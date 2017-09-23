@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// Holds Enter and Exit event as unity events. 
-/// </summary>
-public class ColliderEventContainer : MonoBehaviour
+namespace ChainedRam.Alebi.Core
 {
-    #region Inspecter Variables 
-    public UnityEvent OnEnter;
-    public UnityEvent OnExit;
-    #endregion
+    /// <summary>
+    /// Holds Enter and Exit event as unity events. 
+    /// </summary>
+    public class ColliderEventContainer : MonoBehaviour
+    {
+        #region Inspecter Variables 
+        public UnityEvent OnEnter;
+        public UnityEvent OnExit;
+        #endregion
+    }
 }
