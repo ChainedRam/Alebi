@@ -18,7 +18,6 @@ namespace ChainedRam.Alebi.Core
         #region IRunnable Methods 
         public virtual void Run()
         {
-            gameObject.SetActive(true); 
             if(OnRun != null)
             {
                 OnRun(); 
@@ -26,7 +25,6 @@ namespace ChainedRam.Alebi.Core
         }
         public virtual void Stop()
         {
-            gameObject.SetActive(false);
             if (OnStop != null)
             {
                 OnStop();

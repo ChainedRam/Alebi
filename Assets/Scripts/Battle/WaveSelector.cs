@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveSelector : MonoBehaviour {
+namespace ChainedRam.Alebi.Battle
+{
+    //TODO 
+    public class WaveSelector : MonoBehaviour
+    {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        // Use this for initialization
+        void Start()
+        {
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+    }
 }

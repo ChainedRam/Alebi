@@ -4,98 +4,125 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Fires a projectile in a pattenr 
-/// </summary>
-//TODO abstract 
-public class Pattern : Runnable
+namespace ChainedRam.Alebi.Battle
 {
-    public bool Projecting; 
-    public Vector2 SpawnPosition;
-
-    public Projectile projectileType;
-
-    //TODO move to linear projectile 
-    public float Speed;
-
-    //TODO move to linear projectile 
-    public float Angle;
-
-    private List<Projectile> FiredProjectiles;
-
-
-    //TODO convert to units per second or make a class. Reloader 
-    [Range(0, 5)]
-    public float FireRate;
-
-    private float currentTime;
-    
-    // Use this for initialization
-    void Start()
+    /// <summary>
+    /// Fires a projectile in a pattenr 
+    /// </summary>
+    //TODO abstract 
+    public abstract class Pattern : Runnable
     {
-        Projecting = false; 
-        currentTime = 0f;
-        FiredProjectiles = new List<Projectile>(); 
-    }
+        [Header("Pattern")]
+        public bool IsGenerating; 
+        /// <summary>
+        /// Projectlie to clone.
+        /// </summary>
+        public Projectile projectilePrefab;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Projecting == false)
+        [Header("Global Settings")]
+        [Range(.1f, 2f)]
+        /// <summary>
+        /// Value to enhave all projectile speeds.
+        /// </summary>
+        public float Acceleration;
+
+        [Header("Optimizations")]
+        [Range(0f, 5f)]
+        /// <summary>
+        /// Time between each generated projectile 
+        /// </summary>
+        public float ReloadTime; 
+
+        [Range(0, 5)]
+        /// <summary>
+        /// Time to live before getting deleted. 
+        /// </summary>
+        public float ProjectileTTL;
+       
+        /// <summary>
+        /// Maximum number of projectiles to hold.
+        /// </summary>
+        public int QueueSize;
+       
+        /// <summary>
+        /// Keeps track of projected objects. 
+        /// </summary>
+        private Queue<Projectile> ProjectileQueue;
+
+        private float CurrentTime; 
+
+
+        void Start()
         {
-            ResetLaunch(); 
-            return; 
+            IsGenerating = false; 
+            ProjectileQueue = new Queue<Projectile>(QueueSize);
+            CurrentTime = 0;
         }
 
-        if ((currentTime += Time.deltaTime) > FireRate)
+        /// <summary>
+        /// Generate projectiles 
+        /// </summary>
+        private void Update()
         {
-            ResetLaunch(); 
-            Project();
-        }
-    }
-
-    /// <summary>
-    /// Creates and projects a new projectile. 
-    /// </summary>
-    public void Project()
-    {
-        Projectile p = Instantiate(projectileType, SpawnPosition, Quaternion.identity, transform);
-
-        FiredProjectiles.Add(p);
-
-        p.body.velocity = new Vector2(Speed, -2f); //Speed, Angle
-    }
-
-    /// <summary>
-    /// resets timer to creating projectiles. TODO move to Reloader class. 
-    /// </summary>
-    public void ResetLaunch()
-    {
-        currentTime = 0;
-    }
-
-    /// <summary>
-    /// Enables creating projectiles. 
-    /// </summary>
-    public override void Run()
-    {
-        base.Run();
-        Projecting = true;
-    }
-
-    /// <summary>
-    /// Stops projecting and destroy all created projectiles. -TODO queue and reload. 
-    /// </summary>
-    public override void Stop()
-    {
-        base.Stop();
-        Projecting = false;
-        //delete and stop all projectiles 
-        for (int i = 0; i < FiredProjectiles.Count; i++)
-        {
-            Destroy(FiredProjectiles[i].gameObject); 
+            if((CurrentTime -= Time.deltaTime) < 0)
+            {
+                GenerateProjectile();
+                CurrentTime = ReloadTime; 
+            }
         }
 
-        FiredProjectiles.Clear(); 
+        /// <summary>
+        /// Creates and projects a new projectile. 
+        /// </summary>
+        protected void GenerateProjectile()
+        {
+            Projectile pro; 
+
+            if(ProjectileQueue.Count >= QueueSize)
+            {
+                pro = ProjectileQueue.Dequeue();
+            }
+            else
+            {
+                pro = Instantiate(projectilePrefab);
+            }
+
+            ProjectileQueue.Enqueue(pro);
+
+            pro.Run(); 
+            Project(pro);
+        }
+
+        /// <summary>
+        /// Projects a generated object. 
+        /// </summary>
+        /// <param name="pro"></param>
+        public abstract void Project(Projectile pro);
+       
+        /// <summary>
+        /// Enables creating projectiles. 
+        /// </summary>
+        public override void Run()
+        {
+            base.Run();
+            IsGenerating = true;
+        }
+
+        /// <summary>
+        /// Stops projecting and destroy all created projectiles. -TODO queue and reload. 
+        /// </summary>
+        public override void Stop()
+        {
+            base.Stop(); 
+            IsGenerating = false;
+
+            foreach (Projectile p in ProjectileQueue)
+            {
+                p.Stop();
+                Destroy(p.gameObject, ProjectileTTL);
+            }
+
+            ProjectileQueue.Clear();
+        }
     }
 }

@@ -4,70 +4,73 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// A Phase contains a set of waves in which a selector decides which one to run. 
-/// </summary>
-//TODO abstract 
-public class Phase : Runnable
+namespace ChainedRam.Alebi.Battle
 {
     /// <summary>
-    /// Waves to select from. 
+    /// A Phase contains a set of waves in which a selector decides which one to run. 
     /// </summary>
-    public List<Wave> Waves;
-
-    /// <summary>
-    /// Selects a wave. TODO not implemented -KLD
-    /// </summary>
-    public WaveSelector WaveSelector;
-
-    /// <summary>
-    /// Holds corrent running wave. TODO 'public' for debugging -KLD
-    /// </summary>
-    public Wave RunningWave; 
-
-    //Debugging use 
-    public void StartWaveAtIndex(int index)
+    //TODO abstract 
+    public class Phase : Runnable
     {
-        /*if(RunningWave != null)
+        /// <summary>
+        /// Waves to select from. 
+        /// </summary>
+        public List<Wave> Waves;
+
+        /// <summary>
+        /// Selects a wave. TODO not implemented -KLD
+        /// </summary>
+        public WaveSelector WaveSelector;
+
+        /// <summary>
+        /// Holds corrent running wave. TODO 'public' for debugging -KLD
+        /// </summary>
+        public Wave RunningWave;
+
+        //Debugging use 
+        public void StartWaveAtIndex(int index)
         {
-            RunningWave.Stop(); 
-        }*/
+            /*if(RunningWave != null)
+            {
+                RunningWave.Stop(); 
+            }*/
 
-        RunningWave = Waves[index];
+            RunningWave = Waves[index];
 
-        //for testing 
-        Run(); 
-    }
+            //for testing 
+            Run();
+        }
 
-    //Debug 
-    public void FireNextWave()
-    {
-        StartWaveAtIndex(0);//Random.Range(0, 2));  
-    }
+        //Debug 
+        public void FireNextWave()
+        {
+            StartWaveAtIndex(0);//Random.Range(0, 2));  
+        }
 
-    /// <summary>
-    /// Selects and runs a wave while stopping previous wave. 
-    /// </summary>
-    public override void Run()
-    {
-        base.Run();
+        /// <summary>
+        /// Selects and runs a wave while stopping previous wave. 
+        /// </summary>
+        public override void Run()
+        {
+            base.Run();
 
-        //TODO add selection logic here 
+            //TODO add selection logic here 
 
-        RunningWave.OnStop -= FireNextWave;
-        RunningWave.OnStop += FireNextWave;
+            RunningWave.OnStop -= FireNextWave;
+            RunningWave.OnStop += FireNextWave;
 
-        //TODO Wave doesn't have durations. 
-        RunningWave.Duration = 5; 
-        RunningWave.Run();
-    }
+            //TODO Wave doesn't have durations. 
+            RunningWave.Duration = 50;
+            RunningWave.Run();
+        }
 
-    /// <summary>
-    /// Stops current wave. 
-    /// </summary>
-    public override void Stop()
-    {
-        base.Stop();
-        RunningWave.Stop();
+        /// <summary>
+        /// Stops current wave. 
+        /// </summary>
+        public override void Stop()
+        {
+            base.Stop();
+            RunningWave.Stop();
+        }
     }
 }

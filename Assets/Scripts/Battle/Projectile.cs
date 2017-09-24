@@ -4,22 +4,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// A moving unit that contained a rigide body. 
-/// </summary>
-//TODO absract 
-public class Projectile : Runnable
+namespace ChainedRam.Alebi.Battle
 {
-    public Rigidbody2D body;
-
-    public override void Run()
+    /// <summary>
+    /// A moving unit that contained a rigide body. 
+    /// </summary>
+    public abstract class Projectile : Runnable
     {
-        base.Run();
-    }
+        public abstract void SetVelocity(Vector2 velocity);
+        public abstract void SetDirection(float degrees);
 
-    public override void Stop()
-    {
-        base.Stop();
-        gameObject.SetActive(false); 
+        public override void Run()
+        {
+            base.Run();
+            gameObject.SetActive(true); 
+        }
+
+        public override void Stop()
+        {
+            base.Stop();
+            gameObject.SetActive(false);
+        }
     }
 }

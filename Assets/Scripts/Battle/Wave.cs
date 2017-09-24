@@ -4,57 +4,67 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// A Wave Runs a set of pattern under it. 
-/// </summary>
-//TODO abstract 
-public class Wave : Runnable
+namespace ChainedRam.Alebi.Battle
 {
     /// <summary>
-    /// Set of patterns to run. 
+    /// A Wave Runs a set of pattern under it. 
     /// </summary>
-    public List<Pattern> patterns;
-
-    //TODO move to duration wave class. 
-    public float Duration = 5;
-
-    //for safty  
-    private void Start()
+    public abstract class Wave : Runnable
     {
-        gameObject.SetActive(false); 
-    }
+        /// <summary>
+        /// Set of patterns to run. 
+        /// </summary>
+        public List<Pattern> patterns;
 
-    private void Update()
-    {
-        Duration -= Time.deltaTime; 
+        public float Duration; 
 
-        if(Duration < 0)
+        //for safty  
+        private void Start()
         {
-            Stop(); 
+            gameObject.SetActive(false);
         }
-    }
 
-    /// <summary>
-    /// Runs itself then all nested patterns. 
-    /// </summary>
-    public override void Run()
-    {
-        base.Run(); 
-        foreach (Pattern p in patterns)
+        private void Update()
         {
-            p.Run();
-        }
-    }
+            Duration -= Time.deltaTime;
 
-    /// <summary>
-    /// Stops all nested pattern then itself. 
-    /// </summary>
-    public override void Stop()
-    {
-        foreach (Pattern p in patterns)
-        {
-            p.Stop();
+            if (Duration < 0)
+            {
+                Stop();
+            }
         }
-        base.Stop();
+
+        /// <summary>
+        /// Runs itself then all nested patterns. 
+        /// </summary>
+        public override void Run()
+        {
+            base.Run();
+            gameObject.SetActive(true); 
+
+            int i = 0; 
+
+            //TODO position each pattern 
+            foreach (Pattern p in patterns)
+            {
+                SetUpPattern(i++, p); 
+                p.Run();
+            }
+        }
+
+        public abstract void SetUpPattern(int index, Pattern pattern); 
+       
+
+        /// <summary>
+        /// Stops all nested pattern then itself. 
+        /// </summary>
+        public override void Stop()
+        {
+            foreach (Pattern p in patterns)
+            {
+                p.Stop(); 
+            }
+            base.Stop();
+        }
     }
 }
