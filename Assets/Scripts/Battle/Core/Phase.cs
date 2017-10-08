@@ -15,7 +15,11 @@ namespace ChainedRam.Alebi.Battle
         /// <summary>
         /// Waves to select from. 
         /// </summary>
-        public List<Wave> Waves;
+        public Wave[] Waves;
+
+        public float PhaseCoolDown;
+
+        public float CurrentCoolDown; 
 
         /// <summary>
         /// Selects a wave. TODO not implemented -KLD
@@ -27,24 +31,37 @@ namespace ChainedRam.Alebi.Battle
         /// </summary>
         public Wave RunningWave;
 
-        //Debugging use 
-        public void StartWaveAtIndex(int index)
+
+        public void WaveEnded()
         {
-            /*if(RunningWave != null)
-            {
-                RunningWave.Stop(); 
-            }*/
-
-            RunningWave = Waves[index];
-
-            //for testing 
-            Run();
+            RunningWave = null; 
+            CurrentCoolDown = PhaseCoolDown;
         }
 
-        //Debug 
-        public void FireNextWave()
+
+        private void Update()
         {
-            StartWaveAtIndex(0);//Random.Range(0, 2));  
+            if(RunningWave != null)
+            {
+                return; 
+            }
+
+            CurrentCoolDown -= Time.deltaTime; 
+
+            if(CurrentCoolDown <= 0)
+            {
+                SelectWave(); 
+            }
+        }
+
+        public void SelectWave()
+        {
+            RunningWave = WaveSelector.SelectWave(Waves, RunningWave);
+
+            RunningWave.OnStop -= WaveEnded;
+            RunningWave.OnStop += WaveEnded;
+
+            RunningWave.Run();
         }
 
         /// <summary>
@@ -54,14 +71,7 @@ namespace ChainedRam.Alebi.Battle
         {
             base.Run();
 
-            //TODO add selection logic here 
-
-            RunningWave.OnStop -= FireNextWave;
-            RunningWave.OnStop += FireNextWave;
-
-            //TODO Wave doesn't have durations. 
-            RunningWave.Duration = 50;
-            RunningWave.Run();
+            WaveEnded(); 
         }
 
         /// <summary>

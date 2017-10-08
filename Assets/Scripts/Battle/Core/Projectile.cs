@@ -17,13 +17,11 @@ namespace ChainedRam.Alebi.Battle
         public override void Run()
         {
             base.Run();
-            gameObject.SetActive(true); 
         }
 
         public override void Stop()
         {
             base.Stop();
-            gameObject.SetActive(false);
         }
     }
 }

@@ -22,11 +22,7 @@ namespace ChainedRam.Alebi.Battle
         /// </summary>
         public override void Project(Projectile p)
         {
-            p.transform.parent = transform; 
-
-            p.transform.localPosition = Vector2.zero;
-            p.transform.localRotation = Quaternion.identity;
-
+            p.transform.position = transform.position; 
 
             p.SetVelocity(Vector2.one.Rotate(AlphaAngle + Angle) * LinearSpeed * (Acceleration));
             p.SetDirection(AlphaAngle + Angle);

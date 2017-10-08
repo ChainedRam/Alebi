@@ -16,11 +16,11 @@ public class LinearWaveEditor : Editor
             LinearWave linearWave = (LinearWave)target;
 
             int i= 0; 
-            foreach (Pattern p in linearWave.patterns)
+            foreach (Pattern p in linearWave.Patterns)
             {
                 if (p != null)
                 {
-                    linearWave.SetUpPattern(i++, p);
+                    linearWave.SetUpPatternPosition(i++, p);
                 }
             }
 

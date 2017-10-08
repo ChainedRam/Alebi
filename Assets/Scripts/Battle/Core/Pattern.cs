@@ -1,5 +1,6 @@
 ﻿using ChainedRam.Alebi.Core;
 using ChainedRam.Alebi.Interface.Battle;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,9 @@ namespace ChainedRam.Alebi.Battle
     public abstract class Pattern : Runnable
     {
         [Header("Pattern")]
-        public bool IsGenerating; 
+        public bool IsGenerating;
+
+        public GameObject ProjectileHolder; 
         /// <summary>
         /// Projectlie to clone.
         /// </summary>
@@ -33,7 +36,7 @@ namespace ChainedRam.Alebi.Battle
         /// </summary>
         public float ReloadTime; 
 
-        [Range(0, 5)]
+        [Range(0, 20)]
         /// <summary>
         /// Time to live before getting deleted. 
         /// </summary>
@@ -43,6 +46,11 @@ namespace ChainedRam.Alebi.Battle
         /// Maximum number of projectiles to hold.
         /// </summary>
         public int QueueSize;
+
+
+        ///class attributes 
+
+        public event Action<Projectile> OnProjectileLaunched; 
        
         /// <summary>
         /// Keeps track of projected objects. 
@@ -51,12 +59,12 @@ namespace ChainedRam.Alebi.Battle
 
         private float CurrentTime; 
 
-
-        void Start()
+        public void Setup()
         {
-            IsGenerating = false; 
+            IsGenerating = false;
             ProjectileQueue = new Queue<Projectile>(QueueSize);
             CurrentTime = 0;
+            OnProjectileLaunched = null; 
         }
 
         /// <summary>
@@ -64,6 +72,11 @@ namespace ChainedRam.Alebi.Battle
         /// </summary>
         private void Update()
         {
+            if(!IsGenerating)
+            {
+                return; 
+            }
+
             if((CurrentTime -= Time.deltaTime) < 0)
             {
                 GenerateProjectile();
@@ -84,13 +97,20 @@ namespace ChainedRam.Alebi.Battle
             }
             else
             {
-                pro = Instantiate(projectilePrefab);
+                pro = Instantiate(projectilePrefab, ProjectileHolder.transform);
+                
             }
 
             ProjectileQueue.Enqueue(pro);
 
+            pro.gameObject.SetActive(true);
+            pro.transform.localPosition = Vector2.zero;
+            pro.transform.localRotation = Quaternion.identity;
+
             pro.Run(); 
             Project(pro);
+
+            OnProjectileLaunched?.Invoke(pro); 
         }
 
         /// <summary>
@@ -105,6 +125,7 @@ namespace ChainedRam.Alebi.Battle
         public override void Run()
         {
             base.Run();
+            Setup();
             IsGenerating = true;
         }
 
@@ -113,7 +134,7 @@ namespace ChainedRam.Alebi.Battle
         /// </summary>
         public override void Stop()
         {
-            base.Stop(); 
+            base.Stop();
             IsGenerating = false;
 
             foreach (Projectile p in ProjectileQueue)
@@ -122,7 +143,7 @@ namespace ChainedRam.Alebi.Battle
                 Destroy(p.gameObject, ProjectileTTL);
             }
 
-            ProjectileQueue.Clear();
+            //ProjectileQueue.Clear();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace ChainedRam.Alebi.Core
     public class ColliderEventTrigger : MonoBehaviour
     {
         #region Collider2D events
-        private void OnTriggerEnter2D(Collider2D collision)
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
             ColliderEventContainer eventContainer;
             if ((eventContainer = collision.GetComponent<ColliderEventContainer>()) != null)
@@ -19,7 +19,7 @@ namespace ChainedRam.Alebi.Core
             }
         }
 
-        private void OnTriggerExit2D(Collider2D collision)
+        protected virtual void OnTriggerExit2D(Collider2D collision)
         {
             ColliderEventContainer eventContainer;
             if ((eventContainer = collision.GetComponent<ColliderEventContainer>()) != null)

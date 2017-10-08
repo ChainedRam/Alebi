@@ -14,25 +14,9 @@ namespace ChainedRam.Alebi.Battle
         /// <summary>
         /// Set of patterns to run. 
         /// </summary>
-        public List<Pattern> patterns;
+        public Pattern[] Patterns;
 
-        public float Duration; 
-
-        //for safty  
-        private void Start()
-        {
-            gameObject.SetActive(false);
-        }
-
-        private void Update()
-        {
-            Duration -= Time.deltaTime;
-
-            if (Duration < 0)
-            {
-                Stop();
-            }
-        }
+        public WaveTerminator Terminator; 
 
         /// <summary>
         /// Runs itself then all nested patterns. 
@@ -40,31 +24,37 @@ namespace ChainedRam.Alebi.Battle
         public override void Run()
         {
             base.Run();
-            gameObject.SetActive(true); 
-
+            gameObject.SetActive(true);
             int i = 0; 
 
-            //TODO position each pattern 
-            foreach (Pattern p in patterns)
+            foreach (Pattern p in Patterns)
             {
-                SetUpPattern(i++, p); 
+                SetUpPatternPosition(i++, p);
+
                 p.Run();
+                
+                //add events. Events are cleared when pattern is run.  
+                p.OnProjectileLaunched += (pro) => Terminator.OnProjectileLaunched(p, pro);
+
             }
+
+            Terminator.Setup(Patterns);
         }
 
-        public abstract void SetUpPattern(int index, Pattern pattern); 
-       
+        public abstract void SetUpPatternPosition(int index, Pattern pattern); 
 
         /// <summary>
         /// Stops all nested pattern then itself. 
         /// </summary>
         public override void Stop()
         {
-            foreach (Pattern p in patterns)
+            foreach (Pattern p in Patterns)
             {
                 p.Stop(); 
             }
             base.Stop();
+
+            gameObject.SetActive(false); //hide wave object 
         }
     }
 }
