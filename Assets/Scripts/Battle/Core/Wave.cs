@@ -25,7 +25,9 @@ namespace ChainedRam.Alebi.Battle
         {
             base.Run();
             gameObject.SetActive(true);
-            int i = 0; 
+            int i = 0;
+
+            Terminator.Setup(this, Patterns);
 
             foreach (Pattern p in Patterns)
             {
@@ -38,7 +40,7 @@ namespace ChainedRam.Alebi.Battle
 
             }
 
-            Terminator.Setup(Patterns);
+           
         }
 
         public abstract void SetUpPatternPosition(int index, Pattern pattern); 

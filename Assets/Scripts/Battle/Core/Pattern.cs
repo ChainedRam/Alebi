@@ -140,7 +140,6 @@ namespace ChainedRam.Alebi.Battle
             foreach (Projectile p in ProjectileQueue)
             {
                 p.Stop();
-                Destroy(p.gameObject, ProjectileTTL);
             }
 
             //ProjectileQueue.Clear();

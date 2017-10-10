@@ -51,8 +51,9 @@ namespace ChainedRam.Alebi.Battle
         /// Sets up terminator 
         /// </summary>
         /// <param name="Patterns"></param>
-        public virtual void Setup(Pattern[] Patterns)
+        public virtual void Setup(Wave wave,Pattern[] Patterns)
         {
+            Wave = wave; 
             IsTerminating = false;
         }
 

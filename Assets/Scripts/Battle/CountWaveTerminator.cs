@@ -19,9 +19,9 @@ public class CountWaveTerminator : WaveTerminator
         return Count >= MaxGeneratedProjectiles; 
     }
 
-    public override void Setup(Pattern[] Patterns)
+    public override void Setup(Wave wave, Pattern[] patterns)
     {
-        base.Setup(Patterns); 
+        base.Setup(wave, patterns); 
         Count = 0; 
     }
 

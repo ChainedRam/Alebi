@@ -9,7 +9,7 @@ namespace ChainedRam.Alebi.Battle
     /// <summary>
     /// A Phase contains a set of waves in which a selector decides which one to run. 
     /// </summary>
-    //TODO abstract 
+    //TODO abstract -please 
     public class Phase : Runnable
     {
         /// <summary>
@@ -30,7 +30,6 @@ namespace ChainedRam.Alebi.Battle
         /// Holds corrent running wave. TODO 'public' for debugging -KLD
         /// </summary>
         public Wave RunningWave;
-
 
         public void WaveEnded()
         {
