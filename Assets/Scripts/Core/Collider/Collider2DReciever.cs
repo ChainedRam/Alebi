@@ -14,7 +14,7 @@ namespace ChainedRam.Alebi.Core
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class Trigger2DReciever<T> : Collider2DEventTrigger, IReciever<T>
+    public abstract class Collider2DReciever<T> : Collider2DEventTrigger, IReciever<T>
     {
         /// <summary>
         /// Recieve damage from collision objects that implements <see cref="IHolder{T}"/>

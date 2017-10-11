@@ -13,7 +13,7 @@ namespace ChainedRam.Alebi.Battle
     /// Basic boss definition 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class Boss<T> : Trigger2DReciever<T>
+    public abstract class Boss<T> : Collider2DReciever<T>
     {
         /// <summary>
         /// Set of phases 
