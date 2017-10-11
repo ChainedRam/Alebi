@@ -1,6 +1,7 @@
 ﻿using ChainedRam.Alebi.Battle;
 using ChainedRam.Alebi.Core;
 using ChainedRam.Alebi.Interface;
+using ChainedRam.Core.Interface;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace ChainedRam.Alebi.Battle
     /// Basic boss definition 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class Boss<T> : DamageReciever<T>
+    public abstract class Boss<T> : Trigger2DReciever<T>
     {
         /// <summary>
         /// Set of phases 
@@ -44,15 +45,24 @@ namespace ChainedRam.Alebi.Battle
                 CurrentPhase.Stop();
             }
 
-            CurrentPhase = Phases[++CurrentPhaseIndex];
+            if (CurrentPhaseIndex < Phases.Length)
+            {
+                CurrentPhase = Phases[++CurrentPhaseIndex];
+            }
+            else
+            {
+                Defeated(this);
+            }
         }
 
         /// <summary>
         /// Recieve damage from projectile  
         /// </summary>
-        /// <param name="dmg"></param>
-        public override void RecieveDamage(IDamage<T> dmg)
+        /// <param name="holder"></param>
+        public sealed override void Recieve(IHolder<T> holder)
         {
+            OnRecieve(holder);
+
             if (ShouldSwitchPhase(this))
             {
                 NextPhase();
@@ -60,6 +70,10 @@ namespace ChainedRam.Alebi.Battle
             }
         }
 
+        protected abstract void OnRecieve(IHolder<T> holder);
+
         public abstract bool ShouldSwitchPhase(Boss<T> boss);
+
+        public abstract void Defeated(Boss<T> boss); 
     }
 }

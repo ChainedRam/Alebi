@@ -1,4 +1,5 @@
 ﻿using ChainedRam.Alebi.Interface;
+using ChainedRam.Core.Interface;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,9 +15,9 @@ namespace ChainedRam.Alebi.Battle
 
         public int PhaseSize;
 
-        public override void RecieveDamage(IDamage<int> dmg)
+        protected override void OnRecieve(IHolder<int> holder)
         {
-            HealthPoints -= dmg.Damage;
+            HealthPoints -= holder.Item;
         }
 
         public override bool ShouldSwitchPhase(Boss<int> boss)
@@ -24,5 +25,9 @@ namespace ChainedRam.Alebi.Battle
             return HealthPoints < (Phases.Length - CurrentPhaseIndex) * PhaseSize;
         }
 
+        public override void Defeated(Boss<int> boss)
+        {
+            Debug.Log("I'm ded");
+        }
     }
 }

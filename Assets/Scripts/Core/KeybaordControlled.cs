@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ChainedRam.Alebi.Core
+namespace ChainedRam.Core.Player
 {
     /// <summary>
     /// Allows Object to  move using keybaord.

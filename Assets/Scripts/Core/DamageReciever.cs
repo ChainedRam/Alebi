@@ -1,5 +1,8 @@
 ﻿using ChainedRam.Alebi.Core;
 using ChainedRam.Alebi.Interface;
+using ChainedRam.Core.Collider;
+using ChainedRam.Core.Extentions;
+using ChainedRam.Core.Interface;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,47 +10,33 @@ using UnityEngine;
 
 namespace ChainedRam.Alebi.Core
 {
-    public abstract class DamageReciever<T> : ColliderEventTrigger, IDamageReciever<T>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public abstract class Trigger2DReciever<T> : Collider2DEventTrigger, IReciever<T>
     {
         /// <summary>
-        /// Recieve damage from collision objects that implements <see cref="IDamage{T}"/>
+        /// Recieve damage from collision objects that implements <see cref="IHolder{T}"/>
         /// </summary>
-        /// <param name="dmg"></param>
-        public abstract void RecieveDamage(IDamage<T> dmg);
+        /// <param name="holder"></param>
+        public abstract void Recieve(IHolder<T> holder);
 
         /// <summary>
         /// It works, that all that matters. 
         /// 
-        /// Find of colided object implements<see cref="IDamage{T}"/> and recieve the damage. 
+        /// Find of colided object implements<see cref="IHolder{T}"/> and recieve the damage. 
         /// </summary>
         /// <param name="collision"></param>
         protected override void OnTriggerEnter2D(Collider2D collision)
         {
             base.OnTriggerEnter2D(collision);
 
-            Type DamageType = typeof(IDamage<T>);
+            IHolder<T> holder;
 
-            Component[] comps = collision.gameObject.GetComponents<MonoBehaviour>();
-
-            foreach (Component comp in comps)
+            if (collision.gameObject.HasInterface(typeof(IHolder<T>), out holder))
             {
-                if (comp == null)
-                {
-                    continue;
-                }
-
-                Type compType = comp.GetType();
-
-                Type[] interfaces = compType.GetInterfaces();
-
-                foreach (var inter in interfaces)
-                {
-                    if ((inter == (DamageType)))
-                    {
-                        RecieveDamage((IDamage<T>)comp);
-                        return;
-                    }
-                }
+                Recieve(holder); 
             }
         }
     }

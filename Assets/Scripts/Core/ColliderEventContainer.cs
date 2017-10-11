@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ChainedRam.Alebi.Core
+namespace ChainedRam.Core.Collider
 {
     /// <summary>
     /// Holds Enter and Exit event as unity events. 

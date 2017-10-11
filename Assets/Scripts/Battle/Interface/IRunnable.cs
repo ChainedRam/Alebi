@@ -10,6 +10,7 @@ namespace ChainedRam.Alebi.Interface.Battle
     /// </summary>
     public interface IRunnable
     {
+        //TODO please delete me 
         #region Methods
         /// <summary>
         /// Starts running. 

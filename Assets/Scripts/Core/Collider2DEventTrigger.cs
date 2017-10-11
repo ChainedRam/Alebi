@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ChainedRam.Alebi.Core
+namespace ChainedRam.Core.Collider
 {
     /// <summary>
-    /// Allows object to trigger <see cref="ColliderEventContainer"/> Enter and exit events. 
+    /// Allows object to trigger <see cref="ColliderEventContainer.OnEnter"/> and <see cref="ColliderEventContainer.OnEnter"/> events. 
     /// </summary>
-    public class ColliderEventTrigger : MonoBehaviour
+    public class Collider2DEventTrigger : MonoBehaviour
     {
         #region Collider2D events
         protected virtual void OnTriggerEnter2D(Collider2D collision)
