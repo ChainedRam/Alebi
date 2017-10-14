@@ -1,4 +1,5 @@
 ﻿using ChainedRam.Alebi.Battle;
+using ChainedRam.Core.Projection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public abstract class ProjectileQueueGenerator : QueueInstanceGenerator<Projecti
     public float RelaodDelay;
 
     [Tooltip("Velocity of generated projectile.")]
-    public Vector2 Velocity;
+    public float Velocity;
 
     [Tooltip("Degree of generated projectile.")]
     [Range(-180, 180)]
@@ -20,8 +21,7 @@ public abstract class ProjectileQueueGenerator : QueueInstanceGenerator<Projecti
 
     public override void SetupGenerated(Projectile pro)
     {
-        pro.SetVelocity(Velocity);
-        pro.SetDirection(Angle); 
+        pro.Setup(Velocity, Angle);
     }
 
     public override bool ShouldGenerate()

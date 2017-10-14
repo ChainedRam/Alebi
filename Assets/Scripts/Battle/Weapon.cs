@@ -1,5 +1,6 @@
 ﻿using ChainedRam.Alebi.Battle;
 using ChainedRam.Core.Interface;
+using ChainedRam.Core.Projection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

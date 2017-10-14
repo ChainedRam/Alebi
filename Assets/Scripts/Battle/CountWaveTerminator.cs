@@ -25,7 +25,7 @@ public class CountWaveTerminator : WaveTerminator
         Count = 0; 
     }
 
-    public override void OnProjectileLaunched(Pattern launcher, Projectile proj)
+    /*public override void OnProjectileLaunched(Pattern launcher, Projectile proj)
     {
         base.OnProjectileLaunched(launcher, proj);
 
@@ -33,5 +33,5 @@ public class CountWaveTerminator : WaveTerminator
         {
             Count++;
         }
-    }
+    }*/
 }

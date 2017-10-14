@@ -16,7 +16,7 @@ namespace ChainedRam.Alebi.Battle
 
         public override void SetUpPatternPosition(int index, Pattern pattern)
         {
-            pattern.gameObject.transform.localPosition = Offset + (Spacing * (IsCenter? ((float)Patterns.Length-1)/2 - index : index)); 
+            pattern.gameObject.transform.localPosition = Offset + (Spacing * (IsCenter? ((float)ChildGenerators.Length-1)/2 - index : index)); 
         }
     }
 }

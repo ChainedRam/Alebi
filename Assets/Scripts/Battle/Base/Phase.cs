@@ -1,5 +1,6 @@
 ﻿using ChainedRam.Alebi.Core;
 using ChainedRam.Alebi.Interface.Battle;
+using ChainedRam.Core.Generation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,19 +11,11 @@ namespace ChainedRam.Alebi.Battle
     /// A Phase contains a set of waves in which a selector decides which one to run. 
     /// </summary>
     //TODO abstract -please 
-    public class Phase : Runnable
+    public class Phase : NestedGenerator
     {
+        [Header("Phase Settings")]
         /// <summary>
-        /// Waves to select from. 
-        /// </summary>
-        public Wave[] Waves;
-
-        public float PhaseCoolDown;
-
-        public float CurrentCoolDown; 
-
-        /// <summary>
-        /// Selects a wave. TODO not implemented -KLD
+        /// Selects a wave.
         /// </summary>
         public WaveSelector WaveSelector;
 
@@ -31,55 +24,47 @@ namespace ChainedRam.Alebi.Battle
         /// </summary>
         public Wave RunningWave;
 
+        public Wave[] Waves;
+
+        public override Generator[] ChildGenerators
+        {
+            get
+            {
+                return Waves;
+            }
+
+            set
+            {
+               
+            }
+        }
+
+        private void Awake()
+        {
+            OnStartGenerating += SelectWave; 
+            
+        }
+
         public void WaveEnded()
         {
             RunningWave = null; 
-            CurrentCoolDown = PhaseCoolDown;
-        }
-
-
-        private void Update()
-        {
-            if(RunningWave != null)
-            {
-                return; 
-            }
-
-            CurrentCoolDown -= Time.deltaTime; 
-
-            if(CurrentCoolDown <= 0)
-            {
-                SelectWave(); 
-            }
         }
 
         public void SelectWave()
         {
+            if (RunningWave != null)
+            {
+                RunningWave.OnStopGenerating -= WaveEnded; 
+                RunningWave.StopGenerating(); 
+            }
+
             RunningWave = WaveSelector.SelectWave(Waves, RunningWave);
 
-            RunningWave.OnStop -= WaveEnded;
-            RunningWave.OnStop += WaveEnded;
+            RunningWave.OnStopGenerating -= WaveEnded;
+            RunningWave.OnStopGenerating += WaveEnded;
 
-            RunningWave.Run();
+            RunningWave.StartGenerating();
         }
 
-        /// <summary>
-        /// Selects and runs a wave while stopping previous wave. 
-        /// </summary>
-        public override void Run()
-        {
-            base.Run();
-
-            WaveEnded(); 
-        }
-
-        /// <summary>
-        /// Stops current wave. 
-        /// </summary>
-        public override void Stop()
-        {
-            base.Stop();
-            RunningWave.Stop();
-        }
     }
 }

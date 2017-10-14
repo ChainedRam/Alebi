@@ -13,10 +13,10 @@ public class LinearWaveEditor : Editor
 
         if (GUILayout.Button("Set up Patterns"))
         {
-            LinearWave linearWave = (LinearWave)target;
+            LinearWave linearWave = (LinearWave) target;
 
             int i= 0; 
-            foreach (Pattern p in linearWave.Patterns)
+            foreach (Pattern p in linearWave.ChildGenerators)
             {
                 if (p != null)
                 {

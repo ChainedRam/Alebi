@@ -1,18 +1,16 @@
 ﻿using ChainedRam.Alebi.Core;
 using ChainedRam.Alebi.Interface.Battle;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ChainedRam.Alebi.Battle
+namespace ChainedRam.Core.Projection
 {
     /// <summary>
-    /// Fires a projectile in a pattenr 
+    /// A moving unit that contained a rigide body. 
     /// </summary>
-    //TODO abstract 
-    public abstract class Pattern : ProjectileGenerator
+    public abstract class Projectile : Runnable
     {
-
+        public abstract void Setup(float speed, float direction);
     }
 }

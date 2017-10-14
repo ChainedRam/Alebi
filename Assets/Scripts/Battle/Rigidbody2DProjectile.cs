@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using ChainedRam.Core.Extentions;
+using ChainedRam.Core.Projection;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,14 +10,10 @@ namespace ChainedRam.Alebi.Battle
     {
         public Rigidbody2D body;
 
-        public override void SetDirection(float degrees)
+        public override void Setup(float speed, float direction)
         {
-            body.rotation = degrees;
-        }
-
-        public override void SetVelocity(Vector2 velocity)
-        {
-            body.velocity = velocity;
+            body.rotation = direction;
+            body.velocity = (((Vector2)transform.parent.right) * speed).Rotate(body.rotation); 
         }
     }
 }

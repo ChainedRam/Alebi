@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace ChainedRam.Alebi.Core
+namespace ChainedRam.Core.Projection
 {
     /// <summary>
     /// Core implementation of the <see cref="IRunnable"/> interface.   
@@ -15,20 +15,15 @@ namespace ChainedRam.Alebi.Core
         public event Action OnRun;
         public event Action OnStop;
         #endregion
+
         #region IRunnable Methods 
         public virtual void Run()
         {
-            if(OnRun != null)
-            {
-                OnRun(); 
-            }
+            OnRun?.Invoke();
         }
         public virtual void Stop()
         {
-            if (OnStop != null)
-            {
-                OnStop();
-            }
+            OnStop?.Invoke();
         }
         #endregion
     }

@@ -42,7 +42,7 @@ namespace ChainedRam.Alebi.Battle
         {
             if (CurrentPhase != null)
             {
-                CurrentPhase.Stop();
+                CurrentPhase.StopGenerating();
             }
 
             if (CurrentPhaseIndex < Phases.Length)

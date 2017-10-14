@@ -1,4 +1,5 @@
 ﻿using ChainedRam.Alebi.Battle;
+using ChainedRam.Core.Projection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +32,7 @@ namespace ChainedRam.Alebi.Battle
         public void Terminate()
         {
             IsTerminating = true;
-            Wave.Stop();
+            Wave.StopGenerating();
 
             OnTerminate();
         }

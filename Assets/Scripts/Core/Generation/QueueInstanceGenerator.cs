@@ -2,33 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// An InstanceGenerator that holds limited generations in a queue to recycle them. 
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public abstract class QueueInstanceGenerator<T> : InstanceGenerator<T> where T : Component
 {
+    #region Inspector Attributes 
     [Header("FixedSizeGenerator Settings")]
-    public int MaxSize;
-
+    public int MaxSize = 50; //default size 
+    #endregion
+    #region Private Attributes 
+    /// <summary>
+    /// Holds generated instances
+    /// </summary>
     private Queue<T> GenerationQueue;
-
-    public override ICollection<T> Instances
+    #endregion
+    #region Override InstanceGenerator Property  
+    protected override IEnumerable<T> Instances
     {
         get
         {
-            return (ICollection<T>) GenerationQueue; 
+            return GenerationQueue; 
         }
     }
+    #endregion
+    #region Unity Method
     private void Awake()
     {
         GenerationQueue = new Queue<T>();
-        OnGenerate += GenerationQueue.Enqueue;
     }
-
-    protected override T GetInstance()
+    #endregion
+    #region Override InstanceGenerator Methods  
+    protected override T CreateInstance()
     {
         T comp;
 
         if (GenerationQueue.Count < MaxSize)
         {
-            comp = base.GetInstance();
+            comp = base.CreateInstance();
         }
         else
         {
@@ -36,4 +48,15 @@ public abstract class QueueInstanceGenerator<T> : InstanceGenerator<T> where T :
         }
         return comp; 
     }
+
+    public override void AddInstance(T instance)
+    {
+        GenerationQueue.Enqueue(instance); 
+    }
+
+    public override void RemoveInstance(T instance)
+    {
+        GenerationQueue.Dequeue(); 
+    }
+    #endregion
 }

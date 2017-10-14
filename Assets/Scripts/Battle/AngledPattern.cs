@@ -1,4 +1,5 @@
 ﻿using ChainedRam.Core.Extentions;
+using ChainedRam.Core.Projection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,12 +22,14 @@ namespace ChainedRam.Alebi.Battle
         /// <summary>
         /// Creates and projects a new projectile. 
         /// </summary>
-        public override void Project(Projectile p)
+        /*public override void Project(Projectile p)
         {
             p.transform.position = transform.position; 
 
-            p.SetVelocity(Vector2.one.Rotate(AlphaAngle + Angle) * LinearSpeed * (Acceleration));
-            p.SetDirection(AlphaAngle + Angle);
-        }
+            //p.Setup(LinearSpeed, )
+
+            //p.SetVelocity(Vector2.one.Rotate(AlphaAngle + Angle) * LinearSpeed * (Acceleration));
+            //p.SetDirection(AlphaAngle + Angle);
+        }*/
     }
 }
