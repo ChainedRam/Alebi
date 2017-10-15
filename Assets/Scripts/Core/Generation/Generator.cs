@@ -12,12 +12,18 @@ public abstract class Generator : MonoBehaviour
     #region Inspector Attributes
     [Header("Generator")]
     public bool IsGenerating;
+    public bool PrintDebug; 
     #endregion
     #region Public Events 
     /// <summary>
     /// Invoked when generating. <see cref="Generate"/>
     /// </summary>
     public event Action OnGenerate;
+
+    /// <summary>
+    /// Invoked when stoping generation. <see cref="SkippedGenerate"/>
+    /// </summary>
+    public event Action OnSkippedGenerate;
 
     /// <summary>
     /// Invoked when Starting generation. <see cref="StartGenerating"/>
@@ -28,6 +34,7 @@ public abstract class Generator : MonoBehaviour
     /// Invoked when stoping generation. <see cref="StopGenerating"/>
     /// </summary>
     public event Action OnStopGenerating;
+
     #endregion
     #region Public Methods 
     /// <summary>
@@ -35,7 +42,18 @@ public abstract class Generator : MonoBehaviour
     /// </summary>
     public void Generate()
     {
-        OnGenerate?.Invoke(); 
+        OnGenerate?.Invoke();
+        Log("Generate"); 
+    }
+
+    /// <summary>
+    /// Called when generate call skips a cycle because <see cref="ShouldGenerate"/> returns false. 
+    /// </summary>
+    public void SkippedGenerate()
+    {
+        OnSkippedGenerate?.Invoke();
+        SkippedGeneration();
+        //Log("Skipped");
     }
 
     /// <summary>
@@ -45,6 +63,7 @@ public abstract class Generator : MonoBehaviour
     {
         IsGenerating = true;
         OnStartGenerating?.Invoke();
+        Log("Started");
     }
 
     /// <summary>
@@ -54,10 +73,9 @@ public abstract class Generator : MonoBehaviour
     {
         IsGenerating = false;
         OnStopGenerating?.Invoke();
+        Log("Stopped ");
     }
     #region Attach Detach Methods
-    //TODO check recursion for all add  
-
     /// <summary>
     /// Adds follower's as a listener when Start. 
     /// </summary>
@@ -110,7 +128,10 @@ public abstract class Generator : MonoBehaviour
         //avoid recursion 
         follower.DetachOnGenerate(this);
 
-        OnGenerate += follower.OnGenerate;
+        //avoid duplicate
+        DetachOnGenerate(follower); 
+
+        OnGenerate += follower.Generate;
     }
 
     /// <summary>
@@ -119,37 +140,65 @@ public abstract class Generator : MonoBehaviour
     /// <param name="follower"></param>
     public void DetachOnGenerate(Generator follower)
     {
-        OnGenerate -= follower.OnGenerate;
+        OnGenerate -= follower.Generate;
     }
 
     /// <summary>
-    /// Attachs follower's OnStart, OnStop, & OnGenerate events to own events, 
+    /// Attaches follower to genrate event. 
+    /// </summary>
+    /// <param name="follower"></param>    
+    public void AttachOnSkip(Generator follower)
+    {
+        //avoid recursion 
+        follower.DetachOnSkip(this);
+
+        OnSkippedGenerate += follower.SkippedGenerate;
+    }
+
+    /// <summary>
+    /// Removes follower from on genrate event list. 
+    /// </summary>
+    /// <param name="follower"></param>
+    public void DetachOnSkip(Generator follower)
+    {
+        OnSkippedGenerate -= follower.SkippedGenerate;
+    }
+
+    /// <summary>
+    /// Attachs follower's OnStart, OnStop,OnGenerate, & OnSkip events to own events, 
     /// </summary>
     /// <param name="follower"></param>
     public void Attach(Generator follower)
     {
+        AttachOnGenerate(follower);
+        AttachOnSkip(follower); 
         AttachOnStart(follower);
         AttachOnStop(follower);
-        AttachOnGenerate(follower); 
     }
 
     /// <summary>
-    /// Detaches follower's OnStart, OnStop, & OnGenerate events from own events, 
+    /// Detaches follower's OnStart, OnStop,OnGenerate, & OnSkip events from own events, 
     /// </summary>
     /// <param name="follower"></param>
     public void Detach(Generator follower)
     {
+        DetachOnGenerate(follower);
+        DetachOnSkip(follower);
         DetachOnStart(follower);
         DetachOnStop(follower);
-        DetachOnGenerate(follower);
     }
     #endregion
     #endregion
     #region Unity Methods 
+    protected void Awake()
+    {
+        SetupGenerator(); 
+    }
+
     /// <summary>
     /// Runs the generation cycle. 
     /// </summary>
-    private void Update()
+    protected void Update()
     {
         if (!IsGenerating)
         {
@@ -159,11 +208,10 @@ public abstract class Generator : MonoBehaviour
         if (ShouldGenerate())
         {
             Generate();
-            OnGenerate?.Invoke();
         }
         else
         {
-            SkippedGeneration(); 
+            SkippedGenerate(); 
         }
     }
     #endregion
@@ -175,12 +223,24 @@ public abstract class Generator : MonoBehaviour
     public abstract bool ShouldGenerate();
 
     /// <summary>
-    /// Called when generate call skips a cycle because <see cref="ShouldGenerate"/> returns false. 
+    /// Called last in <see cref="SkippedGenerate"/>. By default, stops generation. 
     /// </summary>
-    public virtual void SkippedGeneration()
+    protected virtual void SkippedGeneration()
     {
-        StopGenerating(); 
+        StopGenerating(); //TODO think about making it a bool 
     }
 
+    protected virtual void SetupGenerator()
+    {
+
+    }
+
+    protected void Log(string s)
+    {
+        if (PrintDebug)
+        {
+            Debug.Log(s+ " " + name);
+        }
+    }
     #endregion
 }

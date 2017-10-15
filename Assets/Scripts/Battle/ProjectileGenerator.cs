@@ -9,8 +9,7 @@ public class ProjectileGenerator : QueueInstanceGenerator<Projectile>
     public float Velocity;
 
     [Range(-180,180)]
-    public float Direction; 
-
+    public float Direction;
 
     public override void SetupGenerated(Projectile generated)
     {
@@ -24,8 +23,8 @@ public class ProjectileGenerator : QueueInstanceGenerator<Projectile>
         return true; 
     }
 
-    public override void SkippedGeneration()
+    protected override void SkippedGeneration()
     {
-        //do nothing 
+        
     }
 }

@@ -10,7 +10,7 @@ namespace ChainedRam.Alebi.Battle
     /// <summary>
     /// A Wave Runs a set of pattern under it. 
     /// </summary>
-    public abstract class Wave : NestedGenerator
+    public abstract class Wave : NestedGenerator<Pattern>
     {
         private void Awake()
         {
@@ -24,7 +24,7 @@ namespace ChainedRam.Alebi.Battle
         {
             int i = 0;
 
-            foreach (Pattern p in ChildGenerators)
+            foreach (Pattern p in Children)
             {
                 SetUpPatternPosition(i++, p);
             }

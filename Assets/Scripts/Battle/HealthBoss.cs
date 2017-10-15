@@ -9,23 +9,18 @@ namespace ChainedRam.Alebi.Battle
     /// <summary>
     /// A boss with integre as it's health. 
     /// </summary>
-    public class HealthBoss : Boss<int>
+    public class HealthBoss : Boss
     {
         public int HealthPoints;
 
         public int PhaseSize;
 
-        protected override void OnRecieve(IHolder<int> holder)
+        public bool ShouldSwitchPhase()
         {
-            HealthPoints -= holder.Item;
+            return true; // HealthPoints < (Phases.Length - CurrentPhaseIndex) * PhaseSize;
         }
 
-        public override bool ShouldSwitchPhase(Boss<int> boss)
-        {
-            return HealthPoints < (Phases.Length - CurrentPhaseIndex) * PhaseSize;
-        }
-
-        public override void Defeated(Boss<int> boss)
+        public void Defeated()
         {
             Debug.Log("I'm ded");
         }

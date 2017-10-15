@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrderedWaveSelector : WaveSelector
+public class OrderedWaveSelector : Selector
 {
     public int StartingIndex;
 
@@ -15,7 +15,7 @@ public class OrderedWaveSelector : WaveSelector
         CurrentIndex = StartingIndex; 
     }
 
-    public override Wave SelectWave(Wave[] waves, Wave previousWave)
+    public override T Select<T>(T[] waves, T previousWave = null)
     {
         return waves[(CurrentIndex++) % waves.Length]; 
     }

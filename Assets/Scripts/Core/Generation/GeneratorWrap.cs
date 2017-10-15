@@ -12,21 +12,12 @@ public class GeneratorWrap : Generator
     public Generator Wrapped;
     #endregion
     #region Unity Methods 
-    private void Awake()
+    protected virtual void Awake()
     {
         Attach(Wrapped); 
     }
     #endregion
     #region Generator Overrides 
-    public override void Generate()
-    {
-        Wrapped.Generate();
-    }
-
-    public override void SkippedGeneration()
-    {
-        Wrapped.SkippedGeneration();
-    }
 
     public override bool ShouldGenerate()
     {

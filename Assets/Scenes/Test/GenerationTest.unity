@@ -183,9 +183,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsGenerating: 0
   Options: 0
+  Children:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   WaveSelector: {fileID: 0}
   RunningWave: {fileID: 0}
-  Waves: []
 --- !u!4 &106586749
 Transform:
   m_ObjectHideFlags: 0
@@ -228,6 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsGenerating: 0
   Options: 0
+  Children: []
   IsCenter: 0
   Offset: {x: 0, y: 0}
   Spacing: {x: 0, y: 0}

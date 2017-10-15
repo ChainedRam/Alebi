@@ -14,19 +14,26 @@ public class TimedGeneratorContainer : GeneratorWrap
     public float Delay;
     #endregion
     #region Private Attributes
-    private float CurrentTime;
+    public float CurrentTime;
     #endregion
     #region Unity Methods
-    private void Awake()
+    protected override void Awake()
     {
         OnStartGenerating += () => CurrentTime = 0;
-        OnGenerate += () => CurrentTime = 0; 
+        OnGenerate += () => CurrentTime = 0;
+
+        AttachOnGenerate(Wrapped);
     }
     #endregion
     #region Override GeneratorWrap
     public override bool ShouldGenerate()
     {
-        return ((CurrentTime += Time.deltaTime) >= Delay && Wrapped.ShouldGenerate()); 
+        return ((CurrentTime += Time.deltaTime) >= Delay); 
+    }
+
+    protected override void SkippedGeneration()
+    {
+        //do nothing 
     }
     #endregion
 }

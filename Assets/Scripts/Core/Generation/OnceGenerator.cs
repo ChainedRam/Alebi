@@ -11,16 +11,18 @@ public abstract class OnceGenerator : GeneratorWrap
     private bool HasGenerated;
     #endregion
     #region Unity Methods 
-    private void Awake()
-    {
-        HasGenerated = false;
-        OnGenerate += () => HasGenerated = true;
-    }
     #endregion
     #region GeneratorWrap Override 
     public sealed override bool ShouldGenerate()
     { 
         return !HasGenerated;
+    }
+
+    protected override void SetupGenerator()
+    {
+        base.SetupGenerator();
+        HasGenerated = false;
+        OnGenerate += () => HasGenerated = true;
     }
     #endregion
 }

@@ -33,15 +33,16 @@ namespace ChainedRam.Core.Generation
         public ShouldGenerateOptions Options = ShouldGenerateOptions.And;
         #endregion
         #region Unity Methods  
-        private void Awake()
-        {
-            foreach (Generator gen in ChildGenerators)
-            {
-                Attach(gen); 
-            }
-        }
         #endregion
         #region Generator Override  
+        protected override void SetupGenerator()
+        {
+            base.SetupGenerator();
+            foreach (Generator gen in ChildGenerators)
+            {
+                Attach(gen);
+            }
+        }
         /// <summary>
         /// And or Or's children's 'ShouldGenerate' based on selected Option
         /// </summary>
@@ -67,21 +68,23 @@ namespace ChainedRam.Core.Generation
 
             return result;
         }
-
-        public override void SkippedGeneration()
-        {
-            foreach (Generator gen in ChildGenerators)
-            {
-                gen.SkippedGeneration();
-            }
-        }
         #endregion
     }
 
     /// <summary>
-    /// None Generic.
+    /// Generic.
     /// </summary>
-    //public class NestedGenerator : NestedGenerator<Generator>
-    //{ } fuck unity custom editor
+    /// <remarks>Made this way such that NestedGenerator<T>can be treated like a non-generic NestedGenrator. And both would share a custome editor</remarks>
+    public class NestedGenerator<T> : NestedGenerator where T : Generator
+    {
+        public T[] Children; 
 
+        public sealed override Generator[] ChildGenerators
+        {
+            get
+            {
+                return Children; 
+            }
+        }
+    }
 }

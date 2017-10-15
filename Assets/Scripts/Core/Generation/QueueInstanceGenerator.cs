@@ -27,12 +27,6 @@ public abstract class QueueInstanceGenerator<T> : InstanceGenerator<T> where T :
         }
     }
     #endregion
-    #region Unity Method
-    private void Awake()
-    {
-        GenerationQueue = new Queue<T>();
-    }
-    #endregion
     #region Override InstanceGenerator Methods  
     protected override T CreateInstance()
     {
@@ -57,6 +51,12 @@ public abstract class QueueInstanceGenerator<T> : InstanceGenerator<T> where T :
     public override void RemoveInstance(T instance)
     {
         GenerationQueue.Dequeue(); 
+    }
+
+    protected override void SetupGenerator()
+    {
+        base.SetupGenerator();
+        GenerationQueue = new Queue<T>();
     }
     #endregion
 }

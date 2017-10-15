@@ -11,60 +11,7 @@ namespace ChainedRam.Alebi.Battle
     /// A Phase contains a set of waves in which a selector decides which one to run. 
     /// </summary>
     //TODO abstract -please 
-    public class Phase : NestedGenerator
+    public class Phase : PoolGenerator<Wave>
     {
-        [Header("Phase Settings")]
-        /// <summary>
-        /// Selects a wave.
-        /// </summary>
-        public WaveSelector WaveSelector;
-
-        /// <summary>
-        /// Holds corrent running wave. TODO 'public' for debugging -KLD
-        /// </summary>
-        public Wave RunningWave;
-
-        public Wave[] Waves;
-
-        public override Generator[] ChildGenerators
-        {
-            get
-            {
-                return Waves;
-            }
-
-            set
-            {
-               
-            }
-        }
-
-        private void Awake()
-        {
-            OnStartGenerating += SelectWave; 
-            
-        }
-
-        public void WaveEnded()
-        {
-            RunningWave = null; 
-        }
-
-        public void SelectWave()
-        {
-            if (RunningWave != null)
-            {
-                RunningWave.OnStopGenerating -= WaveEnded; 
-                RunningWave.StopGenerating(); 
-            }
-
-            RunningWave = WaveSelector.SelectWave(Waves, RunningWave);
-
-            RunningWave.OnStopGenerating -= WaveEnded;
-            RunningWave.OnStopGenerating += WaveEnded;
-
-            RunningWave.StartGenerating();
-        }
-
     }
 }

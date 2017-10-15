@@ -13,6 +13,5 @@ namespace ChainedRam.Alebi.Battle
     //TODO abstract 
     public abstract class Pattern : ProjectileGenerator
     {
-
     }
 }

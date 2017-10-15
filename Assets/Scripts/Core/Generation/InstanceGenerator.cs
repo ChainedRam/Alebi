@@ -23,30 +23,11 @@ public abstract class InstanceGenerator<T> : Generator where T : Component
     /// </summary>
     protected abstract IEnumerable<T> Instances { get; }
     #endregion
-    #region Unity Methods
-    private void Awake()
-    {
-        OnGenerate += GenerateInstance;
-    }
-    #endregion
     #region Public Events
     /// <summary>
     /// Called after generating an instance. 
     /// </summary>
     public event Action<T> OnInstanceGenerated;
-    #endregion
-    #region Private Methods
-    /// <summary>
-    /// 
-    /// </summary>
-    private void GenerateInstance()
-    {
-        T instance = CreateInstance();
-        AddInstance(instance);
-        SetupGenerated(instance);
-
-        OnInstanceGenerated?.Invoke(instance); 
-    }
     #endregion
     #region Public Methods
     protected virtual void DegenerateAll()
@@ -73,6 +54,25 @@ public abstract class InstanceGenerator<T> : Generator where T : Component
         instance.gameObject.SetActive(true);
         instance.transform.localPosition = Vector2.zero;
         instance.transform.rotation = Quaternion.identity; 
+    }
+    #endregion
+    #region Override Generator
+    protected override void SetupGenerator()
+    {
+        OnGenerate += GenerateInstance;
+    }
+    #endregion
+    #region Private Methods
+    /// <summary>
+    /// 
+    /// </summary>
+    private void GenerateInstance()
+    {
+        T instance = CreateInstance();
+        AddInstance(instance);
+        SetupGenerated(instance);
+
+        OnInstanceGenerated?.Invoke(instance); 
     }
     #endregion
     #region Abstarct Methods

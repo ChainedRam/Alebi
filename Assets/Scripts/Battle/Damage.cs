@@ -10,17 +10,9 @@ namespace ChainedRam.Alebi.Core
     /// <summary>
     /// Implements IDamage with integer as a damage type. 
     /// </summary>
-    public class DamageComponent : MonoBehaviour, IHolder<int>
+    public class Damage : MonoBehaviour
     {
-        public int DamagePower;
-
-        public int Item
-        {
-            get
-            {
-                return DamagePower;
-            }
-        }
+        public int Power;
     }
 }
 
