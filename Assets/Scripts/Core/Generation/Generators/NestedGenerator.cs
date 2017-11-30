@@ -17,27 +17,35 @@ namespace ChainedRam.Core.Generation
     /// <summary>
     /// NestedGenerator behaves on behalf of it's children combining their calls into one generator. 
     /// </summary>
+    [Serializable]
     public class NestedGenerator : Generator
     {
         #region Custom Inspector  Attributes  
         //Custome Inspector shows this as an array only for this class excluding children. 
-
         /// <summary>
         /// Holds children generators 
         /// </summary>
-        public virtual Generator[] ChildGenerators { get; set; }
+
+        [SerializeField]
+        public virtual Generator[] ChildGenerators { get { return Generators; } set { Generators = value; } } 
+
+        [HideInInspector]
+        [SerializeField]
+        private Generator[] Generators; 
+
+        [HideInInspector()]
+        public bool ShowChildrenInspecter; 
         #endregion
         #region Inspecter Attributes  
-        [Header("NestedGenerator Settings")]
         [Tooltip("'Should Generate' Condition between children.")]
         public ShouldGenerateOptions Options = ShouldGenerateOptions.And;
         #endregion
         #region Unity Methods  
         #endregion
         #region Generator Override  
-        protected override void SetupGenerator()
+        protected override void WhenAwake()
         {
-            base.SetupGenerator();
+            base.WhenAwake();
             foreach (Generator gen in ChildGenerators)
             {
                 Attach(gen);
@@ -47,7 +55,7 @@ namespace ChainedRam.Core.Generation
         /// And or Or's children's 'ShouldGenerate' based on selected Option
         /// </summary>
         /// <returns></returns>
-        public override bool ShouldGenerate()
+        protected override bool ShouldGenerate()
         {
             bool earlyTermination;
 
@@ -56,7 +64,7 @@ namespace ChainedRam.Core.Generation
             bool result = !earlyTermination; 
             foreach (Generator g in ChildGenerators)
             {
-                bool should = g.ShouldGenerate();
+                bool should = g.IsGenerating; 
 
                 result = operation(result, should); 
 

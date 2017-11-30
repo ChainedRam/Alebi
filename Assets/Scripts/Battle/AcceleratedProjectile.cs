@@ -11,5 +11,4 @@ public class AcceleratedProjectile : Rigidbody2DProjectile
     {
         body.velocity += Acceleration * Time.deltaTime;
     }
-
 }

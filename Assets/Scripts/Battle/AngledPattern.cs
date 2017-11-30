@@ -8,7 +8,7 @@ namespace ChainedRam.Alebi.Battle
 {
     public class AngledPattern : Pattern
     {
-        [Header("DO NOT USE")]
+        [Header("DO NOT USE THIS COMPONENT!")]
         public string msg = "just dont"; 
     }
 }

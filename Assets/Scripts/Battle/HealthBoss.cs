@@ -9,7 +9,7 @@ namespace ChainedRam.Alebi.Battle
     /// <summary>
     /// A boss with integre as it's health. 
     /// </summary>
-    public class HealthBoss : Boss
+    public class BossHealth : DamageCollider2DReciver
     {
         public int HealthPoints;
 

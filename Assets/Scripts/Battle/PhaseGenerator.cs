@@ -26,9 +26,9 @@ namespace ChainedRam.Alebi.Battle
         /// </summary>
         protected int CurrentPhaseIndex;
 
-        private void Awake()
+        protected override void WhenAwake()
         {
-            
+            base.WhenAwake();
             CurrentPhaseIndex = -1;
         }
 

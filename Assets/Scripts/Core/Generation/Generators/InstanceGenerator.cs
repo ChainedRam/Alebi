@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 /// <summary>
@@ -16,12 +17,21 @@ public abstract class InstanceGenerator<T> : Generator where T : Component
 
     [Tooltip("Parnet to generate in.")]
     public Transform GenerateAt;
-    #endregion  
+    #endregion
     #region Protected Abstract Property
     /// <summary>
     /// A collection holding generated instance.
     /// </summary>
-    protected abstract IEnumerable<T> Instances { get; }
+    protected virtual IEnumerable<T> Instances
+    {
+        get
+        {
+            return collection;
+        }
+    }
+    #endregion
+    #region Private Attributes
+    private Collection<T> collection;
     #endregion
     #region Public Events
     /// <summary>
@@ -46,7 +56,7 @@ public abstract class InstanceGenerator<T> : Generator where T : Component
 
     protected virtual T CreateInstance()
     {
-        return Instantiate(Prefab, GenerateAt.transform);
+        return Instantiate(Prefab, GenerateAt);
     }
    
     public virtual void SetupGenerated(T instance)
@@ -57,8 +67,10 @@ public abstract class InstanceGenerator<T> : Generator where T : Component
     }
     #endregion
     #region Override Generator
-    protected override void SetupGenerator()
+    protected override void WhenAwake()
     {
+        base.WhenAwake();
+        collection = new Collection<T>();
         OnGenerate += GenerateInstance;
     }
     #endregion
@@ -75,8 +87,23 @@ public abstract class InstanceGenerator<T> : Generator where T : Component
         OnInstanceGenerated?.Invoke(instance); 
     }
     #endregion
-    #region Abstarct Methods
-    public abstract void AddInstance(T instance);
-    public abstract void RemoveInstance(T instance);
+    #region Virtual Methods
+    public virtual void AddInstance(T instance)
+    {
+        collection.Add(instance);
+    }
+
+    public virtual void RemoveInstance(T instance)
+    {
+        collection.Remove(instance);
+    }
     #endregion
 }
+
+public class InstanceGenerator : InstanceGenerator<MonoBehaviour>
+{
+
+}
+
+
+

@@ -12,9 +12,10 @@ namespace ChainedRam.Alebi.Battle
     /// </summary>
     public abstract class Wave : NestedGenerator<Pattern>
     {
-        private void Awake()
+        protected override void WhenBegin()
         {
-            OnStartGenerating += Setup; 
+            base.WhenBegin();
+            Setup(); 
         }
 
         /// <summary>

@@ -53,9 +53,9 @@ public abstract class QueueInstanceGenerator<T> : InstanceGenerator<T> where T :
         GenerationQueue.Dequeue(); 
     }
 
-    protected override void SetupGenerator()
+    protected override void WhenAwake()
     {
-        base.SetupGenerator();
+        base.WhenAwake();
         GenerationQueue = new Queue<T>();
     }
     #endregion

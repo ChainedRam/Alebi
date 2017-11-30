@@ -12,15 +12,6 @@ public class PoolGenerator : NestedGenerator
 
     public Selector Selector;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    protected override void SetupGenerator()
-    {
-        //ignore NestedGeneratorSetup
-        OnGenerate += () => SwitchIn(Selector.Select(ChildGenerators, Selected));
-    }
-
     public void SwitchIn(Generator gen)
     {
         //Debug.Log("Switching " + Selected.name + " with " + gen.name );
@@ -37,15 +28,15 @@ public class PoolGenerator : NestedGenerator
        // Debug.Log("Promoting " + gen.name);
         
         Selected = gen; 
-        Attach(gen);
-        gen.StartGenerating(); 
+        //Attach(gen);
+        gen.BeginGenerating(); 
     }
 
     public void Demote(Generator gen)
     {
         //Debug.Log("Demoting " + gen.name);
-        gen.StopGenerating();
-        Detach(gen);
+        gen.EndGenerating();
+        //Detach(gen);
 
         Selected = null; 
     }
@@ -53,15 +44,38 @@ public class PoolGenerator : NestedGenerator
     /// <summary>
     /// 
     /// </summary>
-    /// <returns></returns>
-    public override bool ShouldGenerate()
+    protected override void WhenAwake()
     {
-        return (Options == ShouldGenerateOptions.Or? true : (Selected?.ShouldGenerate() ?? true)); 
+
     }
 
-    protected override void SkippedGeneration()
+    protected override void WhenGenerate()
     {
-       
+        SwitchIn(NextGenerator());
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    protected override bool ShouldGenerate()
+    {
+        return !((Selected?.IsGenerating)?? false); 
+    }
+
+    protected override void WhenSkipped()
+    {
+        base.WhenSkipped();
+    }
+
+    public Generator NextGenerator()
+    {
+        return Selector.Select(ChildGenerators, Selected); 
+    }
+
+    protected override void WhenEnd()
+    {
+        Demote(Selected); 
     }
 }
 

@@ -32,7 +32,7 @@ namespace ChainedRam.Alebi.Battle
         public void Terminate()
         {
             IsTerminating = true;
-            Wave.StopGenerating();
+            Wave.EndGenerating();
 
             OnTerminate();
         }

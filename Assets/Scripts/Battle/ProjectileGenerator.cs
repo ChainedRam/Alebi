@@ -18,13 +18,10 @@ public class ProjectileGenerator : QueueInstanceGenerator<Projectile>
         generated.Setup(Velocity, Direction); 
     }
 
-    public override bool ShouldGenerate()
+    protected override bool ShouldGenerate()
     {
         return true; 
     }
 
-    protected override void SkippedGeneration()
-    {
-        
-    }
+
 }

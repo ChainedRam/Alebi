@@ -24,15 +24,17 @@ public abstract class ProjectileQueueGenerator : QueueInstanceGenerator<Projecti
         pro.Setup(Velocity, Angle);
     }
 
-    public override bool ShouldGenerate()
+    protected override bool ShouldGenerate()
     {
         return (CurrentTime -= Time.deltaTime) < 0;
     }
 
     public abstract void Project(Projectile pro); 
 
-    private void Start()
+
+    protected override void WhenStart()
     {
-        CurrentTime = RelaodDelay; 
+        base.WhenStart();
+        CurrentTime = RelaodDelay;
     }
 }

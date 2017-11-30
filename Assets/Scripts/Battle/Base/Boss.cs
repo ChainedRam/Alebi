@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ChainedRam.Core.Interface;
 
-public class Boss : Collider2DReciever<int>
+public class DamageCollider2DReciver : Collider2DReciever<int>
 {
     public override void Recieve(IHolder<int> holder)
     {
