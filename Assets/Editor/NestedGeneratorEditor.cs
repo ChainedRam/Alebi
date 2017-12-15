@@ -11,8 +11,8 @@ namespace ChainedRam.Core.Generation
     [CustomEditor(typeof(NestedGenerator), true)]
     public class NestedGeneratorEditor : GeneratorEditor
     {
-
-        int children = 0;
+        bool[] showChildrenInspecters; 
+        //int children = 0;
 
         public override void OnInspectorGUI()
         {
@@ -35,31 +35,37 @@ namespace ChainedRam.Core.Generation
 
         private void DrawNestedChildren(NestedGenerator ng)
         {
-            int prev = children;
-            children = EditorGUILayout.IntField("Children size", ng.ChildGenerators?.Length ?? children);
+            //int prev = showChildrenInspecters?.Length?? 0;
+           int sizeValue = EditorGUILayout.IntField("Children size", ng.ChildGenerators?.Length ?? 0);
             
-            if (children < 0)
+            if (sizeValue <= 0)
             {
-                children = 0;
+                sizeValue = 0;
+                showChildrenInspecters = new bool[0];
+                ng.ChildGenerators = new Generator[0];
             }
 
             //size changed 
-            if (prev != children)
+            if (sizeValue != (showChildrenInspecters?.Length?? 0))
             {
                 serializedObject.Update();
                 Generator[] prevArray = ng.ChildGenerators;
-                ng.ChildGenerators = new Generator[children];
-                
-                for (int j = 0; j < children && j < prevArray?.Length; j++)
+                bool[] prevShow = showChildrenInspecters; 
+
+                ng.ChildGenerators = new Generator[sizeValue];
+                showChildrenInspecters = new bool[sizeValue]; 
+
+                for (int j = 0; j < sizeValue && j < prevArray.Length; j++)
                 {
                     ng.ChildGenerators[j] = prevArray[j];
+                    showChildrenInspecters[j] = false;
                 }
                 serializedObject.ApplyModifiedProperties();
             }
 
             //draw children
             int i = 0;
-            if (children > 0)
+            if (sizeValue > 0)
             {
                 foreach (var item in ng.ChildGenerators)
                 {
@@ -82,6 +88,7 @@ namespace ChainedRam.Core.Generation
                 int index = 0;
                 foreach (var child in ng.ChildGenerators)
                 {
+                    //change color and store previous
                     Color prevLabelColor = EditorStyles.label.normal.textColor;
                     Color prevFontColor = EditorStyles.boldLabel.normal.textColor;
 
@@ -94,15 +101,19 @@ namespace ChainedRam.Core.Generation
                     }
                     else
                     {
-                        EditorGUILayout.Space();
+                        //ask to show inspecter
+                        if ((showChildrenInspecters[index] = EditorGUILayout.Toggle("Show " + child.name + " Inspecter", showChildrenInspecters[index])))
+                        {
+                            EditorGUILayout.Space();
 
-                        EditorGUI.BeginDisabledGroup(true);
-                        EditorGUILayout.ObjectField("Object source", child, typeof(Generator), true);
-                        EditorGUI.EndDisabledGroup();
+                            EditorGUI.BeginDisabledGroup(true);
+                            EditorGUILayout.ObjectField("Object source", child, typeof(Generator), true);
+                            EditorGUI.EndDisabledGroup();
 
-                        Editor drawer = CreateEditor(child);
-                        drawer.OnInspectorGUI();
-                        EditorGUILayout.Space();
+                            Editor drawer = CreateEditor(child);
+                            drawer.OnInspectorGUI();
+                            EditorGUILayout.Space();
+                         }
                     }
                     EditorStyles.label.normal.textColor = prevLabelColor;
                     EditorStyles.boldLabel.normal.textColor = prevFontColor; 
