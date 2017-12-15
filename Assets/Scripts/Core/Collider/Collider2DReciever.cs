@@ -14,29 +14,25 @@ namespace ChainedRam.Alebi.Core
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class Collider2DReciever<T> : Collider2DEventTrigger, IReciever<T>
+    public abstract class Collider2DReciever<T> : MonoBehaviour, IReciever<T>
     {
         /// <summary>
-        /// Recieve damage from collision objects that implements <see cref="IHolder{T}"/>
+        /// Recieve damage from collision objects that implements <see cref="IPickable{T}"/>
         /// </summary>
         /// <param name="holder"></param>
-        public abstract void Recieve(IHolder<T> holder);
+        public abstract void OnRecieve(T recieved);
 
         /// <summary>
-        /// It works, that all that matters. 
-        /// 
-        /// Find of colided object implements<see cref="IHolder{T}"/> and recieve the damage. 
+        /// Find of colided object implements<see cref="IPickable{T}"/> and recieve the damage. 
         /// </summary>
         /// <param name="collision"></param>
-        protected override void OnTriggerEnter2D(Collider2D collision)
+        protected void OnTriggerEnter2D(Collider2D collision)
         {
-            base.OnTriggerEnter2D(collision);
+            IPickable<T> holder;
 
-            IHolder<T> holder;
-
-            if (collision.gameObject.HasInterface(typeof(IHolder<T>), out holder))
+            if (collision.gameObject.HasInterface(typeof(IPickable<T>), out holder))
             {
-                Recieve(holder); 
+                holder.OnPicked(this); 
             }
         }
     }

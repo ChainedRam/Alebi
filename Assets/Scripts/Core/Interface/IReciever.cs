@@ -13,7 +13,7 @@ namespace ChainedRam.Core.Interface
         /// <summary>
         /// Recieves an item. 
         /// </summary>
-        /// <param name="holder"></param>
-        void Recieve(IHolder<T> holder);
+        /// <param name="recieved"></param>
+        void OnRecieve(T recieved);
     }
 }
