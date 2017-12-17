@@ -1,5 +1,4 @@
 ﻿using ChainedRam.Alebi.Core;
-using ChainedRam.Alebi.Interface.Battle;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

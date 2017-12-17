@@ -1,8 +1,6 @@
 ﻿using ChainedRam.Alebi.Core;
-using ChainedRam.Alebi.Interface;
 using ChainedRam.Core.Collider;
 using ChainedRam.Core.Extentions;
-using ChainedRam.Core.Interface;
 using System;
 using System.Collections;
 using System.Collections.Generic;
