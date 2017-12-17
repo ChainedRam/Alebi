@@ -4,25 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPickable : MonoBehaviour, IPickable<Projectile>
+/// <summary>
+/// Represents items that can be picked by <see cref="PlayerReciever"/>
+/// </summary>
+public class PlayerPickable : Pickable
 {
-    public Projectile ProjectilePrefab; 
-
-    public object Source => reciever; 
-
-    private object reciever; 
-
-    public  void OnPicked(IReciever<Projectile> reciever)
+    public override bool CanBePicked(GameObject PickedBy)
     {
-        this.reciever = reciever;
-
-        WhenPicked(reciever);
-
-        reciever.OnRecieve(ProjectilePrefab); 
+        return true;
     }
 
-    protected virtual void WhenPicked(IReciever<Projectile> reciever)
+    public override void OnPicked(GameObject PickedBy)
     {
-        gameObject.SetActive(false);
+
     }
 }

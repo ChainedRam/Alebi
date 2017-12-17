@@ -7,12 +7,8 @@ using ChainedRam.Core.Interface;
 
 public class PlayerReciever : Collider2DReciever<PlayerPickable>
 {
-
-    public override void OnRecieve(PlayerPickable picked)
+    public override void OnReceive(PlayerPickable recieved)
     {
-        Projectile proj = Instantiate(picked.ProjectilePrefab, transform.position, transform.rotation, transform);
-
-        proj.Setup(1, 90); 
+        
     }
-
 }

@@ -3,16 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : Generator
+/// <summary>
+/// Boss when controls waves. 
+/// </summary>
+public class Boss : DamageReciever
 {
+    /// <summary>
+    /// Trigger to end and move to next boss phase 
+    /// </summary>
+    public TriggerSelector TriggerMeSelecter; 
 
-    public Phase[] Phases;
-
-    private int CurrentPhaseIndex; //Big SHAQ
-
-    protected override bool ShouldGenerate()
+    /// <summary>
+    /// Moves to next phase when recieving damage. 
+    /// </summary>
+    /// <param name="item"></param>
+    public override void OnReceive(DamagePickable item)
     {
-        return !Phases[CurrentPhaseIndex].IsGenerating; 
-    }
+        base.OnReceive(item);
 
+        TriggerMeSelecter.Next(); 
+    }
 }

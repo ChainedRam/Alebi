@@ -11,16 +11,21 @@ using UnityEngine;
 namespace ChainedRam.Alebi.Core
 {
     /// <summary>
-    /// 
+    /// Allows object to recieve a pickable item. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class Collider2DReciever<T> : MonoBehaviour, IReciever<T>
+    //TODO Think about a non-gennric alternative
+    public abstract class Collider2DReciever<T> : MonoBehaviour where T : Pickable
     {
+
         /// <summary>
-        /// Recieve damage from collision objects that implements <see cref="IPickable{T}"/>
+        /// Called when item is recived 
         /// </summary>
-        /// <param name="holder"></param>
-        public abstract void OnRecieve(T recieved);
+        /// <param name="item"></param>
+        public virtual void OnReceive(T item)
+        {
+
+        }
 
         /// <summary>
         /// Find of colided object implements<see cref="IPickable{T}"/> and recieve the damage. 
@@ -28,11 +33,14 @@ namespace ChainedRam.Alebi.Core
         /// <param name="collision"></param>
         protected void OnTriggerEnter2D(Collider2D collision)
         {
-            IPickable<T> holder;
-
-            if (collision.gameObject.HasInterface(typeof(IPickable<T>), out holder))
+            T pickable; 
+            if ((pickable = collision.gameObject.GetComponent<T>()) != null)
             {
-                holder.OnPicked(this); 
+              if(pickable.CanBePicked(this.gameObject))
+               {
+                    pickable.OnPicked(this.gameObject);
+                    OnReceive(pickable);
+               }
             }
         }
     }
