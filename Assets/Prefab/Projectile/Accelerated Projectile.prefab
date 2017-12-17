@@ -24,13 +24,14 @@ GameObject:
   - component: {fileID: 58762878821304434}
   - component: {fileID: 114984543664428644}
   - component: {fileID: 114146891620674596}
+  - component: {fileID: 114068729995122270}
   m_Layer: 0
   m_Name: Accelerated Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4297945554068230
 Transform:
   m_ObjectHideFlags: 1
@@ -79,6 +80,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.2
+--- !u!114 &114068729995122270
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1899202313820238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae860b39a27fae547b2d04f7e0267935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Value: 2
 --- !u!114 &114146891620674596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -91,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 50902571530999132}
-  Acceleration: {x: 1, y: 0}
+  Acceleration: {x: 0, y: 0.1}
 --- !u!114 &114984543664428644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,6 +118,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnEnter:
     m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnExit:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1899202313820238}
         m_MethodName: SetActive
@@ -117,11 +135,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  OnExit:
-    m_PersistentCalls:
-      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!212 &212258603735545392
