@@ -56,11 +56,11 @@ public class DialogSegment : Dialog
 
     public override void WhenDialogStart()
     {
-
+        OnStartDialog?.Invoke();
     }
     public override void WhenDialogEnd()
     {
-
+        OnEndDialog?.Invoke();
     }
     public override void WhenDialogPause()
     {

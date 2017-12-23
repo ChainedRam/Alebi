@@ -17,14 +17,24 @@ public class Conversation : Dialog
     {
         get
         {
-            return Index < Dialogs.Length? Dialogs[Index].Property | DialogPauseProperty.NewPage : DialogPauseProperty.None;
+            return Dialogs[Index].Property | (Index < Dialogs.Length-1 ? DialogPauseProperty.NewPage : DialogPauseProperty.None);
         }
     }
 
     /// <summary>
     /// Current Dialog index
     /// </summary>
-    private int Index; 
+    private int Index;
+
+    /// <summary>
+    /// Indecated whether a new dialog should start 
+    /// </summary>
+    private bool PrepareNextDialog;
+
+    /// <summary>
+    /// Indecated whether conversation has ended
+    /// </summary>
+    private bool HasOnGoingDialog; 
 
     /// <summary>
     /// Invoked when conversation starts.  
@@ -51,12 +61,7 @@ public class Conversation : Dialog
     /// <returns></returns>
     public override bool HasNext()
     {
-        if(Index == Dialogs.Length -1)
-        {
-            return Dialogs[Index].HasNext(); 
-        }
-
-        return true; 
+        return !HasOnGoingDialog; // Index < Dialogs.Length-1 && Dialogs[Index].HasNext();
     }
 
     /// <summary>
@@ -65,24 +70,37 @@ public class Conversation : Dialog
     /// <returns></returns>
     public override char NextCharachter()
     {
-        if(Dialogs[Index].HasNext())
+        if(PrepareNextDialog)
         {
-            return Dialogs[Index].NextCharachter();
-        }
-        else
-        {
+            PrepareNextDialog = false;
+
             Dialogs[Index].WhenDialogEnd();
             Index++;
-            if (HasNext()) //TODO HasNext is called twice at the end. Might cause a bug later. Alternative: set flag. <-- please consider.
+            if (HasNext())
             {
-                Dialogs[Index].WhenDialogStart();
+                Dialogs[Index].WhenDialogStart(); 
             }
             else
             {
-                Index--; //End of conversation
+              
             }
-            return '\0'; 
         }
+
+        if(Dialogs[Index].HasNext()) 
+        {
+            return Dialogs[Index].NextCharachter();
+        }
+
+        //last index doesn't have next
+        if (Index == Dialogs.Length - 1)
+        {
+            HasOnGoingDialog = true;
+        }
+        else
+        {
+            PrepareNextDialog = true;
+        }
+        return '\0';
     }
 
     /// <summary>
@@ -90,7 +108,15 @@ public class Conversation : Dialog
     /// </summary>
     public override void ResetDialog()
     {
-        Dialogs[Index].ResetDialog();
+        foreach (Dialog d in Dialogs)
+        {
+            d.ResetDialog();
+        }
+
+        Index = 0;
+
+        HasOnGoingDialog = false;
+        PrepareNextDialog = false; 
     }
 
     /// <summary>
@@ -124,7 +150,7 @@ public class Conversation : Dialog
     public override void WhenDialogStart()
     {
         OnStartConversation?.Invoke();
-        Index = 0; 
+        Index = 0;
         Dialogs[Index].WhenDialogStart(); 
     }
 }

@@ -10,7 +10,7 @@ public class DialogBox : MonoBehaviour
 
     public GameObject PauseIndecator; 
 
-    public Dialog CurrentSegment;
+    public Dialog CurrentDialog;
 
     private float CurrentTime; 
     private bool IsPaused;
@@ -31,7 +31,7 @@ public class DialogBox : MonoBehaviour
             ResumeDialog(); 
         }
 
-        if (CurrentSegment == null || IsPaused)
+        if (CurrentDialog == null || IsPaused)
         {
             return;
         }
@@ -43,29 +43,29 @@ public class DialogBox : MonoBehaviour
             return; 
         }
 
-        if (CurrentSegment.HasNext())
+        if (CurrentDialog.HasNext())
         {
-            char next = CurrentSegment.NextCharachter();
+            char next = CurrentDialog.NextCharachter();
             text.text += next;
 
             if (next == '\n')
             {
-                if (CurrentSegment.Property.HasFlag(DialogPauseProperty.NewLine))
+                if (CurrentDialog.Property.HasFlag(DialogPauseProperty.NewLine))
                 {
                     PauseDialog();
                 }
                 else
                 {
-                    CurrentTime = -CurrentSegment.GetDisplayDelay();
+                    CurrentTime = -CurrentDialog.GetDisplayDelay();
                 }
             }
             else 
             {
-                if (next == ' ' && CurrentSegment.Property.HasFlag(DialogPauseProperty.Space))
+                if (next == ' ' && CurrentDialog.Property.HasFlag(DialogPauseProperty.Space))
                 {
                     PauseDialog();
                 }
-                else if (CurrentSegment.Property.HasFlag(DialogPauseProperty.NewPage) && next == '\0')
+                else if (CurrentDialog.Property.HasFlag(DialogPauseProperty.NewPage) && next == '\0')
                 {
                     OnResume += ClearText;
                     OnResume += () => OnResume -= ClearText;
@@ -74,13 +74,13 @@ public class DialogBox : MonoBehaviour
                 }
                 else
                 {
-                    CurrentTime = -CurrentSegment.GetDisplayDelay();
+                    CurrentTime = -CurrentDialog.GetDisplayDelay();
                 }
             }
         }
         else //finished dialog 
         {
-            if (CurrentSegment.Property.HasFlag(DialogPauseProperty.PageEnd))
+            if (CurrentDialog.Property.HasFlag(DialogPauseProperty.PageEnd))
             {
                 PauseDialog();
                 OnResume += EndCurrentDialogSegment;
@@ -96,17 +96,23 @@ public class DialogBox : MonoBehaviour
     private void EndCurrentDialogSegment()
     {
         ClearText();
-        CurrentSegment.WhenDialogEnd();
-        CurrentSegment = null;
+        CurrentDialog.WhenDialogEnd();
+        CurrentDialog = null;
     }
 
-    public void PresentSegment(Dialog newSegment)
+    public void PresentSegment(Dialog dialog)
     {
-        ClearText();
-        CurrentSegment = newSegment;
+        if(CurrentDialog != null)
+        {
+            CurrentDialog.WhenDialogEnd();
+        }
 
-        CurrentSegment.ResetDialog();
-        CurrentSegment.WhenDialogStart();
+
+        ClearText();
+        CurrentDialog = dialog;
+
+        CurrentDialog.ResetDialog();
+        CurrentDialog.WhenDialogStart();
 
         IsPaused = false;
         PauseIndecator.SetActive(false);
@@ -125,13 +131,13 @@ public class DialogBox : MonoBehaviour
     public void PauseDialog()
     {
         IsPaused = true;
-        CurrentSegment.WhenDialogPause();
+        CurrentDialog.WhenDialogPause();
         PauseIndecator.SetActive(true); 
     }
 
     public void ResumeDialog()
     {
-        CurrentSegment.WhenDialogResume();
+        CurrentDialog.WhenDialogResume();
 
         OnResume?.Invoke();
         IsPaused = false;
