@@ -12,15 +12,15 @@ public class DialogSegment : Dialog
     public TextAsset textFile;
 
     [Range(0f,.5f)]
-    public float CharachterDisplayTime; //?? i forgot what this is for. 
+    public float CCharachterDelay; 
 
     [Range(0f, .5f)]
-    public float LineDisplayTime; // ?? same ^ 
+    public float NewLineDelay; 
 
     public DialogPauseProperty property;
 
     private int CharachterIndex;
-    private string text;
+    protected string text;
 
     public UnityEvent OnStartDialog;
     public UnityEvent OnEndDialog;
@@ -33,7 +33,7 @@ public class DialogSegment : Dialog
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         text = textFile.text; 
         ResetDialog(); 
@@ -75,10 +75,10 @@ public class DialogSegment : Dialog
     {
         if (text[CharachterIndex-1] == '\n')
         {
-            return LineDisplayTime; 
+            return NewLineDelay; 
         }
 
-        return CharachterDisplayTime; 
+        return CCharachterDelay; 
     }
     
 }

@@ -32,22 +32,22 @@ public abstract class Dialog : MonoBehaviour
     /// <summary>
     /// Invoked when dialog starts
     /// </summary>
-    public abstract void WhenDialogStart();
+    public virtual void WhenDialogStart() { }
 
     /// <summary>
     /// Invoked when dialog ends 
     /// </summary>
-    public abstract void WhenDialogEnd();
+    public virtual void WhenDialogEnd() { }
 
     /// <summary>
     /// Invoked when dialog is paused. <see cref="DialogPauseProperty"/>
     /// </summary>
-    public abstract void WhenDialogPause();
+    public virtual void WhenDialogPause() { }
 
     /// <summary>
     /// Invoked when dialog resumes after pausing. 
     /// </summary>
-    public abstract void WhenDialogResume();
+    public virtual void WhenDialogResume() { }
 
     /// <summary>
     /// Gets time delay in seconds between displaying each charachter. 
