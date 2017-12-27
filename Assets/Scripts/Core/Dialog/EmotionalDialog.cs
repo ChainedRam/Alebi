@@ -10,11 +10,16 @@ public class EmotionalDialog : TextDialog
 {
     public EmotionalCharachter Charachter;
 
-    private List<EmotionalIndex> EmotionStack;
+    private List<IndexedEmotion> EmotionList;
     private int EmotionIndex;
 
     public UnityEvent OnStart;
     public UnityEvent OnEnd;
+
+    private string NonEmotionalText;
+
+
+    protected override string DisplayText => NonEmotionalText;
 
 
     /// <summary>
@@ -22,26 +27,46 @@ public class EmotionalDialog : TextDialog
     /// </summary>
     void Start()
     {
-        EmotionStack = new List<EmotionalIndex>();
-        EmotionIndex = 0; 
+        EmotionList = new List<IndexedEmotion>();
+        Parse(); 
+    }
+
+    private void Parse()
+    {
+       foreach(IndexedEmotion emo in EmotionList)
+       {
+            Destroy(emo);
+            Destroy(emo.gameObject); 
+       }
+       EmotionList = new List<IndexedEmotion>();
+
+        EmotionIndex = 0;
         //parse text 
         bool start = false;
 
         string result = "";
         string emotionBuild = "";
 
-        for (int i= 0; i < Text.Length; i++)
+        for (int i = 0; i < RawText.Length; i++)
         {
-            char c = Text[i];
+            char c = RawText[i];
 
             switch (c)
-            { 
+            {
                 case '<':
                     emotionBuild = "";
                     start = true;
                     break;
                 case '>':
-                    EmotionStack.Add(new EmotionalIndex(result.Length, emotionBuild));
+                    if(start == false)
+                    {
+                        goto default;  //i'm sorry -.-
+                    }
+
+                    IndexedEmotion newEmotion = new GameObject(result.Length + " " + emotionBuild).AddComponent<IndexedEmotion>();
+                    newEmotion.transform.SetParent(transform);
+
+                    EmotionList.Add(newEmotion.Init(result.Length, emotionBuild));
                     start = false;
                     break;
                 default:
@@ -53,11 +78,11 @@ public class EmotionalDialog : TextDialog
                     {
                         result += "" + c;
                     }
-                    break; 
+                    break;
             }
         }
 
-        Text = result;
+        NonEmotionalText = result.Trim();
     }
 
     /// <summary>
@@ -66,9 +91,9 @@ public class EmotionalDialog : TextDialog
     /// <returns></returns>
     public override char NextCharachter()
     {
-        if(EmotionIndex < EmotionStack.Count && Index == EmotionStack[EmotionIndex].Index)
+        if(EmotionIndex < EmotionList.Count && Index == EmotionList[EmotionIndex].Index)
         {
-            Charachter.SetEmotion(EmotionStack[EmotionIndex].Emotion);
+            Charachter?.SetEmotion(EmotionList[EmotionIndex].Emotion);
             EmotionIndex++; 
         }
 
@@ -89,6 +114,7 @@ public class EmotionalDialog : TextDialog
     public override void WhenDialogStart()
     {
         base.WhenDialogStart();
+
         EmotionIndex = 0;
 
         OnStart?.Invoke();
@@ -100,19 +126,5 @@ public class EmotionalDialog : TextDialog
         OnEnd?.Invoke();
     }
 
-    /// <summary>
-    /// Extratable to an external component to better manage parsed emotions. //TODO 
-    /// </summary>
-    private class EmotionalIndex
-    {
-        public int Index;
-        public string Emotion;
-
-        public EmotionalIndex(int i, string e)
-        {
-            Index = i;
-            Emotion = e; 
-        }
-    }
 }
 

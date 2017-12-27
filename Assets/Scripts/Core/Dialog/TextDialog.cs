@@ -8,7 +8,7 @@ using UnityEngine;
 public class TextDialog : Dialog
 {
     [TextArea(1,10)]
-    public string Text;
+    public string RawText;
 
     public DialogPauseProperty PauseProperty;
 
@@ -17,6 +17,7 @@ public class TextDialog : Dialog
 
     protected int Index; 
     
+    protected virtual string DisplayText { get { return RawText; } }
 
     public override DialogPauseProperty Property
     {
@@ -33,12 +34,12 @@ public class TextDialog : Dialog
 
     public override bool HasNext()
     {
-        return Index < Text.Length; 
+        return Index < DisplayText.Length; 
     }
 
     public override char NextCharachter()
     {
-        return Text[Index++]; 
+        return DisplayText[Index++]; 
     }
 
     public override void ResetDialog()

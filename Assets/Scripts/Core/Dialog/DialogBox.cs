@@ -96,11 +96,11 @@ public class DialogBox : MonoBehaviour
     private void EndCurrentDialogSegment()
     {
         ClearText();
-        CurrentDialog.WhenDialogEnd();
+        CurrentDialog?.WhenDialogEnd();
         CurrentDialog = null;
     }
 
-    public void PresentSegment(Dialog dialog)
+    public void PresentDialog(Dialog dialog)
     {
         if(CurrentDialog != null)
         {
@@ -144,8 +144,15 @@ public class DialogBox : MonoBehaviour
         PauseIndecator.SetActive(false);
     }
 
+    public void ForceEndDialog()
+    {
+        EndCurrentDialogSegment(); 
 
-    public bool PageIsFull()
+        IsPaused = false;
+        PauseIndecator.SetActive(false);
+    }
+
+    protected bool PageIsFull()
     {
         return false; //TODO maybe someday 
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// For emotionful dialogs
+/// For emotionful dialogs. TODO: please change to an event listener 
 /// </summary>
 public class EmotionalCharachter : MonoBehaviour
 {
@@ -14,7 +14,7 @@ public class EmotionalCharachter : MonoBehaviour
         Animator.SetTrigger("idle");
     }
 
-    public void SetEmotion(string name)
+    public virtual void SetEmotion(string name)
     {
         //Hold if + at end 
         if (name.EndsWith("+"))
