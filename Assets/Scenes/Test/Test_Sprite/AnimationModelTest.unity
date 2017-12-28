@@ -569,6 +569,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 212788395360262606, guid: db7b6807f6b7512419b270d4feb17c7d,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212219745981211998, guid: db7b6807f6b7512419b270d4feb17c7d,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db7b6807f6b7512419b270d4feb17c7d, type: 2}
   m_IsPrefabParent: 0
@@ -632,7 +642,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -655,7 +665,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1075719497}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 2.55, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -689,13 +699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1dd4c0bd2b03d47809108e9587d8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: '<angry+>I hate you
-
-    <shocked+>where you shocked?
-
-    <blink>look at me blinking
-
-    <idle>I''m idle now'
+  RawText: 
   PauseProperty: 2
   Delay: 0.1
   Charachter: {fileID: 1640806298}
@@ -755,7 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b0ac5f910aa1c14d93e030af7b6cb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: 'Hello, my name is jeff '
+  RawText: 
   PauseProperty: 4
   Delay: 0.315
 --- !u!1 &1218471015
