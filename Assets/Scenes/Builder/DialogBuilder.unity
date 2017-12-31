@@ -154,7 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633adbb519dbf7b448873638a090a713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: 0}
+  animator: {fileID: 0}
+  clips: []
   label: {fileID: 780185511}
 --- !u!1 &81464337
 GameObject:
@@ -544,6 +545,7 @@ MonoBehaviour:
   PauseProperty: 0
   Delay: 0.1
   Charachter: {fileID: 43099320}
+  EmotionList: []
   OnStart:
     m_PersistentCalls:
       m_Calls:
@@ -1277,6 +1279,7 @@ MonoBehaviour:
   PauseProperty: 0
   Delay: 0.1
   Charachter: {fileID: 43099320}
+  EmotionList: []
   OnStart:
     m_PersistentCalls:
       m_Calls:
@@ -1608,14 +1611,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c50559c8658a2c4bb47574f122a5b56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextFile: {fileID: 0}
-  ConversationName: 
-  PauseProprty: 0
-  DelayTime: 0
-  FirstName: 
-  SecondName: 
-  FirstAlias: 
-  SecondAlias: 
+  TextFile: {fileID: 4900000, guid: 9fc22a89fb2f9154e8a45c25896eea11, type: 3}
+  ConversationName: None
+  PauseProprty: 1
+  DelayTime: 0.07
+  FirstName: Naggah
+  SecondName: Jamal
+  FirstAlias: N
+  SecondAlias: J
   Output: {fileID: 0}
   box: {fileID: 794963656}
   ErrorMessage: {fileID: 781357480}

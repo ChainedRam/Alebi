@@ -55,6 +55,10 @@ public class EmotionalCharacter : MonoBehaviour
     //because state machine can't do shit
     private void LateUpdate()
     {
+        if(animator == null)
+        {
+            return; 
+        }
         if (currentStateName != "" && animator.GetCurrentAnimatorStateInfo(0).IsName("default"))
         {
             OverrideController[EmotionHoldName] = ClipsDictionary[currentStateName];
