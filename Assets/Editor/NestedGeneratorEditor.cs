@@ -50,7 +50,7 @@ namespace ChainedRam.Core.Generation
             {
                 serializedObject.Update();
                 Generator[] prevArray = ng.ChildGenerators;
-                bool[] prevShow = showChildrenInspecters; 
+                //bool[] prevShow = showChildrenInspecters; 
 
                 ng.ChildGenerators = new Generator[sizeValue];
                 showChildrenInspecters = new bool[sizeValue]; 

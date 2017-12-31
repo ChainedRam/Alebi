@@ -1,0 +1,7 @@
+[11:34] == Human14 [webchat@62.215.112.204] has joined #mtgrules
+[11:34] <Human14> Hello :)
+[11:35] <Human14> I got a question regarding Kopala, warden of waves
+[11:35] <Volo> Go for it
+[11:36] <Human14> Does he increase the cost of triggered abilities? eg, if I summon a hostage taker and trigger her ability to exile kopala, will i have to pay an extra 2 mana?
+[11:36] <Volo> Nope. Triggered abilities don't get taxed. Only spells and activated abilities.
+[11:37] <Human14> Ok thanks :)
