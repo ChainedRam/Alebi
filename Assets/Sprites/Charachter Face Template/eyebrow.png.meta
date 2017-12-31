@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 72dd3072f25984e43b8f2395d3c7f777
-timeCreated: 1514232123
+guid: 265db5f9d3d550b4abb9fcb56f8a0c25
+timeCreated: 1514735631
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -79,10 +79,10 @@ TextureImporter:
       name: eyebrow_0
       rect:
         serializedVersion: 2
-        x: 44
-        y: 140
-        width: 53
-        height: 12
+        x: 37
+        y: 150
+        width: 50
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

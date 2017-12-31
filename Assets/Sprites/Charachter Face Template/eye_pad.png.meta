@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 84d7d75651268e84d9f7cec5a9f91ede
-timeCreated: 1514224230
+guid: c5786fdfa100ff64aab89320dbac987e
+timeCreated: 1514735608
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -79,10 +79,10 @@ TextureImporter:
       name: eye_pad_0
       rect:
         serializedVersion: 2
-        x: 35
-        y: 121
-        width: 78
-        height: 52
+        x: 37
+        y: 100
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
