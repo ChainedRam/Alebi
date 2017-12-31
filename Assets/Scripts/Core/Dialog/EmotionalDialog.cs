@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,7 +11,7 @@ public class EmotionalDialog : TextDialog
 {
     public EmotionalCharacter Charachter;
 
-    private List<IndexedEmotion> EmotionList;
+    public List<IndexedEmotion> EmotionList;
     private int EmotionIndex;
 
     public UnityEvent OnStart;
@@ -33,7 +34,9 @@ public class EmotionalDialog : TextDialog
 
     private void Parse()
     {
-       foreach(IndexedEmotion emo in EmotionList)
+       EmotionList = GetComponentsInChildren<IndexedEmotion>().ToList(); 
+
+       foreach (IndexedEmotion emo in EmotionList)
        {
             Destroy(emo);
             Destroy(emo.gameObject); 
