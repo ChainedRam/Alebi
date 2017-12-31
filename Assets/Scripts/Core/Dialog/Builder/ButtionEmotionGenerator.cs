@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ButtionEmotionGenerator : MonoBehaviour
 {
-    public EmotionalCharachter Character;
+    public EmotionalCharacter Character;
 
     public Button ButtonPrefab;
     public GameObject ButtonParent;

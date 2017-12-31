@@ -8,7 +8,7 @@ using UnityEngine.Events;
 /// </summary>
 public class EmotionalDialog : TextDialog
 {
-    public EmotionalCharachter Charachter;
+    public EmotionalCharacter Charachter;
 
     private List<IndexedEmotion> EmotionList;
     private int EmotionIndex;

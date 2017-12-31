@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FakeEmotionalCharachter : EmotionalCharachter
+public class FakeEmotionalCharachter : EmotionalCharacter
 {
     public Text label;
 

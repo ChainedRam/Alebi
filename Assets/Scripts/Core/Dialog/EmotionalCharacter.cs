@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// For emotionful dialogs. TODO: please change to an event listener -what? 
 /// </summary>
-public class EmotionalCharachter : MonoBehaviour
+public class EmotionalCharacter : MonoBehaviour
 {
     public Animator animator;
     public AnimationClip[] clips;
