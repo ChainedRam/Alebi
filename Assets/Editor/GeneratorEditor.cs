@@ -86,7 +86,7 @@ public class GeneratorEditor : Editor
 
     private void ClearPreviousTerminators(Generator gen, GenTermination prev)
     {
-        if (prev == gen.TerminatorTag)
+        if (prev == gen.TerminatorTag || prev == GenTermination.Internal)
         {
             return;
         }
@@ -139,12 +139,12 @@ public class GeneratorEditor : Editor
 
     private void ClearPreviousCondition(Generator gen, GenCondition prevConditionType)
     {
-        if (prevConditionType == gen.GenerateConditionTag)
+        if (prevConditionType == gen.GenerateConditionTag || prevConditionType == GenCondition.Internal)
         {
             return;
         }
 
-        gen.Terminator = null;
+        gen.GenerateCondition = null;
         switch (prevConditionType)
         {
             case GenCondition.Cooldown:
