@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using ChainedRam.Core.Collider;
 using UnityEngine;
+
 
 /// <summary>
 /// A Pickable Damage component. 
@@ -14,11 +14,11 @@ public class DamagePickable : Pickable
 
     public override bool CanBePicked(GameObject PickedBy)
     {
-        return true; 
+        return true;
     }
 
     public override void OnPicked(GameObject PickedBy)
     {
-        
+
     }
 }

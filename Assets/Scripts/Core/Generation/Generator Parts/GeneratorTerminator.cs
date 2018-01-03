@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GeneratorTerminator : MonoBehaviour
+namespace ChainedRam.Core.Generation
 {
-    public virtual void Setup(Generator gen) { }
-    public virtual void SetApart(Generator gen) { }
+    public abstract class GeneratorTerminator : MonoBehaviour
+    {
+        public virtual void Setup(Generator gen) { }
+        public virtual void SetApart(Generator gen) { }
 
-    public abstract bool ShouldTerminate(Generator gen);
+        public abstract bool ShouldTerminate(Generator gen);
+    }
 }

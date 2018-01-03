@@ -2,31 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Wrap a generater and stops after a given time. 
-/// </summary>
-public class DurationTerminator : GeneratorTerminator
+namespace ChainedRam.Core.Generation
 {
-    #region Inspector Attributes
-    [Header("TimedGeneratorContainer")]
-
-    [Tooltip("In seconds")]
-    public float Duration;
-    #endregion
-    #region Private Attributes
-    public float CurrentTime;
-
-   
-    #endregion
-    #region Override GeneratorTerminator
-    public override void Setup(Generator gen)
+    /// <summary>
+    /// Wrap a generater and stops after a given time. 
+    /// </summary>
+    public class DurationTerminator : GeneratorTerminator
     {
-        CurrentTime = 0;
-    }
+        #region Inspector Attributes
+        [Header("TimedGeneratorContainer")]
 
-    public override bool ShouldTerminate(Generator gen)
-    {
-        return ((CurrentTime += Time.deltaTime) >= Duration);
+        [Tooltip("In seconds")]
+        public float Duration;
+        #endregion
+        #region Private Attributes
+        public float CurrentTime;
+
+
+        #endregion
+        #region Override GeneratorTerminator
+        public override void Setup(Generator gen)
+        {
+            CurrentTime = 0;
+        }
+
+        public override bool ShouldTerminate(Generator gen)
+        {
+            return ((CurrentTime += Time.deltaTime) >= Duration);
+        }
+        #endregion
     }
-    #endregion
 }

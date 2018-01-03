@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Contains flags in which a <see cref="DialogBox" will pause upon reaching such charahcters. />
-/// </summary>
-public enum DialogPauseProperty : int
+namespace ChainedRam.Core.Dialog
 {
-    None = 0,
-    PageEnd = 1,
-    NewLine = 2,
-    Space = 4,
-    NewPage = 8,
+    /// <summary>
+    /// Contains flags in which a <see cref="DialogBox" will pause upon reaching such charahcters. />
+    /// </summary>
+    public enum DialogPauseType : int
+    {
+        None = 0,
+        PageEnd = 1,
+        NewLine = 2,
+        Space = 4,
+        NewPage = 8,
+    }
 }

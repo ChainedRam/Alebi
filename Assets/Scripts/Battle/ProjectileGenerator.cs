@@ -4,24 +4,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileGenerator : QueueInstanceGenerator<Projectile>
+namespace ChainedRam.Core.Generation
 {
-    public float Velocity;
-
-    [Range(-180,180)]
-    public float Direction;
-
-    public override void SetupGenerated(Projectile generated)
+    public class ProjectileGenerator : QueueInstanceGenerator<Projectile>
     {
-        base.SetupGenerated(generated);
+        public float Velocity;
 
-        generated.Setup(Velocity, Direction); 
+        [Range(-180, 180)]
+        public float Direction;
+
+        public override void SetupGenerated(Projectile generated)
+        {
+            base.SetupGenerated(generated);
+
+            generated.Setup(Velocity, Direction);
+        }
+
+        protected override bool ShouldGenerate()
+        {
+            return true;
+        }
     }
-
-    protected override bool ShouldGenerate()
-    {
-        return true; 
-    }
-
-
 }

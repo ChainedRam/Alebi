@@ -2,33 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkippedTerminator : GeneratorTerminator
+namespace ChainedRam.Core.Generation
 {
-    private bool HasSkipped; 
-
-    public override void Setup(Generator gen)
+    //TODO: Test this 
+    public class SkippedTerminator : GeneratorTerminator
     {
-        base.Setup(gen);
-        HasSkipped = false;
+        private bool HasSkipped;
 
-        gen.OnSkippedGenerate -= DidSkip;
-        gen.OnSkippedGenerate += DidSkip; 
-    }
+        public override void Setup(Generator gen)
+        {
+            base.Setup(gen);
+            HasSkipped = false;
 
-    public override void SetApart(Generator gen)
-    {
-        base.SetApart(gen);
-        gen.OnSkippedGenerate -= DidSkip;
-    }
+            gen.OnSkippedGenerate -= DidSkip;
+            gen.OnSkippedGenerate += DidSkip;
+        }
 
-    public override bool ShouldTerminate(Generator gen)
-    {
-        return HasSkipped; 
-    }
+        public override void SetApart(Generator gen)
+        {
+            base.SetApart(gen);
+            gen.OnSkippedGenerate -= DidSkip;
+        }
 
-    private void DidSkip()
-    {
-        HasSkipped = true; 
+        public override bool ShouldTerminate(Generator gen)
+        {
+            return HasSkipped;
+        }
+
+        private void DidSkip()
+        {
+            HasSkipped = true;
+        }
     }
-    
 }

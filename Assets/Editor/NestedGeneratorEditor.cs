@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-namespace ChainedRam.Core.Generation
+namespace ChainedRam.Inspecter.Generation
 {
     [CustomEditor(typeof(NestedGenerator), true)]
     public class NestedGeneratorEditor : GeneratorEditor

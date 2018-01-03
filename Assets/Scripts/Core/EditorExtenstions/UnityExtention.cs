@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnityExtention : MonoBehaviour
-{
 
+namespace ChainedRam.Core.Extentions
+{
+    public class UnityExtention : MonoBehaviour
+    {
+
+    }
 }

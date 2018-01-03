@@ -4,76 +4,78 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 
-
-public static class EnumExtensions
+namespace ChainedRam.Core.Enum.Extensions
 {
-   
-    public static bool HasFlag<T>(this T property, T flag) where T : struct, IComparable, IFormattable, IConvertible
+    public static class EnumExtensions
     {
-        if (!typeof(T).IsEnum)
+
+        public static bool HasFlag<T>(this T property, T flag) where T : struct, IComparable, IFormattable, IConvertible
         {
-            throw new ArgumentException("Type must be an enum.");
+            if (!typeof(T).IsEnum)
+            {
+                throw new ArgumentException("Type must be an enum.");
+            }
+
+            int proeryValue = property.ToInt32(null);
+            int flagValue = flag.ToInt32(null);
+
+
+            return (proeryValue & flagValue) == flagValue;
         }
 
-        int proeryValue = property.ToInt32(null);
-        int flagValue = flag.ToInt32(null);
-
-        
-        return (proeryValue & flagValue) == flagValue; 
-    }
-
-    public static void AddFlag<T>(ref T property, T flag) where T : struct, IComparable, IFormattable, IConvertible
-    {
-        if (!typeof(T).IsEnum)
+        public static void AddFlag<T>(ref T property, T flag) where T : struct, IComparable, IFormattable, IConvertible
         {
-            throw new ArgumentException("Type must be an enum.");
+            if (!typeof(T).IsEnum)
+            {
+                throw new ArgumentException("Type must be an enum.");
+            }
+
+            int proeryValue = property.ToInt32(null);
+            int flagValue = flag.ToInt32(null);
+
+            proeryValue = (proeryValue | flagValue);
+            //todo
+
+            property = (T)(object)proeryValue;
         }
 
-        int proeryValue = property.ToInt32(null);
-        int flagValue = flag.ToInt32(null);
-
-        proeryValue = (proeryValue | flagValue);
-        //todo
-
-        property = (T)(object)proeryValue; 
-    }
-
-    public static void RemoveFlag<T>(ref T property, T flag) where T : struct, IComparable, IFormattable, IConvertible
-    {
-        if (!typeof(T).IsEnum)
+        public static void RemoveFlag<T>(ref T property, T flag) where T : struct, IComparable, IFormattable, IConvertible
         {
-            throw new ArgumentException("Type must be an enum.");
+            if (!typeof(T).IsEnum)
+            {
+                throw new ArgumentException("Type must be an enum.");
+            }
+
+            int proeryValue = property.ToInt32(null);
+            int flagValue = flag.ToInt32(null);
+
+            proeryValue = proeryValue & ~flagValue;
+
+            property = (T)(object)proeryValue;
         }
 
-        int proeryValue = property.ToInt32(null);
-        int flagValue = flag.ToInt32(null);
 
-        proeryValue = proeryValue & ~flagValue;
-
-        property = (T)(object)proeryValue;
-    }
-
-
-    //TODO needs Quick Maths! 
-    public static void SetFlag<T>(ref T property, T flag, bool value) where T : struct, IComparable, IFormattable, IConvertible
-    {
-        if (!typeof(T).IsEnum)
+        //TODO needs Quick Maths! 
+        public static void SetFlag<T>(ref T property, T flag, bool value) where T : struct, IComparable, IFormattable, IConvertible
         {
-            throw new ArgumentException("Type must be an enum.");
-        }
+            if (!typeof(T).IsEnum)
+            {
+                throw new ArgumentException("Type must be an enum.");
+            }
 
-        if (property.HasFlag(flag) == value)
-        {
-            return; 
-        }
+            if (property.HasFlag(flag) == value)
+            {
+                return;
+            }
 
-        if(value)
-        {
-            AddFlag(ref property, flag); 
-        }
-        else
-        {
-            RemoveFlag(ref property, flag);
+            if (value)
+            {
+                AddFlag(ref property, flag);
+            }
+            else
+            {
+                RemoveFlag(ref property, flag);
+            }
         }
     }
 }

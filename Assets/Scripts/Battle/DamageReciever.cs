@@ -1,7 +1,6 @@
-﻿using ChainedRam.Alebi.Core;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿
+
+using ChainedRam.Core.Collider;
 
 /// <summary>
 /// Allows objects to recieve Damage 
@@ -9,10 +8,11 @@ using UnityEngine;
 public class DamageReciever : Collider2DReciever<DamagePickable>
 {
     //Used for demonstration. TODO remove 
-    public int HP; 
+    public int HP;
 
     public override void OnReceive(DamagePickable item)
     {
-        HP -= item.Value; 
+        HP -= item.Value;
     }
 }
+

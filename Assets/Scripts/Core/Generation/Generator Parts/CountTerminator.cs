@@ -2,47 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// A terminatorgenerates based on a given number before stopping. 
-/// </summary>
-public class CountTerminator : GeneratorTerminator
+namespace ChainedRam.Core.Generation
 {
-    #region Inspector Attributes 
-    [Header("CountGenerator")]
-    [Tooltip("Maximum number to generate")]
-    public int MaxGeneration;
-    #endregion
-    #region Private Attributes 
     /// <summary>
-    /// Holds counter 
+    /// A terminatorgenerates based on a given number before stopping. 
     /// </summary>
-    private int CurrentGeneration;
-
-    #endregion
-    #region Override GeneratorTerminator
-    public override void Setup(Generator gen)
+    public class CountTerminator : GeneratorTerminator
     {
-        CurrentGeneration = 0;
+        #region Inspector Attributes 
+        [Header("CountGenerator")]
+        [Tooltip("Maximum number to generate")]
+        public int MaxGeneration;
+        #endregion
+        #region Private Attributes 
+        /// <summary>
+        /// Holds counter 
+        /// </summary>
+        private int CurrentGeneration;
 
-        gen.OnGenerate -= IncrementCounter;
-        gen.OnGenerate += IncrementCounter; 
+        #endregion
+        #region Override GeneratorTerminator
+        public override void Setup(Generator gen)
+        {
+            CurrentGeneration = 0;
 
+            gen.OnGenerate -= IncrementCounter;
+            gen.OnGenerate += IncrementCounter;
+
+        }
+
+        public override void SetApart(Generator gen)
+        {
+            gen.OnGenerate -= IncrementCounter;
+        }
+
+        public override bool ShouldTerminate(Generator gen)
+        {
+            return CurrentGeneration >= MaxGeneration;
+        }
+        #endregion
+
+        private void IncrementCounter()
+        {
+            CurrentGeneration++;
+        }
     }
-
-    public override void SetApart(Generator gen)
-    {
-        gen.OnGenerate -= IncrementCounter;
-    }
-
-    public override bool ShouldTerminate(Generator gen)
-    {
-        return CurrentGeneration >= MaxGeneration;
-    }
-    #endregion
-
-    private void IncrementCounter()
-    {
-        CurrentGeneration++;
-    }
-
 }

@@ -1,12 +1,7 @@
-﻿using ChainedRam.Alebi.Core;
-using ChainedRam.Core.Collider;
-using ChainedRam.Core.Extentions;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-namespace ChainedRam.Alebi.Core
+namespace ChainedRam.Core.Collider
 {
     /// <summary>
     /// Allows object to recieve a pickable item. 

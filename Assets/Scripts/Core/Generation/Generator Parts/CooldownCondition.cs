@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CooldownCondition : GeneratorCondition
+namespace ChainedRam.Core.Generation
 {
-    [Tooltip("Time to wait in seconds.")]
-    [Range(0, 1000)]
-    public float WaitTime;
-
-    private float CurrentTimer;
-
-    public override void OnGeneratorGenerated()
+    public class CooldownCondition : GeneratorCondition
     {
-        CurrentTimer = WaitTime; 
-    }
+        [Tooltip("Time to wait in seconds.")]
+        [Range(0, 1000)]
+        public float WaitTime;
 
-    public override bool ShouldGenerate(Generator gen)
-    {
-        return (CurrentTimer -= Time.deltaTime) <= 0;
+        private float CurrentTimer;
+
+        public override void OnGeneratorGenerated()
+        {
+            CurrentTimer = WaitTime;
+        }
+
+        public override bool ShouldGenerate(Generator gen)
+        {
+            return (CurrentTimer -= Time.deltaTime) <= 0;
+        }
     }
- 
 }
