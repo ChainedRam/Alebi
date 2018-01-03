@@ -13,8 +13,6 @@ public class DamageReciever : Collider2DReciever<DamagePickable>
 
     public override void OnReceive(DamagePickable item)
     {
-        base.OnReceive(item);
-
         HP -= item.Value; 
     }
 }
