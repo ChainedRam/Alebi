@@ -20,11 +20,11 @@ namespace ChainedRam.Core.Generation
             return !HasGenerated;
         }
 
-        protected override void WhenAwake()
+        protected override void OnAwake()
         {
-            base.WhenAwake();
+            base.OnAwake();
             HasGenerated = false;
-            OnGenerate += () => HasGenerated = true; //REEEEEEE. move to WhenGenerate
+            OnGenerateEventHandler += (s,e) => HasGenerated = true; //REEEEEEE. move to WhenGenerate
         }
         #endregion
     }

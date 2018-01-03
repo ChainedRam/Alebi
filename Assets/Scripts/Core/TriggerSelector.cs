@@ -21,7 +21,7 @@ namespace ChainedRam.Core
         public void Next()
         {
             Count++;
-            Pool.Selected.EndGenerating();
+            Pool.Selected.End();
         }
     }
 }

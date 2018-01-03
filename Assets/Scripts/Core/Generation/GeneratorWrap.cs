@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ChainedRam.Core.Generation.Extention;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,10 +16,10 @@ namespace ChainedRam.Core.Generation
         #endregion
         #region Unity Methods 
 
-        protected override void WhenAwake()
+        protected override void OnAwake()
         {
-            base.WhenAwake();
-            Attach(Wrapped);
+            base.OnAwake();
+            this.Attach(Wrapped);
         }
         #endregion
         #region Generator Overrides 
@@ -26,6 +27,11 @@ namespace ChainedRam.Core.Generation
         protected override bool ShouldGenerate()
         {
             return Wrapped.IsGenerating;
+        }
+
+        protected override bool ShouldTerminate()
+        {
+            return Wrapped.IsGenerating == false;
         }
         #endregion
     }

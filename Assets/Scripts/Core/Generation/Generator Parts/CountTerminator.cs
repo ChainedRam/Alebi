@@ -26,14 +26,14 @@ namespace ChainedRam.Core.Generation
         {
             CurrentGeneration = 0;
 
-            gen.OnGenerate -= IncrementCounter;
-            gen.OnGenerate += IncrementCounter;
+            gen.OnGenerateEventHandler -= (s, e) => IncrementCounter();
+            gen.OnGenerateEventHandler += (s, e) => IncrementCounter();
 
         }
 
         public override void SetApart(Generator gen)
         {
-            gen.OnGenerate -= IncrementCounter;
+            gen.OnGenerateEventHandler -= (s, e) => IncrementCounter();
         }
 
         public override bool ShouldTerminate(Generator gen)

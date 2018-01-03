@@ -14,14 +14,14 @@ namespace ChainedRam.Core.Generation
             base.Setup(gen);
             HasSkipped = false;
 
-            gen.OnSkippedGenerate -= DidSkip;
-            gen.OnSkippedGenerate += DidSkip;
+            gen.OnSkippedEventHandler -= (s,e) =>  DidSkip();
+            gen.OnSkippedEventHandler += (s, e) => DidSkip();
         }
 
         public override void SetApart(Generator gen)
         {
             base.SetApart(gen);
-            gen.OnSkippedGenerate -= DidSkip;
+            gen.OnSkippedEventHandler -= (s, e) => DidSkip();
         }
 
         public override bool ShouldTerminate(Generator gen)

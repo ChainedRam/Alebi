@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ChainedRam.Core.Generation.Extention; 
 
 namespace ChainedRam.Core.Generation
 {
@@ -43,12 +43,12 @@ namespace ChainedRam.Core.Generation
         #region Unity Methods  
         #endregion
         #region Generator Override  
-        protected override void WhenAwake()
+        protected override void OnAwake()
         {
-            base.WhenAwake();
+            base.OnAwake();
             foreach (Generator gen in ChildGenerators)
             {
-                Attach(gen);
+                this.Attach(gen);
             }
         }
         /// <summary>

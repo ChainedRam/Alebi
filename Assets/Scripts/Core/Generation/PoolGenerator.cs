@@ -31,13 +31,13 @@ namespace ChainedRam.Core.Generation
 
             Selected = gen;
             //Attach(gen);
-            gen.BeginGenerating();
+            gen.Begin();
         }
 
         public void Demote(Generator gen)
         {
             //Debug.Log("Demoting " + gen.name);
-            gen.EndGenerating();
+            gen.End();
             //Detach(gen);
 
             Selected = null;
@@ -46,12 +46,12 @@ namespace ChainedRam.Core.Generation
         /// <summary>
         /// 
         /// </summary>
-        protected override void WhenAwake()
+        protected override void OnAwake()
         {
 
         }
 
-        protected override void WhenGenerate()
+        protected override void OnGenerate()
         {
             SwitchIn(NextGenerator());
         }
@@ -65,9 +65,9 @@ namespace ChainedRam.Core.Generation
             return !((Selected?.IsGenerating) ?? false);
         }
 
-        protected override void WhenSkipped()
+        protected override void OnSkip()
         {
-            base.WhenSkipped();
+            base.OnSkip();
         }
 
         public Generator NextGenerator()
@@ -75,7 +75,7 @@ namespace ChainedRam.Core.Generation
             return Selector.Select(ChildGenerators, Selected);
         }
 
-        protected override void WhenEnd()
+        protected override void OnEnd()
         {
             Demote(Selected);
         }

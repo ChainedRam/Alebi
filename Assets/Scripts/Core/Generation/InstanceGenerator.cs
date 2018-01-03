@@ -69,11 +69,11 @@ namespace ChainedRam.Core.Generation
         }
         #endregion
         #region Override Generator
-        protected override void WhenAwake()
+        protected override void OnAwake()
         {
-            base.WhenAwake();
+            base.OnAwake();
             collection = new Collection<T>();
-            OnGenerate += GenerateInstance;
+            OnGenerateEventHandler += (s, e) => GenerateInstance();
         }
         #endregion
         #region Private Methods
@@ -106,6 +106,5 @@ namespace ChainedRam.Core.Generation
     {
 
     }
-
 }
 

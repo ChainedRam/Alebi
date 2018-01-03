@@ -8,14 +8,14 @@ namespace ChainedRam.Core.Generation
     {
         public virtual void Setup(Generator gen)
         {
-            gen.OnGenerate -= OnGeneratorGenerated;
-            gen.OnGenerate += OnGeneratorGenerated;
+            gen.OnGenerateEventHandler -= (s, e) => OnGeneratorGenerated();
+            gen.OnGenerateEventHandler += (s, e) => OnGeneratorGenerated();
         }
 
 
         public virtual void SetApart(Generator gen)
         {
-            gen.OnGenerate -= OnGeneratorGenerated;
+            gen.OnGenerateEventHandler -= (s, e) => OnGeneratorGenerated();
         }
 
         public virtual void OnGeneratorGenerated() { }

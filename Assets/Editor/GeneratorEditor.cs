@@ -1,41 +1,28 @@
 ﻿using ChainedRam.Core.Generation;
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using ChainedRam.Core.Enum;
 using UnityEditor;
-using UnityEngine;
+
 
 namespace ChainedRam.Inspecter.Generation
 {
-
+    //TODO: This needs some refactoring 
     [CustomEditor(typeof(Generator), true)]
     public class GeneratorEditor : Editor
     {
         private TerminationType PrevTerminationType;
-        private GeneratingType PrevConditionType;
+        private GenerationType PrevConditionType;
 
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
-            /*
-            //draw script source
-            EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("m_Script"));
-            EditorGUI.EndDisabledGroup();
-            */
 
             EditorGUILayout.Space();
+            EditorGUILayout.LabelField(target.name + " Generator Settings", EditorStyles.boldLabel);
 
             Generator gen = ((Generator)target);
-
-            //draw header
-            EditorGUILayout.LabelField(gen.name + " Generator Settings", EditorStyles.boldLabel);
-
             gen.IsGenerating = EditorGUILayout.Toggle("IsGenerating", gen.IsGenerating);
-
             DrawTerminatorSection(gen);
-
-            //EditorGUILayout.Space();
             DrawConditionSection(gen);
         }
         #region Terminator
@@ -113,17 +100,17 @@ namespace ChainedRam.Inspecter.Generation
         #region Condition
         private void DrawConditionSection(Generator gen)
         {
-            gen.GenerateConditionTag = (GeneratingType)EditorGUILayout.EnumPopup("ConditionType", gen.GenerateConditionTag);
+            gen.GenerateConditionTag = (GenerationType)EditorGUILayout.EnumPopup("ConditionType", gen.GenerateConditionTag);
 
             ClearPreviousCondition(gen, PrevConditionType);
 
             switch (gen.GenerateConditionTag)
             {
-                case GeneratingType.Internal:
+                case GenerationType.Internal:
                     gen.GenerateCondition = null;
                     break;
 
-                case GeneratingType.External:
+                case GenerationType.External:
                     gen.GenerateCondition = (GeneratorCondition)EditorGUILayout.ObjectField("GenerateCondition", gen.GenerateCondition, typeof(GeneratorCondition), true);
                     EditorGUILayout.Space();
                     if (gen.GenerateCondition != null)
@@ -131,7 +118,7 @@ namespace ChainedRam.Inspecter.Generation
                         CreateEditor(gen.GenerateCondition).DrawDefaultInspector();
                     }
                     break;
-                case GeneratingType.Cooldown:
+                case GenerationType.Cooldown:
                     CooldownCondition IntervalCond = gen.gameObject.GetComponent<CooldownCondition>() ?? gen.gameObject.AddComponent<CooldownCondition>();
                     IntervalCond.WaitTime = EditorGUILayout.Slider("Cooldown", IntervalCond.WaitTime, 0, 100);
                     gen.GenerateCondition = IntervalCond;
@@ -141,9 +128,9 @@ namespace ChainedRam.Inspecter.Generation
             PrevConditionType = gen.GenerateConditionTag;
         }
 
-        private void ClearPreviousCondition(Generator gen, GeneratingType prevConditionType)
+        private void ClearPreviousCondition(Generator gen, GenerationType prevConditionType)
         {
-            if (prevConditionType == gen.GenerateConditionTag || prevConditionType == GeneratingType.Internal)
+            if (prevConditionType == gen.GenerateConditionTag || prevConditionType == GenerationType.Internal)
             {
                 return;
             }
@@ -151,7 +138,7 @@ namespace ChainedRam.Inspecter.Generation
             gen.GenerateCondition = null;
             switch (prevConditionType)
             {
-                case GeneratingType.Cooldown:
+                case GenerationType.Cooldown:
                     DestroyImmediate(gen.gameObject.GetComponent<CooldownCondition>());
                     break;
             }

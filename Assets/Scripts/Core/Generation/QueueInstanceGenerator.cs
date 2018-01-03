@@ -55,9 +55,9 @@ namespace ChainedRam.Core.Generation
             GenerationQueue.Dequeue();
         }
 
-        protected override void WhenAwake()
+        protected override void OnAwake()
         {
-            base.WhenAwake();
+            base.OnAwake();
             GenerationQueue = new Queue<T>();
         }
         #endregion

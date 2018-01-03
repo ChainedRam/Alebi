@@ -34,9 +34,9 @@ namespace ChainedRam.Core.Generation
         public abstract void Project(Projectile pro);
 
 
-        protected override void WhenStart()
+        protected override void OnStart()
         {
-            base.WhenStart();
+            base.OnStart();
             CurrentTime = RelaodDelay;
         }
     }
