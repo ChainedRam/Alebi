@@ -136,6 +136,3 @@ namespace ChainedRam.Inspecter.Generation
     }
 }
 
-/**
-    
- */
