@@ -19,7 +19,7 @@ namespace ChainedRam.Core.Dialog
         {
             EnumExtensions.SetFlag(ref Segment.property, DialogPauseType.Space, Space); //TODO ref code smell 
             EnumExtensions.SetFlag(ref Segment.property, DialogPauseType.NewLine, NewLine);
-            EnumExtensions.SetFlag(ref Segment.property, DialogPauseType.PageEnd, PageEnd);
+            EnumExtensions.SetFlag(ref Segment.property, DialogPauseType.End, PageEnd);
             EnumExtensions.SetFlag(ref Segment.property, DialogPauseType.NewPage, NewPage);
         }
 

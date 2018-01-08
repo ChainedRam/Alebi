@@ -10,7 +10,7 @@ namespace ChainedRam.Core.Dialog
     public enum DialogPauseType : int
     {
         None = 0,
-        PageEnd = 1,
+        End = 1,
         NewLine = 2,
         Space = 4,
         NewPage = 8,
