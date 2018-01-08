@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ChainedRam.Core
+namespace ChainedRam.Core.Selection
 {
     /// <summary>
     /// Compnenet that implements a select method to select an element from a list. 

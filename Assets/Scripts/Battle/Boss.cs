@@ -1,5 +1,6 @@
 ﻿
 using ChainedRam.Core;
+using ChainedRam.Core.Selection;
 /// <summary>
 /// Boss when controls waves. 
 /// </summary>

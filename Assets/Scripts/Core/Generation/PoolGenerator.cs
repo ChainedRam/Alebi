@@ -1,4 +1,5 @@
 ﻿using ChainedRam.Core.Generation;
+using ChainedRam.Core.Selection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,13 +11,17 @@ namespace ChainedRam.Core.Generation
     {
         [Header("Pool Geenerator Settings")]
 
+        [HideInInspector()]
         public Generator Selected;
 
+        [HideInInspector()]
         public Selector Selector;
+
+        [HideInInspector]
+        public SelectorType SelectorType;
 
         public void SwitchIn(Generator gen)
         {
-            //Debug.Log("Switching " + Selected.name + " with " + gen.name );
             if (Selected != null)
             {
                 Demote(Selected);
