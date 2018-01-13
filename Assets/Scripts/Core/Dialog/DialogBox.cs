@@ -1,5 +1,5 @@
 ﻿using ChainedRam.Core.Dialog.Extention;
-using ChainedRam.Core.Enum.Extensions;
+using ChainedRam.Core.Enums.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;

@@ -9,7 +9,15 @@ using UnityEngine;
 namespace ChainedRam.Core.Generation
 {
     [Flags]
-    public enum TerminationType { Internal, External, Duration, Counter, OnSkip }
+    public enum TerminationType
+    {
+        Internal,
+        External,
+        Duration,
+        Counter,
+        OnSkip
+    }
+
     [Flags]
     public enum GenerationType { Internal, External, Cooldown }
     /// <summary>

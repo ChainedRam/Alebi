@@ -1,4 +1,4 @@
-﻿using ChainedRam.Core.Enum.Extensions;
+﻿using ChainedRam.Core.Enums.Extensions;
 using UnityEngine;
 
 namespace ChainedRam.Core.Dialog

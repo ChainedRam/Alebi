@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 
-namespace ChainedRam.Core.Enum.Extensions
+namespace ChainedRam.Core.Enums.Extensions
 {
     public static class EnumExtensions
     {

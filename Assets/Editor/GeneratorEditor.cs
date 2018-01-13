@@ -1,6 +1,6 @@
 ﻿using ChainedRam.Core.Generation;
 using System;
-using ChainedRam.Core.Enum;
+using ChainedRam.Core.Enums;
 using UnityEditor;
 
 
