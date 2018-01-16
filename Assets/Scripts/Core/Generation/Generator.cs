@@ -8,66 +8,95 @@ using UnityEngine;
 
 namespace ChainedRam.Core.Generation
 {
-    [Flags]
-    public enum TerminationType
-    {
-        Internal,
-        External,
-        Duration,
-        Counter,
-        OnSkip
-    }
-
-    [Flags]
-    public enum GenerationType { Internal, External, Cooldown }
     /// <summary>
     /// A Compnent that generates. 
     /// </summary>
     public abstract class Generator : MonoBehaviour
     {
-        #region Inspector Attributes
-
-        [HideInInspector()]
+        #region Inspecter Attributes
         public bool IsGenerating;
-
+        public float Delta;
+        #endregion 
+        #region Custom Inspector Attributes
         [HideInInspector()]
         public bool PrintDebug;
 
         [HideInInspector()]
-        public TerminationType TerminatorTag = TerminationType.Internal;
+        public TerminationType TerminatorType = TerminationType.Internal;
 
         [HideInInspector()]
-        public GenerationType GenerateConditionTag = GenerationType.Internal;
+        public GenerationType GenerateConditionType = GenerationType.Internal;
 
         [HideInInspector()]
         public GeneratorTerminator Terminator;
 
         [HideInInspector()]
         public GeneratorCondition GenerateCondition;
-
-
         #endregion
         #region Public Events 
         /// <summary>
         /// Invoked when generating. <see cref="Generate"/>
         /// </summary>
-        public EventHandler OnGenerateEventHandler;
+        public EventHandler<GenerateEventArgs> OnGenerateEventHandler;
 
         /// <summary>
         /// Invoked when stoping generation. <see cref="DoSkippedGenerate"/>
         /// </summary>
-        public EventHandler OnSkippedEventHandler;
+        public EventHandler<GenerateEventArgs> OnSkippedEventHandler;
 
         /// <summary>
         /// Invoked when Starting generation. <see cref="Begin"/>
         /// </summary>
-        public EventHandler OnBeginEventHandler;
+        public EventHandler<GenerateEventArgs> OnBeginEventHandler;
 
         /// <summary>
         /// Invoked when stoping generation. <see cref="End"/>
         /// </summary>
-        public EventHandler OnEndEventHandler;
+        public EventHandler<GenerateEventArgs> OnEndEventHandler;
 
+        #endregion
+        #region Raise Event
+
+        /// <summary>
+        /// Raises a generation event
+        /// </summary>
+        /// <param name="genEvent"></param>
+        protected void Raise(EventHandler<GenerateEventArgs> genEvent)
+        {
+            genEvent?.Invoke(this, new GenerateEventArgs(Delta));
+        }
+
+        /// <summary>
+        /// Raise OnGenerateEvent
+        /// </summary>
+        protected void RaiseOnGenerateEvent()
+        {
+            Raise(OnGenerateEventHandler); 
+        }
+
+        /// <summary>
+        /// Raise OnSkippedEvent
+        /// </summary>
+        protected void RaiseOnSkippedEvent()
+        {
+            Raise(OnSkippedEventHandler);
+        }
+
+        /// <summary>
+        /// Raise OnBeginEvent
+        /// </summary>
+        protected void RaiseOnBeginEvent()
+        {
+            Raise(OnBeginEventHandler);
+        }
+
+        /// <summary>
+        /// aise OnEndEvent
+        /// </summary>
+        protected void RaiseOnEndEvent()
+        {
+            Raise(OnEndEventHandler);
+        }
         #endregion
         #region Public Methods 
         /// <summary>
@@ -75,8 +104,8 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         public void Generate()
         {
-            OnGenerate();
-            OnGenerateEventHandler?.Invoke(this, EventArgs.Empty); 
+            OnGenerate(new GenerateEventArgs(Delta));
+            RaiseOnGenerateEvent(); 
         }
 
         /// <summary>
@@ -85,7 +114,7 @@ namespace ChainedRam.Core.Generation
         public void SkippedGenerate()
         {
             OnSkip();
-            OnSkippedEventHandler?.Invoke(this, EventArgs.Empty);
+            RaiseOnSkippedEvent();
         }
 
         /// <summary>
@@ -95,7 +124,7 @@ namespace ChainedRam.Core.Generation
         {
             IsGenerating = true;
             OnBegin();
-            OnBeginEventHandler?.Invoke(this, EventArgs.Empty);
+            RaiseOnBeginEvent(); 
 
             GenerateCondition?.Setup(this);
             Terminator?.Setup(this);
@@ -121,7 +150,7 @@ namespace ChainedRam.Core.Generation
         {
             IsGenerating = false;
             OnEnd();
-            OnEndEventHandler?.Invoke(this, EventArgs.Empty);
+            RaiseOnEndEvent();
 
             GenerateCondition?.SetApart(this);
             Terminator?.SetApart(this);
@@ -211,7 +240,7 @@ namespace ChainedRam.Core.Generation
         /// <summary>
         /// Called when genrator generates. This is invoked before <see cref="OnGenerateEventHandler"/> 
         /// </summary>
-        protected virtual void OnGenerate() { }
+        protected virtual void OnGenerate(GenerateEventArgs e) { }
 
         /// <summary>
         /// Called when genrator skips generate. This is invoked before <see cref="OnSkippedEventHandler"/> 
@@ -227,6 +256,27 @@ namespace ChainedRam.Core.Generation
         /// Called when genrator ends generating. This is invoked before <see cref="OnEndEventHandler"/> 
         /// </summary>
         protected virtual void OnEnd() { }
+        #endregion
+        #region Protected Methods 
+        /// <summary>
+        /// Gets whether a generator should generate or not. Is is used for nested generators. 
+        /// </summary>
+        /// <param name="gen"></param>
+        /// <returns></returns>
+        protected bool GeneratorShouldGenerate(Generator gen)
+        {
+            return gen.ShouldGenerate(); 
+        }
+
+        /// <summary>
+        /// Gets whether a generator should terminate or not. Is is used for nested generators. 
+        /// </summary>
+        /// <param name="gen"></param>
+        /// <returns></returns>
+        protected bool GeneratorShouldTerminate(Generator gen)
+        {
+            return gen.ShouldTerminate();
+        }
         #endregion
     }
 }

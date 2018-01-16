@@ -6,7 +6,7 @@ using UnityEditor;
 
 namespace ChainedRam.Inspecter.Generation
 {
-    //TODO: This needs some refactoring 
+    //TODO: This needs some refactoring. This can be moved into the script itself Generator.OnGui >:\
     [CustomEditor(typeof(Generator), true)]
     public class GeneratorEditor : Editor
     {
@@ -21,17 +21,20 @@ namespace ChainedRam.Inspecter.Generation
             EditorGUILayout.LabelField(target.name + " Generator Settings", EditorStyles.boldLabel);
 
             Generator gen = ((Generator)target);
-            gen.IsGenerating = EditorGUILayout.Toggle("IsGenerating", gen.IsGenerating);
+            //gen.IsGenerating = EditorGUILayout.Toggle("IsGenerating", gen.IsGenerating);
+
+            //gen.Delta = EditorGUILayout.PropertyField();
+
             DrawTerminatorSection(gen);
             DrawConditionSection(gen);
         }
         #region Terminator
         private void DrawTerminatorSection(Generator gen)
         {
-            gen.TerminatorTag = (TerminationType)EditorGUILayout.EnumPopup("TerminatorType", gen.TerminatorTag);
+            gen.TerminatorType = (TerminationType)EditorGUILayout.EnumPopup("TerminatorType", gen.TerminatorType);
             ClearPreviousTerminators(gen, PrevTerminationType);
 
-            switch (gen.TerminatorTag)
+            switch (gen.TerminatorType)
             {
                 case TerminationType.Internal:
                     gen.Terminator = null;
@@ -72,12 +75,12 @@ namespace ChainedRam.Inspecter.Generation
                     break;
             }
 
-            PrevTerminationType = gen.TerminatorTag;
+            PrevTerminationType = gen.TerminatorType;
         }
 
         private void ClearPreviousTerminators(Generator gen, TerminationType prev)
         {
-            if (prev == gen.TerminatorTag || prev == TerminationType.Internal)
+            if (prev == gen.TerminatorType || prev == TerminationType.Internal)
             {
                 return;
             }
@@ -100,11 +103,11 @@ namespace ChainedRam.Inspecter.Generation
         #region Condition
         private void DrawConditionSection(Generator gen)
         {
-            gen.GenerateConditionTag = (GenerationType)EditorGUILayout.EnumPopup("ConditionType", gen.GenerateConditionTag);
+            gen.GenerateConditionType = (GenerationType)EditorGUILayout.EnumPopup("ConditionType", gen.GenerateConditionType);
 
             ClearPreviousCondition(gen, PrevConditionType);
 
-            switch (gen.GenerateConditionTag)
+            switch (gen.GenerateConditionType)
             {
                 case GenerationType.Internal:
                     gen.GenerateCondition = null;
@@ -125,12 +128,12 @@ namespace ChainedRam.Inspecter.Generation
                     break;
             }
 
-            PrevConditionType = gen.GenerateConditionTag;
+            PrevConditionType = gen.GenerateConditionType;
         }
 
         private void ClearPreviousCondition(Generator gen, GenerationType prevConditionType)
         {
-            if (prevConditionType == gen.GenerateConditionTag || prevConditionType == GenerationType.Internal)
+            if (prevConditionType == gen.GenerateConditionType || prevConditionType == GenerationType.Internal)
             {
                 return;
             }

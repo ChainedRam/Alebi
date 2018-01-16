@@ -435,34 +435,6 @@ Transform:
   m_Father: {fileID: 1841895041}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &196896052
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 196896053}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &196896053
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 196896052}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7446332, y: -0.11838876, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &255126413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,9 +1234,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsGenerating: 0
+  Delta: 0
   PrintDebug: 0
-  TerminatorTag: 2
-  GenerateConditionTag: 2
+  TerminatorType: 0
+  GenerateConditionType: 0
   Terminator: {fileID: 875154504}
   GenerateCondition: {fileID: 875154505}
   Prefab: {fileID: 520009943}
@@ -1282,6 +1255,58 @@ Transform:
   - {fileID: 61008661}
   m_Father: {fileID: 523144917}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &992745792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 992745794}
+  - component: {fileID: 992745793}
+  m_Layer: 0
+  m_Name: Nested
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &992745793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 992745792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9846a774887f3a748bbfc47e699196b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
+  PrintDebug: 0
+  TerminatorType: 0
+  GenerateConditionType: 0
+  Terminator: {fileID: 0}
+  GenerateCondition: {fileID: 0}
+  Generators: []
+  ShowChildrenInspecter: 0
+  ShouldGenerateOption: 0
+  ShouldTerminateOption: 0
+  GenerateOption: 0
+--- !u!4 &992745794
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 992745792}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.509203, y: 1.5601851, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1054281650
 GameObject:
@@ -1642,14 +1667,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsGenerating: 0
+  Delta: 0
   PrintDebug: 0
-  TerminatorTag: 0
-  GenerateConditionTag: 0
+  TerminatorType: 0
+  GenerateConditionType: 0
   Terminator: {fileID: 0}
   GenerateCondition: {fileID: 0}
   Generators: []
   ShowChildrenInspecter: 1
-  Options: 0
+  ShouldGenerateOption: 0
+  ShouldTerminateOption: 0
+  GenerateOption: 0
   Selected: {fileID: 0}
   Selector: {fileID: 0}
   SelectorType: 0
@@ -1845,16 +1873,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsGenerating: 0
+  Delta: 0
   PrintDebug: 0
-  TerminatorTag: 3
-  GenerateConditionTag: 2
+  TerminatorType: 0
+  GenerateConditionType: 0
   Terminator: {fileID: 1517480248}
   GenerateCondition: {fileID: 1517480247}
   Generators:
   - {fileID: 875154506}
   - {fileID: 1797851124}
   ShowChildrenInspecter: 1
-  Options: 0
+  ShouldGenerateOption: 0
+  ShouldTerminateOption: 0
+  GenerateOption: 0
 --- !u!4 &1517480246
 Transform:
   m_ObjectHideFlags: 0
@@ -1892,34 +1923,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxGeneration: 20
---- !u!1 &1548148462
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1548148464}
-  m_Layer: 0
-  m_Name: Generator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1548148464
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1548148462}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7446332, y: -0.11838876, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1564262773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1929,6 +1932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1564262775}
   - component: {fileID: 1564262774}
+  - component: {fileID: 1564262776}
   m_Layer: 0
   m_Name: Pool
   m_TagString: Untagged
@@ -1947,10 +1951,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82fe1ac8e2b5fc44990b4efef651e56d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsGenerating: 1
+  IsGenerating: 0
+  Delta: 1
   PrintDebug: 0
-  TerminatorTag: 0
-  GenerateConditionTag: 0
+  TerminatorType: 0
+  GenerateConditionType: 0
   Terminator: {fileID: 0}
   GenerateCondition: {fileID: 0}
   Generators:
@@ -1958,10 +1963,12 @@ MonoBehaviour:
   - {fileID: 2004058569}
   - {fileID: 1841895039}
   ShowChildrenInspecter: 1
-  Options: 0
+  ShouldGenerateOption: 0
+  ShouldTerminateOption: 0
+  GenerateOption: 0
   Selected: {fileID: 0}
-  Selector: {fileID: 0}
-  SelectorType: 0
+  Selector: {fileID: 1564262776}
+  SelectorType: 1
 --- !u!4 &1564262775
 Transform:
   m_ObjectHideFlags: 0
@@ -1978,6 +1985,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1564262776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1564262773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a61c9f194bf1f642857ddb95728c438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Loop: 1
 --- !u!1 &1565736777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2371,11 +2390,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsGenerating: 0
+  Delta: 0
   PrintDebug: 0
-  TerminatorTag: 0
-  GenerateConditionTag: 2
+  TerminatorType: 0
+  GenerateConditionType: 0
   Terminator: {fileID: 0}
-  GenerateCondition: {fileID: 1781587179}
+  GenerateCondition: {fileID: 0}
   Prefab: {fileID: 1482610527}
   GenerateAt: {fileID: 1781587180}
 --- !u!114 &1781587179
@@ -2459,9 +2479,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsGenerating: 0
+  Delta: 0
   PrintDebug: 0
-  TerminatorTag: 2
-  GenerateConditionTag: 2
+  TerminatorType: 0
+  GenerateConditionType: 0
   Terminator: {fileID: 1797851122}
   GenerateCondition: {fileID: 1797851123}
   Prefab: {fileID: 1070918147}
@@ -2509,9 +2530,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsGenerating: 0
+  Delta: 0
   PrintDebug: 0
-  TerminatorTag: 0
-  GenerateConditionTag: 2
+  TerminatorType: 0
+  GenerateConditionType: 0
   Terminator: {fileID: 0}
   GenerateCondition: {fileID: 1841895040}
   Prefab: {fileID: 149659691}
@@ -2671,9 +2693,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsGenerating: 0
+  Delta: 0
   PrintDebug: 0
-  TerminatorTag: 0
-  GenerateConditionTag: 2
+  TerminatorType: 0
+  GenerateConditionType: 0
   Terminator: {fileID: 0}
   GenerateCondition: {fileID: 2004058568}
   Prefab: {fileID: 1691535948}
@@ -2977,9 +3000,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsGenerating: 0
+  Delta: 0
   PrintDebug: 0
-  TerminatorTag: 2
-  GenerateConditionTag: 2
+  TerminatorType: 0
+  GenerateConditionType: 0
   Terminator: {fileID: 2143745447}
   GenerateCondition: {fileID: 2143745448}
   Prefab: {fileID: 1670090262}

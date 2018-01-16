@@ -36,6 +36,8 @@ namespace ChainedRam.Core.Generation
 
             Selected = gen;
             //Attach(gen);
+
+            gen.Delta = this.Delta; 
             gen.Begin();
         }
 
@@ -56,8 +58,9 @@ namespace ChainedRam.Core.Generation
 
         }
 
-        protected override void OnGenerate()
+        protected override void OnGenerate(GenerateEventArgs e)
         {
+            Delta = e.Delta; 
             SwitchIn(NextGenerator());
         }
 
