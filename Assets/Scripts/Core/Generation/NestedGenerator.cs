@@ -43,9 +43,9 @@ namespace ChainedRam.Core.Generation
         #endregion
         #region Inspecter Attributes  
         [Tooltip("'Should Generate' Condition between children.")]
-        public ConditionOption ShouldGenerateOption;
-
         public ConditionOption ShouldTerminateOption;
+
+        public ConditionOption ShouldGenerateOption;
 
         public NestedGenerateOption GenerateOption;
         #endregion
@@ -73,7 +73,6 @@ namespace ChainedRam.Core.Generation
             if(ShouldGenerateOption.HasFlag(ConditionOption.Parent))
             {
                 return baseValue; 
-
             }
 
             bool earlyTermination;
@@ -104,7 +103,6 @@ namespace ChainedRam.Core.Generation
             if (ShouldTerminateOption.HasFlag(ConditionOption.Parent))
             {
                 return baseValue;
-
             }
             bool earlyTermination;
 

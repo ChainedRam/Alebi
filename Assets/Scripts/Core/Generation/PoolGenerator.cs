@@ -27,7 +27,11 @@ namespace ChainedRam.Core.Generation
                 Demote(Selected);
             }
 
-            Promote(gen);
+
+            if (gen != null)
+            {
+                Promote(gen);
+            }
         }
 
         public void Promote(Generator gen)
@@ -37,15 +41,21 @@ namespace ChainedRam.Core.Generation
             Selected = gen;
             //Attach(gen);
 
+            //AttachNext(gen.OnEndEventHandler); 
+
+            gen.OnEndEventHandler += Next;
+
             gen.Delta = this.Delta; 
             gen.Begin();
         }
 
         public void Demote(Generator gen)
         {
+            gen.OnEndEventHandler -= Next;
             //Debug.Log("Demoting " + gen.name);
             gen.End();
             //Detach(gen);
+            
 
             Selected = null;
         }
@@ -53,15 +63,32 @@ namespace ChainedRam.Core.Generation
         /// <summary>
         /// 
         /// </summary>
-        protected override void OnAwake()
+        protected override void OnStart()
         {
+           
+        }
 
+        private void AttachNext(EventHandler<GenerateEventArgs> ev)
+        {
+            ev += Next; 
+        }
+
+        private void DetachNext(EventHandler<GenerateEventArgs> ev)
+        {
+            ev -= Next; 
+        }
+
+
+        private void Next(object s= null, GenerateEventArgs e= null)
+        {
+            SwitchIn(NextGenerator());
         }
 
         protected override void OnGenerate(GenerateEventArgs e)
         {
-            Delta = e.Delta; 
-            SwitchIn(NextGenerator());
+            base.OnGenerate(e);
+
+            Next();
         }
 
         /// <summary>
@@ -70,7 +97,7 @@ namespace ChainedRam.Core.Generation
         /// <returns></returns>
         protected override bool ShouldGenerate()
         {
-            return !((Selected?.IsGenerating) ?? false);
+            return !((Selected?.IsGenerating) ?? false); //TODO use GeneratorShouldGnerate
         }
 
         protected override void OnSkip()

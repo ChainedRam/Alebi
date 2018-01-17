@@ -1292,8 +1292,8 @@ MonoBehaviour:
   GenerateCondition: {fileID: 0}
   Generators: []
   ShowChildrenInspecter: 0
-  ShouldGenerateOption: 0
   ShouldTerminateOption: 0
+  ShouldGenerateOption: 0
   GenerateOption: 0
 --- !u!4 &992745794
 Transform:
@@ -1675,8 +1675,8 @@ MonoBehaviour:
   GenerateCondition: {fileID: 0}
   Generators: []
   ShowChildrenInspecter: 1
-  ShouldGenerateOption: 0
   ShouldTerminateOption: 0
+  ShouldGenerateOption: 0
   GenerateOption: 0
   Selected: {fileID: 0}
   Selector: {fileID: 0}
@@ -1883,8 +1883,8 @@ MonoBehaviour:
   - {fileID: 875154506}
   - {fileID: 1797851124}
   ShowChildrenInspecter: 1
-  ShouldGenerateOption: 0
   ShouldTerminateOption: 0
+  ShouldGenerateOption: 0
   GenerateOption: 0
 --- !u!4 &1517480246
 Transform:
@@ -1963,9 +1963,9 @@ MonoBehaviour:
   - {fileID: 2004058569}
   - {fileID: 1841895039}
   ShowChildrenInspecter: 1
-  ShouldGenerateOption: 0
   ShouldTerminateOption: 0
-  GenerateOption: 0
+  ShouldGenerateOption: 0
+  GenerateOption: 1
   Selected: {fileID: 0}
   Selector: {fileID: 1564262776}
   SelectorType: 1
@@ -2535,7 +2535,7 @@ MonoBehaviour:
   TerminatorType: 0
   GenerateConditionType: 0
   Terminator: {fileID: 0}
-  GenerateCondition: {fileID: 1841895040}
+  GenerateCondition: {fileID: 0}
   Prefab: {fileID: 149659691}
   GenerateAt: {fileID: 1841895041}
 --- !u!114 &1841895040
@@ -2698,7 +2698,7 @@ MonoBehaviour:
   TerminatorType: 0
   GenerateConditionType: 0
   Terminator: {fileID: 0}
-  GenerateCondition: {fileID: 2004058568}
+  GenerateCondition: {fileID: 0}
   Prefab: {fileID: 1691535948}
   GenerateAt: {fileID: 2004058567}
 --- !u!1 &2016309699
