@@ -5,35 +5,24 @@ using UnityEngine;
 
 public class CurveMotion : Motion
 {
-    public float linearSpeed;
-    public bool IsCurve = true;
-    public bool IsAcceleration = true;
-    public float angleOffset;
-    private float currentAngleOffset;
-
-    [Range(-90, 90)]
-    public float initAngle;
-
+    public float AngleOffset;
+    private float CurrentAngleOffset;
     public override Vector2 GetOffset()
     {
-        angleControl();
-        Vector2 offset = new Vector2(0, linearSpeed * Time.fixedDeltaTime);
-        offset = offset.Rotate(-initAngle + currentAngleOffset);
+        CurrentAngleOffset += AngleOffset;
+        Vector2 offset = new Vector2(0, 1);
+        offset = offset.Rotate(CurrentAngleOffset);
         return offset;
     }
 
     public override void Initialize()
     {
-        currentAngleOffset = 0; 
+        CurrentAngleOffset = 0; 
     }
 
-    void angleControl()
+    public override Vector2 Apply(Vector2 vector)
     {
-        if (IsCurve)
-        {
-
-            currentAngleOffset += angleOffset;
-        }
+        CurrentAngleOffset += AngleOffset;
+        return vector.Rotate(CurrentAngleOffset);
     }
-
 }

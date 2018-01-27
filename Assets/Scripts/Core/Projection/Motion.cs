@@ -7,5 +7,7 @@ public abstract class Motion : MonoBehaviour
 {
     public abstract Vector2 GetOffset();
 
-    public virtual void Initialize() { }
+    public virtual Vector2 Apply(Vector2 vector) { return GetOffset() + vector; }
+
+    public virtual void Initialize(){}
 }
