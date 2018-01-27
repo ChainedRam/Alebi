@@ -16,7 +16,7 @@ public class ProjectileGenerator : QueueInstanceGenerator<Projectile>
     {
         base.SetupGenerated(generated);
 
-        generated.Setup(Velocity, Direction);
+        generated.Setup(this.Delta);
     }
 
     protected override bool ShouldGenerate()

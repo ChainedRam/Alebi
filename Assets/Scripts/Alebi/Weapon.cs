@@ -15,7 +15,7 @@ public class Weapon : PlayerPickable
     {
        Projectile proj = Instantiate(ProjectilePrefab, pickedBy.transform.position, pickedBy.transform.rotation, pickedBy.transform);
        proj.gameObject.SetActive(true); 
-       proj.Setup(1, 90);
+       //proj.Setup(); TODO 
 
        gameObject.SetActive(false);
 

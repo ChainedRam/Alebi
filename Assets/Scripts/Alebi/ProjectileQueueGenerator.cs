@@ -22,7 +22,7 @@ public abstract class ProjectileQueueGenerator : QueueInstanceGenerator<Projecti
 
     public override void SetupGenerated(Projectile pro)
     {
-        pro.Setup(Velocity, Angle);
+        pro.Setup(this.Delta);
     }
 
     protected override bool ShouldGenerate()
