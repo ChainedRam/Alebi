@@ -20,19 +20,24 @@ public class ProjectileGizmo : MonoBehaviour
         }
         Motion motion = projectile.motion;
         motion.Initialize();
-        int size = 20;
+        int size = 10;
         Color[] c = { Color.white, Color.green, Color.blue, Color.red, Color.green };
         Color prev = Gizmos.color; 
         Vector3 from = projectile.transform.position;
 
-        for (int i = 0; i < size; i++)
+        int i = 0;
+        float sum = 0;
+        while ( sum <= size)
         {
             Gizmos.color = c[i % c.Length];
             Vector3 to = from + (Vector3)motion.GetOffset();
             Gizmos.DrawLine(from, to);
-            from = to;
-        }
 
+            i++;
+            float line = Vector2.Distance(from, to);
+            from = to;
+            sum += line;
+        }
         Gizmos.color = prev; 
         motion.Initialize();
     }
