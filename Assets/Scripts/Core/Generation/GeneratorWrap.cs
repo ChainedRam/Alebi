@@ -1,27 +1,38 @@
-﻿using System.Collections;
+﻿using ChainedRam.Core.Generation.Extention;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Wraps a generator around it. Can be used to refrence other generator. 
-/// </summary>
-public class GeneratorWrap : Generator
+namespace ChainedRam.Core.Generation
 {
-    #region Inspector Attribute 
-    [Header("GeneratorWrap")]
-    public Generator Wrapped;
-    #endregion
-    #region Unity Methods 
-    protected virtual void Awake()
+    /// <summary>
+    /// Wraps a generator around it. Can be used to refrence other generator. 
+    /// </summary>
+    public class GeneratorWrap : Generator
     {
-        Attach(Wrapped); 
-    }
-    #endregion
-    #region Generator Overrides 
+        #region Inspector Attribute 
+        [Header("GeneratorWrap")]
+        public Generator Wrapped;
+        #endregion
+        #region Unity Methods 
 
-    public override bool ShouldGenerate()
-    {
-        return Wrapped.ShouldGenerate();
+        protected override void OnAwake()
+        {
+            base.OnAwake();
+            this.Attach(Wrapped);
+        }
+        #endregion
+        #region Generator Overrides 
+
+        protected override bool ShouldGenerate()
+        {
+            return Wrapped.IsGenerating;
+        }
+
+        protected override bool ShouldTerminate()
+        {
+            return Wrapped.IsGenerating == false;
+        }
+        #endregion
     }
-    #endregion
 }

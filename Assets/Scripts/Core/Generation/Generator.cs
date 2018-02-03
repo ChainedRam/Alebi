@@ -1,246 +1,283 @@
-﻿using System;
+﻿using ChainedRam.Core.Exceptions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-/// <summary>
-/// A Compnent that genrates. 
-/// </summary>
-public abstract class Generator : MonoBehaviour
+
+namespace ChainedRam.Core.Generation
 {
-    #region Inspector Attributes
-    [Header("Generator")]
-    public bool IsGenerating;
-    public bool PrintDebug; 
-    #endregion
-    #region Public Events 
     /// <summary>
-    /// Invoked when generating. <see cref="Generate"/>
+    /// A Compnent that generates. 
     /// </summary>
-    public event Action OnGenerate;
-
-    /// <summary>
-    /// Invoked when stoping generation. <see cref="SkippedGenerate"/>
-    /// </summary>
-    public event Action OnSkippedGenerate;
-
-    /// <summary>
-    /// Invoked when Starting generation. <see cref="StartGenerating"/>
-    /// </summary>
-    public event Action OnStartGenerating;
-
-    /// <summary>
-    /// Invoked when stoping generation. <see cref="StopGenerating"/>
-    /// </summary>
-    public event Action OnStopGenerating;
-
-    #endregion
-    #region Public Methods 
-    /// <summary>
-    /// Generates something. 
-    /// </summary>
-    public void Generate()
+    public abstract class Generator : MonoBehaviour
     {
-        OnGenerate?.Invoke();
-        Log("Generate"); 
-    }
+        #region Inspecter Attributes
+        public bool IsGenerating;
+        public float Delta;
+        #endregion 
+        #region Custom Inspector Attributes
+        [HideInInspector()]
+        public bool PrintDebug;
 
-    /// <summary>
-    /// Called when generate call skips a cycle because <see cref="ShouldGenerate"/> returns false. 
-    /// </summary>
-    public void SkippedGenerate()
-    {
-        OnSkippedGenerate?.Invoke();
-        SkippedGeneration();
-        //Log("Skipped");
-    }
+        [HideInInspector()]
+        public TerminationType TerminatorType = TerminationType.Internal;
 
-    /// <summary>
-    /// Starts Generation and invokes OnStart events.
-    /// </summary>
-    public void StartGenerating()
-    {
-        IsGenerating = true;
-        OnStartGenerating?.Invoke();
-        Log("Started");
-    }
+        [HideInInspector()]
+        public GenerationType GenerateConditionType = GenerationType.Internal;
 
-    /// <summary>
-    /// Stops Generation and trigger OnStop events.
-    /// </summary>
-    public void StopGenerating()
-    {
-        IsGenerating = false;
-        OnStopGenerating?.Invoke();
-        Log("Stopped ");
-    }
-    #region Attach Detach Methods
-    /// <summary>
-    /// Adds follower's as a listener when Start. 
-    /// </summary>
-    /// <param name="follower"></param>
-    /// <remarks>To avoid recursion, followe <see cref="DetachOnStart(Generator)"/> the calling generator. </remarks>
-    public void AttachOnStart(Generator follower)
-    {
-        //avoid recursion 
-        follower.DetachOnStart(this); 
+        [HideInInspector()]
+        public GeneratorTerminator Terminator;
 
-        OnStartGenerating += follower.StartGenerating; 
-    }
+        [HideInInspector()]
+        public GeneratorCondition GenerateCondition;
+        #endregion
+        #region Public Events 
+        /// <summary>
+        /// Invoked when generating. <see cref="Generate"/>
+        /// </summary>
+        public EventHandler<GenerateEventArgs> OnGenerateEventHandler;
 
-    /// <summary>
-    /// Removes following's StartGenerating from Start event list. 
-    /// </summary>
-    /// <param name="follower"></param>
-    public void DetachOnStart(Generator follower)
-    {
-        OnStartGenerating -= follower.StartGenerating;
-    }
+        /// <summary>
+        /// Invoked when stoping generation. <see cref="DoSkippedGenerate"/>
+        /// </summary>
+        public EventHandler<GenerateEventArgs> OnSkippedEventHandler;
 
-    /// <summary>
-    /// Adds follower as listern when stop. 
-    /// </summary>
-    /// <param name="follower"></param>
-    public void AttachOnStop(Generator follower)
-    {       
-        //avoid recursion 
-        follower.DetachOnStop(this); 
-        
-        OnStopGenerating += follower.StopGenerating;
-    }
+        /// <summary>
+        /// Invoked when Starting generation. <see cref="Begin"/>
+        /// </summary>
+        public EventHandler<GenerateEventArgs> OnBeginEventHandler;
 
-    /// <summary>
-    /// Removes follower from Stop event list. 
-    /// </summary>
-    /// <param name="follower"></param>
-    public void DetachOnStop(Generator follower)
-    {
-        OnStopGenerating -= follower.StopGenerating;
-    }
+        /// <summary>
+        /// Invoked when stoping generation. <see cref="End"/>
+        /// </summary>
+        public EventHandler<GenerateEventArgs> OnEndEventHandler;
 
-    /// <summary>
-    /// Attaches follower to genrate event. 
-    /// </summary>
-    /// <param name="follower"></param>    
-    public void AttachOnGenerate(Generator follower)
-    {
-        //avoid recursion 
-        follower.DetachOnGenerate(this);
+        #endregion
+        #region Raise Event
 
-        //avoid duplicate
-        DetachOnGenerate(follower); 
-
-        OnGenerate += follower.Generate;
-    }
-
-    /// <summary>
-    /// Removes follower from on genrate event list. 
-    /// </summary>
-    /// <param name="follower"></param>
-    public void DetachOnGenerate(Generator follower)
-    {
-        OnGenerate -= follower.Generate;
-    }
-
-    /// <summary>
-    /// Attaches follower to genrate event. 
-    /// </summary>
-    /// <param name="follower"></param>    
-    public void AttachOnSkip(Generator follower)
-    {
-        //avoid recursion 
-        follower.DetachOnSkip(this);
-
-        OnSkippedGenerate += follower.SkippedGenerate;
-    }
-
-    /// <summary>
-    /// Removes follower from on genrate event list. 
-    /// </summary>
-    /// <param name="follower"></param>
-    public void DetachOnSkip(Generator follower)
-    {
-        OnSkippedGenerate -= follower.SkippedGenerate;
-    }
-
-    /// <summary>
-    /// Attachs follower's OnStart, OnStop,OnGenerate, & OnSkip events to own events, 
-    /// </summary>
-    /// <param name="follower"></param>
-    public void Attach(Generator follower)
-    {
-        AttachOnGenerate(follower);
-        AttachOnSkip(follower); 
-        AttachOnStart(follower);
-        AttachOnStop(follower);
-    }
-
-    /// <summary>
-    /// Detaches follower's OnStart, OnStop,OnGenerate, & OnSkip events from own events, 
-    /// </summary>
-    /// <param name="follower"></param>
-    public void Detach(Generator follower)
-    {
-        DetachOnGenerate(follower);
-        DetachOnSkip(follower);
-        DetachOnStart(follower);
-        DetachOnStop(follower);
-    }
-    #endregion
-    #endregion
-    #region Unity Methods 
-    protected void Awake()
-    {
-        SetupGenerator(); 
-    }
-
-    /// <summary>
-    /// Runs the generation cycle. 
-    /// </summary>
-    protected void Update()
-    {
-        if (!IsGenerating)
+        /// <summary>
+        /// Raises a generation event
+        /// </summary>
+        /// <param name="genEvent"></param>
+        protected void Raise(EventHandler<GenerateEventArgs> genEvent)
         {
-            return;
+            genEvent?.Invoke(this, new GenerateEventArgs(Delta));
         }
 
-        if (ShouldGenerate())
+        /// <summary>
+        /// Raise OnGenerateEvent
+        /// </summary>
+        protected void RaiseOnGenerateEvent()
         {
-            Generate();
+            Raise(OnGenerateEventHandler); 
         }
-        else
+
+        /// <summary>
+        /// Raise OnSkippedEvent
+        /// </summary>
+        protected void RaiseOnSkippedEvent()
         {
-            SkippedGenerate(); 
+            Raise(OnSkippedEventHandler);
         }
-    }
-    #endregion
-    #region Abstract Methods
-    /// <summary>
-    /// Called with in <see cref="Update"/> to check if generation is allowed.
-    /// </summary>
-    /// <returns></returns>
-    public abstract bool ShouldGenerate();
 
-    /// <summary>
-    /// Called last in <see cref="SkippedGenerate"/>. By default, stops generation. 
-    /// </summary>
-    protected virtual void SkippedGeneration()
-    {
-        StopGenerating(); //TODO think about making it a bool 
-    }
-
-    protected virtual void SetupGenerator()
-    {
-
-    }
-
-    protected void Log(string s)
-    {
-        if (PrintDebug)
+        /// <summary>
+        /// Raise OnBeginEvent
+        /// </summary>
+        protected void RaiseOnBeginEvent()
         {
-            Debug.Log(s+ " " + name);
+            Raise(OnBeginEventHandler);
         }
+
+        /// <summary>
+        /// aise OnEndEvent
+        /// </summary>
+        protected void RaiseOnEndEvent()
+        {
+            Raise(OnEndEventHandler);
+        }
+        #endregion
+        #region Public Methods 
+        /// <summary>
+        /// Generates something. 
+        /// </summary>
+        public void Generate()
+        {
+            OnGenerate(new GenerateEventArgs(Delta));
+            RaiseOnGenerateEvent(); 
+        }
+
+        /// <summary>
+        /// Called when generate call skips a cycle because <see cref="ShouldGenerate"/> returns false. 
+        /// </summary>
+        public void SkippedGenerate()
+        {
+            OnSkip();
+            RaiseOnSkippedEvent();
+        }
+
+        /// <summary>
+        /// Begins Generations. Does not throw exception if already generating. 
+        /// </summary>
+        public void Begin()
+        {
+            IsGenerating = true;
+            OnBegin();
+            RaiseOnBeginEvent(); 
+
+            GenerateCondition?.Setup(this);
+            Terminator?.Setup(this);
+        }
+
+        /// <summary>
+        /// Begins Generation and invokes OnStart events.
+        /// </summary>
+        public void BeginSafly()
+        {
+            if (IsGenerating == false)
+            {
+                throw new GeneratorBeginException("Generator is already genrating");
+            }
+
+            Begin(); 
+        }
+
+        /// <summary>
+        /// Ends Generations. Does not throw exception if already stopped. 
+        /// </summary>
+        public void End()
+        {
+            IsGenerating = false;
+            OnEnd();
+            RaiseOnEndEvent();
+
+            GenerateCondition?.SetApart(this);
+            Terminator?.SetApart(this);
+        }
+       
+        /// <summary>
+        /// Stops Generation and trigger OnStop events.
+        /// </summary>
+        public void EndSafly(bool safe = false)
+        {
+            if (IsGenerating == false && safe)
+            {
+                throw new GeneratorEndException("Generator is already not genrating");
+            }
+
+            End(); 
+        }
+        #endregion
+        #region Unity Methods 
+        /// <summary>
+        /// 'Seals' Awake function. DO NOT OVERWRITE! use <see cref="OnAwake"/>
+        /// </summary>
+        protected void Awake()
+        {
+            OnAwake();
+            Terminator?.Setup(this);
+            GenerateCondition?.Setup(this);
+        }
+
+        /// <summary>
+        /// 'Seals' Start function. DO NOT OVERWRITE. use <see cref="Start"/>
+        /// </summary>
+        protected void Start()
+        {
+            OnStart();
+        }
+
+        /// <summary>
+        /// Runs the generation cycle.  DO NOT OVERWRITE
+        /// </summary>
+        protected void Update()
+        {
+            if (IsGenerating == false)
+            {
+                return;
+            }
+
+            if (Terminator?.ShouldTerminate(this) ?? ShouldTerminate())
+            {
+                End();
+                return;
+            }
+
+            if (GenerateCondition?.ShouldGenerate(this) ?? ShouldGenerate())
+            {
+                Generate();
+            }
+            else
+            {
+                SkippedGenerate();
+            }
+        }
+        #endregion
+        #region Protected Virtual Methods
+        /// <summary>
+        /// Called within <see cref="Update"/> to check if generation is allowed.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual bool ShouldGenerate() => true;
+
+        /// <summary>
+        /// Called within <see cref="Update"/> to check if generation shoul terminate before generating.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual bool ShouldTerminate() => false; 
+
+        /// <summary>
+        /// Gets called when this object's Awake function. 
+        /// </summary>
+        protected virtual void OnAwake() { }
+
+        /// <summary>
+        /// Gets called when this object's Awake function. 
+        /// </summary>
+        protected virtual void OnStart() { }
+
+        /// <summary>
+        /// Called when genrator generates. This is invoked before <see cref="OnGenerateEventHandler"/> 
+        /// </summary>
+        protected virtual void OnGenerate(GenerateEventArgs e) { }
+
+        /// <summary>
+        /// Called when genrator skips generate. This is invoked before <see cref="OnSkippedEventHandler"/> 
+        /// </summary>
+        protected virtual void OnSkip() { }
+
+        /// <summary>
+        /// Called when genrator begins generating. This is invoked before <see cref="OnBeginEventHandler"/> 
+        /// </summary>
+        protected virtual void OnBegin() { }
+
+        /// <summary>
+        /// Called when genrator ends generating. This is invoked before <see cref="OnEndEventHandler"/> 
+        /// </summary>
+        protected virtual void OnEnd() { }
+        #endregion
+        #region Protected Methods 
+        /// <summary>
+        /// Gets whether a generator should generate or not. Is is used for nested generators. 
+        /// </summary>
+        /// <param name="gen"></param>
+        /// <returns></returns>
+        protected bool GeneratorShouldGenerate(Generator gen)
+        {
+            return gen.ShouldGenerate(); 
+        }
+
+        /// <summary>
+        /// Gets whether a generator should terminate or not. Is is used for nested generators. 
+        /// </summary>
+        /// <param name="gen"></param>
+        /// <returns></returns>
+        protected bool GeneratorShouldTerminate(Generator gen)
+        {
+            return gen.ShouldTerminate();
+        }
+        #endregion
     }
-    #endregion
 }
+

@@ -1,82 +1,110 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
-/// <summary>
-/// A generator that generates components. 
-/// </summary>
-/// <typeparam name="T"></typeparam>
-public abstract class InstanceGenerator<T> : Generator where T : Component
+namespace ChainedRam.Core.Generation
 {
-    #region Inspector Attribute 
-    [Header("Instance Generator")]
-    [Tooltip("Prefab to genrate.")]
-    public T Prefab;
-
-    [Tooltip("Parnet to generate in.")]
-    public Transform GenerateAt;
-    #endregion  
-    #region Protected Abstract Property
     /// <summary>
-    /// A collection holding generated instance.
+    /// A generator that generates components. 
     /// </summary>
-    protected abstract IEnumerable<T> Instances { get; }
-    #endregion
-    #region Public Events
-    /// <summary>
-    /// Called after generating an instance. 
-    /// </summary>
-    public event Action<T> OnInstanceGenerated;
-    #endregion
-    #region Public Methods
-    protected virtual void DegenerateAll()
+    /// <typeparam name="T"></typeparam>
+    public abstract class InstanceGenerator<T> : Generator where T : Component
     {
-        foreach(T i in Instances)
+        #region Inspector Attribute 
+        [Header("Instance Generator")]
+        [Tooltip("Prefab to genrate.")]
+        public T Prefab;
+
+        [Tooltip("Parnet to generate in.")]
+        public Transform GenerateAt;
+        #endregion
+        #region Protected Abstract Property
+        /// <summary>
+        /// A collection holding generated instance.
+        /// </summary>
+        protected virtual IEnumerable<T> Instances
         {
-            Degenerate(i);
+            get
+            {
+                return collection;
+            }
         }
+        #endregion
+        #region Private Attributes
+        private Collection<T> collection;
+        #endregion
+        #region Public Events
+        /// <summary>
+        /// Called after generating an instance. 
+        /// </summary>
+        public event Action<T> OnInstanceGenerated;
+        #endregion
+        #region Public Methods
+        protected virtual void DegenerateAll()
+        {
+            foreach (T i in Instances)
+            {
+                Degenerate(i);
+            }
+        }
+
+        protected virtual void Degenerate(T instance)
+        {
+            RemoveInstance(instance);
+            Destroy(instance.gameObject);
+        }
+
+        protected virtual T CreateInstance()
+        {
+            return Instantiate(Prefab, GenerateAt);
+        }
+
+        public virtual void SetupGenerated(T instance)
+        {
+            instance.gameObject.SetActive(true);
+            instance.transform.localPosition = Vector2.zero;
+            instance.transform.rotation = Quaternion.identity;
+        }
+        #endregion
+        #region Override Generator
+        protected override void OnAwake()
+        {
+            base.OnAwake();
+            collection = new Collection<T>();
+            OnGenerateEventHandler += (s, e) => GenerateInstance();
+        }
+        #endregion
+        #region Private Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        private void GenerateInstance()
+        {
+            T instance = CreateInstance();
+            AddInstance(instance);
+            SetupGenerated(instance);
+
+            OnInstanceGenerated?.Invoke(instance);
+        }
+        #endregion
+        #region Virtual Methods
+        public virtual void AddInstance(T instance)
+        {
+            collection.Add(instance);
+        }
+
+        public virtual void RemoveInstance(T instance)
+        {
+            collection.Remove(instance);
+        }
+        #endregion
     }
 
-    protected virtual void Degenerate(T instance)
+    public class InstanceGenerator : InstanceGenerator<MonoBehaviour>
     {
-        RemoveInstance(instance);
-        Destroy(instance.gameObject);
-    }
 
-    protected virtual T CreateInstance()
-    {
-        return Instantiate(Prefab, GenerateAt.transform);
     }
-   
-    public virtual void SetupGenerated(T instance)
-    {
-        instance.gameObject.SetActive(true);
-        instance.transform.localPosition = Vector2.zero;
-        instance.transform.rotation = Quaternion.identity; 
-    }
-    #endregion
-    #region Override Generator
-    protected override void SetupGenerator()
-    {
-        OnGenerate += GenerateInstance;
-    }
-    #endregion
-    #region Private Methods
-    /// <summary>
-    /// 
-    /// </summary>
-    private void GenerateInstance()
-    {
-        T instance = CreateInstance();
-        AddInstance(instance);
-        SetupGenerated(instance);
-
-        OnInstanceGenerated?.Invoke(instance); 
-    }
-    #endregion
-    #region Abstarct Methods
-    public abstract void AddInstance(T instance);
-    public abstract void RemoveInstance(T instance);
-    #endregion
 }
+

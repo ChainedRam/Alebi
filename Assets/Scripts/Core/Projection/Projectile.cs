@@ -1,16 +1,35 @@
-﻿using ChainedRam.Alebi.Core;
-using ChainedRam.Alebi.Interface.Battle;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using ChainedRam.Core.Extentions;
 
 namespace ChainedRam.Core.Projection
 {
     /// <summary>
     /// A moving unit that contained a rigide body. 
     /// </summary>
-    public abstract class Projectile : Runnable
+    public class Projectile : MonoBehaviour
     {
-        public abstract void Setup(float speed, float direction);
+        public Motion motion;
+
+
+        private void Start()
+        {
+            motion.Initialize();
+        }
+        public virtual void Setup(float delta)
+        {
+            
+        }
+
+        public void FixedUpdate()
+        {
+
+            Vector2 offset = motion.GetOffset(); 
+
+            transform.position += (Vector3)offset;
+        }
+
+       
+
+
     }
 }

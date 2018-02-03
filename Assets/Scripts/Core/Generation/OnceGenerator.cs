@@ -2,27 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Generates wrapped generator once. ONCE! 
-/// </summary>
-public abstract class OnceGenerator : GeneratorWrap
+namespace ChainedRam.Core.Generation
 {
-    #region Private Atributes 
-    private bool HasGenerated;
-    #endregion
-    #region Unity Methods 
-    #endregion
-    #region GeneratorWrap Override 
-    public sealed override bool ShouldGenerate()
-    { 
-        return !HasGenerated;
-    }
-
-    protected override void SetupGenerator()
+    /// <summary>
+    /// Generates wrapped generator once. ONCE! 
+    /// </summary>
+    public class OnceGenerator : GeneratorWrap
     {
-        base.SetupGenerator();
-        HasGenerated = false;
-        OnGenerate += () => HasGenerated = true;
+        #region Private Atributes 
+        private bool HasGenerated;
+        #endregion
+        #region Unity Methods 
+        #endregion
+        #region GeneratorWrap Override 
+        protected sealed override bool ShouldGenerate()
+        {
+            return !HasGenerated;
+        }
+
+        protected override void OnAwake()
+        {
+            base.OnAwake();
+            HasGenerated = false;
+            OnGenerateEventHandler += (s,e) => HasGenerated = true; //REEEEEEE. move to WhenGenerate
+        }
+        #endregion
     }
-    #endregion
 }

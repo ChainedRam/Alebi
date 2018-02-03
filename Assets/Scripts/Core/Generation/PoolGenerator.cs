@@ -1,84 +1,136 @@
 ﻿using ChainedRam.Core.Generation;
+using ChainedRam.Core.Selection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolGenerator : NestedGenerator
+namespace ChainedRam.Core.Generation
 {
-    [Header("Pool Geenerator Settings")]
-
-    public Generator Selected;
-
-    public Selector Selector;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    protected override void SetupGenerator()
+    public class PoolGenerator : NestedGenerator
     {
-        //ignore NestedGeneratorSetup
-        OnGenerate += () => SwitchIn(Selector.Select(ChildGenerators, Selected));
-    }
+        [Header("Pool Geenerator Settings")]
 
-    public void SwitchIn(Generator gen)
-    {
-        //Debug.Log("Switching " + Selected.name + " with " + gen.name );
-        if(Selected != null)
+        [HideInInspector()]
+        public Generator Selected;
+
+        [HideInInspector()]
+        public Selector Selector;
+
+        [HideInInspector]
+        public SelectorType SelectorType;
+
+        public void SwitchIn(Generator gen)
         {
-            Demote(Selected); 
+            if (Selected != null)
+            {
+                Demote(Selected);
+            }
+
+
+            if (gen != null)
+            {
+                Promote(gen);
+            }
         }
 
-        Promote(gen); 
-    }
-
-    public void Promote(Generator gen)
-    {
-       // Debug.Log("Promoting " + gen.name);
-        
-        Selected = gen; 
-        Attach(gen);
-        gen.StartGenerating(); 
-    }
-
-    public void Demote(Generator gen)
-    {
-        //Debug.Log("Demoting " + gen.name);
-        gen.StopGenerating();
-        Detach(gen);
-
-        Selected = null; 
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public override bool ShouldGenerate()
-    {
-        return (Options == ShouldGenerateOptions.Or? true : (Selected?.ShouldGenerate() ?? true)); 
-    }
-
-    protected override void SkippedGeneration()
-    {
-       
-    }
-}
-
-/// <summary>
-/// Generic version of PoolGenerator
-/// </summary>
-/// <typeparam name="T"></typeparam>
-public class PoolGenerator<T> : PoolGenerator where T : Generator
-{
-    public T[] Pool;
-
-    public override Generator[] ChildGenerators
-    {
-        get
+        public void Promote(Generator gen)
         {
-            return Pool;
+            // Debug.Log("Promoting " + gen.name);
+
+            Selected = gen;
+            //Attach(gen);
+
+            //AttachNext(gen.OnEndEventHandler); 
+
+            gen.OnEndEventHandler += Next;
+
+            gen.Delta = this.Delta; 
+            gen.Begin();
+        }
+
+        public void Demote(Generator gen)
+        {
+            gen.OnEndEventHandler -= Next;
+            //Debug.Log("Demoting " + gen.name);
+            gen.End();
+            //Detach(gen);
+            
+
+            Selected = null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected override void OnStart()
+        {
+           
+        }
+
+        private void AttachNext(EventHandler<GenerateEventArgs> ev)
+        {
+            ev += Next; 
+        }
+
+        private void DetachNext(EventHandler<GenerateEventArgs> ev)
+        {
+            ev -= Next; 
+        }
+
+
+        private void Next(object s= null, GenerateEventArgs e= null)
+        {
+            SwitchIn(NextGenerator());
+        }
+
+        protected override void OnGenerate(GenerateEventArgs e)
+        {
+            base.OnGenerate(e);
+
+            Next();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        protected override bool ShouldGenerate()
+        {
+            return !((Selected?.IsGenerating) ?? false); //TODO use GeneratorShouldGnerate
+        }
+
+        protected override void OnSkip()
+        {
+            base.OnSkip();
+        }
+
+        public Generator NextGenerator()
+        {
+            return Selector.Select(ChildGenerators, Selected);
+        }
+
+        protected override void OnEnd()
+        {
+            Demote(Selected);
         }
     }
 
+    /// <summary>
+    /// Generic version of PoolGenerator
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class PoolGenerator<T> : PoolGenerator where T : Generator
+    {
+        public T[] Pool;
+
+        public override Generator[] ChildGenerators
+        {
+            get
+            {
+                return Pool;
+            }
+        }
+
+    }
 }

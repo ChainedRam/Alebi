@@ -2,61 +2,87 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ChainedRam.Core.Generation.Extention; 
 
 namespace ChainedRam.Core.Generation
 {
     #region Enum
-    public enum ShouldGenerateOptions : int
+    public enum ConditionOption : int
     {
-        And, 
-        Or
+        Parent,
+        AtLeastOne,
+        All,
+    }
+
+    public enum NestedGenerateOption : int
+    {
+        Force,
+        Individual,
     }
     #endregion
 
     /// <summary>
     /// NestedGenerator behaves on behalf of it's children combining their calls into one generator. 
     /// </summary>
+    [Serializable]
     public class NestedGenerator : Generator
     {
         #region Custom Inspector  Attributes  
         //Custome Inspector shows this as an array only for this class excluding children. 
-
         /// <summary>
         /// Holds children generators 
         /// </summary>
-        public virtual Generator[] ChildGenerators { get; set; }
+        public virtual Generator[] ChildGenerators { get { return Generators; } set { Generators = value; } } 
+
+        [HideInInspector]
+        [SerializeField]
+        private Generator[] Generators; 
+
+        [HideInInspector()]
+        public bool ShowChildrenInspecter;
         #endregion
         #region Inspecter Attributes  
-        [Header("NestedGenerator Settings")]
         [Tooltip("'Should Generate' Condition between children.")]
-        public ShouldGenerateOptions Options = ShouldGenerateOptions.And;
+        public ConditionOption ShouldTerminateOption;
+
+        public ConditionOption ShouldGenerateOption;
+
+        public NestedGenerateOption GenerateOption;
         #endregion
         #region Unity Methods  
         #endregion
         #region Generator Override  
-        protected override void SetupGenerator()
+
+        private void ForChildren(Action<Generator> act)
         {
-            base.SetupGenerator();
-            foreach (Generator gen in ChildGenerators)
+            foreach(var gen in ChildGenerators)
             {
-                Attach(gen);
+                act(gen); 
             }
         }
+
         /// <summary>
         /// And or Or's children's 'ShouldGenerate' based on selected Option
         /// </summary>
         /// <returns></returns>
-        public override bool ShouldGenerate()
+        //TODO: DRY
+        protected override bool ShouldGenerate()
         {
+            bool baseValue = base.ShouldGenerate(); 
+
+            if(ShouldGenerateOption.HasFlag(ConditionOption.Parent))
+            {
+                return baseValue; 
+            }
+
             bool earlyTermination;
 
-            Func<bool, bool, bool> operation = (earlyTermination = Options.HasFlag(ShouldGenerateOptions.Or))?  operation = (a, b) => a | b : operation = (a, b) => a & b;
+            Func<bool, bool, bool> operation = (earlyTermination = ShouldGenerateOption.HasFlag(ConditionOption.AtLeastOne)) ?  operation = (a, b) => a | b : operation = (a, b) => a & b;
 
             bool result = !earlyTermination; 
             foreach (Generator g in ChildGenerators)
             {
-                bool should = g.ShouldGenerate();
+                bool should = GeneratorShouldGenerate(g); 
 
                 result = operation(result, should); 
 
@@ -68,6 +94,55 @@ namespace ChainedRam.Core.Generation
 
             return result;
         }
+
+        //TODO: DRY
+        protected override bool ShouldTerminate()
+        {
+            bool baseValue = base.ShouldTerminate();
+
+            if (ShouldTerminateOption.HasFlag(ConditionOption.Parent))
+            {
+                return baseValue;
+            }
+            bool earlyTermination;
+
+            Func<bool, bool, bool> operation = (earlyTermination = ShouldTerminateOption.HasFlag(ConditionOption.AtLeastOne)) ? operation = (a, b) => a | b : operation = (a, b) => a & b;
+
+            bool result = !earlyTermination;
+            foreach (Generator g in ChildGenerators)
+            {
+                bool should = GeneratorShouldTerminate(g); 
+
+                result = operation(result, should);
+
+                if (should == earlyTermination)
+                {
+                    return earlyTermination;
+                }
+            }
+
+            return result;
+        }
+
+        protected override void OnGenerate(GenerateEventArgs e)
+        {
+            //base.OnGenerate(e);
+
+            RaiseOnGenerateEvent(); 
+
+            foreach(var gen in ChildGenerators)
+            {
+                if (GenerateOption.HasFlag(NestedGenerateOption.Force) ||
+                    (GenerateOption.HasFlag(NestedGenerateOption.Individual) && GeneratorShouldGenerate(gen)))
+                 {
+                    float prevDelta = gen.Delta;
+                    gen.Delta = e.Delta;
+                    gen.Generate();
+                    gen.Delta = prevDelta;
+                }
+            }
+        }
+
         #endregion
     }
 
