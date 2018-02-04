@@ -9,10 +9,10 @@ public class ProjectileGizmo : MonoBehaviour
     public Projectile projectile;
 
     [Range(10, 100)]
-    public float MaxLineLength;
+    public float MaxLineLength = 10;
 
     [Range(200, 2000)]
-    public int MaxLineDrawn; 
+    public int MaxLineDrawn = 1000; 
 
     private void Start()
     {
@@ -41,7 +41,7 @@ public class ProjectileGizmo : MonoBehaviour
         int i;
         float lineLength;
 
-        for (i = 0, lineLength = 0; lineLength <= MaxLineLength && i < MaxLineDrawn; i++, from = to, lineLength += Vector2.Distance(from, to))
+        for (i = 0, lineLength = 0; lineLength <= MaxLineLength && i < MaxLineDrawn; i++,lineLength += Vector2.Distance(from, to), from = to)
         {
             Gizmos.color = c[i % c.Length];
             to = from + (Vector3)motion.GetOffset();
