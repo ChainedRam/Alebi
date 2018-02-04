@@ -425,6 +425,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 551366478}
+  MaxLineLength: 10
+  MaxLineDrawn: 200
 --- !u!1 &857808427
 GameObject:
   m_ObjectHideFlags: 0

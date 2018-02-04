@@ -3,63 +3,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MultiMotion : Motion
+namespace ChainedRam.Core.Projection
 {
-    [Header("Motions apply from top to bottom")]
-    [Header("Order Matters")]
-    public Motion[] Motions;
-   
-    public override Vector2 Default()
+    public class MultiMotion : Motion
     {
-        OnValidate(); 
-        return Motions[0].Default(); 
-    }
+        [Header("Motions apply from top to bottom")]
+        [Header("Order Matters")]
+        public Motion[] Motions;
 
-    public override Vector2 GetRelativeOffset(Vector2 defaultVector)
-    {
-        OnValidate();
-        foreach (var m in Motions)
+        public override Vector2 Default()
         {
-            defaultVector = m.GetRelativeOffset(defaultVector);
-        }
-        return defaultVector;
-    }
-
-    public override void Initialize(float delta)
-    {
-        OnValidate();
-        base.Initialize(delta);
-        foreach (var motion in Motions)
-        {
-            motion.Initialize(delta);
-        }
-    }
-
-    #region OnValidate
-    private void OnValidate()
-    {
-        //check list 
-        if (Motions == null || Motions.Length == 0)
-        {
-            throw new Exception(name + " contains an empty list of motions"); //TODO create exception type
+            OnValidate();
+            return Motions[0].Default();
         }
 
-        //check list elements 
-        int i = 0;
-        string build = "";
-        foreach (var m in Motions)
+        public override Vector2 GetRelativeOffset(Vector2 defaultVector)
         {
-            if (m == null)
+            OnValidate();
+            foreach (var m in Motions)
             {
-                build += i + ",";
+                defaultVector = m.GetRelativeOffset(defaultVector);
             }
-            i++;
+            return defaultVector;
         }
 
-        if (!string.IsNullOrEmpty(build))
+        public override void Initialize(float delta)
         {
-            throw new Exception(name + $" contains null elements at {{{ build.Substring(0, build.Length - 1) }}}. Please set refrences."); //TODO create exception type
+            OnValidate();
+            base.Initialize(delta);
+            foreach (var motion in Motions)
+            {
+                motion.Initialize(delta);
+            }
         }
-    } 
-    #endregion
+
+        #region OnValidate
+        private void OnValidate()
+        {
+            //check list 
+            if (Motions == null || Motions.Length == 0)
+            {
+                throw new Exception(name + " contains an empty list of motions"); //TODO create exception type
+            }
+
+            //check list elements 
+            int i = 0;
+            string build = "";
+            foreach (var m in Motions)
+            {
+                if (m == null)
+                {
+                    build += i + ",";
+                }
+                i++;
+            }
+
+            if (!string.IsNullOrEmpty(build))
+            {
+                throw new Exception(name + $" contains null elements at {{{ build.Substring(0, build.Length - 1) }}}. Please set refrences."); //TODO create exception type
+            }
+        }
+        #endregion
+    }
 }

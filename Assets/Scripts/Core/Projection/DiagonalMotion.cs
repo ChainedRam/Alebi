@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using ChainedRam.Core.Extentions;
 
-public class DiagonalMotion : RelativeMotion
+namespace ChainedRam.Core.Projection
 {
-    [Range(-90, 90)]
-    public float InitAngle;
-
-    public override Vector2 GetRelativeOffset(Vector2 vector)
+    public class DiagonalMotion : RelativeMotion
     {
-        return vector.Rotate(-InitAngle);
-    }
+        [Range(-90, 90)]
+        public float InitAngle;
 
+        public override Vector2 GetRelativeOffset(Vector2 vector)
+        {
+            return vector.Rotate(-InitAngle);
+        }
+    }
 }

@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AbsoluteMotion : Motion 
+namespace ChainedRam.Core.Projection
 {
-    public override Vector2 Default()
+    public abstract class AbsoluteMotion : Motion
     {
-        return Vector2.zero; 
-    }
+        public override Vector2 Default()
+        {
+            return Vector2.zero;
+        }
+    } 
 }
