@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AcceleratedMotion : Motion
+public class AcceleratedMotion : AbsoluteMotion
 {
     public float Acceleration;
     private float CurrentAcceleration;
 
-    public override Vector2 GetOffset()
+    public override Vector2 GetRelativeOffset(Vector2 defaultVector)
     {
-        CurrentAcceleration += this.Acceleration;
-        Vector2 acceleration = new Vector2(0, CurrentAcceleration);
-        return acceleration;
+        CurrentAcceleration += Acceleration;
+        return new Vector2(0, CurrentAcceleration) + defaultVector;
     }
 
-    public override void Initialize()
+    public override void Initialize(float delta)
     {
         CurrentAcceleration = 0;
     }
+
 }

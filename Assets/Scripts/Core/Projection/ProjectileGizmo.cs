@@ -1,4 +1,5 @@
 ﻿using ChainedRam.Core.Projection;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,12 @@ using UnityEngine;
 public class ProjectileGizmo : MonoBehaviour
 {
     public Projectile projectile;
+
+    [Range(10, 100)]
+    public float MaxLineLength;
+
+    [Range(200, 2000)]
+    public int MaxLineDrawn; 
 
     private void Start()
     {
@@ -18,25 +25,27 @@ public class ProjectileGizmo : MonoBehaviour
         {
             return;
         }
-        Motion motion = projectile.motion;
-        motion.Initialize();
-        int size = 10;
-        Color[] c = { Color.white, Color.green, Color.blue, Color.red, Color.green };
-        Color prev = Gizmos.color; 
-        Vector3 from = projectile.transform.position;
 
-        int i = 0;
-        float sum = 0;
-        while ( sum <= size)
+        if (projectile.Motion == null)
+        {
+            throw new NullReferenceException(projectile.name + "'s motion is null");
+        }
+
+        Motion motion = projectile.Motion;
+        motion.Initialize();
+       
+        Color[] c = { Color.white, Color.green, Color.blue, Color.red, Color.green };
+        Color prev = Gizmos.color;
+
+        Vector3 to, from = projectile.transform.position;
+        int i;
+        float lineLength;
+
+        for (i = 0, lineLength = 0; lineLength <= MaxLineLength && i < MaxLineDrawn; i++, from = to, lineLength += Vector2.Distance(from, to))
         {
             Gizmos.color = c[i % c.Length];
-            Vector3 to = from + (Vector3)motion.GetOffset();
+            to = from + (Vector3)motion.GetOffset();
             Gizmos.DrawLine(from, to);
-
-            i++;
-            float line = Vector2.Distance(from, to);
-            from = to;
-            sum += line;
         }
         Gizmos.color = prev; 
         motion.Initialize();

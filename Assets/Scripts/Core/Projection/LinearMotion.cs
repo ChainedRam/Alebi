@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LinearMotion : Motion
+public class LinearMotion : AbsoluteMotion
 {
     public float Speed;
 
-    public override Vector2 GetOffset()
+    public override Vector2 GetRelativeOffset(Vector2 defaultVector)
     {
-        Vector2 speed = new Vector2(0, Speed * Time.fixedDeltaTime);
-        return speed;
+        return new Vector2(0, Speed) + defaultVector;
     }
 }

@@ -1,28 +1,65 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MultiMotion : Motion
 {
-
-    public Motion[] motions;
-
-    public override Vector2 GetOffset()
+    [Header("Motions apply from top to bottom")]
+    [Header("Order Matters")]
+    public Motion[] Motions;
+   
+    public override Vector2 Default()
     {
-        Vector2 fakeVector = new Vector2(0, 0);
-        foreach (var m in motions)
-        {
-            fakeVector = m.Apply(fakeVector);
-        }
-        return fakeVector;
+        OnValidate(); 
+        return Motions[0].Default(); 
     }
 
-    public override void Initialize()
+    public override Vector2 GetRelativeOffset(Vector2 defaultVector)
     {
-        base.Initialize();
-        foreach (var motion in motions)
+        OnValidate();
+        foreach (var m in Motions)
         {
-            motion.Initialize();
+            defaultVector = m.GetRelativeOffset(defaultVector);
+        }
+        return defaultVector;
+    }
+
+    public override void Initialize(float delta)
+    {
+        OnValidate();
+        base.Initialize(delta);
+        foreach (var motion in Motions)
+        {
+            motion.Initialize(delta);
         }
     }
+
+    #region OnValidate
+    private void OnValidate()
+    {
+        //check list 
+        if (Motions == null || Motions.Length == 0)
+        {
+            throw new Exception(name + " contains an empty list of motions"); //TODO create exception type
+        }
+
+        //check list elements 
+        int i = 0;
+        string build = "";
+        foreach (var m in Motions)
+        {
+            if (m == null)
+            {
+                build += i + ",";
+            }
+            i++;
+        }
+
+        if (!string.IsNullOrEmpty(build))
+        {
+            throw new Exception(name + $" contains null elements at {{{ build.Substring(0, build.Length - 1) }}}. Please set refrences."); //TODO create exception type
+        }
+    } 
+    #endregion
 }

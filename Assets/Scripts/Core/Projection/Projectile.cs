@@ -8,28 +8,23 @@ namespace ChainedRam.Core.Projection
     /// </summary>
     public class Projectile : MonoBehaviour
     {
-        public Motion motion;
-
+        public Motion Motion;
 
         private void Start()
         {
-            motion.Initialize();
+            Motion.Initialize(); 
         }
+
         public virtual void Setup(float delta)
         {
-            
+            Motion.Initialize(delta); 
         }
 
         public void FixedUpdate()
         {
-
-            Vector2 offset = motion.GetOffset(); 
+            Vector2 offset = Motion.GetOffset(); 
 
             transform.position += (Vector3)offset;
         }
-
-       
-
-
     }
 }
