@@ -25,6 +25,8 @@ public enum TileContent
 /// </summary>
 public class Puzzle : MonoBehaviour
 {
+    public float speed;
+
 	public GameObject[][] Board;
 	public TileContent[][] BoardContent; 
 
@@ -100,7 +102,7 @@ public class Puzzle : MonoBehaviour
 
         timeWaited += Time.fixedDeltaTime; 
 
-        if(timeWaited > 1f)
+        if(timeWaited > speed)
         {
             if(Input.GetKey(KeyCode.RightArrow) && CanMovePlayerTo(Direction.East))
             {
@@ -186,7 +188,7 @@ public class Puzzle : MonoBehaviour
                 GameObject box = Board[ty][tx].transform.GetChild(0).gameObject;
                 box.transform.SetParent(Board[by][bx].transform);
                 BoardContent[by][bx] = TileContent.Box; 
-                StartCoroutine(CenterObject(box, 1)); 
+                StartCoroutine(CenterObject(box, speed)); 
                 BoardContent[py][px] = TileContent.Empty;
                 break;
 
@@ -204,7 +206,7 @@ public class Puzzle : MonoBehaviour
         PlayerPosition = new Vector2(tx,ty);
         Player.transform.SetParent(Board[ty][tx].transform); 
 
-        StartCoroutine(CenterObject(Player, 1f)); 
+        StartCoroutine(CenterObject(Player, speed)); 
     }
 
     private void GoalReached()
