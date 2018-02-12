@@ -86,8 +86,6 @@ namespace ChainedRam.Core.Generation
 
         protected override void OnGenerate(GenerateEventArgs e)
         {
-            base.OnGenerate(e);
-
             Next();
         }
 

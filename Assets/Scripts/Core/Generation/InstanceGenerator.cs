@@ -65,7 +65,7 @@ namespace ChainedRam.Core.Generation
         {
             instance.gameObject.SetActive(true);
             instance.transform.localPosition = Vector2.zero;
-            instance.transform.rotation = Quaternion.identity;
+            instance.transform.localRotation = Quaternion.identity;
         }
         #endregion
         #region Override Generator
