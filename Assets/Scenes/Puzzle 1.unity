@@ -1613,6 +1613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606848c577903364594e2488c9d4b6db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0.35
   Width: 3
   Height: 6
   PlayerPosition: {x: 1, y: 0}
