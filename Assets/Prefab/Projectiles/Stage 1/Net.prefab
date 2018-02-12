@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4767316972115808}
   - component: {fileID: 212370207227961960}
   - component: {fileID: 114134827714133822}
-  - component: {fileID: 114593732184631556}
   - component: {fileID: 61823051749983092}
   m_Layer: 0
   m_Name: Net
@@ -194,20 +193,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Acceleration: 0.1
---- !u!114 &114593732184631556
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1215035392223010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0aa5d269711113469533c1329aa937e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 114134827714133822}
-  MaxLineLength: 10
-  MaxLineDrawn: 200
 --- !u!114 &114620888467819812
 MonoBehaviour:
   m_ObjectHideFlags: 1
