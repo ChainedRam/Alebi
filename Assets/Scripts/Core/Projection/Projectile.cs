@@ -24,7 +24,7 @@ namespace ChainedRam.Core.Projection
         {
             Vector2 offset = Motion.GetOffset(); 
 
-            transform.position += (Vector3)offset.Rotate(transform.rotation.eulerAngles.z);
+            transform.localPosition += (Vector3)offset.Rotate(transform.rotation.eulerAngles.z);
         }
     }
 }
