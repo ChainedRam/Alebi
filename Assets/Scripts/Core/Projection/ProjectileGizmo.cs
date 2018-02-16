@@ -47,7 +47,7 @@ namespace ChainedRam.Core.Projection //TODO this is more into Editor than Core
             for (i = 0, lineLength = 0; lineLength <= MaxLineLength && i < MaxLineDrawn; i++, lineLength += Vector2.Distance(from, to), from = to)
             {
                 Gizmos.color = c[i % c.Length];
-                to = from + (Vector3)motion.GetOffset().Rotate(transform.rotation.eulerAngles.z);
+                to = from + (Vector3)motion.GetOffset().Rotate(projectile.transform.rotation.eulerAngles.z);
                 Gizmos.DrawLine(from, to);
             }
             Gizmos.color = prev;
