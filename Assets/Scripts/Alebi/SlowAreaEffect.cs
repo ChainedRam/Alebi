@@ -13,13 +13,9 @@ public class SlowAreaEffect : AreaEffect
 
     StatusEffect SlowEffect; 
 
-    [Header("Optional for display")]
-    public Text DurationLabel;
-
-
     private void Start()
     {
-        SlowEffect = new SlowStatusEffect(Duration, 1- SlowRate);
+        SlowEffect = new SlowStatusEffect(Duration, 1 - SlowRate);
     }
 
     public override void AddEffect(Player player)
@@ -35,13 +31,5 @@ public class SlowAreaEffect : AreaEffect
     public override void RemoveEffect(Player player)
     {
 
-    }
-
-    private void Update()
-    {
-         if(DurationLabel != null)
-        {
-            //DurationLabel.text = SlowEffect.Duration.ToString("0.00");
-        }
     }
 }
