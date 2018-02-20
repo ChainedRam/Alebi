@@ -11,11 +11,11 @@ public class SlowAreaEffect : AreaEffect
     [Range(0f,1f)]
     public float SlowRate; 
 
-    StatusEffect SlowEffect; 
+    private StatusEffect SlowEffect; 
 
     private void Start()
     {
-        SlowEffect = new SlowStatusEffect(Duration, 1 - SlowRate);
+        SlowEffect = new SlowStatusEffect(1 - SlowRate);
     }
 
     public override void AddEffect(Player player)

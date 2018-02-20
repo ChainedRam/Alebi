@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class SlowStatusEffect : StatusEffect
 {
-    private float Slow;
+    private float SlowRate;
 
-    public SlowStatusEffect(float duration, float slow) : base("Slow")
+    public SlowStatusEffect(float slow) : base("Slow")
     {
-        Slow = slow;
+        SlowRate = slow;
     }
 
     public override void Apply(Player p)
     {
-        p.Speed *= Slow; 
+        p.Speed *= SlowRate; 
     }
 }
