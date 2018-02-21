@@ -204,6 +204,11 @@ namespace ChainedRam.Core.Player
             }
             
         }
+
+        public void velocityReset()
+        {
+            rigidbody2D.velocity = Vector2.zero;
+        }
         #endregion
     }
 }
