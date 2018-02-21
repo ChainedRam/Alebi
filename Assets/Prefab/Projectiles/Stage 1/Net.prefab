@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212370207227961960}
   - component: {fileID: 114134827714133822}
   - component: {fileID: 61823051749983092}
+  - component: {fileID: 114054330394001486}
   m_Layer: 0
   m_Name: Net
   m_TagString: Untagged
@@ -65,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1215035392223010}
   m_LocalRotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -7.14, y: -3, z: 0}
+  m_LocalPosition: {x: -4.4, y: -2.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4216068638258446}
@@ -81,7 +82,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0032390356, y: 0.00000023841858}
@@ -97,6 +98,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9826734, y: 0.9891515}
   m_EdgeRadius: 0
+--- !u!114 &114054330394001486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1215035392223010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c50f61a77efc8b4ba6ff7812f3b7396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 2
 --- !u!114 &114134827714133822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,9 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7496952bfaf95cc40a90a78f92d71c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.25
+  Speed: 0
   Tilt: -68
-  SpeedAcc: -0.001
+  SpeedAcc: 0
   TileAcc: 1.31
 --- !u!212 &212370207227961960
 SpriteRenderer:
