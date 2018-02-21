@@ -124,10 +124,10 @@ namespace ChainedRam.Core.Player
         }
 
         /// <summary>
-        /// Handles Collision with collision effects. 
+        /// Handles trigger enter effects . 
         /// </summary>
         /// <param name="collision"></param>
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
             CollisionEffect effect = collision.gameObject.GetComponent<CollisionEffect>();
 
@@ -135,14 +135,7 @@ namespace ChainedRam.Core.Player
             {
                 effect.OnHit(this);
             }
-        }
 
-        /// <summary>
-        /// Handles trigger enter effects . 
-        /// </summary>
-        /// <param name="collision"></param>
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
             AreaEffect areaEffect = collision.gameObject.GetComponent<AreaEffect>();
 
             if (areaEffect != null)
