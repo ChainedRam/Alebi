@@ -7,7 +7,7 @@ namespace ChainedRam.Core.Generation
     /// <summary>
     /// A terminatorgenerates based on a given number before stopping. 
     /// </summary>
-    public class CountTerminator : GeneratorTerminator
+    public class CountTerminator : GeneratorTerminatorComponent
     {
         #region Inspector Attributes 
         [Header("CountGenerator")]

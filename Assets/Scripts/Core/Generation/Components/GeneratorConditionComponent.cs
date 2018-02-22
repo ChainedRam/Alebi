@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ChainedRam.Core.Generation
 {
-    public abstract class GeneratorCondition : MonoBehaviour
+    public abstract class GeneratorConditionComponent : MonoBehaviour
     {
         public virtual void Setup(Generator gen)
         {

@@ -10,7 +10,7 @@ namespace ChainedRam.Core.Generation
     /// A generator that generates components. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class InstanceGenerator<T> : Generator where T : Component
+    public abstract class InstanceGenerator<T> : ComponentGenerator where T : Component
     {
         #region Inspector Attribute 
         [Header("Instance Generator")]

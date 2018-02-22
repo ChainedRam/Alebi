@@ -8,11 +8,11 @@ namespace ChainedRam.Core.Generation
     /// <summary>
     /// Wraps a generator around it. Can be used to refrence other generator. 
     /// </summary>
-    public class GeneratorWrap : Generator
+    public class GeneratorWrap : ComponentGenerator
     {
         #region Inspector Attribute 
         [Header("GeneratorWrap")]
-        public Generator Wrapped;
+        public ComponentGenerator Wrapped;
         #endregion
         #region Unity Methods 
 

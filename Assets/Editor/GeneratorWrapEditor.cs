@@ -16,7 +16,7 @@ public class GeneratorWrapEditor : Editor
         EditorGUILayout.Space();
         if (showChildInspecter = EditorGUILayout.Toggle("Show Wrapped Inspector", showChildInspecter))
         {
-            Generator gen = ((GeneratorWrap)target).Wrapped;
+            ComponentGenerator gen = ((GeneratorWrap)target).Wrapped;
 
             if (gen == null)
             {

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ChainedRam.Core.Generation
 {
     //TODO: Test this 
-    public class SkippedTerminator : GeneratorTerminator
+    public class SkippedTerminator : GeneratorTerminatorComponent
     {
         private bool HasSkipped;
 

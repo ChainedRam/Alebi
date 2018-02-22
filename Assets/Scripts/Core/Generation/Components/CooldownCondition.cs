@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ChainedRam.Core.Generation
 {
-    public class CooldownCondition : GeneratorCondition
+    public class CooldownCondition : GeneratorConditionComponent
     {
         [Tooltip("Time to wait in seconds.")]
         [Range(0, 1000)]

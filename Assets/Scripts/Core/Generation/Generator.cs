@@ -2,12 +2,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-
 namespace ChainedRam.Core.Generation
-{
+{    
     /// <summary>
     /// A Compnent that generates. 
     /// </summary>
@@ -16,22 +14,6 @@ namespace ChainedRam.Core.Generation
         #region Inspecter Attributes
         public bool IsGenerating;
         public float Delta;
-        #endregion 
-        #region Custom Inspector Attributes
-        [HideInInspector()]
-        public bool PrintDebug;
-
-        [HideInInspector()]
-        public TerminationType TerminatorType = TerminationType.Internal;
-
-        [HideInInspector()]
-        public GenerationType GenerateConditionType = GenerationType.Internal;
-
-        [HideInInspector()]
-        public GeneratorTerminator Terminator;
-
-        [HideInInspector()]
-        public GeneratorCondition GenerateCondition;
         #endregion
         #region Public Events 
         /// <summary>
@@ -56,7 +38,6 @@ namespace ChainedRam.Core.Generation
 
         #endregion
         #region Raise Event
-
         /// <summary>
         /// Raises a generation event
         /// </summary>
@@ -71,7 +52,7 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         protected void RaiseOnGenerateEvent()
         {
-            Raise(OnGenerateEventHandler); 
+            Raise(OnGenerateEventHandler);
         }
 
         /// <summary>
@@ -105,7 +86,7 @@ namespace ChainedRam.Core.Generation
         public void Generate()
         {
             OnGenerate(new GenerateEventArgs(Delta));
-            RaiseOnGenerateEvent(); 
+            RaiseOnGenerateEvent();
         }
 
         /// <summary>
@@ -124,23 +105,20 @@ namespace ChainedRam.Core.Generation
         {
             IsGenerating = true;
             OnBegin();
-            RaiseOnBeginEvent(); 
-
-            GenerateCondition?.Setup(this);
-            Terminator?.Setup(this);
+            RaiseOnBeginEvent();
         }
 
         /// <summary>
         /// Begins Generation and invokes OnStart events.
         /// </summary>
-        public void BeginSafly()
+        public void BeginSafely()
         {
             if (IsGenerating == false)
             {
                 throw new GeneratorBeginException("Generator is already genrating");
             }
 
-            Begin(); 
+            Begin();
         }
 
         /// <summary>
@@ -151,22 +129,19 @@ namespace ChainedRam.Core.Generation
             IsGenerating = false;
             OnEnd();
             RaiseOnEndEvent();
-
-            GenerateCondition?.SetApart(this);
-            Terminator?.SetApart(this);
         }
-       
+
         /// <summary>
         /// Stops Generation and trigger OnStop events.
         /// </summary>
-        public void EndSafly(bool safe = false)
+        public void EndSafely(bool safe = false)
         {
             if (IsGenerating == false && safe)
             {
                 throw new GeneratorEndException("Generator is already not genrating");
             }
 
-            End(); 
+            End();
         }
         #endregion
         #region Unity Methods 
@@ -176,8 +151,6 @@ namespace ChainedRam.Core.Generation
         protected void Awake()
         {
             OnAwake();
-            Terminator?.Setup(this);
-            GenerateCondition?.Setup(this);
         }
 
         /// <summary>
@@ -198,13 +171,13 @@ namespace ChainedRam.Core.Generation
                 return;
             }
 
-            if (Terminator?.ShouldTerminate(this) ?? ShouldTerminate())
+            if (ShouldTerminate())
             {
                 End();
                 return;
             }
 
-            if (GenerateCondition?.ShouldGenerate(this) ?? ShouldGenerate())
+            if (ShouldGenerate())
             {
                 Generate();
             }
@@ -214,19 +187,26 @@ namespace ChainedRam.Core.Generation
             }
         }
         #endregion
-        #region Protected Virtual Methods
+        #region Protected Abstract
         /// <summary>
         /// Called within <see cref="Update"/> to check if generation is allowed.
         /// </summary>
         /// <returns></returns>
-        protected virtual bool ShouldGenerate() => true;
+        protected abstract bool ShouldGenerate();
 
         /// <summary>
         /// Called within <see cref="Update"/> to check if generation shoul terminate before generating.
         /// </summary>
         /// <returns></returns>
-        protected virtual bool ShouldTerminate() => false; 
+        protected abstract bool ShouldTerminate();
 
+        /// <summary>
+        /// Called when genrator generates. This is invoked before <see cref="OnGenerateEventHandler"/> 
+        /// </summary>
+        protected abstract void OnGenerate(GenerateEventArgs e);
+
+        #endregion
+        #region Protected Virtual Methods
         /// <summary>
         /// Gets called when this object's Awake function. 
         /// </summary>
@@ -236,11 +216,6 @@ namespace ChainedRam.Core.Generation
         /// Gets called when this object's Awake function. 
         /// </summary>
         protected virtual void OnStart() { }
-
-        /// <summary>
-        /// Called when genrator generates. This is invoked before <see cref="OnGenerateEventHandler"/> 
-        /// </summary>
-        protected virtual void OnGenerate(GenerateEventArgs e) { }
 
         /// <summary>
         /// Called when genrator skips generate. This is invoked before <see cref="OnSkippedEventHandler"/> 
@@ -257,15 +232,15 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         protected virtual void OnEnd() { }
         #endregion
-        #region Protected Methods 
+        #region Protected Static Methods 
         /// <summary>
         /// Gets whether a generator should generate or not. Is is used for nested generators. 
         /// </summary>
         /// <param name="gen"></param>
         /// <returns></returns>
-        protected bool GeneratorShouldGenerate(Generator gen)
+        protected static bool GeneratorShouldGenerate(ComponentGenerator gen)
         {
-            return gen.ShouldGenerate(); 
+            return gen.ShouldGenerate();
         }
 
         /// <summary>
@@ -273,11 +248,10 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         /// <param name="gen"></param>
         /// <returns></returns>
-        protected bool GeneratorShouldTerminate(Generator gen)
+        protected static bool GeneratorShouldTerminate(ComponentGenerator gen)
         {
             return gen.ShouldTerminate();
         }
         #endregion
     }
 }
-

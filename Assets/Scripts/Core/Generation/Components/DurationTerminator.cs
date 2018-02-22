@@ -7,7 +7,7 @@ namespace ChainedRam.Core.Generation
     /// <summary>
     /// Wrap a generater and stops after a given time. 
     /// </summary>
-    public class DurationTerminator : GeneratorTerminator
+    public class DurationTerminator : GeneratorTerminatorComponent
     {
         #region Inspector Attributes
         [Header("TimedGeneratorContainer")]
@@ -17,8 +17,6 @@ namespace ChainedRam.Core.Generation
         #endregion
         #region Private Attributes
         public float CurrentTime;
-
-
         #endregion
         #region Override GeneratorTerminator
         public override void Setup(Generator gen)

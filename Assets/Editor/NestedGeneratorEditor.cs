@@ -41,17 +41,17 @@ namespace ChainedRam.Inspecter.Generation
             {
                 sizeValue = 0;
                 showChildrenInspecters = new bool[0];
-                ng.ChildGenerators = new Generator[0];
+                ng.ChildGenerators = new ComponentGenerator[0];
             }
 
             //size changed 
             if (sizeValue != (showChildrenInspecters?.Length?? 0))
             {
                 serializedObject.Update();
-                Generator[] prevArray = ng.ChildGenerators;
+                ComponentGenerator[] prevArray = ng.ChildGenerators;
                 //bool[] prevShow = showChildrenInspecters; 
 
-                ng.ChildGenerators = new Generator[sizeValue];
+                ng.ChildGenerators = new ComponentGenerator[sizeValue];
                 showChildrenInspecters = new bool[sizeValue]; 
 
                 for (int j = 0; j < sizeValue && j < prevArray.Length; j++)
@@ -68,7 +68,7 @@ namespace ChainedRam.Inspecter.Generation
             {
                 foreach (var item in ng.ChildGenerators)
                 {
-                    ng.ChildGenerators[i] = (Generator)EditorGUILayout.ObjectField("Generator " + i, ng.ChildGenerators[i], typeof(Generator), true);
+                    ng.ChildGenerators[i] = (ComponentGenerator)EditorGUILayout.ObjectField("Generator " + i, ng.ChildGenerators[i], typeof(ComponentGenerator), true);
                     i++;
                 }
                 serializedObject.ApplyModifiedProperties();
@@ -106,7 +106,7 @@ namespace ChainedRam.Inspecter.Generation
                             EditorGUILayout.Space();
 
                             EditorGUI.BeginDisabledGroup(true);
-                            EditorGUILayout.ObjectField("Object source", child, typeof(Generator), true);
+                            EditorGUILayout.ObjectField("Object source", child, typeof(ComponentGenerator), true);
                             EditorGUI.EndDisabledGroup();
 
                             Editor drawer = CreateEditor(child);

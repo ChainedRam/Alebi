@@ -12,7 +12,7 @@ namespace ChainedRam.Core.Generation
         [Header("Pool Geenerator Settings")]
 
         [HideInInspector()]
-        public Generator Selected;
+        public ComponentGenerator Selected;
 
         [HideInInspector()]
         public Selector Selector;
@@ -20,7 +20,7 @@ namespace ChainedRam.Core.Generation
         [HideInInspector]
         public SelectorType SelectorType;
 
-        public void SwitchIn(Generator gen)
+        public void SwitchIn(ComponentGenerator gen)
         {
             if (Selected != null)
             {
@@ -34,7 +34,7 @@ namespace ChainedRam.Core.Generation
             }
         }
 
-        public void Promote(Generator gen)
+        public void Promote(ComponentGenerator gen)
         {
             // Debug.Log("Promoting " + gen.name);
 
@@ -49,7 +49,7 @@ namespace ChainedRam.Core.Generation
             gen.Begin();
         }
 
-        public void Demote(Generator gen)
+        public void Demote(ComponentGenerator gen)
         {
             gen.OnEndEventHandler -= Next;
             //Debug.Log("Demoting " + gen.name);
@@ -103,7 +103,7 @@ namespace ChainedRam.Core.Generation
             base.OnSkip();
         }
 
-        public Generator NextGenerator()
+        public ComponentGenerator NextGenerator()
         {
             return Selector.Select(ChildGenerators, Selected);
         }
@@ -118,11 +118,11 @@ namespace ChainedRam.Core.Generation
     /// Generic version of PoolGenerator
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class PoolGenerator<T> : PoolGenerator where T : Generator
+    public class PoolGenerator<T> : PoolGenerator where T : ComponentGenerator
     {
         public T[] Pool;
 
-        public override Generator[] ChildGenerators
+        public override ComponentGenerator[] ChildGenerators
         {
             get
             {

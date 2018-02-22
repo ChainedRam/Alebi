@@ -7,7 +7,7 @@ using UnityEditor;
 namespace ChainedRam.Inspecter.Generation
 {
     //TODO: This needs some refactoring. This can be moved into the script itself Generator.OnGui >:\
-    [CustomEditor(typeof(Generator), true)]
+    [CustomEditor(typeof(ComponentGenerator), true)]
     public class GeneratorEditor : Editor
     {
         private TerminationType PrevTerminationType;
@@ -20,7 +20,7 @@ namespace ChainedRam.Inspecter.Generation
             EditorGUILayout.Space();
             EditorGUILayout.LabelField(target.name + " Generator Settings", EditorStyles.boldLabel);
 
-            Generator gen = ((Generator)target);
+            ComponentGenerator gen = ((ComponentGenerator)target);
             //gen.IsGenerating = EditorGUILayout.Toggle("IsGenerating", gen.IsGenerating);
 
             //gen.Delta = EditorGUILayout.PropertyField();
@@ -29,7 +29,7 @@ namespace ChainedRam.Inspecter.Generation
             DrawConditionSection(gen);
         }
         #region Terminator
-        private void DrawTerminatorSection(Generator gen)
+        private void DrawTerminatorSection(ComponentGenerator gen)
         {
             gen.TerminatorType = (TerminationType)EditorGUILayout.EnumPopup("TerminatorType", gen.TerminatorType);
             ClearPreviousTerminators(gen, PrevTerminationType);
@@ -41,7 +41,7 @@ namespace ChainedRam.Inspecter.Generation
                     break;
 
                 case TerminationType.External:
-                    gen.Terminator = (GeneratorTerminator)EditorGUILayout.ObjectField("Terminator", gen.Terminator, typeof(GeneratorTerminator), true);
+                    gen.Terminator = (GeneratorTerminatorComponent)EditorGUILayout.ObjectField("Terminator", gen.Terminator, typeof(GeneratorTerminatorComponent), true);
                     EditorGUILayout.Space();
                     if (gen.Terminator != null)
                     {
@@ -78,7 +78,7 @@ namespace ChainedRam.Inspecter.Generation
             PrevTerminationType = gen.TerminatorType;
         }
 
-        private void ClearPreviousTerminators(Generator gen, TerminationType prev)
+        private void ClearPreviousTerminators(ComponentGenerator gen, TerminationType prev)
         {
             if (prev == gen.TerminatorType || prev == TerminationType.Internal)
             {
@@ -101,7 +101,7 @@ namespace ChainedRam.Inspecter.Generation
         }
         #endregion
         #region Condition
-        private void DrawConditionSection(Generator gen)
+        private void DrawConditionSection(ComponentGenerator gen)
         {
             gen.GenerateConditionType = (GenerationType)EditorGUILayout.EnumPopup("ConditionType", gen.GenerateConditionType);
 
@@ -114,7 +114,7 @@ namespace ChainedRam.Inspecter.Generation
                     break;
 
                 case GenerationType.External:
-                    gen.GenerateCondition = (GeneratorCondition)EditorGUILayout.ObjectField("GenerateCondition", gen.GenerateCondition, typeof(GeneratorCondition), true);
+                    gen.GenerateCondition = (GeneratorConditionComponent)EditorGUILayout.ObjectField("GenerateCondition", gen.GenerateCondition, typeof(GeneratorConditionComponent), true);
                     EditorGUILayout.Space();
                     if (gen.GenerateCondition != null)
                     {
@@ -131,7 +131,7 @@ namespace ChainedRam.Inspecter.Generation
             PrevConditionType = gen.GenerateConditionType;
         }
 
-        private void ClearPreviousCondition(Generator gen, GenerationType prevConditionType)
+        private void ClearPreviousCondition(ComponentGenerator gen, GenerationType prevConditionType)
         {
             if (prevConditionType == gen.GenerateConditionType || prevConditionType == GenerationType.Internal)
             {
