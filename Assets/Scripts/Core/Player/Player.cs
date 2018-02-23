@@ -20,10 +20,13 @@ namespace ChainedRam.Core.Player
 
         public int Health;
 
+
+        public StatusDisplayList StatusDisplay; 
+
         /// <summary>
         /// Holds active status effects on player. 
         /// </summary>
-        private List<KeyValue<StatusEffect, float>> Effects;
+        private List<KeyValue<IStatusEffect, float>> Effects;
 
         #endregion
         #region Private Variables
@@ -39,7 +42,7 @@ namespace ChainedRam.Core.Player
         private void Start()
         {
             UnEffectedSpeed = Speed;
-            Effects = new List<KeyValue<StatusEffect, float>>(); 
+            Effects = new List<KeyValue<IStatusEffect, float>>(); 
             rigidbody2D = GetComponent<Rigidbody2D>();
 
             ArrowsDirectionDic = new Dictionary<string, Vector2>()
@@ -49,6 +52,7 @@ namespace ChainedRam.Core.Player
                 { "right", Vector2.right },
                 { "left", Vector2.left }
             };
+
         }
 
         /// <summary>
@@ -56,14 +60,14 @@ namespace ChainedRam.Core.Player
         /// </summary>
         void FixedUpdate()
         {
+            StatusDisplay.SetStatuses(Effects);
+
             foreach (var pair in ArrowsDirectionDic)
             {
                 if (Input.GetKey(pair.Key))
                 {
-                    StorePlayerState();
                     ApplyStatusEffects();
-                    MovePlayer(pair.Value);
-                    RestorePlayerState(); 
+                    MovePlayer(pair.Value); 
                 }
             }
 
@@ -117,7 +121,7 @@ namespace ChainedRam.Core.Player
 
                 if (Effects[i].Value <= 0.001f)
                 {
-                    Effects.RemoveAt(i);
+                    RemoveEffect(Effects[i].Key); 
                     i--;
                 }
             }
@@ -176,13 +180,14 @@ namespace ChainedRam.Core.Player
         /// Uniquely add a status effects if it's not already added. 
         /// </summary>
         /// <param name="e"></param>
-        public void AddEffect(StatusEffect e, float Duration)
+        public void AddEffect(IStatusEffect e, float Duration)
         {
-            KeyValue<StatusEffect, float> effect = Effects.Where(p => p.Key == e).SingleOrDefault();
+            KeyValue<IStatusEffect, float> effect = Effects.Where(p => p.Key == e).SingleOrDefault();
 
             if(effect == null)
             {
-                Effects.Add(new KeyValue<StatusEffect, float>(e, Duration));
+                Effects.Add(new KeyValue<IStatusEffect, float>(e, Duration));
+                e.Init(this); 
             }
             else
             {
@@ -194,15 +199,15 @@ namespace ChainedRam.Core.Player
         /// Removes status effect if exist. 
         /// </summary>
         /// <param name="e"></param>
-        public void RemoveEffect(StatusEffect e)
+        public void RemoveEffect(IStatusEffect e)
         {
-            KeyValue<StatusEffect, float> effect = Effects.Where(p => p.Key == e).SingleOrDefault();
+            KeyValue<IStatusEffect, float> effect = Effects.Where(p => p.Key == e).SingleOrDefault();
 
             if (effect != null)
             {
                 Effects.Remove(effect);
-            }
-            
+                e.Revert(this); 
+            }    
         }
 
         public void velocityReset()

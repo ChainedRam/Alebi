@@ -10,8 +10,18 @@ public class RootStatusEffect : StatusEffect
 
     }
 
+    public override void Init(Player p)
+    {
+        p.velocityReset(); 
+    }
+
     public override void Apply(Player p)
     {
         p.Speed = 0;
+    }
+
+    public override void Revert(Player p)
+    {
+       
     }
 }
