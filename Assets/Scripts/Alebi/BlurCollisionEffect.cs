@@ -13,7 +13,6 @@ public class BlurCollisionEffect : CollisionEffect
 
     public override void OnHit(Player p)
     {
-        ScreenEffect.ShowFor(Duration); 
         p.AddEffect(ScreenEffect, Duration);
 
         gameObject.SetActive(false); 

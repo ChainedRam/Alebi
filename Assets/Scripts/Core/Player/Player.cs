@@ -11,25 +11,24 @@ namespace ChainedRam.Core.Player
     public class Player : MonoBehaviour
     {
         #region Inspecter Variables
+        [Header("Player Properties")]
         /// <summary>
         /// Speed in which the object will move. 
         /// </summary>
-        public float Speed;
-
-        private float UnEffectedSpeed; 
-
+        public float Speed; 
+        public bool CanMove; 
+        public float SpeedDelta;  
         public int Health;
 
 
-        public StatusDisplayList StatusDisplay; 
-
+        [Header("Status Properties")]
+        public StatusDisplayList StatusDisplay;
+        #endregion
+        #region Private Variables
         /// <summary>
         /// Holds active status effects on player. 
         /// </summary>
         private List<KeyValue<IStatusEffect, float>> Effects;
-
-        #endregion
-        #region Private Variables
         //my body is ready, do not inheret
         new private Rigidbody2D rigidbody2D;
 
@@ -41,7 +40,8 @@ namespace ChainedRam.Core.Player
         #region Unity Methods
         private void Start()
         {
-            UnEffectedSpeed = Speed;
+            CanMove = true;
+            SpeedDelta = 1; 
             Effects = new List<KeyValue<IStatusEffect, float>>(); 
             rigidbody2D = GetComponent<Rigidbody2D>();
 
@@ -67,7 +67,7 @@ namespace ChainedRam.Core.Player
                 if (Input.GetKey(pair.Key))
                 {
                     ApplyStatusEffects();
-                    MovePlayer(pair.Value); 
+                    MovePlayer(pair.Value); ///define player profile struct
                 }
             }
 
@@ -80,23 +80,10 @@ namespace ChainedRam.Core.Player
         /// <param name="direction"></param>
         private void MovePlayer(Vector2 direction)
         {
-            rigidbody2D.velocity += direction * Speed * Time.fixedDeltaTime;
-        }
-
-        /// <summary>
-        /// Stored player status before getting effected by status effects.
-        /// </summary>
-        private void StorePlayerState()
-        {
-            UnEffectedSpeed = Speed;
-        }
-
-        /// <summary>
-        /// Restores player status after getting effected by statusEfects. 
-        /// </summary>
-        private void RestorePlayerState()
-        {
-            Speed = UnEffectedSpeed;
+            if (CanMove)
+            {
+                rigidbody2D.velocity += direction * ((Speed * SpeedDelta)) * Time.fixedDeltaTime;
+            }
         }
 
         /// <summary>

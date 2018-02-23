@@ -12,18 +12,18 @@ public class SlowStatusEffect : StatusEffect
         SlowRate = slow;
     }
 
+    public override void Init(Player p)
+    {
+        p.SpeedDelta *= SlowRate;
+    }
+
     public override void Apply(Player p)
     {
        
     }
 
-    public override void Init(Player p)
-    {
-        p.Speed *= SlowRate;
-    }
-
     public override void Revert(Player p)
     {
-        p.Speed *= (1/SlowRate); 
+        p.SpeedDelta *= (1/SlowRate); 
     }
 }
