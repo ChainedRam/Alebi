@@ -19,6 +19,13 @@ public class StatusDisplayList : MonoBehaviour
 			build += pair.Key.Name + ": " + pair.Value.ToString("0.00") + "\n";
 		}
 
-		text.text = build; 
+        if (text != null)
+        {
+		    text.text = build; 
+        }
+        else
+        {
+            Debug.LogWarning("Missing text reference");
+        }
 	}
 }

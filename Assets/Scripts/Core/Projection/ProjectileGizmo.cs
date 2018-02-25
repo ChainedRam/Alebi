@@ -53,5 +53,14 @@ namespace ChainedRam.Core.Projection //TODO this is more into Editor than Core
             Gizmos.color = prev;
             motion.Initialize();
         }
+
+        private void OnValidate()
+        {
+            Projectile p = GetComponent<Projectile>();
+            if (this.projectile == null && p != null)
+            {
+                this.projectile = p;
+            }
+        }
     }
 }

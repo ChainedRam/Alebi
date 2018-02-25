@@ -38,6 +38,8 @@ GameObject:
   - component: {fileID: 212995178751681176}
   - component: {fileID: 114643541697879042}
   - component: {fileID: 61549205433932652}
+  - component: {fileID: 114850713947502118}
+  - component: {fileID: 114259712101325842}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -52,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1979392020133226}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.08, y: -2.07, z: 0}
+  m_LocalPosition: {x: 6.18, y: -0.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4667782891863540}
@@ -81,7 +83,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.000000059604645, y: 0.003283143}
@@ -97,6 +99,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9873811, y: 0.9808142}
   m_EdgeRadius: 0
+--- !u!114 &114259712101325842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1979392020133226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25e2dd39df6d2f942a0035d80887ac2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114324892755791408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -108,10 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7496952bfaf95cc40a90a78f92d71c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.1
-  Tilt: 45
+  Speed: 0.25
+  Tilt: -156
   SpeedAcc: 0
-  TileAcc: -0.55
+  TileAcc: 2.5
 --- !u!114 &114643541697879042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,6 +137,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Motion: {fileID: 114324892755791408}
+--- !u!114 &114850713947502118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1979392020133226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0aa5d269711113469533c1329aa937e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 114643541697879042}
+  MaxLineLength: 10
+  MaxLineDrawn: 1000
 --- !u!212 &212995178751681176
 SpriteRenderer:
   m_ObjectHideFlags: 1

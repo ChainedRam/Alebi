@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 138039218}
   - component: {fileID: 138039217}
   - component: {fileID: 138039216}
+  - component: {fileID: 138039221}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -259,6 +260,22 @@ Transform:
   m_Father: {fileID: 1054281651}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &138039221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 138039215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc6bde01469c7b4badee5362f191d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  downsample: 0
+  blurSize: 0
+  blurIterations: 1
+  blurType: 0
+  blurShader: {fileID: 4800000, guid: f9d5fa183cd6b45eeb1491f74863cd91, type: 3}
 --- !u!1001 &249791720
 Prefab:
   m_ObjectHideFlags: 0
@@ -303,6 +320,11 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1,
+        type: 2}
+      propertyPath: Motion
+      value: 
+      objectReference: {fileID: 1613185126}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   m_IsPrefabParent: 0
@@ -649,12 +671,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1675152263}
---- !u!114 &407520183 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114730909593124060, guid: 6ac4f7aceaa5047419439981f759fd74,
-    type: 2}
-  m_PrefabInternal: {fileID: 1244776050}
-  m_Script: {fileID: 11500000, guid: 7496952bfaf95cc40a90a78f92d71c9a, type: 3}
 --- !u!1 &499948826
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,62 +1344,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114635628181971380, guid: 6ac4f7aceaa5047419439981f759fd74,
+    - target: {fileID: 114904437918720438, guid: 6ac4f7aceaa5047419439981f759fd74,
         type: 2}
-      propertyPath: Motion
+      propertyPath: ScreenEffect
       value: 
-      objectReference: {fileID: 407520183}
-    - target: {fileID: 61696629652306854, guid: 6ac4f7aceaa5047419439981f759fd74,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114730909593124060, guid: 6ac4f7aceaa5047419439981f759fd74,
-        type: 2}
-      propertyPath: Speed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114730909593124060, guid: 6ac4f7aceaa5047419439981f759fd74,
-        type: 2}
-      propertyPath: SpeedAcc
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1279783229}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6ac4f7aceaa5047419439981f759fd74, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1244776051 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1784923916548236, guid: 6ac4f7aceaa5047419439981f759fd74,
-    type: 2}
-  m_PrefabInternal: {fileID: 1244776050}
---- !u!114 &1244776052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1244776051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8832c91dfd8e77245ada45168ec93576, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScreenEffect: {fileID: 1279783229}
-  Duration: 3
---- !u!114 &1244776057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1244776051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7496952bfaf95cc40a90a78f92d71c9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 1
-  Tilt: 0
-  SpeedAcc: 0
-  TileAcc: 0
 --- !u!1 &1279783228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,6 +1381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aaf0288e19a8bc4f94e5bc14d97d460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blur: {fileID: 138039221}
 --- !u!224 &1279783230
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1737,6 +1706,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd33c9b499b64204cbb02264d2274caf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1613185126 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114079180916546838, guid: bfa5c108ec0a8f24e931dc859fbd91b1,
+    type: 2}
+  m_PrefabInternal: {fileID: 249791720}
+  m_Script: {fileID: 11500000, guid: 7496952bfaf95cc40a90a78f92d71c9a, type: 3}
 --- !u!1 &1675152261
 GameObject:
   m_ObjectHideFlags: 0
