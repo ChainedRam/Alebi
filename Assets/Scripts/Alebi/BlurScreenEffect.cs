@@ -4,18 +4,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.ImageEffects;
 
 public class BlurScreenEffect : MonoBehaviour, IStatusEffect
 {
-	public void Show()
+    public BlurOptimized blur;
+    public void Show()
 	{
+        blur.downsample = 1;
+        blur.blurIterations = 2;
+        blur.blurSize = 3;
 		gameObject.SetActive(true);
 	}
 
 	public void Hide()
 	{
-		gameObject.SetActive(false); 
-	}
+        blur.downsample = 0;
+        blur.blurIterations = 1;
+        blur.blurSize = 0;
+        gameObject.SetActive(false);
+    }
 
     #region  IStatusEffect Interface Property
     public string Name

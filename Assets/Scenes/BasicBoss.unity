@@ -574,6 +574,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 50
+  CanMove: 0
+  SpeedDelta: 0
   Health: 5
   StatusDisplay: {fileID: 357964294}
 --- !u!4 &357964290
@@ -1441,7 +1443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5514706, g: 0.30806288, b: 0, a: 0.341}
+  m_Color: {r: 0.5514706, g: 0.30806288, b: 0, a: 0.397}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
