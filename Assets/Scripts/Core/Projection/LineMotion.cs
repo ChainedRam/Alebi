@@ -14,7 +14,7 @@ namespace ChainedRam.Core.Projection
 
         [Header("Accelerated Values")]
         public float SpeedAcc = 0;
-        public float TileAcc = 0;
+        public float TiltAcc = 0;
 
         private float TotalSpeed;
         private float TotalTilt;
@@ -28,11 +28,16 @@ namespace ChainedRam.Core.Projection
         public override Vector2 GetRelativeOffset(Vector2 defaultVector)
         {
             TotalSpeed += SpeedAcc;
-            TotalTilt += TileAcc;
+            TotalTilt += TiltAcc;
 
             defaultVector += new Vector2(0, TotalSpeed + Speed);
 
             return defaultVector.Rotate(-(Tilt + TotalTilt));
+        }
+
+        public override string ToString()
+        {
+            return $" S:{Speed.ToString("0.00")}, T:{Tilt.ToString("00.0")}, SA:{SpeedAcc.ToString("0.000")}, TA:{TiltAcc.ToString("0.000")}";
         }
 
     }

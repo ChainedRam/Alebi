@@ -32,3 +32,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Personal Testng
+
+Assets/[Tt]est/
+Assets/[Tt]est.meta

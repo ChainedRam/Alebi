@@ -164,7 +164,7 @@ namespace ChainedRam.Core.Generation
         /// <summary>
         /// Runs the generation cycle.  DO NOT OVERWRITE
         /// </summary>
-        protected void Update()
+        protected virtual void Update()
         {
             if (IsGenerating == false)
             {
