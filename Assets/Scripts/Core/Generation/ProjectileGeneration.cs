@@ -16,9 +16,8 @@ public class ProjectileGeneration : WaitGeneration
     {
         ProjectilePrefab.gameObject.SetActive(false);
 
-        Projectile proj = Instantiate(ProjectilePrefab, GenerateAt, false);
+        Projectile proj = Instantiate(ProjectilePrefab, GenerateAt, true);
         proj.transform.localPosition = Vector2.zero;
-        proj.transform.localRotation = Quaternion.identity;
         proj.Motion = Motion;
 
         proj.Setup(1);
