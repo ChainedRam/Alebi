@@ -24,9 +24,8 @@ namespace ChainedRam.Core.Projection
 
         public void FixedUpdate()
         {
-            Vector2 offset = Motion.GetOffset(); 
-
-            transform.localPosition += (Vector3)offset.Rotate(transform.rotation.eulerAngles.z);
+            Vector2 offset = Motion.GetOffset();
+            transform.localPosition += (Vector3)offset.Rotate(-transform.localRotation.eulerAngles.z);
         }
 
         #region ContextMenuItem
