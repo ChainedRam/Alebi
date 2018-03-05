@@ -60,7 +60,7 @@ namespace ChainedRam.Core.Player
         /// </summary>
         void FixedUpdate()
         {
-            StatusDisplay.SetStatuses(Effects);
+            StatusDisplay?.SetStatuses(Effects);
 
             foreach (var pair in ArrowsDirectionDic)
             {
