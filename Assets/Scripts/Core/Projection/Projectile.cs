@@ -12,20 +12,20 @@ namespace ChainedRam.Core.Projection
         [ContextMenuItem("Remove Gizmu", "RemoveGizmu", order = 1)]
         public Motion Motion;
 
-        private void Start()
+        public void Start()
         {
-            Motion.Initialize(); 
+            Motion.Initialize(this, 1);
         }
 
         public virtual void Setup(float delta)
         {
-            Motion.Initialize(delta);
+            Motion.Initialize(this, delta);
         }
 
         public void FixedUpdate()
         {
             Vector2 offset = Motion.GetOffset();
-            transform.localPosition += (Vector3)offset.Rotate(-transform.localRotation.eulerAngles.z);
+            transform.position += (Vector3)offset; 
         }
 
         #region ContextMenuItem

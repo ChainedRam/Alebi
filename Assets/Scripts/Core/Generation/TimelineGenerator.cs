@@ -11,13 +11,13 @@ public class TimelineGenerator : Generator
 
     private float CurrentTime; 
 
-    protected override void OnStart()
+    protected override void OnBegin()
     {
-        base.OnStart();
+        base.OnBegin();
+        CurrentTime = 0; 
         Enumerator = TimedGeneration.GetEnumerator();
         Enumerator.Reset();
         Enumerator.MoveNext(); 
-        CurrentTime = 0; 
     }
 
     protected override void OnGenerate(GenerateEventArgs e)
@@ -37,7 +37,7 @@ public class TimelineGenerator : Generator
 
     protected override bool ShouldTerminate()
     {
-        return Enumerator.Current == null;
+        return Enumerator.Current == null && CurrentTime <= 0;
     }
 
     protected override void Update()

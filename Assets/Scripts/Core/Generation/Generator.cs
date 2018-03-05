@@ -238,7 +238,7 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         /// <param name="gen"></param>
         /// <returns></returns>
-        protected static bool GeneratorShouldGenerate(ComponentGenerator gen)
+        protected static bool GeneratorShouldGenerate(Generator gen)
         {
             return gen.ShouldGenerate();
         }
@@ -248,7 +248,7 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         /// <param name="gen"></param>
         /// <returns></returns>
-        protected static bool GeneratorShouldTerminate(ComponentGenerator gen)
+        protected static bool GeneratorShouldTerminate(Generator gen)
         {
             return gen.ShouldTerminate();
         }

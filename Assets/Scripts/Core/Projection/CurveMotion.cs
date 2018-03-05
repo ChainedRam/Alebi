@@ -10,7 +10,7 @@ namespace ChainedRam.Core.Projection
         public float AngleOffset;
         private float CurrentAngleOffset;
 
-        public override void Initialize(float delta)
+        public override void Initialize(Projectile sender, float delta)
         {
             CurrentAngleOffset = 0;
         }

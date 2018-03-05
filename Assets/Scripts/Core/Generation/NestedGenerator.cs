@@ -25,18 +25,18 @@ namespace ChainedRam.Core.Generation
     /// NestedGenerator behaves on behalf of it's children combining their calls into one generator. 
     /// </summary>
     [Serializable]
-    public class NestedGenerator : ComponentGenerator
+    public class NestedGenerator : Generator
     {
         #region Custom Inspector  Attributes  
         //Custome Inspector shows this as an array only for this class excluding children. 
         /// <summary>
         /// Holds children generators 
         /// </summary>
-        public virtual ComponentGenerator[] ChildGenerators { get { return Generators; } set { Generators = value; } } 
+        public virtual Generator[] ChildGenerators { get { return Generators; } set { Generators = value; } } 
 
         [HideInInspector]
         [SerializeField]
-        private ComponentGenerator[] Generators; 
+        private Generator[] Generators; 
 
         [HideInInspector()]
         public bool ShowChildrenInspecter;
@@ -53,7 +53,7 @@ namespace ChainedRam.Core.Generation
         #endregion
         #region Generator Override  
 
-        private void ForChildren(Action<ComponentGenerator> act)
+        private void ForChildren(Action<Generator> act)
         {
             foreach(var gen in ChildGenerators)
             {
@@ -68,7 +68,7 @@ namespace ChainedRam.Core.Generation
         //TODO: DRY
         protected override bool ShouldGenerate()
         {
-            bool baseValue = base.ShouldGenerate(); 
+            bool baseValue = true; 
 
             if(ShouldGenerateOption.HasFlag(ConditionOption.Parent))
             {
@@ -80,7 +80,7 @@ namespace ChainedRam.Core.Generation
             Func<bool, bool, bool> operation = (earlyTermination = ShouldGenerateOption.HasFlag(ConditionOption.AtLeastOne)) ?  operation = (a, b) => a | b : operation = (a, b) => a & b;
 
             bool result = !earlyTermination; 
-            foreach (ComponentGenerator g in ChildGenerators)
+            foreach (Generator g in ChildGenerators)
             {
                 bool should = GeneratorShouldGenerate(g); 
 
@@ -98,7 +98,7 @@ namespace ChainedRam.Core.Generation
         //TODO: DRY
         protected override bool ShouldTerminate()
         {
-            bool baseValue = base.ShouldTerminate();
+            bool baseValue = false;
 
             if (ShouldTerminateOption.HasFlag(ConditionOption.Parent))
             {
@@ -109,7 +109,7 @@ namespace ChainedRam.Core.Generation
             Func<bool, bool, bool> operation = (earlyTermination = ShouldTerminateOption.HasFlag(ConditionOption.AtLeastOne)) ? operation = (a, b) => a | b : operation = (a, b) => a & b;
 
             bool result = !earlyTermination;
-            foreach (ComponentGenerator g in ChildGenerators)
+            foreach (Generator g in ChildGenerators)
             {
                 bool should = GeneratorShouldTerminate(g); 
 
@@ -150,11 +150,11 @@ namespace ChainedRam.Core.Generation
     /// Generic.
     /// </summary>
     /// <remarks>Made this way such that NestedGenerator<T>can be treated like a non-generic NestedGenrator. And both would share a custome editor</remarks>
-    public class NestedGenerator<T> : NestedGenerator where T : ComponentGenerator
+    public class NestedGenerator<T> : NestedGenerator where T : Generator
     {
         public T[] Children; 
 
-        public sealed override ComponentGenerator[] ChildGenerators
+        public sealed override Generator[] ChildGenerators
         {
             get
             {

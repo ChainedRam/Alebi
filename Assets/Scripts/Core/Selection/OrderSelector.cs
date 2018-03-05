@@ -24,7 +24,7 @@ namespace ChainedRam.Core.Selection
                 throw new Exception("Cannot select from empty list"); //TODO custom exception
             }
 
-            return list[Index++ % (Loop ? list.Length : 1)];
+            return list[Index++ % (Loop ? list.Length : int.MaxValue)];
         }
 
         public void ResetIndex()

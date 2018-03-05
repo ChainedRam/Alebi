@@ -1,6 +1,5 @@
 ﻿
-using ChainedRam.Core.Extentions;
-
+using ChainedRam.Core.Extentions; 
 using UnityEngine;
 
 namespace ChainedRam.Core.Projection
@@ -9,36 +8,53 @@ namespace ChainedRam.Core.Projection
     {
         [Header("Flat Values")]
         public float Speed = 1;
-        [Range(-180, 180)]
-        public float Tilt = 0;
+
+        [Range(-360, 360)]
+        public float Tilt = 0; 
 
         [Header("Accelerated Values")]
         public float SpeedAcc = 0;
         public float TiltAcc = 0;
 
         private float TotalSpeed;
-        private float TotalTilt;
+        private float TotalTilt; 
 
-        public override void Initialize(float delta)
+        public bool FaceTilt; 
+        private Projectile Proj; 
+
+        public override void Initialize(Projectile sender, float delta)
         {
-            TotalTilt = 0;
+            Proj = sender;
             TotalSpeed = 0;
+            TotalTilt = 0; 
+
+            if (Proj != null && FaceTilt)
+            {
+                TotalTilt = Proj.gameObject.transform.eulerAngles.z;
+            }
         }
 
         public override Vector2 GetRelativeOffset(Vector2 defaultVector)
         {
             TotalSpeed += SpeedAcc;
-            TotalTilt += TiltAcc;
+            TotalTilt += TiltAcc; 
 
             defaultVector += new Vector2(0, TotalSpeed + Speed);
 
-            return defaultVector.Rotate(-(Tilt + TotalTilt));
+            return defaultVector.Rotate(TotalTilt + Tilt);
+        }
+
+        private void LateUpdate()
+        {
+            if(Proj != null && FaceTilt)
+            {
+                Proj.gameObject.transform.eulerAngles += new Vector3(0, 0, TiltAcc);
+            }
         }
 
         public override string ToString()
         {
-            return $" S:{Speed.ToString("0.00")}, T:{Tilt.ToString("00.0")}, SA:{SpeedAcc.ToString("0.000")}, TA:{TiltAcc.ToString("0.000")}";
+            return $" S:{Speed.ToString("0.00")}, SA:{SpeedAcc.ToString("0.000")}, TA:{TiltAcc.ToString("0.000")}";
         }
-
     }
 }

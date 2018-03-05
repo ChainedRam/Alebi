@@ -27,13 +27,13 @@ namespace ChainedRam.Core.Projection
             return defaultVector;
         }
 
-        public override void Initialize(float delta)
+        public override void Initialize(Projectile sender, float delta)
         {
             OnValidate();
-            base.Initialize(delta);
+            base.Initialize(sender, delta);
             foreach (var motion in Motions)
             {
-                motion.Initialize(delta);
+                motion.Initialize(sender, delta);
             }
         }
 

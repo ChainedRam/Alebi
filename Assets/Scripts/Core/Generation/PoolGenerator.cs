@@ -11,8 +11,8 @@ namespace ChainedRam.Core.Generation
     {
         [Header("Pool Geenerator Settings")]
 
-        [HideInInspector()]
-        public ComponentGenerator Selected;
+        //[HideInInspector()]
+        public Generator Selected;
 
         [HideInInspector()]
         public Selector Selector;
@@ -20,7 +20,7 @@ namespace ChainedRam.Core.Generation
         [HideInInspector]
         public SelectorType SelectorType;
 
-        public void SwitchIn(ComponentGenerator gen)
+        public void SwitchIn(Generator gen)
         {
             if (Selected != null)
             {
@@ -34,7 +34,7 @@ namespace ChainedRam.Core.Generation
             }
         }
 
-        public void Promote(ComponentGenerator gen)
+        public void Promote(Generator gen)
         {
             // Debug.Log("Promoting " + gen.name);
 
@@ -42,14 +42,14 @@ namespace ChainedRam.Core.Generation
             //Attach(gen);
 
             //AttachNext(gen.OnEndEventHandler); 
-
+           
             gen.OnEndEventHandler += Next;
 
             gen.Delta = this.Delta; 
             gen.Begin();
         }
 
-        public void Demote(ComponentGenerator gen)
+        public void Demote(Generator gen)
         {
             gen.OnEndEventHandler -= Next;
             //Debug.Log("Demoting " + gen.name);
@@ -103,7 +103,7 @@ namespace ChainedRam.Core.Generation
             base.OnSkip();
         }
 
-        public ComponentGenerator NextGenerator()
+        public Generator NextGenerator()
         {
             return Selector.Select(ChildGenerators, Selected);
         }
@@ -118,11 +118,11 @@ namespace ChainedRam.Core.Generation
     /// Generic version of PoolGenerator
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class PoolGenerator<T> : PoolGenerator where T : ComponentGenerator
+    public class PoolGenerator<T> : PoolGenerator where T : Generator
     {
         public T[] Pool;
 
-        public override ComponentGenerator[] ChildGenerators
+        public override Generator[] ChildGenerators
         {
             get
             {

@@ -8,7 +8,7 @@ namespace ChainedRam.Inspecter.Generation
 {
     //TODO: This needs some refactoring. This can be moved into the script itself Generator.OnGui >:\
     [CustomEditor(typeof(ComponentGenerator), true)]
-    public class GeneratorEditor : Editor
+    public class ComponentGeneratorEditor : Editor
     {
         private TerminationType PrevTerminationType;
         private GenerationType PrevConditionType;
