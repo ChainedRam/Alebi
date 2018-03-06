@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 114473929826023432}
   - component: {fileID: 70015599477908220}
   - component: {fileID: 114777416689300326}
+  - component: {fileID: 114752860426119850}
   m_Layer: 0
   m_Name: Jewellery
   m_TagString: Untagged
@@ -102,7 +103,8 @@ MonoBehaviour:
   Speed: 0.075
   Tilt: 135
   SpeedAcc: 0.001
-  TileAcc: 1
+  TiltAcc: 0
+  FaceTilt: 0
 --- !u!114 &114473929826023432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,6 +117,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Motion: {fileID: 114413676012650280}
+--- !u!114 &114752860426119850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1511422451638624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078fe3fc174bbff459f965e86726d18f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1511422451638624}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114777416689300326
 MonoBehaviour:
   m_ObjectHideFlags: 1

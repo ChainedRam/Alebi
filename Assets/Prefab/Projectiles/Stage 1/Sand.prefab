@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 114904437918720438}
   - component: {fileID: 114963710220239472}
   - component: {fileID: 114264166451944624}
+  - component: {fileID: 114455801253091956}
   m_Layer: 0
   m_Name: Sand
   m_TagString: Untagged
@@ -158,6 +159,38 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   time: 1.6587
+--- !u!114 &114455801253091956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1784923916548236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078fe3fc174bbff459f965e86726d18f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1784923916548236}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114538772864286304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,7 +228,8 @@ MonoBehaviour:
   Speed: 0.1
   Tilt: -90
   SpeedAcc: -0.001
-  TileAcc: 0
+  TiltAcc: 0
+  FaceTilt: 0
 --- !u!114 &114904437918720438
 MonoBehaviour:
   m_ObjectHideFlags: 1

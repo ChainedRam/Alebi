@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 212752545316236166}
   - component: {fileID: 114251989816601076}
   - component: {fileID: 114371987238006014}
+  - component: {fileID: 114142516315315032}
   m_Layer: 0
   m_Name: Oil Bottle
   m_TagString: Untagged
@@ -159,6 +160,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Duration: 1
   SlowRate: 0.8
+--- !u!114 &114142516315315032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1864722332696122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078fe3fc174bbff459f965e86726d18f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1864722332696122}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114251989816601076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,7 +260,8 @@ MonoBehaviour:
   Speed: 0.1
   Tilt: 0
   SpeedAcc: 0.001
-  TileAcc: -2.15
+  TiltAcc: 0
+  FaceTilt: 0
 --- !u!212 &212358656760385084
 SpriteRenderer:
   m_ObjectHideFlags: 1

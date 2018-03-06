@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114134827714133822}
   - component: {fileID: 61823051749983092}
   - component: {fileID: 114054330394001486}
+  - component: {fileID: 114611567381333948}
   m_Layer: 0
   m_Name: Net
   m_TagString: Untagged
@@ -122,6 +123,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Motion: {fileID: 114792166602253366}
+--- !u!114 &114611567381333948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1215035392223010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078fe3fc174bbff459f965e86726d18f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1215035392223010}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114792166602253366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,7 +170,7 @@ MonoBehaviour:
   Tilt: 0
   SpeedAcc: 0.001
   TiltAcc: 0.5
-  Proj: {fileID: 0}
+  FaceTilt: 0
 --- !u!212 &212370207227961960
 SpriteRenderer:
   m_ObjectHideFlags: 1
