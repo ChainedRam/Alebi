@@ -7,21 +7,39 @@ using UnityEngine;
 
 public class ProjectileGenerator : QueueInstanceGenerator<Projectile>
 {
-    public float Velocity;
+    [Header("Projectile Generator")]
+    public ChainedRam.Core.Projection.Motion Motion;
 
-    [Range(-180, 180)]
-    public float Direction;
+    private bool GenerateOnce; 
 
     public override void SetupGenerated(Projectile generated)
     {
         base.SetupGenerated(generated);
-
-        generated.Setup(this.Delta);
+        generated.Motion = Motion; 
+        generated.Setup(Delta);
     }
 
     protected override bool ShouldGenerate()
     {
-        return true;
+        if (GenerateOnce)
+        {
+            GenerateOnce = false; 
+            return true;
+        }
+
+        return false; 
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        GenerateOnce = true; 
+    }
+
+    protected override void OnBegin()
+    {
+        base.OnBegin();
+        GenerateOnce = true; 
     }
 }
 

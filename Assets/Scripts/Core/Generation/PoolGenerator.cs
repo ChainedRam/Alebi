@@ -9,9 +9,9 @@ namespace ChainedRam.Core.Generation
 {
     public class PoolGenerator : NestedGenerator
     {
-        [Header("Pool Geenerator Settings")]
+        //[Header("Pool Geenerator Settings")]
 
-        //[HideInInspector()]
+        [HideInInspector()]
         public Generator Selected;
 
         [HideInInspector()]
@@ -20,13 +20,14 @@ namespace ChainedRam.Core.Generation
         [HideInInspector]
         public SelectorType SelectorType;
 
+        private bool HasRanOut = false; 
+
         public void SwitchIn(Generator gen)
         {
             if (Selected != null)
             {
                 Demote(Selected);
             }
-
 
             if (gen != null)
             {
@@ -36,13 +37,8 @@ namespace ChainedRam.Core.Generation
 
         public void Promote(Generator gen)
         {
-            // Debug.Log("Promoting " + gen.name);
-
             Selected = gen;
-            //Attach(gen);
 
-            //AttachNext(gen.OnEndEventHandler); 
-           
             gen.OnEndEventHandler += Next;
 
             gen.Delta = this.Delta; 
@@ -52,36 +48,27 @@ namespace ChainedRam.Core.Generation
         public void Demote(Generator gen)
         {
             gen.OnEndEventHandler -= Next;
-            //Debug.Log("Demoting " + gen.name);
-            gen.End();
-            //Detach(gen);
-            
-
             Selected = null;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        protected override void OnStart()
+        protected override void OnBegin()
         {
-           
+            HasRanOut = false; 
         }
-
-        private void AttachNext(EventHandler<GenerateEventArgs> ev)
-        {
-            ev += Next; 
-        }
-
-        private void DetachNext(EventHandler<GenerateEventArgs> ev)
-        {
-            ev -= Next; 
-        }
-
 
         private void Next(object s= null, GenerateEventArgs e= null)
         {
-            SwitchIn(NextGenerator());
+            Generator nextGen = NextGenerator(); 
+
+            if(nextGen == null)
+            {
+                HasRanOut = true; 
+            }
+            else
+            {
+                SwitchIn(nextGen);
+                
+            }
         }
 
         protected override void OnGenerate(GenerateEventArgs e)
@@ -95,12 +82,12 @@ namespace ChainedRam.Core.Generation
         /// <returns></returns>
         protected override bool ShouldGenerate()
         {
-            return !((Selected?.IsGenerating) ?? false); //TODO use GeneratorShouldGnerate
+            return !((Selected?.IsGenerating) ?? false); //TODO use GeneratorShouldGnerate //maybe not 
         }
 
-        protected override void OnSkip()
+        protected override bool ShouldTerminate()
         {
-            base.OnSkip();
+            return HasRanOut; 
         }
 
         public Generator NextGenerator()
@@ -110,7 +97,8 @@ namespace ChainedRam.Core.Generation
 
         protected override void OnEnd()
         {
-            Demote(Selected);
+            if(Selected != null)
+                Demote(Selected);
         }
     }
 

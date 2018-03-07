@@ -104,6 +104,7 @@ namespace ChainedRam.Core.Generation
         public void Begin()
         {
             IsGenerating = true;
+            enabled = true; 
             OnBegin();
             RaiseOnBeginEvent();
         }
@@ -148,17 +149,17 @@ namespace ChainedRam.Core.Generation
         /// <summary>
         /// 'Seals' Awake function. DO NOT OVERWRITE! use <see cref="OnAwake"/>
         /// </summary>
-        protected void Awake()
+        protected virtual void Awake()
         {
-            OnAwake();
+            enabled = false; 
         }
 
         /// <summary>
-        /// 'Seals' Start function. DO NOT OVERWRITE. use <see cref="Start"/>
+        /// Start function. DO NOT OVERWRITE. use <see cref="Start"/>
         /// </summary>
-        protected void Start()
+        protected virtual void Start()
         {
-            OnStart();
+
         }
 
         /// <summary>
@@ -184,7 +185,7 @@ namespace ChainedRam.Core.Generation
             else
             {
                 SkippedGenerate();
-            }
+            } 
         }
         #endregion
         #region Protected Abstract
@@ -208,16 +209,6 @@ namespace ChainedRam.Core.Generation
         #endregion
         #region Protected Virtual Methods
         /// <summary>
-        /// Gets called when this object's Awake function. 
-        /// </summary>
-        protected virtual void OnAwake() { }
-
-        /// <summary>
-        /// Gets called when this object's Awake function. 
-        /// </summary>
-        protected virtual void OnStart() { }
-
-        /// <summary>
         /// Called when genrator skips generate. This is invoked before <see cref="OnSkippedEventHandler"/> 
         /// </summary>
         protected virtual void OnSkip() { }
@@ -231,6 +222,7 @@ namespace ChainedRam.Core.Generation
         /// Called when genrator ends generating. This is invoked before <see cref="OnEndEventHandler"/> 
         /// </summary>
         protected virtual void OnEnd() { }
+
         #endregion
         #region Protected Static Methods 
         /// <summary>

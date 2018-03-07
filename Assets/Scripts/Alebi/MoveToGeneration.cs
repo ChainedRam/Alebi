@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ChainedRam.Core.Generation;
 using UnityEngine;
 
-public class MoveToGeneration : WaitGeneration
+public class MoveToGeneration : TimedGenerator
 {
     public GameObject Movable;
 
@@ -15,13 +15,15 @@ public class MoveToGeneration : WaitGeneration
     protected bool IsMoving;
     private const float DistanceDalta = 0.01f; 
 
-    public override void Trigger(Generator sender)
+    protected override void OnGenerate(GenerateEventArgs e)
     {
         IsMoving = true;   
     }
 
-    private void FixedUpdate()
+    protected override void Update()
     {
+        base.Update(); 
+
         if (!IsMoving)
         {
             return;
@@ -33,10 +35,11 @@ public class MoveToGeneration : WaitGeneration
       
     }
 
-    protected override void SyncWaitTime()
+    protected override float GetSyncedWaitTime()
     {
-       WaitTime = Vector3.Distance(Movable.transform.position, Destenation.position) / Speed; 
+       return Vector3.Distance(Movable.transform.position, Destenation.position) / Speed; 
     }
+
     private void SyncSpeed()
     {
         Speed = Vector3.Distance(Movable.transform.position, Destenation.position) / WaitTime;

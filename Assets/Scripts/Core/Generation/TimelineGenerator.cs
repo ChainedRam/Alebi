@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class TimelineGenerator : Generator
 {
-    public List<TimedGeneration> TimedGeneration;
+    public List<TimedGenerator> TimedGeneration;
 
-    private IEnumerator<TimedGeneration> Enumerator;
+    private IEnumerator<TimedGenerator> Enumerator;
 
     private float CurrentTime; 
 
@@ -24,8 +24,8 @@ public class TimelineGenerator : Generator
     {
         if(Enumerator.Current != null)
         {
-            Enumerator.Current.Trigger(this);
-            CurrentTime = Enumerator.Current.Seconds;
+            Enumerator.Current.Generate();
+            CurrentTime = Enumerator.Current.WaitTime;
             Enumerator.MoveNext(); 
         }
     }
@@ -42,8 +42,7 @@ public class TimelineGenerator : Generator
 
     protected override void Update()
     {
-        base.Update();
-
+        base.Update(); 
         if (CurrentTime > 0)
         {
             CurrentTime -= Time.deltaTime;

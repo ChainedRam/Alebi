@@ -16,9 +16,9 @@ namespace ChainedRam.Core.Generation
         #endregion
         #region Unity Methods 
 
-        protected override void OnAwake()
+        protected override void Awake()
         {
-            base.OnAwake();
+            base.Awake();
             this.Attach(Wrapped);
         }
         #endregion

@@ -124,6 +124,50 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 592717333}
   m_Script: {fileID: 11500000, guid: 7496952bfaf95cc40a90a78f92d71c9a, type: 3}
+--- !u!1 &118265635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 118265637}
+  - component: {fileID: 118265636}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &118265636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 118265635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9846a774887f3a748bbfc47e699196b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
+  WaitTime: 0
+  Generators: []
+--- !u!4 &118265637
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 118265635}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.24905425, y: -0.19612312, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &127241146
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75668d3218d6ac64dbdeb6023e3f7e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
   WaitTime: 5
   Movable: {fileID: 328108319}
   Destenation: {fileID: 127241147}
@@ -237,11 +283,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 195759133}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2261abaebc7c1834aa12c87d44058c1b, type: 3}
+  m_Script: {fileID: 11500000, guid: 9846a774887f3a748bbfc47e699196b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
   WaitTime: 2
-  Generations:
+  Generators:
   - {fileID: 1839634295}
   - {fileID: 1816250571}
   - {fileID: 419678019}
@@ -525,7 +573,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 10
-  TriggerMeSelecter: {fileID: 0}
 --- !u!4 &328108324
 Transform:
   m_ObjectHideFlags: 0
@@ -624,6 +671,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75668d3218d6ac64dbdeb6023e3f7e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
   WaitTime: 3
   Movable: {fileID: 328108319}
   Destenation: {fileID: 886381227}
@@ -739,11 +788,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50599d5975cd38940aa6567b81ec1b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
   WaitTime: 8
-  ProjectilePrefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1,
-    type: 2}
+  Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt: {fileID: 266462366}
-  Parent: {fileID: 2139236680}
+  Parent: {fileID: 0}
+  MaxSize: 50
   Motion: {fileID: 39532536}
   Count: 14
   FireRate: 1
@@ -755,7 +806,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 494263796}
-  - component: {fileID: 494263795}
+  - component: {fileID: 494263797}
+  - component: {fileID: 494263798}
   m_Layer: 0
   m_Name: CoinWave
   m_TagString: Untagged
@@ -763,24 +815,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &494263795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 494263794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d207f6016da1ec24b89371bac3bed75e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsGenerating: 0
-  Delta: 1
-  TimedGeneration:
-  - {fileID: 195759135}
-  - {fileID: 1746006604}
-  - {fileID: 1971126179}
-  - {fileID: 175368624}
 --- !u!4 &494263796
 Transform:
   m_ObjectHideFlags: 0
@@ -798,6 +832,40 @@ Transform:
   m_Father: {fileID: 1613760369}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &494263797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 494263794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fe1ac8e2b5fc44990b4efef651e56d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
+  WaitTime: 16
+  Generators:
+  - {fileID: 195759135}
+  - {fileID: 1746006604}
+  - {fileID: 1971126179}
+  - {fileID: 175368624}
+  Selected: {fileID: 0}
+  Selector: {fileID: 494263798}
+  SelectorType: 1
+--- !u!114 &494263798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 494263794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a61c9f194bf1f642857ddb95728c438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Loop: 0
 --- !u!1001 &542765547
 Prefab:
   m_ObjectHideFlags: 0
@@ -1100,11 +1168,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50599d5975cd38940aa6567b81ec1b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
   WaitTime: 8
-  ProjectilePrefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1,
-    type: 2}
+  Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt: {fileID: 266462366}
-  Parent: {fileID: 2139236680}
+  Parent: {fileID: 0}
+  MaxSize: 50
   Motion: {fileID: 2035871379}
   Count: 14
   FireRate: 1
@@ -1206,6 +1276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75668d3218d6ac64dbdeb6023e3f7e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
   WaitTime: 3
   Movable: {fileID: 328108319}
   Destenation: {fileID: 127241147}
@@ -1218,6 +1290,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1039382104}
+  - component: {fileID: 1039382106}
   - component: {fileID: 1039382105}
   m_Layer: 0
   m_Name: NetWave
@@ -1253,18 +1326,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1039382103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d207f6016da1ec24b89371bac3bed75e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a61c9f194bf1f642857ddb95728c438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Loop: 0
+--- !u!114 &1039382106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1039382103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fe1ac8e2b5fc44990b4efef651e56d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsGenerating: 0
-  Delta: 1
-  TimedGeneration:
+  Delta: 0
+  WaitTime: 0
+  Generators:
   - {fileID: 404634805}
   - {fileID: 1175583369}
   - {fileID: 1190619434}
   - {fileID: 1194634597}
   - {fileID: 1651715409}
   - {fileID: 951220776}
+  Selected: {fileID: 0}
+  Selector: {fileID: 1039382105}
+  SelectorType: 1
 --- !u!1 &1146051913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,11 +1439,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197119d013515b646ade1c16f668c937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
   WaitTime: 1
-  ProjectilePrefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd,
-    type: 2}
+  Prefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd, type: 2}
   GenerateAt: {fileID: 1449530181}
   Parent: {fileID: 0}
+  MaxSize: 50
   Motion: {fileID: 1175583368}
   Target: {fileID: 1806644291}
   PrepTime: 2
@@ -1415,11 +1506,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197119d013515b646ade1c16f668c937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
   WaitTime: 1
-  ProjectilePrefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd,
-    type: 2}
+  Prefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd, type: 2}
   GenerateAt: {fileID: 340789113}
   Parent: {fileID: 0}
+  MaxSize: 50
   Motion: {fileID: 1190619433}
   Target: {fileID: 1806644291}
   PrepTime: 2
@@ -1480,11 +1573,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197119d013515b646ade1c16f668c937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
   WaitTime: 1
-  ProjectilePrefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd,
-    type: 2}
+  Prefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd, type: 2}
   GenerateAt: {fileID: 633636986}
   Parent: {fileID: 0}
+  MaxSize: 50
   Motion: {fileID: 1194634596}
   Target: {fileID: 1806644291}
   PrepTime: 2
@@ -1905,7 +2000,7 @@ GameObject:
   - component: {fileID: 1613760371}
   - component: {fileID: 1613760370}
   m_Layer: 0
-  m_Name: Phases
+  m_Name: Phase 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1937,7 +2032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a61c9f194bf1f642857ddb95728c438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Loop: 1
+  Loop: 0
 --- !u!114 &1613760371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1950,14 +2045,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsGenerating: 1
-  Delta: 0
+  Delta: 1
+  WaitTime: 0
   Generators:
-  - {fileID: 1039382105}
-  - {fileID: 1039382105}
-  ShowChildrenInspecter: 1
-  ShouldTerminateOption: 0
-  ShouldGenerateOption: 0
-  GenerateOption: 0
+  - {fileID: 1613760371}
+  - {fileID: 1039382106}
   Selected: {fileID: 0}
   Selector: {fileID: 1613760370}
   SelectorType: 1
@@ -2018,11 +2110,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197119d013515b646ade1c16f668c937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaitTime: 4
-  ProjectilePrefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd,
-    type: 2}
+  IsGenerating: 0
+  Delta: 0
+  WaitTime: 1
+  Prefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd, type: 2}
   GenerateAt: {fileID: 1146051914}
   Parent: {fileID: 0}
+  MaxSize: 50
   Motion: {fileID: 1651715408}
   Target: {fileID: 1806644291}
   PrepTime: 2
@@ -2066,6 +2160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75668d3218d6ac64dbdeb6023e3f7e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
   WaitTime: 3
   Movable: {fileID: 328108319}
   Destenation: {fileID: 1757205989}
@@ -2404,11 +2500,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50599d5975cd38940aa6567b81ec1b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
   WaitTime: 8
-  ProjectilePrefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1,
-    type: 2}
+  Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt: {fileID: 570209498}
-  Parent: {fileID: 2139236680}
+  Parent: {fileID: 0}
+  MaxSize: 50
   Motion: {fileID: 2035871379}
   Count: 14
   FireRate: 1
@@ -2457,11 +2555,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50599d5975cd38940aa6567b81ec1b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
   WaitTime: 8
-  ProjectilePrefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1,
-    type: 2}
+  Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt: {fileID: 570209498}
-  Parent: {fileID: 2139236680}
+  Parent: {fileID: 0}
+  MaxSize: 50
   Motion: {fileID: 39532536}
   Count: 14
   FireRate: 1
@@ -2510,6 +2610,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75668d3218d6ac64dbdeb6023e3f7e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGenerating: 0
+  Delta: 0
   WaitTime: 6
   Movable: {fileID: 328108319}
   Destenation: {fileID: 227413326}

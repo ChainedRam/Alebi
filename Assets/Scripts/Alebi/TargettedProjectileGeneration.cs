@@ -5,7 +5,7 @@ using ChainedRam.Core.Generation;
 using ChainedRam.Core.Projection;
 using UnityEngine;
 
-public class TargettedProjectileGeneration : ProjectileGeneration
+public class TargettedProjectileGeneration : ProjectileGenerator
 {
     [Header("Targetted Options")]
     public GameObject Target; 
@@ -16,21 +16,22 @@ public class TargettedProjectileGeneration : ProjectileGeneration
 
     private Projectile Projectile; 
 
-    public override void Trigger(Generator sender)
+    protected override void OnGenerate(GenerateEventArgs e)
     {
-        base.Trigger(sender); 
-        StartCoroutine(StareAtPlayer(PrepTime, sender));
+        base.OnGenerate(e);
+        StartCoroutine(StareAtPlayer(PrepTime));
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update(); 
         if (IsMoving == true)
         {
             Projectile.transform.up = (Target.transform.position - Projectile.transform.position);
         }
     }
 
-    private IEnumerator StareAtPlayer(float prepTime, Generator g)
+    private IEnumerator StareAtPlayer(float prepTime)
     {
         IsMoving = true; 
         yield return new WaitForSeconds(prepTime);
@@ -39,19 +40,39 @@ public class TargettedProjectileGeneration : ProjectileGeneration
         IsMoving = false;  
     }
 
-    protected override Projectile CreateProjectile()
+    protected override Projectile CreateInstance()
     {
-        Projectile = base.CreateProjectile();
+        Projectile = base.CreateInstance();
+        Projectile.enabled = false; 
 
         DelayedMotion delayedMotion = Projectile.gameObject.AddComponent<DelayedMotion>();
         delayedMotion.Delay = PrepTime;
         delayedMotion.Warpped = Projectile.Motion;
 
         Projectile.Motion = delayedMotion;
-        Projectile.Setup(1); 
-
+        Projectile.Setup(1);
+        Projectile.enabled = true;
 
         return Projectile; 
+    }
+
+    public override void SetupGenerated(Projectile generated)
+    {
+        Projectile = generated;
+        generated.enabled = false;
+        base.SetupGenerated(generated);
+
+        DelayedMotion delayedMotion = Projectile.gameObject.AddComponent<DelayedMotion>();
+        delayedMotion.Delay = PrepTime;
+        delayedMotion.Warpped = Projectile.Motion;
+
+        Projectile.Motion = delayedMotion;
+        Projectile.Setup(1);
+       
+
+        generated.enabled = true; 
+
+
     }
 }
 

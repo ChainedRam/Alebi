@@ -46,9 +46,9 @@ namespace ChainedRam.Core.Generation
             Terminator?.SetApart(this);
         }
 
-        protected override void OnAwake()
+        protected override void Awake()
         {
-            base.OnAwake();
+            base.Awake();
             Terminator?.Setup(this);
             GenerateCondition?.Setup(this);
         }
