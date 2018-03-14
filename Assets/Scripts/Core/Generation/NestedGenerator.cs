@@ -78,8 +78,7 @@ namespace ChainedRam.Core.Generation
     /// <remarks>Made this way such that NestedGenerator<T>can be treated like a non-generic NestedGenrator. And both would share a custome editor</remarks>
     public class NestedGenerator<T> : NestedGenerator where T : Generator
     {
-        [SerializeField]
-        private T[] Children; 
+        public T[] Children; 
 
         public sealed override Generator[] ChildGenerators
         {

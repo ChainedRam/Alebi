@@ -26,12 +26,12 @@ namespace ChainedRam.Core.Generation
 
         protected override bool ShouldGenerate()
         {
-            return Wrapped.IsGenerating;
+            return Wrapped.enabled;
         }
 
         protected override bool ShouldTerminate()
         {
-            return Wrapped.IsGenerating == false;
+            return Wrapped.enabled == false;
         }
         #endregion
     }

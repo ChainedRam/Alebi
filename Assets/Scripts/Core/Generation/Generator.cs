@@ -12,7 +12,6 @@ namespace ChainedRam.Core.Generation
     public abstract class Generator : MonoBehaviour
     {
         #region Inspecter Attributes
-        public bool IsGenerating;
         public float Delta;
         #endregion
         #region Public Events 
@@ -103,8 +102,7 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         public void Begin()
         {
-            IsGenerating = true;
-            enabled = true; 
+            enabled = true;
             OnBegin();
             RaiseOnBeginEvent();
         }
@@ -114,7 +112,7 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         public void BeginSafely()
         {
-            if (IsGenerating == false)
+            if (enabled == false)
             {
                 throw new GeneratorBeginException("Generator is already genrating");
             }
@@ -127,7 +125,7 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         public void End()
         {
-            IsGenerating = false;
+            enabled = false;
             OnEnd();
             RaiseOnEndEvent();
         }
@@ -137,7 +135,7 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         public void EndSafely(bool safe = false)
         {
-            if (IsGenerating == false && safe)
+            if (enabled == false && safe)
             {
                 throw new GeneratorEndException("Generator is already not genrating");
             }
@@ -151,7 +149,7 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         protected virtual void Awake()
         {
-            enabled = false; 
+            base.enabled = false; 
         }
 
         /// <summary>
@@ -167,7 +165,7 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         protected virtual void Update()
         {
-            if (IsGenerating == false)
+            if (enabled == false)
             {
                 return;
             }

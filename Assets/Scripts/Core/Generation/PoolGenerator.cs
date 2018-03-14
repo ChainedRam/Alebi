@@ -7,9 +7,12 @@ using UnityEngine;
 
 namespace ChainedRam.Core.Generation
 {
-    public class PoolGenerator : NestedGenerator
+    public class PoolGenerator : Generator
     {
-        //[Header("Pool Geenerator Settings")]
+        public virtual Generator[] ChildGenerators { get { return Generators; } set { Generators = value; } }
+
+        [SerializeField]
+        private Generator[] Generators;
 
         [HideInInspector()]
         public Generator Selected;
@@ -83,7 +86,7 @@ namespace ChainedRam.Core.Generation
         /// <returns></returns>
         protected override bool ShouldGenerate()
         {
-            return !((Selected?.IsGenerating) ?? false); //TODO use GeneratorShouldGnerate //maybe not 
+            return !((Selected?.enabled) ?? false); //TODO use GeneratorShouldGnerate //maybe not 
         }
 
         protected override bool ShouldTerminate()
