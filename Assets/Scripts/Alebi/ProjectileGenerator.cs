@@ -8,14 +8,15 @@ using UnityEngine;
 public class ProjectileGenerator : QueueInstanceGenerator<Projectile>
 {
     [Header("Projectile Generator")]
-    public ChainedRam.Core.Projection.Motion Motion;
+    public ChainedRam.Core.Projection.Motion MotionOverride;
 
     private bool GenerateOnce; 
 
     public override void SetupGenerated(Projectile generated)
     {
         base.SetupGenerated(generated);
-        generated.Motion = Motion; 
+        generated.Motion = MotionOverride ?? generated.Motion; 
+
         generated.Setup(Delta);
     }
 

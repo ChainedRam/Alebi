@@ -12,20 +12,20 @@ public class StatusDisplayList : MonoBehaviour
 
 	public void SetStatuses(List<KeyValue<IStatusEffect, float>> effects)
 	{
-		string build = "EffectsL\n";
+		string build = "Effects\n";
 
 		foreach(var pair in effects)
 		{
 			build += pair.Key.Name + ": " + pair.Value.ToString("0.00") + "\n";
 		}
 
-        if (text != null)
-        {
-		    text.text = build; 
-        }
-        else
-        {
-            Debug.LogWarning("Missing text reference");
-        }
+		if (text != null)
+		{
+			text.text = build; 
+		}
+		else
+		{
+			Debug.LogWarning("Missing text reference");
+		}
 	}
 }

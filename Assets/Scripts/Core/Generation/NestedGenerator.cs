@@ -69,6 +69,24 @@ namespace ChainedRam.Core.Generation
             base.OnEnd();
             //ForChildren(c => c.End());  terminate children independently 
         }
+
+        [ContextMenu("From Children")]
+        private void SetGeneratorsFromChildren()
+        {
+            List<Generator> gens = new List<Generator>();
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Generator g = transform.GetChild(i).GetComponent<Generator>();
+
+                if (g != null)
+                {
+                    gens.Add(g);
+                }
+            }
+
+            ChildGenerators = gens.ToArray();
+        }
         #endregion
     }
 

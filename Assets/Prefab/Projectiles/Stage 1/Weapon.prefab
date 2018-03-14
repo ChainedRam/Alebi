@@ -11,22 +11,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1979392020133226}
   m_IsPrefabParent: 1
---- !u!1 &1930336594879356
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4667782891863540}
-  - component: {fileID: 114324892755791408}
-  m_Layer: 0
-  m_Name: LineMotion
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1979392020133226
 GameObject:
   m_ObjectHideFlags: 0
@@ -38,9 +22,9 @@ GameObject:
   - component: {fileID: 212995178751681176}
   - component: {fileID: 114643541697879042}
   - component: {fileID: 61549205433932652}
-  - component: {fileID: 114850713947502118}
   - component: {fileID: 114259712101325842}
   - component: {fileID: 114786723026784516}
+  - component: {fileID: 114787539881070476}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -57,22 +41,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 6.18, y: -0.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4667782891863540}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4667782891863540
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1930336594879356}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.51, y: -2.49, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4112525990148412}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &61549205433932652
@@ -111,22 +81,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e2dd39df6d2f942a0035d80887ac2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114324892755791408
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1930336594879356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7496952bfaf95cc40a90a78f92d71c9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 0.25
-  Tilt: -156
-  SpeedAcc: 0
-  TiltAcc: 0
-  FaceTilt: 0
 --- !u!114 &114643541697879042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002ef15d0f9fcb9439dcfb702668ba35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Motion: {fileID: 114324892755791408}
+  Motion: {fileID: 114787539881070476}
 --- !u!114 &114786723026784516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,7 +125,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &114850713947502118
+--- !u!114 &114787539881070476
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -179,12 +133,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1979392020133226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0aa5d269711113469533c1329aa937e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7496952bfaf95cc40a90a78f92d71c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 114643541697879042}
-  MaxLineLength: 10
-  MaxLineDrawn: 1000
+  Speed: 0.25
+  Tilt: -156
+  SpeedAcc: 0
+  TiltAcc: 0
+  FaceTilt: 0
 --- !u!212 &212995178751681176
 SpriteRenderer:
   m_ObjectHideFlags: 1

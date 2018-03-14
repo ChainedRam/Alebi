@@ -6,8 +6,7 @@ using UnityEngine;
 public class RootCollision : CollisionEffect
 {
     public float duration;
-    private StatusEffect rootEffect = new RootStatusEffect();
-
+    private static StatusEffect rootEffect = new RootStatusEffect();
 
     public override void OnHit(Player p)
     {

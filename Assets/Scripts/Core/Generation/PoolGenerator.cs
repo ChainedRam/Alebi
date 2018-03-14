@@ -11,8 +11,7 @@ namespace ChainedRam.Core.Generation
     {
         public virtual Generator[] ChildGenerators { get { return Generators; } set { Generators = value; } }
 
-        [SerializeField]
-        private Generator[] Generators;
+        public Generator[] Generators;
 
         [HideInInspector()]
         public Generator Selected;
@@ -103,6 +102,24 @@ namespace ChainedRam.Core.Generation
         {
             if(Selected != null)
                 Demote(Selected);
+        }
+
+        [ContextMenu("From Children")]
+        private void SetGeneratorsFromChildren()
+        {
+            List<Generator> gens = new List<Generator>();
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Generator g = transform.GetChild(i).GetComponent<Generator>();
+
+                if(g!= null)
+                {
+                    gens.Add(g); 
+                }
+            }
+
+            ChildGenerators = gens.ToArray(); 
         }
     }
 

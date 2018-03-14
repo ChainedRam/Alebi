@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 61823051749983092}
   - component: {fileID: 114054330394001486}
   - component: {fileID: 114611567381333948}
+  - component: {fileID: 114105031797533716}
   m_Layer: 0
   m_Name: Net
   m_TagString: Untagged
@@ -31,35 +32,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!1 &1971966449130504
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4216068638258446}
-  - component: {fileID: 114792166602253366}
-  m_Layer: 0
-  m_Name: LineMotion
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4216068638258446
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1971966449130504}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4767316972115808}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4767316972115808
 Transform:
   m_ObjectHideFlags: 1
@@ -69,8 +41,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6.99, y: 1.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4216068638258446}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111,6 +82,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 2
+--- !u!114 &114105031797533716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1215035392223010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7496952bfaf95cc40a90a78f92d71c9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 0.125
+  Tilt: 0
+  SpeedAcc: 0.01
+  TiltAcc: 0.35
+  FaceTilt: 1
 --- !u!114 &114134827714133822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -122,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002ef15d0f9fcb9439dcfb702668ba35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Motion: {fileID: 114792166602253366}
+  Motion: {fileID: 114105031797533716}
 --- !u!114 &114611567381333948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,22 +142,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &114792166602253366
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1971966449130504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7496952bfaf95cc40a90a78f92d71c9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 0.01
-  Tilt: 0
-  SpeedAcc: 0.001
-  TiltAcc: 0.5
-  FaceTilt: 0
 --- !u!212 &212370207227961960
 SpriteRenderer:
   m_ObjectHideFlags: 1
