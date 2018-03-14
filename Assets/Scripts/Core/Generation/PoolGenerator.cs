@@ -53,7 +53,8 @@ namespace ChainedRam.Core.Generation
 
         protected override void OnBegin()
         {
-            HasRanOut = false; 
+            HasRanOut = false;
+            Selector.ResetSelector(); 
         }
 
         private void Next(object s= null, GenerateEventArgs e= null)
