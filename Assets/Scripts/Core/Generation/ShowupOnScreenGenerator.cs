@@ -1,43 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using ChainedRam.Core.Generation;
+using ChainedRam.Core;
 using UnityEngine;
 
 namespace ChainedRam.Core.Generation
 {
-    public enum Direction
-    {
-        None = 0x00,
-        //Single
-        North = 0x01, 
-        South = 0x02, 
-        East = 0x04, 
-        West = 0x08, 
-        //Combo
-        NorthEast = North | East,
-        NorthWest = North | West, 
-        SouthEast = South | East, 
-        SouthWest = South | West, 
-    }
-
-    public enum ShowupMovement
-    {
-        ToInside = 0,
-        ToOutSide = 1, 
-    }
 
     public class ShowupOnScreenGenerator : TimedGenerator
     {
-
         public GameObject Target;
         public Direction Side;
-        public ShowupMovement Movement;
-
+        public PositionRelativeTo OffsetRelative;
+        
         public int TargetRotation;
         public Vector2 Offset;
 
         public bool TeleportToOtherSide;
         public bool HideGizmo;
+
+        public PositionProvider PositionProvider; 
 
         private Vector2? TargetPosition;
 
@@ -49,10 +30,10 @@ namespace ChainedRam.Core.Generation
         {
             if (TeleportToOtherSide)
             {
-                Target.transform.position = GetSidePosition(Side, Offset, (ShowupMovement)((((int)Movement) + 1) % 2));
+                Target.transform.position = PositionProvider.GetScreenPosition(Side, Offset, (PositionRelativeTo)(-1*(int)OffsetRelative)); 
             }
 
-            TargetPosition = GetSidePosition(Side, Offset, Movement);
+            TargetPosition = PositionProvider.GetScreenPosition(Side, Offset, OffsetRelative); 
 
             Target.transform.eulerAngles = Vector3.forward * TargetRotation;
             Speed = Vector3.Distance(Target.transform.position, TargetPosition.Value) / WaitTime;
@@ -83,47 +64,11 @@ namespace ChainedRam.Core.Generation
                 return;
             }
 
-            Vector2 sidePos = GetSidePosition(Side, Offset, Movement);
-            //Vector2 targetposition = GetSidePosition(Side, Offset, (ShowupMovement)(((int)Movement+1)%2));
-
+            Vector2 sidePos = PositionProvider.GetScreenPosition(Side, Offset, OffsetRelative);
+           
             Gizmos.DrawSphere(sidePos, .5f);
         }
 
-        private float GetScreenWidth()
-        {
-            return GetScreenHeight() * Camera.main.aspect;
-        }
-        private float GetScreenHeight()
-        {
-            return 2 * Camera.main.orthographicSize;
-        }
 
-        public Vector2 GetSidePosition(Direction d, Vector2 offset, ShowupMovement m)
-        {
-            int mov = m == ShowupMovement.ToInside ? 1 : -1;
-
-            float width = offset.x;
-            float height = offset.y;
-
-            if(d.HasFlag(Direction.North))
-            {
-                height = GetScreenHeight() / 2 - (mov * offset.y); 
-            }
-            else if(d.HasFlag(Direction.South))
-            {
-                height = -GetScreenHeight() / 2 + (mov * offset.y);
-            }
-
-            if (d.HasFlag(Direction.East))
-            {
-                width = GetScreenWidth() / 2 - (mov * offset.x);
-            }
-            else if (d.HasFlag(Direction.West))
-            {
-                width = -GetScreenWidth() / 2 + (mov * offset.x);
-            }
-
-            return new Vector2(width, height);
-        }
     }
 }

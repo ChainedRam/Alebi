@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using ChainedRam.Core.Generation;
 using UnityEngine;
 
+[Obsolete("Use: ShowupOnScreenGenerator")]
 public class MoveToGenerator : TimedGenerator
 {
     public GameObject Movable;
