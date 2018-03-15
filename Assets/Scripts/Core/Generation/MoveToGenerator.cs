@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ChainedRam.Core.Generation;
 using UnityEngine;
 
-public class MoveToGeneration : TimedGenerator
+public class MoveToGenerator : TimedGenerator
 {
     public GameObject Movable;
 

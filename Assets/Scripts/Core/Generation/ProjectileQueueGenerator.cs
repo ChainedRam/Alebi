@@ -5,7 +5,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class ProjectileQueueGenerator : QueueInstanceGenerator<Projectile>
+namespace ChainedRam.Core.Generation
 {
-   
+    public abstract class ProjectileQueueGenerator : QueueInstanceGenerator<Projectile>
+    {
+
+    }
+
 }

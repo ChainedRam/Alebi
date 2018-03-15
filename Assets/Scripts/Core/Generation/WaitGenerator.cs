@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using ChainedRam.Core.Generation;
 using UnityEngine;
 
-public class WaitGenerator : TimedGenerator
+namespace ChainedRam.Core.Generation
 {
-    protected override void OnGenerate(GenerateEventArgs e)
+    public class WaitGenerator : TimedGenerator
     {
-       
+        protected override void OnGenerate(GenerateEventArgs e)
+        {
+
+        }
     }
+
 }
