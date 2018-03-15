@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4202446568707294}
   - component: {fileID: 114333591413716878}
   m_Layer: 0
-  m_Name: NorthOut
+  m_Name: 'N O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 4949888422466444}
   - component: {fileID: 114286405568866874}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: 'S I T '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 4761361313775984}
   - component: {fileID: 114206228067733418}
   m_Layer: 0
-  m_Name: EastOutSide
+  m_Name: 'E O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 4414904163639306}
   - component: {fileID: 114462701610503014}
   m_Layer: 0
-  m_Name: EastOutSide
+  m_Name: 'E O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 4058864329970546}
   - component: {fileID: 114910371913659636}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: E I T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 4271042261274134}
   - component: {fileID: 114588868038489762}
   m_Layer: 0
-  m_Name: EastOutSide
+  m_Name: 'E O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 4420297221392026}
   - component: {fileID: 114883748789984864}
   m_Layer: 0
-  m_Name: EastOutSide
+  m_Name: 'W O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 4346338277837480}
   - component: {fileID: 114666600034272404}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: 'W I T '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 4435786174310952}
   - component: {fileID: 114115574828107246}
   m_Layer: 0
-  m_Name: EastOutSide
+  m_Name: 'N O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 4964336201242176}
   - component: {fileID: 114578561427715116}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: W I T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,7 +733,7 @@ GameObject:
   - component: {fileID: 4259959909604534}
   - component: {fileID: 114456813303677368}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: 'E I T '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 4036063803772280}
   - component: {fileID: 114119418692420194}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: 'E I T '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -781,7 +781,7 @@ GameObject:
   - component: {fileID: 4331307224215588}
   - component: {fileID: 114663033517318272}
   m_Layer: 0
-  m_Name: WestOutSide
+  m_Name: 'W O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1011,7 +1011,7 @@ GameObject:
   - component: {fileID: 4725862357508126}
   - component: {fileID: 114129827016955288}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: N I T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1092,7 +1092,7 @@ GameObject:
   - component: {fileID: 4606882403370248}
   - component: {fileID: 114471861669152064}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: W I T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1108,7 +1108,7 @@ GameObject:
   - component: {fileID: 4524390905349082}
   - component: {fileID: 114677198881042908}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: 'E I T '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1172,7 +1172,7 @@ GameObject:
   - component: {fileID: 4410811547478752}
   - component: {fileID: 114177405831469372}
   m_Layer: 0
-  m_Name: EastOutSide
+  m_Name: 'W O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1205,7 +1205,7 @@ GameObject:
   - component: {fileID: 4922888546424786}
   - component: {fileID: 114427710007111656}
   m_Layer: 0
-  m_Name: EastOutSide
+  m_Name: 'W O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1237,7 +1237,7 @@ GameObject:
   - component: {fileID: 4231673010031356}
   - component: {fileID: 114964452063083078}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: 'W I T '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1366,7 +1366,7 @@ GameObject:
   - component: {fileID: 4792664341851136}
   - component: {fileID: 114083530828122350}
   m_Layer: 0
-  m_Name: NorthInTele
+  m_Name: N I T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1414,7 +1414,7 @@ GameObject:
   - component: {fileID: 4951605887482062}
   - component: {fileID: 114732143073949000}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: E I T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1430,7 +1430,7 @@ GameObject:
   - component: {fileID: 4299966125813658}
   - component: {fileID: 114864089230634108}
   m_Layer: 0
-  m_Name: EastOutSide
+  m_Name: 'S O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1446,7 +1446,7 @@ GameObject:
   - component: {fileID: 4093616781398228}
   - component: {fileID: 114012931151773558}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: W I T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1462,7 +1462,7 @@ GameObject:
   - component: {fileID: 4001832531729042}
   - component: {fileID: 114140770758946762}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: 'S I T '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1478,7 +1478,7 @@ GameObject:
   - component: {fileID: 4838239741481260}
   - component: {fileID: 114832440734950692}
   m_Layer: 0
-  m_Name: EastOutSide
+  m_Name: 'N O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1673,7 +1673,7 @@ GameObject:
   - component: {fileID: 4004100998889264}
   - component: {fileID: 114816174180486810}
   m_Layer: 0
-  m_Name: EastOutSide
+  m_Name: 'E O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1722,7 +1722,7 @@ GameObject:
   - component: {fileID: 4222440180818264}
   - component: {fileID: 114526281482756034}
   m_Layer: 0
-  m_Name: EastOutSide
+  m_Name: 'W O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1770,7 +1770,7 @@ GameObject:
   - component: {fileID: 4244725156224344}
   - component: {fileID: 114707015324860658}
   m_Layer: 0
-  m_Name: EastInsideTel
+  m_Name: N I T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1819,7 +1819,7 @@ GameObject:
   - component: {fileID: 4570711441581816}
   - component: {fileID: 114196718417693084}
   m_Layer: 0
-  m_Name: EastOutSide
+  m_Name: 'S O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1835,7 +1835,7 @@ GameObject:
   - component: {fileID: 4940019326726482}
   - component: {fileID: 114536039788353442}
   m_Layer: 0
-  m_Name: EastOutSide
+  m_Name: 'E O '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3498,10 +3498,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 0.25
   Target: {fileID: 0}
-  Side: 2
+  Side: 8
   Movement: 0
   TargetRotation: 90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -3732,8 +3732,8 @@ MonoBehaviour:
   Target: {fileID: 0}
   Side: 1
   Movement: 0
-  TargetRotation: 0
-  Offset: 2
+  TargetRotation: 180
+  Offset: {x: 0, y: 1}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -3808,7 +3808,7 @@ MonoBehaviour:
   Side: 1
   Movement: 1
   TargetRotation: 0
-  Offset: 2
+  Offset: {x: 0, y: 1}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -3826,10 +3826,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 1
   Target: {fileID: 0}
-  Side: 3
+  Side: 4
   Movement: 0
   TargetRotation: -90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -3894,7 +3894,7 @@ MonoBehaviour:
   Side: 1
   Movement: 0
   TargetRotation: 0
-  Offset: 2
+  Offset: {x: 0, y: 1}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -3944,10 +3944,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 0.25
   Target: {fileID: 0}
-  Side: 0
+  Side: 2
   Movement: 0
   TargetRotation: 180
-  Offset: 2
+  Offset: {x: 0, y: 1}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -4005,10 +4005,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 0.25
   Target: {fileID: 0}
-  Side: 2
+  Side: 8
   Movement: 1
   TargetRotation: 90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -4045,10 +4045,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 0.25
   Target: {fileID: 0}
-  Side: 0
+  Side: 2
   Movement: 1
   TargetRotation: 180
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -4085,10 +4085,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 2
   Target: {fileID: 0}
-  Side: 3
+  Side: 4
   Movement: 1
   TargetRotation: -90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -4251,10 +4251,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 0.25
   Target: {fileID: 0}
-  Side: 0
+  Side: 2
   Movement: 0
   TargetRotation: 180
-  Offset: 2
+  Offset: {x: 0, y: 1}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -4386,7 +4386,7 @@ MonoBehaviour:
   Side: 1
   Movement: 1
   TargetRotation: 0
-  Offset: 2
+  Offset: {x: 0, y: 1}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -4600,10 +4600,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 0.25
   Target: {fileID: 0}
-  Side: 2
+  Side: 8
   Movement: 1
   TargetRotation: 90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -4668,10 +4668,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 1
   Target: {fileID: 0}
-  Side: 3
+  Side: 4
   Movement: 0
   TargetRotation: -90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -4701,10 +4701,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 2
   Target: {fileID: 0}
-  Side: 3
+  Side: 4
   Movement: 1
   TargetRotation: -90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -4741,10 +4741,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 1
   Target: {fileID: 0}
-  Side: 2
+  Side: 8
   Movement: 0
   TargetRotation: 90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -4812,10 +4812,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 3
   Target: {fileID: 0}
-  Side: 2
+  Side: 8
   Movement: 1
   TargetRotation: 90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -4852,10 +4852,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 0.25
   Target: {fileID: 0}
-  Side: 3
+  Side: 4
   Movement: 1
   TargetRotation: -90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -4954,10 +4954,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 0.25
   Target: {fileID: 0}
-  Side: 2
+  Side: 8
   Movement: 0
   TargetRotation: 90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -4987,10 +4987,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 0.25
   Target: {fileID: 0}
-  Side: 3
+  Side: 4
   Movement: 1
   TargetRotation: -90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -5133,10 +5133,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 2
   Target: {fileID: 0}
-  Side: 2
+  Side: 8
   Movement: 1
   TargetRotation: 90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -5154,10 +5154,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 1
   Target: {fileID: 0}
-  Side: 2
+  Side: 8
   Movement: 0
   TargetRotation: 90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -5215,10 +5215,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 1
   Target: {fileID: 0}
-  Side: 3
+  Side: 4
   Movement: 0
   TargetRotation: -90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -5293,7 +5293,7 @@ MonoBehaviour:
   Side: 1
   Movement: 0
   TargetRotation: 0
-  Offset: 2
+  Offset: {x: 0, y: 1}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -5323,10 +5323,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 0.25
   Target: {fileID: 0}
-  Side: 3
+  Side: 4
   Movement: 0
   TargetRotation: -90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -5573,10 +5573,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 2
   Target: {fileID: 0}
-  Side: 3
+  Side: 4
   Movement: 1
   TargetRotation: -90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -5609,7 +5609,7 @@ MonoBehaviour:
   Side: 1
   Movement: 1
   TargetRotation: 0
-  Offset: 2
+  Offset: {x: 0, y: 1}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -5655,10 +5655,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 0.25
   Target: {fileID: 0}
-  Side: 0
+  Side: 2
   Movement: 1
   TargetRotation: 180
-  Offset: 2
+  Offset: {x: 0, y: 1}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -5696,10 +5696,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 2
   Target: {fileID: 0}
-  Side: 2
+  Side: 8
   Movement: 1
   TargetRotation: 90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -5748,10 +5748,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 0.25
   Target: {fileID: 0}
-  Side: 3
+  Side: 4
   Movement: 0
   TargetRotation: -90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -5838,10 +5838,10 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 1
   Target: {fileID: 0}
-  Side: 2
+  Side: 8
   Movement: 0
   TargetRotation: 90
-  Offset: 2
+  Offset: {x: 1, y: 0}
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0

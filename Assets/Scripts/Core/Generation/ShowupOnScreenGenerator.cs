@@ -5,10 +5,25 @@ using UnityEngine;
 
 namespace ChainedRam.Core.Generation
 {
+    public enum Direction
+    {
+        None = 0x00,
+        //Single
+        North = 0x01, 
+        South = 0x02, 
+        East = 0x04, 
+        West = 0x08, 
+        //Combo
+        NorthEast = North | East,
+        NorthWest = North | West, 
+        SouthEast = South | East, 
+        SouthWest = South | West, 
+    }
+
     public enum ShowupMovement
     {
         ToInside = 0,
-        ToOutSide = 1
+        ToOutSide = 1, 
     }
 
     public class ShowupOnScreenGenerator : TimedGenerator
@@ -19,7 +34,7 @@ namespace ChainedRam.Core.Generation
         public ShowupMovement Movement;
 
         public int TargetRotation;
-        public float Offset;
+        public Vector2 Offset;
 
         public bool TeleportToOtherSide;
         public bool HideGizmo;
@@ -36,7 +51,6 @@ namespace ChainedRam.Core.Generation
             {
                 Target.transform.position = GetSidePosition(Side, Offset, (ShowupMovement)((((int)Movement) + 1) % 2));
             }
-
 
             TargetPosition = GetSidePosition(Side, Offset, Movement);
 
@@ -84,20 +98,32 @@ namespace ChainedRam.Core.Generation
             return 2 * Camera.main.orthographicSize;
         }
 
-        public Vector2 GetSidePosition(Direction d, float offset, ShowupMovement m)
+        public Vector2 GetSidePosition(Direction d, Vector2 offset, ShowupMovement m)
         {
-            int side = (int)d;
-            int sideSign = (2 * (side % 2) - 1);
-            int offsetSign = ((int)m * 2 - 1);
-            int isVertical = 1 - (side / 2);
-            int isHorizontal = (side / 2);
+            int mov = m == ShowupMovement.ToInside ? 1 : -1;
 
-            float width = isHorizontal * (sideSign * GetScreenWidth() / 2 + offset * sideSign * offsetSign);
-            float height = isVertical * (sideSign * GetScreenHeight() / 2 + offset * sideSign * offsetSign);
+            float width = offset.x;
+            float height = offset.y;
+
+            if(d.HasFlag(Direction.North))
+            {
+                height = GetScreenHeight() / 2 - (mov * offset.y); 
+            }
+            else if(d.HasFlag(Direction.South))
+            {
+                height = -GetScreenHeight() / 2 + (mov * offset.y);
+            }
+
+            if (d.HasFlag(Direction.East))
+            {
+                width = GetScreenWidth() / 2 - (mov * offset.x);
+            }
+            else if (d.HasFlag(Direction.West))
+            {
+                width = -GetScreenWidth() / 2 + (mov * offset.x);
+            }
 
             return new Vector2(width, height);
         }
     }
-
-
 }
