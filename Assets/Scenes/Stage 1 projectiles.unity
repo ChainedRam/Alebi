@@ -426,7 +426,6 @@ GameObject:
   - component: {fileID: 1302550159}
   - component: {fileID: 1302550158}
   - component: {fileID: 1302550157}
-  - component: {fileID: 1302550156}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -434,18 +433,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1302550156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302550155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33ba48c248020b3439de289e7525c984, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 0}
 --- !u!114 &1302550157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,7 +448,7 @@ MonoBehaviour:
   CanMove: 0
   SpeedDelta: 0
   Health: 5
-  StatusDisplay: {fileID: 1302550156}
+  StatusDisplay: {fileID: 0}
 --- !u!114 &1302550158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,12 +709,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 61696629652306854, guid: 6ac4f7aceaa5047419439981f759fd74,
-        type: 2}
-      propertyPath: m_UsedByComposite
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114963710220239472, guid: 6ac4f7aceaa5047419439981f759fd74, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6ac4f7aceaa5047419439981f759fd74, type: 2}
   m_IsPrefabParent: 0

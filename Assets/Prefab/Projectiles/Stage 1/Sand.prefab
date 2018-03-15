@@ -27,6 +27,8 @@ GameObject:
   - component: {fileID: 114455801253091956}
   - component: {fileID: 114236034425944520}
   - component: {fileID: 114995614115776844}
+  - component: {fileID: 114644336013386190}
+  - component: {fileID: 114191901245381222}
   m_Layer: 0
   m_Name: Sand
   m_TagString: Untagged
@@ -42,7 +44,7 @@ Transform:
   m_GameObject: {fileID: 1784923916548236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.62, y: -4.04, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -58,7 +60,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: -0.000000059604645, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
@@ -72,6 +74,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3262292, y: 0.3262291}
   m_EdgeRadius: 0
+--- !u!114 &114191901245381222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1784923916548236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 350914a9053151d478315b1f49be4074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Duration: 2
 --- !u!114 &114236034425944520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 0.1
-  Tilt: -90
+  Tilt: 90
   SpeedAcc: -0.001
   TiltAcc: 0
   FaceTilt: 0
@@ -115,7 +129,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  time: 1.6587
+  time: 2
 --- !u!114 &114455801253091956
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,6 +174,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Motion: {fileID: 114236034425944520}
+--- !u!114 &114644336013386190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1784923916548236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 975c87e966f7ad643a3b5617125cb392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StrechTo: {x: 2, y: 5, z: 1}
+  Speed: 0.04
 --- !u!114 &114904437918720438
 MonoBehaviour:
   m_ObjectHideFlags: 1
