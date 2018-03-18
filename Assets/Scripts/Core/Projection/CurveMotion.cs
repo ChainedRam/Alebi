@@ -3,26 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CurveMotion : Motion
+namespace ChainedRam.Core.Projection
 {
-    public float AngleOffset;
-    private float CurrentAngleOffset;
-    public override Vector2 GetOffset()
+    public class CurveMotion : RelativeMotion
     {
-        CurrentAngleOffset += AngleOffset;
-        Vector2 offset = new Vector2(0, 1);
-        offset = offset.Rotate(CurrentAngleOffset);
-        return offset;
-    }
+        public float AngleOffset;
+        private float CurrentAngleOffset;
 
-    public override void Initialize()
-    {
-        CurrentAngleOffset = 0; 
-    }
+        public override void Initialize(Projectile sender, float delta)
+        {
+            CurrentAngleOffset = 0;
+        }
 
-    public override Vector2 Apply(Vector2 vector)
-    {
-        CurrentAngleOffset += AngleOffset;
-        return vector.Rotate(CurrentAngleOffset);
+        public override Vector2 GetRelativeOffset(Vector2 defaultVector)
+        {
+            CurrentAngleOffset += AngleOffset;
+            return defaultVector.Rotate(CurrentAngleOffset);
+        }
     }
 }

@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LinearMotion : Motion
+namespace ChainedRam.Core.Projection
 {
-    public float Speed;
-
-    public override Vector2 GetOffset()
+    public class LinearMotion : AbsoluteMotion
     {
-        Vector2 speed = new Vector2(0, Speed * Time.fixedDeltaTime);
-        return speed;
+        public float Speed;
+
+        public override Vector2 GetRelativeOffset(Vector2 defaultVector)
+        {
+            return new Vector2(0, Speed) + defaultVector;
+        }
     }
 }

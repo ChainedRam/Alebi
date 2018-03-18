@@ -2,36 +2,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-
 namespace ChainedRam.Core.Generation
-{
+{    
     /// <summary>
     /// A Compnent that generates. 
     /// </summary>
     public abstract class Generator : MonoBehaviour
     {
         #region Inspecter Attributes
-        public bool IsGenerating;
         public float Delta;
-        #endregion 
-        #region Custom Inspector Attributes
-        [HideInInspector()]
-        public bool PrintDebug;
-
-        [HideInInspector()]
-        public TerminationType TerminatorType = TerminationType.Internal;
-
-        [HideInInspector()]
-        public GenerationType GenerateConditionType = GenerationType.Internal;
-
-        [HideInInspector()]
-        public GeneratorTerminator Terminator;
-
-        [HideInInspector()]
-        public GeneratorCondition GenerateCondition;
         #endregion
         #region Public Events 
         /// <summary>
@@ -56,7 +37,6 @@ namespace ChainedRam.Core.Generation
 
         #endregion
         #region Raise Event
-
         /// <summary>
         /// Raises a generation event
         /// </summary>
@@ -71,7 +51,7 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         protected void RaiseOnGenerateEvent()
         {
-            Raise(OnGenerateEventHandler); 
+            Raise(OnGenerateEventHandler);
         }
 
         /// <summary>
@@ -105,7 +85,7 @@ namespace ChainedRam.Core.Generation
         public void Generate()
         {
             OnGenerate(new GenerateEventArgs(Delta));
-            RaiseOnGenerateEvent(); 
+            RaiseOnGenerateEvent();
         }
 
         /// <summary>
@@ -122,25 +102,22 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         public void Begin()
         {
-            IsGenerating = true;
+            enabled = true;
             OnBegin();
-            RaiseOnBeginEvent(); 
-
-            GenerateCondition?.Setup(this);
-            Terminator?.Setup(this);
+            RaiseOnBeginEvent();
         }
 
         /// <summary>
         /// Begins Generation and invokes OnStart events.
         /// </summary>
-        public void BeginSafly()
+        public void BeginSafely()
         {
-            if (IsGenerating == false)
+            if (enabled == false)
             {
                 throw new GeneratorBeginException("Generator is already genrating");
             }
 
-            Begin(); 
+            Begin();
         }
 
         /// <summary>
@@ -148,100 +125,87 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         public void End()
         {
-            IsGenerating = false;
+            enabled = false;
             OnEnd();
             RaiseOnEndEvent();
-
-            GenerateCondition?.SetApart(this);
-            Terminator?.SetApart(this);
         }
-       
+
         /// <summary>
         /// Stops Generation and trigger OnStop events.
         /// </summary>
-        public void EndSafly(bool safe = false)
+        public void EndSafely(bool safe = false)
         {
-            if (IsGenerating == false && safe)
+            if (enabled == false && safe)
             {
                 throw new GeneratorEndException("Generator is already not genrating");
             }
 
-            End(); 
+            End();
         }
         #endregion
         #region Unity Methods 
         /// <summary>
         /// 'Seals' Awake function. DO NOT OVERWRITE! use <see cref="OnAwake"/>
         /// </summary>
-        protected void Awake()
+        protected virtual void Awake()
         {
-            OnAwake();
-            Terminator?.Setup(this);
-            GenerateCondition?.Setup(this);
+            base.enabled = false; 
         }
 
         /// <summary>
-        /// 'Seals' Start function. DO NOT OVERWRITE. use <see cref="Start"/>
+        /// Start function. DO NOT OVERWRITE. use <see cref="Start"/>
         /// </summary>
-        protected void Start()
+        protected virtual void Start()
         {
-            OnStart();
+
         }
 
         /// <summary>
         /// Runs the generation cycle.  DO NOT OVERWRITE
         /// </summary>
-        protected void Update()
+        protected virtual void Update()
         {
-            if (IsGenerating == false)
+            if (enabled == false)
             {
                 return;
             }
 
-            if (Terminator?.ShouldTerminate(this) ?? ShouldTerminate())
+            if (ShouldTerminate())
             {
                 End();
                 return;
             }
 
-            if (GenerateCondition?.ShouldGenerate(this) ?? ShouldGenerate())
+            if (ShouldGenerate())
             {
                 Generate();
             }
             else
             {
                 SkippedGenerate();
-            }
+            } 
         }
         #endregion
-        #region Protected Virtual Methods
+        #region Protected Abstract
         /// <summary>
         /// Called within <see cref="Update"/> to check if generation is allowed.
         /// </summary>
         /// <returns></returns>
-        protected virtual bool ShouldGenerate() => true;
+        protected abstract bool ShouldGenerate();
 
         /// <summary>
         /// Called within <see cref="Update"/> to check if generation shoul terminate before generating.
         /// </summary>
         /// <returns></returns>
-        protected virtual bool ShouldTerminate() => false; 
-
-        /// <summary>
-        /// Gets called when this object's Awake function. 
-        /// </summary>
-        protected virtual void OnAwake() { }
-
-        /// <summary>
-        /// Gets called when this object's Awake function. 
-        /// </summary>
-        protected virtual void OnStart() { }
+        protected abstract bool ShouldTerminate();
 
         /// <summary>
         /// Called when genrator generates. This is invoked before <see cref="OnGenerateEventHandler"/> 
         /// </summary>
-        protected virtual void OnGenerate(GenerateEventArgs e) { }
+        protected abstract void OnGenerate(GenerateEventArgs e);
 
+        #endregion
+        #region Protected Virtual Methods
         /// <summary>
         /// Called when genrator skips generate. This is invoked before <see cref="OnSkippedEventHandler"/> 
         /// </summary>
@@ -256,16 +220,17 @@ namespace ChainedRam.Core.Generation
         /// Called when genrator ends generating. This is invoked before <see cref="OnEndEventHandler"/> 
         /// </summary>
         protected virtual void OnEnd() { }
+
         #endregion
-        #region Protected Methods 
+        #region Protected Static Methods 
         /// <summary>
         /// Gets whether a generator should generate or not. Is is used for nested generators. 
         /// </summary>
         /// <param name="gen"></param>
         /// <returns></returns>
-        protected bool GeneratorShouldGenerate(Generator gen)
+        protected static bool GeneratorShouldGenerate(Generator gen)
         {
-            return gen.ShouldGenerate(); 
+            return gen.ShouldGenerate();
         }
 
         /// <summary>
@@ -273,11 +238,10 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         /// <param name="gen"></param>
         /// <returns></returns>
-        protected bool GeneratorShouldTerminate(Generator gen)
+        protected static bool GeneratorShouldTerminate(Generator gen)
         {
             return gen.ShouldTerminate();
         }
         #endregion
     }
 }
-

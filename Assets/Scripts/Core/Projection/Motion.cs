@@ -3,11 +3,24 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Motion : MonoBehaviour
+namespace ChainedRam.Core.Projection
 {
-    public abstract Vector2 GetOffset();
+    /// <summary>
+    /// Represent an object that gives an offset value as a direction to create motional movment. 
+    /// </summary>
+    public abstract class Motion : MonoBehaviour
+    {
+        #region Public Abstract
+        public abstract Vector2 GetRelativeOffset(Vector2 defaultVector);
+        public abstract Vector2 Default();
+        #endregion
+        #region Public Virtual 
+        public virtual Vector2 GetOffset()
+        {
+            return GetRelativeOffset(Default());
+        }
 
-    public virtual Vector2 Apply(Vector2 vector) { return GetOffset() + vector; }
-
-    public virtual void Initialize(){}
+        public virtual void Initialize(Projectile sender, float delta = 1) { }
+        #endregion
+    }
 }

@@ -12,11 +12,6 @@ namespace ChainedRam.Core.Selection
 
         private int Index;
 
-        private void Start()
-        {
-            Index = 0;
-        }
-
         public override T Select<T>(T[] list, T prev = null)
         {
             if (list.Length == 0)
@@ -24,7 +19,16 @@ namespace ChainedRam.Core.Selection
                 throw new Exception("Cannot select from empty list"); //TODO custom exception
             }
 
-            return list[Index++ % (Loop ? list.Length : 1)];
+            if (Loop)
+            {
+                return list[(Index++) % list.Length];
+            }
+            else if(Index < list.Length)
+            {
+                return list[(Index++)];
+            }
+
+            return null; 
         }
 
         public void ResetIndex()
@@ -42,6 +46,9 @@ namespace ChainedRam.Core.Selection
             Index += skips;
         }
 
-
+        public override void ResetSelector()
+        {
+            Index = 0; 
+        }
     } 
 }

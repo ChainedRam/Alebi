@@ -11,6 +11,8 @@ namespace ChainedRam.Core.Dialog
     {
         public Text label;
 
+        public EmotionalCharacter Face;
+
         private void Start()
         {
             //ignore parent's Start()
@@ -19,6 +21,8 @@ namespace ChainedRam.Core.Dialog
         public override void SetEmotion(string name)
         {
             label.text = name;
+            Face?.SetEmotion(name);
+
         }
     }
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 namespace ChainedRam.Inspecter.Generation
 {
     [CustomEditor(typeof(NestedGenerator), true)]
-    public class NestedGeneratorEditor : GeneratorEditor
+    public class NestedGeneratorEditor : Editor
     {
         bool[] showChildrenInspecters; 
         //int children = 0;
@@ -17,19 +17,29 @@ namespace ChainedRam.Inspecter.Generation
         {
             base.OnInspectorGUI();
 
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Nested Generator Settings", EditorStyles.boldLabel);
 
-            NestedGenerator ng = (NestedGenerator)target;
+            //EditorGUILayout.Space();
+            //EditorGUILayout.LabelField("Nested Generator Settings", EditorStyles.boldLabel);
 
-            if (ng.ShowChildrenInspecter = EditorGUILayout.Toggle("Show Nested Inspectors", ng.ShowChildrenInspecter))
-            {
-                //list children 
-                DrawNestedChildren(ng);
+            //NestedGenerator ng = (NestedGenerator)target;
 
-                //draw each child inspecter
-                DrawChildrenInspecter(ng); 
-            }
+           
+            //var serializedObject = new SerializedObject(target);
+            //var property = serializedObject.FindProperty("Generators");
+
+            //serializedObject.Update();
+            //EditorGUILayout.PropertyField(property, true);
+            //serializedObject.ApplyModifiedProperties();
+
+            //Debug.Log(property.arraySize);
+            //if (ng.ShowChildrenInspecter = EditorGUILayout.Toggle("Show Nested Inspectors", ng.ShowChildrenInspecter))
+            //{
+            //    //list children 
+            //    DrawNestedChildren(ng);
+
+            //    //draw each child inspecter
+            //    DrawChildrenInspecter(ng); 
+            //}
         }
 
         private void DrawNestedChildren(NestedGenerator ng)

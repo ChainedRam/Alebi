@@ -10,15 +10,18 @@ namespace ChainedRam.Core.Generation
     /// A generator that generates components. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class InstanceGenerator<T> : Generator where T : Component
+    public class InstanceGenerator<T> : TimedGenerator where T : Component
     {
         #region Inspector Attribute 
         [Header("Instance Generator")]
         [Tooltip("Prefab to genrate.")]
         public T Prefab;
 
-        [Tooltip("Parnet to generate in.")]
+        [Tooltip("Transform's location.")]
         public Transform GenerateAt;
+
+        [Tooltip("Makes generated instances children of.")]
+        public Transform Parent; 
         #endregion
         #region Protected Abstract Property
         /// <summary>
@@ -31,6 +34,7 @@ namespace ChainedRam.Core.Generation
                 return collection;
             }
         }
+
         #endregion
         #region Private Attributes
         private Collection<T> collection;
@@ -58,29 +62,41 @@ namespace ChainedRam.Core.Generation
 
         protected virtual T CreateInstance()
         {
-            return Instantiate(Prefab, GenerateAt);
+            var instance = Instantiate(Prefab);
+
+            if(Parent != null)
+            {
+                instance.transform.SetParent(Parent); 
+            }
+
+            return instance; 
+
         }
 
         public virtual void SetupGenerated(T instance)
         {
             instance.gameObject.SetActive(true);
-            instance.transform.localPosition = Vector2.zero;
-            instance.transform.rotation = Quaternion.identity;
+            instance.transform.position = GenerateAt.position;
+            instance.transform.rotation = GenerateAt.rotation; 
         }
         #endregion
         #region Override Generator
-        protected override void OnAwake()
+        protected override void Awake()
         {
-            base.OnAwake();
-            collection = new Collection<T>();
-            OnGenerateEventHandler += (s, e) => GenerateInstance();
+            base.Awake();
+            collection = new Collection<T>(); 
+        }
+
+        protected override void OnGenerate(GenerateEventArgs e)
+        {
+            GenerateInstance(); 
         }
         #endregion
         #region Private Methods
         /// <summary>
         /// 
         /// </summary>
-        private void GenerateInstance()
+        protected virtual void GenerateInstance()
         {
             T instance = CreateInstance();
             AddInstance(instance);

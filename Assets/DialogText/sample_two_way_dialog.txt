@@ -1,5 +1,5 @@
-N: <fresh> Good mornin' Jamal! Did you sleep well honey?
-J: <sleepy, grumpy> Morning dear (or should i say camel lmao).. How am I supposed to sleep when you keep slapping me with your hump in your sleep? -_-
+N: <happy> Good mornin' Jamal! Did you sleep well honey?
+J: <angry+> Morning dear (or should i say camel lmao).. How am I supposed to sleep when you keep slapping me with your hump in your sleep? -_- <idle>
 N: <surprised> Oh I'm sorry, but I did tell you that we need a bigger bed. Would you like a cup of tea to wake you up? I'll make it the way you like it. Black tea with my own milk! I've also got some cactus fruit for your breakfast in the fridge.
 J: <Grateful> Thank you my love. I can start working on building a fence for our house after having your delicious tea to wake me up.
 N: Good, we've been getting a lot of unwanted visitors recently. I'll get started on your tea. 

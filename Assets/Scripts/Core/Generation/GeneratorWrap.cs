@@ -8,17 +8,17 @@ namespace ChainedRam.Core.Generation
     /// <summary>
     /// Wraps a generator around it. Can be used to refrence other generator. 
     /// </summary>
-    public class GeneratorWrap : Generator
+    public class GeneratorWrap : ComponentGenerator
     {
         #region Inspector Attribute 
         [Header("GeneratorWrap")]
-        public Generator Wrapped;
+        public ComponentGenerator Wrapped;
         #endregion
         #region Unity Methods 
 
-        protected override void OnAwake()
+        protected override void Awake()
         {
-            base.OnAwake();
+            base.Awake();
             this.Attach(Wrapped);
         }
         #endregion
@@ -26,12 +26,12 @@ namespace ChainedRam.Core.Generation
 
         protected override bool ShouldGenerate()
         {
-            return Wrapped.IsGenerating;
+            return Wrapped.enabled;
         }
 
         protected override bool ShouldTerminate()
         {
-            return Wrapped.IsGenerating == false;
+            return Wrapped.enabled == false;
         }
         #endregion
     }

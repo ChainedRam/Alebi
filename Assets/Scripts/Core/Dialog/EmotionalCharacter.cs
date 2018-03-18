@@ -61,7 +61,7 @@ namespace ChainedRam.Core.Dialog
             {
                 return;
             }
-            if (currentStateName != "" && animator.GetCurrentAnimatorStateInfo(0).IsName("default"))
+            if (currentStateName != "" && ClipsDictionary.ContainsKey(currentStateName) && animator.GetCurrentAnimatorStateInfo(0).IsName("default"))
             {
                 OverrideController[EmotionHoldName] = ClipsDictionary[currentStateName];
                 animator.runtimeAnimatorController = OverrideController;

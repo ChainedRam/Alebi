@@ -9,7 +9,7 @@ namespace ChainedRam.Core.Generation.Extention
         /// </summary>
         /// <param name="follower"></param>
         /// <remarks>To avoid recursion, followe <see cref="DetachOnStart(this Generator source, Generator)"/> the calling generator. </remarks>
-        public static void AttachOnBegin(this Generator source, Generator follower)
+        public static void AttachOnBegin(this ComponentGenerator source, ComponentGenerator follower)
         {
             //avoid recursion 
             follower.DetachOnBegin(source);
@@ -21,7 +21,7 @@ namespace ChainedRam.Core.Generation.Extention
         /// Removes following's StartGenerating from Start event list. 
         /// </summary>
         /// <param name="follower"></param>
-        public static void DetachOnBegin(this Generator source, Generator follower)
+        public static void DetachOnBegin(this ComponentGenerator source, ComponentGenerator follower)
         {
             source.OnBeginEventHandler -= (e, a) => follower.Begin();
         }
@@ -30,7 +30,7 @@ namespace ChainedRam.Core.Generation.Extention
         /// Adds follower as listern when stop. 
         /// </summary>
         /// <param name="follower"></param>
-        public static void AttachOnEnd(this Generator source, Generator follower)
+        public static void AttachOnEnd(this ComponentGenerator source, ComponentGenerator follower)
         {
             //avoid recursion 
             follower.DetachOnEnd(source);
@@ -42,7 +42,7 @@ namespace ChainedRam.Core.Generation.Extention
         /// Removes follower from Stop event list. 
         /// </summary>
         /// <param name="follower"></param>
-        public static void DetachOnEnd(this Generator source, Generator follower)
+        public static void DetachOnEnd(this ComponentGenerator source, ComponentGenerator follower)
         {
             source.OnEndEventHandler -= (e, a) => follower.End();
         }
@@ -51,7 +51,7 @@ namespace ChainedRam.Core.Generation.Extention
         /// Attaches follower to genrate event. 
         /// </summary>
         /// <param name="follower"></param>    
-        public static void AttachOnGenerate(this Generator source, Generator follower)
+        public static void AttachOnGenerate(this ComponentGenerator source, ComponentGenerator follower)
         {
             //avoid recursion 
             follower.DetachOnGenerate(source);
@@ -66,7 +66,7 @@ namespace ChainedRam.Core.Generation.Extention
         /// Removes follower from on genrate event list. 
         /// </summary>
         /// <param name="follower"></param>
-        public static void DetachOnGenerate(this Generator source, Generator follower)
+        public static void DetachOnGenerate(this ComponentGenerator source, ComponentGenerator follower)
         {
             source.OnGenerateEventHandler -= (e, a) => follower.Generate();
         }
@@ -75,7 +75,7 @@ namespace ChainedRam.Core.Generation.Extention
         /// Attaches follower to genrate event. 
         /// </summary>
         /// <param name="follower"></param>    
-        public static void AttachOnSkipped(this Generator source, Generator follower)
+        public static void AttachOnSkipped(this ComponentGenerator source, ComponentGenerator follower)
         {
             //avoid recursion 
             follower.DetachOnSkipped(source);
@@ -87,7 +87,7 @@ namespace ChainedRam.Core.Generation.Extention
         /// Removes follower from on genrate event list. 
         /// </summary>
         /// <param name="follower"></param>
-        public static void DetachOnSkipped(this Generator source, Generator follower)
+        public static void DetachOnSkipped(this ComponentGenerator source, ComponentGenerator follower)
         {
             source.OnSkippedEventHandler -= (e, a) => follower.SkippedGenerate();
         }
@@ -96,7 +96,7 @@ namespace ChainedRam.Core.Generation.Extention
         /// Attachs follower's OnStart, OnStop,OnGenerate, & OnSkip events to own events, 
         /// </summary>
         /// <param name="follower"></param>
-        public static void Attach(this Generator source, Generator follower)
+        public static void Attach(this ComponentGenerator source, ComponentGenerator follower)
         {
             AttachOnGenerate(source, follower);
             AttachOnSkipped(source, follower);
@@ -108,7 +108,7 @@ namespace ChainedRam.Core.Generation.Extention
         /// Detaches follower's OnStart, OnStop,OnGenerate, & OnSkip events from own events, 
         /// </summary>
         /// <param name="follower"></param>
-        public static void Detach(this Generator source, Generator follower)
+        public static void Detach(this ComponentGenerator source, ComponentGenerator follower)
         {
             DetachOnGenerate(source, follower);
             DetachOnSkipped(source, follower);

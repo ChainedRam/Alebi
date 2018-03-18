@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AcceleratedMotion : Motion
+namespace ChainedRam.Core.Projection
 {
-    public float Acceleration;
-    private float CurrentAcceleration;
-
-    public override Vector2 GetOffset()
+    public class AcceleratedMotion : AbsoluteMotion
     {
-        CurrentAcceleration += this.Acceleration;
-        Vector2 acceleration = new Vector2(0, CurrentAcceleration);
-        return acceleration;
-    }
+        public float Acceleration;
+        private float CurrentAcceleration;
 
-    public override void Initialize()
-    {
-        CurrentAcceleration = 0;
+        public override Vector2 GetRelativeOffset(Vector2 defaultVector)
+        {
+            CurrentAcceleration += Acceleration;
+            return new Vector2(0, CurrentAcceleration) + defaultVector;
+        }
+
+        public override void Initialize(Projectile sender, float delta)
+        {
+            CurrentAcceleration = 0;
+        }
     }
 }
