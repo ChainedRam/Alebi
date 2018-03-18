@@ -1,0 +1,24 @@
+﻿using ChainedRam.Core.Projection;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+
+[CustomEditor(typeof(Projectile), true)]
+public class MotionEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        
+
+        Projectile gen = ((Projectile)target);
+
+        if(gen.Motion != null)
+        {
+            EditorGUILayout.LabelField(gen.Motion.name +  " Inspecter");
+            CreateEditor(gen.Motion).DrawDefaultInspector();    
+        }
+
+    }
+
+}

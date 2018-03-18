@@ -3,17 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FakeEmotionalCharachter : EmotionalCharacter
+
+namespace ChainedRam.Core.Dialog
 {
-    public Text label;
 
-    private void Start()
+    public class FakeEmotionalCharachter : EmotionalCharacter
     {
-        //ignore parent's Start()
-    }
+        public Text label;
 
-    public override void SetEmotion(string name)
-    {
-        label.text = name; 
+        public EmotionalCharacter Face;
+
+        private void Start()
+        {
+            //ignore parent's Start()
+        }
+
+        public override void SetEmotion(string name)
+        {
+            label.text = name;
+            Face?.SetEmotion(name);
+
+        }
     }
 }

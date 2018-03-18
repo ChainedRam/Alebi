@@ -237,8 +237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textFile: {fileID: 4900000, guid: 701519802209898449f3f15819a97b01, type: 3}
-  CharachterDisplayTime: 0.063
-  LineDisplayTime: 0.077
+  CCharachterDelay: 0.023
+  NewLineDelay: 0.092
   property: 1
   OnStartDialog:
     m_PersistentCalls:
@@ -465,11 +465,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 625568614}
-        m_MethodName: PresentSegment
+        m_MethodName: PresentDialog
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 50145084}
-          m_ObjectArgumentAssemblyTypeName: Dialog, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: ChainedRam.Core.Dialog.Dialog, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -861,11 +861,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 625568614}
-        m_MethodName: PresentSegment
+        m_MethodName: PresentDialog
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 118154382}
-          m_ObjectArgumentAssemblyTypeName: DialogSegment, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: ChainedRam.Core.Dialog.Dialog, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1329,11 +1329,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 625568614}
-        m_MethodName: PresentSegment
+        m_MethodName: PresentDialog
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2109790446}
-          m_ObjectArgumentAssemblyTypeName: DialogSegment, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: ChainedRam.Core.Dialog.Dialog, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1421,9 +1421,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textFile: {fileID: 4900000, guid: 2c7f65e02899a1b45ad3f451e43c1ad6, type: 3}
-  CharachterDisplayTime: 0.004
-  LineDisplayTime: 0.317
-  property: 2
+  CCharachterDelay: 0.057
+  NewLineDelay: 0.058
+  property: 1
   OnStartDialog:
     m_PersistentCalls:
       m_Calls:

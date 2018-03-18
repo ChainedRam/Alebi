@@ -1,38 +1,42 @@
-﻿using System.Collections;
+﻿using ChainedRam.Core.Dialog;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtionEmotionGenerator : MonoBehaviour
+namespace ChainedRam.Core.Dialog
 {
-    public EmotionalCharacter Character;
-
-    public Button ButtonPrefab;
-    public GameObject ButtonParent;
-
-    private string HoldCharacter = ""; 
-
-    private void Start()
+    public class ButtionEmotionGenerator : MonoBehaviour
     {
-        foreach(var clip in Character.clips)
+        public EmotionalCharacter Character;
+
+        public Button ButtonPrefab;
+        public GameObject ButtonParent;
+
+        private string HoldCharacter = "";
+
+        private void Start()
         {
-            string emotionName = clip.name.Substring(clip.name.LastIndexOf('_') + 1); //WRONG 
+            foreach (var clip in Character.clips)
+            {
+                string emotionName = clip.name.Substring(clip.name.LastIndexOf('_') + 1); //WRONG 
 
-            Button plsAddMe = Instantiate(ButtonPrefab, ButtonParent.transform);
-            plsAddMe.GetComponentInChildren<Text>().text = emotionName;
-            plsAddMe.onClick.AddListener(() => { Character.SetEmotion(emotionName.ToLower() + HoldCharacter);});
-            plsAddMe.gameObject.SetActive(true); 
+                Button plsAddMe = Instantiate(ButtonPrefab, ButtonParent.transform);
+                plsAddMe.GetComponentInChildren<Text>().text = emotionName;
+                plsAddMe.onClick.AddListener(() => { Character.SetEmotion(emotionName.ToLower() + HoldCharacter); });
+                plsAddMe.gameObject.SetActive(true);
+            }
         }
-    }
 
-    public void TurnHoldOn()
-    {
-        HoldCharacter = "+"; 
-    }
+        public void TurnHoldOn()
+        {
+            HoldCharacter = "+";
+        }
 
-    public void TurnHoldOff()
-    {
-        HoldCharacter = "";
-        Character.Release(); 
+        public void TurnHoldOff()
+        {
+            HoldCharacter = "";
+            Character.Release();
+        }
     }
 }

@@ -176,9 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7825b2784408283448f58cd61217a5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 114700731303239106}
+  TextBox: {fileID: 114700731303239106}
   PauseIndecator: {fileID: 1968462439374214}
-  CurrentDialog: {fileID: 0}
 --- !u!222 &222479584759255596
 CanvasRenderer:
   m_ObjectHideFlags: 1
