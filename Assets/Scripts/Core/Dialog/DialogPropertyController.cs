@@ -1,38 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using ChainedRam.Core.Enums.Extensions;
 using UnityEngine;
 
-/// <summary>
-/// Allows changing <see cref="Dialog.Property"/> in inspecter. Requires a DialogSegment Component
-/// </summary>
-public class DialogPropertyController : MonoBehaviour
+namespace ChainedRam.Core.Dialog
 {
-    public DialogSegment Segment; 
-
-    public bool Space;
-    public bool NewLine;
-    public bool PageEnd;
-    public bool NewPage;
-
-    void Update()
+    /// <summary>
+    /// Allows changing <see cref="Dialog.Property"/> in inspecter. Requires a DialogSegment Component
+    /// </summary>
+    public class DialogPropertyController : MonoBehaviour
     {
-        EnumExtensions.SetFlag(ref Segment.property, DialogPauseProperty.Space, Space );
-        EnumExtensions.SetFlag(ref Segment.property, DialogPauseProperty.NewLine, NewLine);
-        EnumExtensions.SetFlag(ref Segment.property, DialogPauseProperty.PageEnd, PageEnd);
-        EnumExtensions.SetFlag(ref Segment.property, DialogPauseProperty.NewPage, NewPage);
-    }
+        public DialogSegment Segment;
 
-    private void OnValidate()
-    {
-        if(Segment == null)
+        public bool Space;
+        public bool NewLine;
+        public bool PageEnd;
+        public bool NewPage;
+
+        void Update()
         {
-            Segment = GetComponent<DialogSegment>();
+            EnumExtensions.SetFlag(ref Segment.property, DialogPauseType.Space, Space); //TODO ref code smell 
+            EnumExtensions.SetFlag(ref Segment.property, DialogPauseType.NewLine, NewLine);
+            EnumExtensions.SetFlag(ref Segment.property, DialogPauseType.End, PageEnd);
+            EnumExtensions.SetFlag(ref Segment.property, DialogPauseType.NewPage, NewPage);
+        }
 
-            if(Segment == null)
+        private void OnValidate()
+        {
+            if (Segment == null)
             {
-                Debug.LogError("Missing DialogSegment component.", this); 
+                Segment = GetComponent<DialogSegment>();
+
+                if (Segment == null)
+                {
+                    Debug.LogError("Missing DialogSegment component.", this);
+                }
             }
         }
     }
-
 }

@@ -1,159 +1,208 @@
-﻿using System;
+﻿using ChainedRam.Core.Dialog.Extention;
+using ChainedRam.Core.Enums.Extensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogBox : MonoBehaviour
+namespace ChainedRam.Core.Dialog
 {
-    public Text text;
-
-    public GameObject PauseIndecator; 
-
-    public Dialog CurrentDialog;
-
-    private float CurrentTime; 
-    private bool IsPaused;
-    private Action OnResume;  
-
-    private void Start()
+    public class DialogBox : MonoBehaviour
     {
-        ResetTime();
-        PauseIndecator.SetActive(false);
-        IsPaused = false;
-    }
 
-    private void Update()
-    {
-        //make this readable damn it. 
-        if(Input.anyKeyDown && IsPaused)
+        #region Public Attributes 
+        public Text TextBox;
+        public GameObject PauseIndecator; //TODO get by finding + set to private
+
+        #endregion
+        #region Private Attributes
+        public Dialog CurrentDialog;
+        private float CurrentTime;
+        private bool IsPaused;
+        private Action OnResume; 
+        #endregion
+
+        #region Unity
+        private void Start()
         {
-            ResumeDialog(); 
+            ResetTime();
+            ResetPause();
         }
 
-        if (CurrentDialog == null || IsPaused)
+        private void Update()
         {
-            return;
-        }
+            ListenForResumeInput();
 
-        CurrentTime += Time.deltaTime;
-
-        if (CurrentTime <= 0)
-        {
-            return; 
-        }
-
-        if (CurrentDialog.HasNext())
-        {
-            char next = CurrentDialog.NextCharachter();
-            text.text += next;
-
-            if (next == '\n')
+            if (IsDialogReady() == false)
             {
-                if (CurrentDialog.Property.HasFlag(DialogPauseProperty.NewLine))
-                {
-                    PauseDialog();
-                }
-                else
-                {
-                    CurrentTime = -CurrentDialog.GetDisplayDelay();
-                }
+                return;
             }
-            else 
-            {
-                if (next == ' ' && CurrentDialog.Property.HasFlag(DialogPauseProperty.Space))
-                {
-                    PauseDialog();
-                }
-                else if (CurrentDialog.Property.HasFlag(DialogPauseProperty.NewPage) && next == '\0')
-                {
-                    OnResume += ClearText;
-                    OnResume += () => OnResume -= ClearText;
 
-                    PauseDialog();
-                }
-                else
-                {
-                    CurrentTime = -CurrentDialog.GetDisplayDelay();
-                }
-            }
-        }
-        else //finished dialog 
-        {
-            if (CurrentDialog.Property.HasFlag(DialogPauseProperty.PageEnd))
+            CurrentTime += Time.deltaTime;
+            if (IsDelayOnCooldown())
             {
-                PauseDialog();
-                OnResume += EndCurrentDialogSegment;
-                OnResume += () => OnResume -= EndCurrentDialogSegment;
+                return;
+            }
+
+            if (CurrentDialog.HasNext())
+            {
+                RecieveCharacter(CurrentDialog.NextCharachter());
+                ApplyDialogDelay();
             }
             else
             {
-                EndCurrentDialogSegment(); 
+                DialogReachedEnd();
+            }
+
+        } //end update 
+        #endregion 
+        #region Called From Update
+        private void ListenForResumeInput()
+        {
+            if (Input.anyKeyDown && IsPaused)
+            {
+                ResumeDialog();
             }
         }
-    }
 
-    private void EndCurrentDialogSegment()
-    {
-        ClearText();
-        CurrentDialog?.WhenDialogEnd();
-        CurrentDialog = null;
-    }
-
-    public void PresentDialog(Dialog dialog)
-    {
-        if(CurrentDialog != null)
+        private bool IsDialogReady()
         {
-            CurrentDialog.WhenDialogEnd();
+            return CurrentDialog != null && !IsPaused;
         }
 
+        private bool IsDelayOnCooldown()
+        {
+            return CurrentTime < 0;
+        }
 
-        ClearText();
-        CurrentDialog = dialog;
+        private void RecieveCharacter(char next)
+        {
+            AppendToDisplay(next);
 
-        CurrentDialog.ResetDialog();
-        CurrentDialog.WhenDialogStart();
+            if (IsForcedPauseCharachter(next))
+            {
+                ClearTextOnResume();
+            }
 
-        IsPaused = false;
-        PauseIndecator.SetActive(false);
-    }
+            CheckPause(next.ToPauseProperty());
+        }
 
-    public void ResetTime()
-    {
-        CurrentTime = 0;
-    }
+        private void DialogReachedEnd()
+        {
+            if (CurrentDialog.Property.HasFlag(DialogPauseType.End))
+            {
+                PauseDialog();
+                OnResume += EndCurrentDialog;
+                OnResume += () => OnResume -= EndCurrentDialog; //TODO adds forever
+            }
+            else
+            {
+                EndCurrentDialog();
+            }
+        }
+        #endregion
+        #region RecieveCharacter Helpers
+        private void AppendToDisplay(char next)
+        {
+            TextBox.text += next;
+        }
 
-    public void ClearText()
-    {
-        text.text = string.Empty; 
-    }
+        private bool IsForcedPauseCharachter(char next)
+        {
+            return next == '\0';
+        }
 
-    public void PauseDialog()
-    {
-        IsPaused = true;
-        CurrentDialog.WhenDialogPause();
-        PauseIndecator.SetActive(true); 
-    }
+        private void ApplyDialogDelay()
+        {
+            CurrentTime = -CurrentDialog.GetDisplayDelay();
+        }
 
-    public void ResumeDialog()
-    {
-        CurrentDialog.WhenDialogResume();
+        private void ClearTextOnResume()
+        {
+            OnResume += ClearText;
+            OnResume += () => OnResume -= ClearText;
+        }
 
-        OnResume?.Invoke();
-        IsPaused = false;
-        PauseIndecator.SetActive(false);
-    }
+        private void CheckPause(DialogPauseType flag)
+        {
+            if(flag != DialogPauseType.None && ShouldPause(flag))
+            {
+                PauseDialog(); 
+            }
+        }
+        private bool ShouldPause(DialogPauseType flag)
+        {
+            return EnumExtensions.HasFlag(CurrentDialog.Property,flag);
+        }
+        #endregion
+        #region RecieveCharacter helpers
+        private void EndCurrentDialog()
+        {
+            ClearText();
+            CurrentDialog?.WhenDialogEnd();
+            CurrentDialog = null;
+        }
 
-    public void ForceEndDialog()
-    {
-        EndCurrentDialogSegment(); 
+        private void Pause()
+        {
+            IsPaused = true;
+            PauseIndecator.SetActive(true);
+        }
 
-        IsPaused = false;
-        PauseIndecator.SetActive(false);
-    }
+        private void ResetPause()
+        {
+            IsPaused = false;
+            PauseIndecator.SetActive(false);
+        }
+        #endregion
+        #region Public Methods
+        public void PresentDialog(Dialog dialog)
+        {
+            if (CurrentDialog != null)
+            {
+                CurrentDialog.WhenDialogEnd();
+            }
 
-    protected bool PageIsFull()
-    {
-        return false; //TODO maybe someday 
+
+            ClearText();
+            CurrentDialog = dialog;
+
+            CurrentDialog.ResetDialog();
+            CurrentDialog.WhenDialogStart();
+
+            ResetPause();
+        }
+
+        public void ResetTime()
+        {
+            CurrentTime = 0;
+        }
+
+        public void ClearText()
+        {
+            TextBox.text = string.Empty;
+        }
+
+        public void PauseDialog()
+        {
+            Pause();
+            CurrentDialog.WhenDialogPause();
+        }
+
+        public void ResumeDialog()
+        {
+            CurrentDialog.WhenDialogResume();
+
+            OnResume?.Invoke();
+            ResetPause();
+        }
+
+        public void ForceEndDialog()
+        {
+            EndCurrentDialog();
+            ResetPause();
+        }
+        #endregion
     }
 }
