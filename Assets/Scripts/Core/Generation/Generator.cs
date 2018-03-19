@@ -103,8 +103,7 @@ namespace ChainedRam.Core.Generation
         public void Begin()
         {
             enabled = true;
-            OnBegin();
-            RaiseOnBeginEvent();
+            OnEnable(); 
         }
 
         /// <summary>
@@ -126,8 +125,7 @@ namespace ChainedRam.Core.Generation
         public void End()
         {
             enabled = false;
-            OnEnd();
-            RaiseOnEndEvent();
+            OnDisable(); 
         }
 
         /// <summary>
@@ -184,6 +182,18 @@ namespace ChainedRam.Core.Generation
             {
                 SkippedGenerate();
             } 
+        }
+
+        protected void OnEnable()
+        {
+            OnBegin();
+            RaiseOnBeginEvent();
+        }
+
+        protected void OnDisable()
+        {
+            OnEnd();
+            RaiseOnEndEvent();
         }
         #endregion
         #region Protected Abstract
