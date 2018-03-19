@@ -11,18 +11,19 @@ namespace ChainedRam.Core.Generation
     {
         public virtual Generator[] ChildGenerators { get { return Generators; } set { Generators = value; } }
 
+        public int Repeat = 1;
+
         public Generator[] Generators;
 
         [HideInInspector()]
         public Generator Selected;
 
-        [HideInInspector()]
-        public Selector Selector;
-
+       
         [HideInInspector]
         public SelectorType SelectorType;
 
-        private bool HasRanOut = false; 
+        private bool HasRanOut = false;
+        private int Index;
 
         public void SwitchIn(Generator gen)
         {
@@ -56,7 +57,7 @@ namespace ChainedRam.Core.Generation
         protected override void OnBegin()
         {
             HasRanOut = false;
-            Selector.ResetSelector(); 
+            ResetSelector(); 
         }
 
         private void Next(object s= null, GenerateEventArgs e= null)
@@ -95,7 +96,7 @@ namespace ChainedRam.Core.Generation
 
         public Generator NextGenerator()
         {
-            return Selector.Select(ChildGenerators, Selected);
+            return Select(ChildGenerators, Selected);
         }
 
         protected override void OnEnd()
@@ -120,6 +121,34 @@ namespace ChainedRam.Core.Generation
             }
 
             ChildGenerators = gens.ToArray(); 
+        }
+
+        public T Select<T>(T[] list, T prev = null) where T : class
+        {
+            if (list.Length == 0)
+            {
+                throw new Exception("Cannot select from empty list"); //TODO custom exception
+            }
+
+            if (Repeat > 1 && Index + 1 == list.Length)
+            {
+                Repeat--;
+                Index = 0;
+            }
+
+            if (Index < list.Length)
+            {
+                return list[(Index++)];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public void ResetSelector()
+        {
+            Index = 0;
         }
     }
 
