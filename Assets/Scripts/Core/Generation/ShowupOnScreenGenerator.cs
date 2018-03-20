@@ -18,8 +18,6 @@ namespace ChainedRam.Core.Generation
         public bool TeleportToOtherSide;
         public bool HideGizmo;
 
-        public PositionProvider PositionProvider; 
-
         private Vector2? TargetPosition;
 
         private const float DeltaDistance = 0.01f;
