@@ -28,9 +28,9 @@ namespace ChainedRam.Core.Generation
             }
         }
 
-        protected override void Update()
+        protected override void FixedUpdate()
         {
-            base.Update();
+            base.FixedUpdate();
             if (CurrentTime > 0)
                 CurrentTime -= Time.fixedDeltaTime;
         }

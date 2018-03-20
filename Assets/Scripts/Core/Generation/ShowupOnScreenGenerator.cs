@@ -37,9 +37,9 @@ namespace ChainedRam.Core.Generation
             Speed = Vector3.Distance(Target.transform.position, TargetPosition.Value) / WaitTime;
         }
 
-        protected override void Update()
+        protected override void FixedUpdate()
         {
-            base.Update();
+            base.FixedUpdate();
 
             if (TargetPosition != null)
             {

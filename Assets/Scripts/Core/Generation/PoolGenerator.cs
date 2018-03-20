@@ -15,7 +15,6 @@ namespace ChainedRam.Core.Generation
 
         public Generator[] Generators;
 
-        [HideInInspector()]
         public Generator Selected;
 
        
@@ -43,7 +42,6 @@ namespace ChainedRam.Core.Generation
             Selected = gen;
 
             gen.OnEndEventHandler += Next;
-
             gen.Delta = this.Delta; 
             gen.Begin();
         }
@@ -51,13 +49,14 @@ namespace ChainedRam.Core.Generation
         public void Demote(Generator gen)
         {
             gen.OnEndEventHandler -= Next;
-            Selected = null;
+            //Selected = null;
         }
 
         protected override void OnBegin()
         {
             HasRanOut = false;
-            ResetSelector(); 
+            ResetSelector();
+            Next();
         }
 
         private void Next(object s= null, GenerateEventArgs e= null)
@@ -70,14 +69,13 @@ namespace ChainedRam.Core.Generation
             }
             else
             {
-                SwitchIn(nextGen);
-                
+                SwitchIn(nextGen);  
             }
         }
 
         protected override void OnGenerate(GenerateEventArgs e)
         {
-            Next();
+            
         }
 
         /// <summary>
@@ -86,7 +84,7 @@ namespace ChainedRam.Core.Generation
         /// <returns></returns>
         protected override bool ShouldGenerate()
         {
-            return !((Selected?.enabled) ?? false); //TODO use GeneratorShouldGnerate //maybe not 
+            return false;
         }
 
         protected override bool ShouldTerminate()
@@ -101,8 +99,10 @@ namespace ChainedRam.Core.Generation
 
         protected override void OnEnd()
         {
-            if(Selected != null)
+            if (Selected != null)
+            {
                 Demote(Selected);
+            }
         }
 
         [ContextMenu("From Children")]
@@ -130,7 +130,7 @@ namespace ChainedRam.Core.Generation
                 throw new Exception("Cannot select from empty list"); //TODO custom exception
             }
 
-            if (Repeat > 1 && Index + 1 == list.Length)
+            if (Repeat > 0 && Index + 1 >= list.Length)
             {
                 Repeat--;
                 Index = 0;

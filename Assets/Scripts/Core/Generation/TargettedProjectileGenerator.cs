@@ -22,9 +22,9 @@ namespace ChainedRam.Core.Generation
             StartCoroutine(StareAtPlayer(WaitTime));
         }
 
-        protected override void Update()
+        protected override void FixedUpdate()
         {
-            base.Update();
+            base.FixedUpdate();
             if (IsMoving == true)
             {
                 Projectile.transform.up = (Target.transform.position - Projectile.transform.position);

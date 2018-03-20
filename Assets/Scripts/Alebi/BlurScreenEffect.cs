@@ -8,17 +8,15 @@ using UnityStandardAssets.ImageEffects;
 
 public class BlurScreenEffect : MonoBehaviour, IStatusEffect
 {
-
-
-	private BlurOptimized blur;
+	private static BlurOptimized blur;
 
 	private void Start()
-	{
-		blur = Camera.main.GetComponent<BlurOptimized>();
+	{	
 		if (blur == null)
 		{
-			blur = Camera.main.gameObject.AddComponent<BlurOptimized>();
+			blur = Camera.main.GetComponent<BlurOptimized>() ?? Camera.main.gameObject.AddComponent<BlurOptimized>();
 		}
+
 		blur.downsample = 1;
 		blur.blurIterations = 2;
 		blur.blurSize = 3;
@@ -36,7 +34,7 @@ public class BlurScreenEffect : MonoBehaviour, IStatusEffect
 		gameObject.SetActive(false);
 	}
 
-	#region  IStatusEffect Interface Property
+	#region IStatusEffect Interface Property
 	public string Name
 	{
 		get
@@ -62,3 +60,4 @@ public class BlurScreenEffect : MonoBehaviour, IStatusEffect
 	} 
 	#endregion
 }
+

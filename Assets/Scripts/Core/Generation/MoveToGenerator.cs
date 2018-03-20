@@ -22,9 +22,9 @@ public class MoveToGenerator : TimedGenerator
         IsMoving = true;   
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update(); 
+        base.FixedUpdate(); 
 
         if (!IsMoving)
         {
