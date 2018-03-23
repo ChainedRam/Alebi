@@ -15,12 +15,13 @@ namespace ChainedRam.Core.Generation
 
         public Generator[] Generators;
 
+        [HideInInspector]
         public Generator Selected;
 
-       
         [HideInInspector]
         public SelectorType SelectorType;
 
+        private int RepeatCounter; 
         private bool HasRanOut = false;
         private int Index;
 
@@ -55,6 +56,7 @@ namespace ChainedRam.Core.Generation
         protected override void OnBegin()
         {
             HasRanOut = false;
+            RepeatCounter = Repeat; 
             ResetSelector();
             Next();
         }
@@ -130,9 +132,9 @@ namespace ChainedRam.Core.Generation
                 throw new Exception("Cannot select from empty list"); //TODO custom exception
             }
 
-            if (Repeat > 0 && Index + 1 >= list.Length)
+            if (RepeatCounter > 1 && Index + 1 >= list.Length)
             {
-                Repeat--;
+                RepeatCounter--;
                 Index = 0;
             }
 
