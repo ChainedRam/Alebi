@@ -99,7 +99,7 @@ namespace ChainedRam.Core.Configuration
         /// </summary>
         /// <param name="t"></param>
         /// <param name="comp"></param>
-        public static void ConfigureGameObject(GameObject go)
+        public static void ConfigureGameObject(GameObject go, bool mustConfig = false)
         {
             int configCount = 0;
             foreach (var comp in go.GetComponents<Component>())
@@ -111,10 +111,9 @@ namespace ChainedRam.Core.Configuration
                 }
             }
 
-            if (configCount == 0)
+            if (mustConfig && configCount == 0)
             {
                 Debug.LogError("Failed to configure: '" + go.name + "': object contains to confiurable components.");
-                //throw Exception; 
             }
         }
         #endregion
