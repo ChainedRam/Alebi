@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 114264166451944624}
   - component: {fileID: 114455801253091956}
   - component: {fileID: 114236034425944520}
-  - component: {fileID: 114995614115776844}
   - component: {fileID: 114644336013386190}
   - component: {fileID: 114191901245381222}
   m_Layer: 0
@@ -198,19 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8832c91dfd8e77245ada45168ec93576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenEffect: {fileID: 114995614115776844}
   Duration: 3
---- !u!114 &114995614115776844
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1784923916548236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aaf0288e19a8bc4f94e5bc14d97d460, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  ScreenEffect: {fileID: 0}
 --- !u!212 &212177883604979982
 SpriteRenderer:
   m_ObjectHideFlags: 1
