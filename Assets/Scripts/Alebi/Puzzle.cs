@@ -50,11 +50,18 @@ namespace ChainedRam.Alebi.Puzzle
 
         public int[][] BoxBoard;
 
-
         public GameObject EndWindow;
 
+        public Puzzle Next;
+
+
         // Use this for initialization
-        void Start()
+        private void Start()
+        {
+            Generate();
+        }
+
+        public void Generate()
         {
             float ix = (-CellSize.x / 2) * Width;
             float iy = (-CellSize.y / 2) * Height;
@@ -73,7 +80,7 @@ namespace ChainedRam.Alebi.Puzzle
                     Board[i][j].transform.localPosition = new Vector3(ix + CellSize.x * j, iy + CellSize.y * i, 0);
                 }
             }
-
+            //the starting point
             Player.transform.SetParent(Board[(int)PlayerPosition.y][(int)PlayerPosition.x].transform);
             Player.transform.localPosition = Vector3.zero;
             BoardContent[(int)PlayerPosition.y][(int)PlayerPosition.x] = TileContent.Player;
@@ -85,14 +92,13 @@ namespace ChainedRam.Alebi.Puzzle
             foreach (var boxPos in BoxPositions)
             {
                 GameObject box = Instantiate(BoxPrefab, Board[(int)boxPos.y][(int)boxPos.x].transform);
-                BoardContent[(int)boxPos.y][(int)boxPos.x] = TileContent.Box;
-                box.name = $"box {boxPos.x},{boxPos.y}";
                 box.transform.localPosition = Vector3.zero;
+                box.name = $"box {boxPos.x},{boxPos.y}";
+                BoardContent[(int)boxPos.y][(int)boxPos.x] = TileContent.Box;
             }
         }
 
-
-        float timeWaited;
+        float TimeWaited;
 
         // Update is called once per frame
         void FixedUpdate()
@@ -102,42 +108,40 @@ namespace ChainedRam.Alebi.Puzzle
                 return;
             }
 
-            timeWaited += Time.fixedDeltaTime;
+            TimeWaited += Time.fixedDeltaTime;
 
-            if (timeWaited > speed)
+            if (TimeWaited > speed)
             {
                 if (Input.GetKey(KeyCode.RightArrow) && CanMovePlayerTo(Direction.Right))
                 {
                     MovePlayerTo(Direction.Right);
-                    timeWaited = 0;
+                    TimeWaited = 0;
                 }
                 else if (Input.GetKey(KeyCode.UpArrow) && CanMovePlayerTo(Direction.Up))
                 {
                     MovePlayerTo(Direction.Up);
-                    timeWaited = 0;
+                    TimeWaited = 0;
                 }
                 else if (Input.GetKey(KeyCode.LeftArrow) && CanMovePlayerTo(Direction.Left))
                 {
                     MovePlayerTo(Direction.Left);
-                    timeWaited = 0;
+                    TimeWaited = 0;
                 }
                 else if (Input.GetKey(KeyCode.DownArrow) && CanMovePlayerTo(Direction.Down))
                 {
                     MovePlayerTo(Direction.Down);
-                    timeWaited = 0;
+                    TimeWaited = 0;
                 }
-
-
             }
-
         }
 
         private bool CanMovePlayerTo(Direction d)
         {
             int tx = (int)PlayerPosition.x + ToX(d);
             int ty = (int)PlayerPosition.y + ToY(d);
+
             //check bounds 
-            if (tx < 0 || tx >= Width || ty < 0 || ty > Height)
+            if (tx < 0 || tx >= Width || ty < 0 || ty >= Height)
             {
                 return false;
             }
@@ -195,7 +199,7 @@ namespace ChainedRam.Alebi.Puzzle
 
                 case TileContent.Goal:
                     GoalReached();
-                    break;
+                    return; 
 
                 default:
                     throw new System.Exception("srsly dude?");
@@ -212,7 +216,15 @@ namespace ChainedRam.Alebi.Puzzle
 
         private void GoalReached()
         {
-            EndWindow.SetActive(true); //egh
+            gameObject.SetActive(false);
+            if (Next)
+            {
+                Next.enabled = true; 
+            }
+            else
+            {
+                EndWindow.SetActive(true); //egh
+            }
         }
 
         IEnumerator CenterObject(GameObject go, float duration)
