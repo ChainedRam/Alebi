@@ -3,6 +3,7 @@ using ChainedRam.Core.Projection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChainedRam.Core.Configuration; 
 
 
 namespace ChainedRam.Core.Generation
@@ -16,7 +17,7 @@ namespace ChainedRam.Core.Generation
         {
             base.SetupGenerated(generated);
             generated.Motion = MotionOverride ?? generated.Motion;
-
+            ConfigureManager.ConfigureGameObject(generated.gameObject);
             generated.Setup(Delta);
         }
     }

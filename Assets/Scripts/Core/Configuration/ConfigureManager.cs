@@ -99,7 +99,7 @@ namespace ChainedRam.Core.Configuration
         /// </summary>
         /// <param name="t"></param>
         /// <param name="comp"></param>
-        public void ConfigureGameObject(GameObject go)
+        public static void ConfigureGameObject(GameObject go)
         {
             int configCount = 0;
             foreach (var comp in go.GetComponents<Component>())

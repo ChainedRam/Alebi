@@ -7,9 +7,20 @@ public class BlurCollisionEffect : CollisionEffect
 {
     public string Name { get;set; }
 
+    public float Duration;
+
+    [HideInInspector]
     public BlurScreenEffect ScreenEffect;
 
-    public float Duration;
+    private void Start()
+    {
+        if(ScreenEffect == null)
+        {
+            Debug.LogError("Missing ScreenEffect refreence. " +
+                "Be sure to add and setup 'BlurCollisionEffectConfig'" +
+                " in ConfiguraionManager.");
+        }
+    }
 
     public override void OnHit(Player p)
     {
