@@ -441,7 +441,7 @@ MonoBehaviour:
   TilePrefab: {fileID: 365889397}
   CellSize: {x: 1, y: 1}
   EndWindow: {fileID: 816836209}
-  Next: {fileID: 0}
+  Next: {fileID: 1568819112}
 --- !u!4 &422395131
 Transform:
   m_ObjectHideFlags: 0
@@ -1828,7 +1828,7 @@ MonoBehaviour:
   TilePrefab: {fileID: 496841088}
   CellSize: {x: 1, y: 1}
   EndWindow: {fileID: 816836209}
-  Next: {fileID: 0}
+  Next: {fileID: 422395130}
 --- !u!4 &1568819113
 Transform:
   m_ObjectHideFlags: 0
