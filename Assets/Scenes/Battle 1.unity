@@ -2498,8 +2498,8 @@ MonoBehaviour:
   Delta: 0
   WaitTime: 8
   Target: {fileID: 328108319}
+  Loops: -2
   TargetAngle: 0
-  Speed: 0
 --- !u!1 &1146051913
 GameObject:
   m_ObjectHideFlags: 0
@@ -3208,7 +3208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 0
-  Repeat: 8
+  Repeat: 100
   Generators:
   - {fileID: 1561565405}
   Selected: {fileID: 0}
@@ -3254,7 +3254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 0
-  WaitTime: 1
+  WaitTime: 0.25
   Prefab: {fileID: 114635628181971380, guid: 6ac4f7aceaa5047419439981f759fd74, type: 2}
   GenerateAt: {fileID: 328108324}
   Parent: {fileID: 0}
