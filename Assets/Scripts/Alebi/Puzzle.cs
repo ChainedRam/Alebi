@@ -11,7 +11,8 @@ namespace ChainedRam.Alebi.Puzzle
         Empty,
         Box,
         Goal,
-        Player
+        Player,
+        Wall
     }
 
     /// <summary>
@@ -39,12 +40,14 @@ namespace ChainedRam.Alebi.Puzzle
         public Vector2 GoalPosition;
 
         public Vector2[] BoxPositions;
+        public Vector2[] WallPositions;
 
         public GameObject Player;
         public GameObject Goal;
 
         public GameObject BoxPrefab;
         public GameObject TilePrefab;
+        public GameObject WallPrefab;
 
         public Vector2 CellSize;
 
@@ -88,6 +91,13 @@ namespace ChainedRam.Alebi.Puzzle
                 BoardContent[(int)boxPos.y][(int)boxPos.x] = TileContent.Box;
                 box.name = $"box {boxPos.x},{boxPos.y}";
                 box.transform.localPosition = Vector3.zero;
+            }
+            foreach (var WallPos in WallPositions)
+            {
+                GameObject Wall = Instantiate(WallPrefab, Board[(int)WallPos.y][(int)WallPos.x].transform);
+                BoardContent[(int)WallPos.y][(int)WallPos.x] = TileContent.Wall;
+                Wall.name = $"Wall {WallPos.x},{WallPos.y}";
+                Wall.transform.localPosition = Vector3.zero;
             }
         }
 
@@ -146,6 +156,8 @@ namespace ChainedRam.Alebi.Puzzle
             {
                 case TileContent.Empty:
                     return true;
+                case TileContent.Wall:
+                    return false;
 
                 case TileContent.Box:
                     int bx = tx + ToX(d);
@@ -192,6 +204,7 @@ namespace ChainedRam.Alebi.Puzzle
                     StartCoroutine(CenterObject(box, speed));
                     BoardContent[py][px] = TileContent.Empty;
                     break;
+
 
                 case TileContent.Goal:
                     GoalReached();
