@@ -1,0 +1,18 @@
+*Naggah stops in front of some boulders blocking her path*
+N: <Neutral> Jaber must have put these boulders here to protect his den. 
+N: <Thinking> How did he manage that with his tiny body? He must have had help from someone.
+N: <Determined> Now to deal with these boulders.
+
+*Naggah does first puzzle*
+
+N: <Relieved> Ok that was easy, Jaber has to try harder than that to keep me out of his little cave
+
+*naggah goes through first door and sees second set of boulders*
+
+N: <Annoyed, -_-> I spoke to soon. 
+
+*she does second puzzle*
+
+N: <Happy> I did it! Am I done?
+
+*goes through door and sees 3rd set*
