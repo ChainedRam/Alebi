@@ -26,10 +26,12 @@ namespace ChainedRam.Core
         OutSide = -1, 
     }
 
-
-    public class PositionProvider : MonoBehaviour
+    /// <summary>
+    /// Provides Positions relative to camera sides.
+    /// </summary>
+    public static class PositionProvider
     {
-        public Vector2 GetScreenPosition(Direction dir, Vector2 offset, PositionRelativeTo m)
+        public static Vector2 GetScreenPosition(Direction dir, Vector2 offset, PositionRelativeTo m)
         {
             int mov = (int)m;
 
@@ -57,22 +59,22 @@ namespace ChainedRam.Core
             return new Vector2(width, height);
         }
 
-        public Vector2 GetScreenPosition(Direction dir, Vector2 offset)
+        public static Vector2 GetScreenPosition(Direction dir, Vector2 offset)
         {
             return GetScreenPosition(dir, offset, PositionRelativeTo.None); 
         }
 
-        public Vector2 GetScreenPosition(Direction dir)
+        public static Vector2 GetScreenPosition(Direction dir)
         {
             return GetScreenPosition(dir, Vector2.zero, PositionRelativeTo.None);
         }
 
-        public float GetScreenWidth()
+        public static float GetScreenWidth()
         {
             return GetScreenHeight() * Camera.main.aspect;
         }
 
-        public float GetScreenHeight()
+        public static float GetScreenHeight()
         {
             return 2 * Camera.main.orthographicSize;
         }

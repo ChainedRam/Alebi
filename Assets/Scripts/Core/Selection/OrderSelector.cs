@@ -8,7 +8,7 @@ namespace ChainedRam.Core.Selection
 {
     public class OrderSelector : Selector
     {
-        public bool Loop;
+        public int Repeat = 0;
 
         private int Index;
 
@@ -19,36 +19,25 @@ namespace ChainedRam.Core.Selection
                 throw new Exception("Cannot select from empty list"); //TODO custom exception
             }
 
-            if (Loop)
+            if (Repeat > 1 && Index + 1 == list.Length)
             {
-                return list[(Index++) % list.Length];
+                Repeat--;
+                Index = 0;
             }
-            else if(Index < list.Length)
+
+            if (Index < list.Length)
             {
                 return list[(Index++)];
             }
-
-            return null; 
-        }
-
-        public void ResetIndex()
-        {
-            Index = 0;
-        }
-
-        public void Skip()
-        {
-            Skip(1);
-        }
-
-        public void Skip(int skips)
-        {
-            Index += skips;
+            else
+            {
+                return null;
+            }
         }
 
         public override void ResetSelector()
         {
-            Index = 0; 
+            Index = 0;
         }
     } 
 }

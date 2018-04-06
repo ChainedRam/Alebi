@@ -18,8 +18,6 @@ namespace ChainedRam.Core.Generation
         public bool TeleportToOtherSide;
         public bool HideGizmo;
 
-        public PositionProvider PositionProvider; 
-
         private Vector2? TargetPosition;
 
         private const float DeltaDistance = 0.01f;
@@ -39,9 +37,9 @@ namespace ChainedRam.Core.Generation
             Speed = Vector3.Distance(Target.transform.position, TargetPosition.Value) / WaitTime;
         }
 
-        protected override void Update()
+        protected override void FixedUpdate()
         {
-            base.Update();
+            base.FixedUpdate();
 
             if (TargetPosition != null)
             {

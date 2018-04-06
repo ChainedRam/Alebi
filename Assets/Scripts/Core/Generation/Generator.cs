@@ -103,8 +103,6 @@ namespace ChainedRam.Core.Generation
         public void Begin()
         {
             enabled = true;
-            OnBegin();
-            RaiseOnBeginEvent();
         }
 
         /// <summary>
@@ -126,8 +124,6 @@ namespace ChainedRam.Core.Generation
         public void End()
         {
             enabled = false;
-            OnEnd();
-            RaiseOnEndEvent();
         }
 
         /// <summary>
@@ -163,7 +159,7 @@ namespace ChainedRam.Core.Generation
         /// <summary>
         /// Runs the generation cycle.  DO NOT OVERWRITE
         /// </summary>
-        protected virtual void Update()
+        protected virtual void FixedUpdate()
         {
             if (enabled == false)
             {
@@ -185,16 +181,28 @@ namespace ChainedRam.Core.Generation
                 SkippedGenerate();
             } 
         }
+
+        protected void OnEnable()
+        {
+            OnBegin();
+            RaiseOnBeginEvent();
+        }
+
+        protected void OnDisable()
+        {
+            OnEnd();
+            RaiseOnEndEvent();
+        }
         #endregion
         #region Protected Abstract
         /// <summary>
-        /// Called within <see cref="Update"/> to check if generation is allowed.
+        /// Called within <see cref="FixedUpdate"/> to check if generation is allowed.
         /// </summary>
         /// <returns></returns>
         protected abstract bool ShouldGenerate();
 
         /// <summary>
-        /// Called within <see cref="Update"/> to check if generation shoul terminate before generating.
+        /// Called within <see cref="FixedUpdate"/> to check if generation shoul terminate before generating.
         /// </summary>
         /// <returns></returns>
         protected abstract bool ShouldTerminate();

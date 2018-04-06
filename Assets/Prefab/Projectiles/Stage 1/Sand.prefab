@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 114264166451944624}
   - component: {fileID: 114455801253091956}
   - component: {fileID: 114236034425944520}
-  - component: {fileID: 114995614115776844}
   - component: {fileID: 114644336013386190}
   - component: {fileID: 114191901245381222}
   m_Layer: 0
@@ -44,7 +43,7 @@ Transform:
   m_GameObject: {fileID: 1784923916548236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.62, y: -4.04, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -98,10 +97,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 0.1
-  Tilt: 90
+  Tilt: 0
   SpeedAcc: -0.001
   TiltAcc: 0
-  FaceTilt: 0
+  FaceTilt: 1
 --- !u!114 &114264166451944624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,8 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 975c87e966f7ad643a3b5617125cb392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StrechTo: {x: 2, y: 5, z: 1}
-  Speed: 0.04
+  StrechTo: {x: 5, y: 2, z: 1}
+  Duration: 0
 --- !u!114 &114904437918720438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,19 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8832c91dfd8e77245ada45168ec93576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenEffect: {fileID: 114995614115776844}
   Duration: 3
---- !u!114 &114995614115776844
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1784923916548236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aaf0288e19a8bc4f94e5bc14d97d460, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  ScreenEffect: {fileID: 0}
 --- !u!212 &212177883604979982
 SpriteRenderer:
   m_ObjectHideFlags: 1

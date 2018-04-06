@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class StrechScale : MonoBehaviour
 {
-	public Vector3 StrechTo;
+    private float Speed;
 
-	public float Speed;
+    public Vector3 StrechTo;
 
-	private void Awake()
-	{
-		enabled = true; 
-	}
+    public float Duration; 
 
-	public void BeginStreching()
-	{
-		enabled = true; 
-	}
+    private void Awake()
+    {
+        enabled = true;
+        Speed =  Vector3.Distance(transform.localScale, StrechTo) / (Duration); 
+    }
 
-	private void Update()
-	{
-		transform.localScale = Vector3.MoveTowards(transform.localScale, StrechTo, Speed); 
-	}
+    public void BeginStreching()
+    {
+        enabled = true; 
+    }
+
+    private void Update()
+    {
+        transform.localScale = Vector3.MoveTowards(transform.localScale, StrechTo, Speed * Time.deltaTime); 
+    }
 }
