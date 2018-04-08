@@ -18,7 +18,7 @@ namespace ChainedRam.Core.Generation
         public T Prefab;
 
         [Tooltip("Transform's location.")]
-        public Transform GenerateAt;
+        public PositionProvider GenerateAt;
 
         [Tooltip("Makes generated instances children of.")]
         public Transform Parent; 
@@ -76,8 +76,10 @@ namespace ChainedRam.Core.Generation
         public virtual void SetupGenerated(T instance)
         {
             instance.gameObject.SetActive(true);
-            instance.transform.position = GenerateAt.position;
-            instance.transform.rotation = GenerateAt.rotation; 
+            instance.transform.position = GenerateAt.ProvidedPosition;
+
+            if(GenerateAt.ProvidedRotation.HasValue)
+                instance.transform.eulerAngles = Vector3.forward * GenerateAt.ProvidedRotation.Value; 
         }
         #endregion
         #region Override Generator
