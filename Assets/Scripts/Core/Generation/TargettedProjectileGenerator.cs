@@ -10,10 +10,9 @@ namespace ChainedRam.Core.Generation
     public class TargettedProjectileGenerator : ProjectileGenerator
     {
         [Header("Targetted Options")]
-        public GameObject Target;
+        public PositionProvider Target;
 
         private bool IsMoving;
-
         private Projectile Projectile;
 
         protected override void OnGenerate(GenerateEventArgs e)
@@ -27,7 +26,7 @@ namespace ChainedRam.Core.Generation
             base.FixedUpdate();
             if (IsMoving == true)
             {
-                Projectile.transform.up = (Target.transform.position - Projectile.transform.position);
+                Projectile.transform.up = (Target.ProvidedPosition - Projectile.transform.position);
             }
         }
 
@@ -36,7 +35,7 @@ namespace ChainedRam.Core.Generation
             IsMoving = true;
             yield return new WaitForSeconds(prepTime);
 
-
+            Projectile.Setup(Delta); 
             IsMoving = false;
         }
 

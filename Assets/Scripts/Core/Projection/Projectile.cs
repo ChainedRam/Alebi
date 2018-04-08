@@ -15,11 +15,13 @@ namespace ChainedRam.Core.Projection
         public void Start()
         {
             Motion.Initialize(this, 1);
+            enabled = false; 
         }
 
         public virtual void Setup(float delta)
         {
             Motion.Initialize(this, delta);
+            enabled = true; 
         }
 
         public void FixedUpdate()

@@ -9,11 +9,11 @@ namespace ChainedRam.Core.Generation
     public class ShowupOnScreenGenerator : TimedGenerator
     {
         public GameObject Target;
-        public Direction Side;
-        public PositionRelativeTo OffsetRelative;
-        
+
+        public PositionProvider PositionProvider; 
+
         public int TargetRotation;
-        public Vector2 Offset;
+
 
         public bool TeleportToOtherSide;
         public bool HideGizmo;
@@ -28,10 +28,10 @@ namespace ChainedRam.Core.Generation
         {
             if (TeleportToOtherSide)
             {
-                Target.transform.position = PositionProvider.GetScreenPosition(Side, Offset, (PositionRelativeTo)(-1*(int)OffsetRelative)); 
+                Target.transform.position = PositionProvider.OppositePosition;
             }
 
-            TargetPosition = PositionProvider.GetScreenPosition(Side, Offset, OffsetRelative); 
+            TargetPosition = PositionProvider.ProvidedPosition;
 
             Target.transform.eulerAngles = Vector3.forward * TargetRotation;
             Speed = Vector3.Distance(Target.transform.position, TargetPosition.Value) / WaitTime;
@@ -62,7 +62,7 @@ namespace ChainedRam.Core.Generation
                 return;
             }
 
-            Vector2 sidePos = PositionProvider.GetScreenPosition(Side, Offset, OffsetRelative);
+            Vector2 sidePos = PositionProvider.ProvidedPosition; 
            
             Gizmos.DrawSphere(sidePos, .5f);
         }

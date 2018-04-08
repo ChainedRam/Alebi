@@ -9,14 +9,16 @@ namespace ChainedRam.Core.Projection
 {
     public class TargetedMotion : AbsoluteMotion
     {
-        public GameObject Target;
+        public PositionProvider Target;
 
-        [Range(1f, 350f)]
+        [Range(1f, 359)]
         public float Degree = 1;
 
         public float Speed;
 
         public bool HideGizmo;
+
+        private Projectile Projectile; 
 
         private const float StepSize = 0.005f;
         private float DegreeToTarget;
@@ -27,7 +29,7 @@ namespace ChainedRam.Core.Projection
         public override void Initialize(Projectile sender, float delta = 1)
         {
             base.Initialize(sender, delta);
-
+            Projectile = sender; 
             FancyMath();
         }
 
@@ -57,17 +59,17 @@ namespace ChainedRam.Core.Projection
 
         private void FancyMath()
         {
-            var lineCenter = (transform.position + Target.transform.position) / 2;
-            float L = Vector3.Distance(transform.position, Target.transform.position);
+            var lineCenter = (Projectile.transform.position + Target.ProvidedPosition) / 2;
+            float L = Vector3.Distance(Projectile.transform.position, Target.ProvidedPosition);
             float X = (L) / (Mathf.Tan((Degree / 2) * Mathf.Deg2Rad) * 2);
-            float Xdiff = transform.position.x - Target.transform.position.x;
-            float Ydiff = transform.position.y - Target.transform.position.y;
+            float Xdiff = Projectile.transform.position.x - Target.ProvidedPosition.x;
+            float Ydiff = Projectile.transform.position.y - Target.ProvidedPosition.y;
 
             DegreeToTarget = Mathf.Atan2(Ydiff, Xdiff) * Mathf.Rad2Deg;
 
             var offset = (Vector2.right * X).Rotate(-90 + DegreeToTarget);
             var circleCenter = lineCenter + (Vector3)offset;
-            float radius = Vector3.Distance(circleCenter, transform.position);
+            float radius = Vector3.Distance(circleCenter, Projectile.transform.position);
             float arcLength = radius * Degree * Mathf.Deg2Rad;
 
             DegreeStepLength = arcLength / StepSize;
@@ -78,26 +80,26 @@ namespace ChainedRam.Core.Projection
 
         private void OnDrawGizmos()
         {
-            if (HideGizmo)
+            if (HideGizmo || Projectile == null)
             {
                 return;
             }
             float TotalDegree = Degree;
 
             //line between
-            Gizmos.DrawLine(transform.position, Target.transform.position);
+            Gizmos.DrawLine(Projectile.transform.position, Target.ProvidedPosition);
 
             //center point 
-            var lineCenter = (transform.position + Target.transform.position) / 2;
+            var lineCenter = (Projectile.transform.position + Target.ProvidedPosition) / 2;
             Gizmos.DrawSphere(lineCenter, 0.1f);
 
 
             //Cicrle center 
-            float L = Vector3.Distance(transform.position, Target.transform.position);
+            float L = Vector3.Distance(Projectile.transform.position, Target.ProvidedPosition);
             float X = (L) / (Mathf.Tan((TotalDegree / 2) * Mathf.Deg2Rad) * 2);
 
-            float Xdiff = transform.position.x - Target.transform.position.x;
-            float Ydiff = transform.position.y - Target.transform.position.y;
+            float Xdiff = Projectile.transform.position.x - Target.ProvidedPosition.x;
+            float Ydiff = Projectile.transform.position.y - Target.ProvidedPosition.y;
 
             float degree = Mathf.Atan2(Ydiff, Xdiff) * Mathf.Rad2Deg;
 
@@ -108,7 +110,7 @@ namespace ChainedRam.Core.Projection
             Gizmos.DrawSphere(circleCenter, 0.1f);
 
 
-            float radius = Vector3.Distance(circleCenter, transform.position);
+            float radius = Vector3.Distance(circleCenter, Projectile.transform.position);
 
             //length 
             float arcLength = radius * TotalDegree * Mathf.Deg2Rad;
@@ -117,7 +119,7 @@ namespace ChainedRam.Core.Projection
 
             float degreeStep = TotalDegree / degreeStepCount;
 
-            Vector2 from = transform.position;
+            Vector2 from = Projectile.transform.position;
             Vector2 to;
             for (int i = 0; i < degreeStepCount && i < 1000000; i++)
             {

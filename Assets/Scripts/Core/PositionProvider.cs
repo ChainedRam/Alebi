@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ namespace ChainedRam.Core
 {
     public enum Direction
     {
-        None = 0x00,
+        Transform = -1,
+        Center = 0x00,
         //Single
         North = 0x01,
         South = 0x02,
@@ -29,8 +31,81 @@ namespace ChainedRam.Core
     /// <summary>
     /// Provides Positions relative to camera sides.
     /// </summary>
-    public static class PositionProvider
+    [Serializable]
+    public class PositionProvider
     {
+        [SerializeField]
+        private Direction Direction;
+
+        [SerializeField]
+        private Vector2 Offset;
+
+        [SerializeField]
+        private PositionRelativeTo RelativeTo;
+        
+        [SerializeField]
+        private Transform Refrence;
+
+        public Vector3 ProvidedPosition
+        {
+            get
+            {
+                if (Direction == Direction.Transform)
+                {
+                    if(Refrence == null)
+                    {
+                        throw new NullReferenceException("Transform must be set"); 
+                    }
+                    return Refrence.position + (Vector3)Offset; 
+                }
+
+                return GetScreenPosition(Direction, Offset, RelativeTo); 
+            }
+        }
+
+        public Vector3 OppositePosition
+        {
+            get {
+                if (Direction == Direction.Transform)
+                {
+                    if (Refrence == null)
+                    {
+                        throw new NullReferenceException("Transform must be set");
+                    }
+                    return Refrence.position - (Vector3)Offset;
+                }
+
+                return GetScreenPosition(Direction, Offset, (PositionRelativeTo)(-1 * (int)RelativeTo));
+            }
+        }
+
+        public void SetToTransform(Transform transform)
+        {
+            SetToTransform(transform, Vector2.zero); 
+        }
+
+        public void SetToTransform(Transform transform, Vector2 offset)
+        {
+            Direction = Direction.Transform;
+            Offset = offset; 
+            RelativeTo = PositionRelativeTo.None;
+            Refrence = transform;
+        }
+
+        public void SetToPosition(Direction d, Vector2 offset, PositionRelativeTo r = PositionRelativeTo.None)
+        {
+            Direction = d;
+            Offset = offset;
+            RelativeTo = r;
+            Refrence = null;
+        }
+
+        public void SetToPosition(Direction d)
+        {
+            SetToPosition(d, Vector2.zero); 
+        }
+
+        #region Static Helper Methods
         public static Vector2 GetScreenPosition(Direction dir, Vector2 offset, PositionRelativeTo m)
         {
             int mov = (int)m;
@@ -61,7 +136,7 @@ namespace ChainedRam.Core
 
         public static Vector2 GetScreenPosition(Direction dir, Vector2 offset)
         {
-            return GetScreenPosition(dir, offset, PositionRelativeTo.None); 
+            return GetScreenPosition(dir, offset, PositionRelativeTo.None);
         }
 
         public static Vector2 GetScreenPosition(Direction dir)
@@ -77,6 +152,7 @@ namespace ChainedRam.Core
         public static float GetScreenHeight()
         {
             return 2 * Camera.main.orthographicSize;
-        }
+        } 
+        #endregion
     }
 }

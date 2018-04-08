@@ -6,6 +6,7 @@ using UnityEditor;
 [CustomEditor(typeof(Projectile), true)]
 public class MotionEditor : Editor
 {
+    private bool ShowMotion; 
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -13,7 +14,7 @@ public class MotionEditor : Editor
 
         Projectile gen = ((Projectile)target);
 
-        if(gen.Motion != null)
+        if(gen.Motion != null && (ShowMotion = EditorGUILayout.Toggle("Show Motion Inspecter", ShowMotion)))
         {
             EditorGUILayout.LabelField(gen.Motion.name +  " Inspecter");
             CreateEditor(gen.Motion).DrawDefaultInspector();    
