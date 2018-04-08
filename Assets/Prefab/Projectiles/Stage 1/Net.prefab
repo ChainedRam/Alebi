@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114054330394001486}
   - component: {fileID: 114611567381333948}
   - component: {fileID: 114105031797533716}
+  - component: {fileID: 114158425627469044}
   m_Layer: 0
   m_Name: Net
   m_TagString: Untagged
@@ -110,6 +111,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Motion: {fileID: 114105031797533716}
+--- !u!114 &114158425627469044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1215035392223010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e175395830b94cf468939f71559a24f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target:
+    Direction: 0
+    Offset: {x: 0, y: 0}
+    Degree: 0
+    RelativeTo: 0
+    RotationFacing: 0
+    Refrence: {fileID: 0}
+  Degree: 1
+  Speed: 0
+  HideGizmo: 0
 --- !u!114 &114611567381333948
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1678,7 +1678,7 @@ Prefab:
         type: 2}
       propertyPath: Target
       value: 
-      objectReference: {fileID: 1806644291}
+      objectReference: {fileID: 0}
     - target: {fileID: 114637927211030866, guid: 8018d64c8fcaee643a89c81eabd6ff83,
         type: 2}
       propertyPath: GenerateAt
@@ -1772,7 +1772,7 @@ Prefab:
     - target: {fileID: 114333591413716878, guid: 8018d64c8fcaee643a89c81eabd6ff83,
         type: 2}
       propertyPath: PositionProvider.Direction
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 114206228067733418, guid: 8018d64c8fcaee643a89c81eabd6ff83,
         type: 2}
@@ -2218,6 +2218,166 @@ Prefab:
         type: 2}
       propertyPath: PositionProvider.RelativeTo
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114568021936312858, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: Target.Direction
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114568021936312858, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: Target.Refrence
+      value: 
+      objectReference: {fileID: 1806644298}
+    - target: {fileID: 114333591413716878, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114012931151773558, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114177405831469372, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114129827016955288, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114816174180486810, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114196718417693084, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114115574828107246, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114286405568866874, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114883748789984864, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114526281482756034, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114663033517318272, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114832440734950692, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114471861669152064, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114910371913659636, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114206228067733418, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114864089230634108, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114677198881042908, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114964452063083078, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114666600034272404, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114588868038489762, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114536039788353442, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114707015324860658, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114578561427715116, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114119418692420194, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114462701610503014, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114456813303677368, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114427710007111656, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114140770758946762, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114732143073949000, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
@@ -2758,8 +2918,11 @@ MonoBehaviour:
   PositionProvider:
     Direction: 0
     Offset: {x: 0, y: 0}
+    Degree: 0
     RelativeTo: 0
-    Refrence: {fileID: 0}
+    RotationFacing: 0
+    PositionRefrence: {fileID: 0}
+    RotationRefrence: {fileID: 0}
   TargetRotation: 180
   TeleportToOtherSide: 0
   HideGizmo: 1
@@ -2915,8 +3078,11 @@ MonoBehaviour:
   Target:
     Direction: 0
     Offset: {x: 0, y: 0}
+    Degree: 0
     RelativeTo: 0
-    Refrence: {fileID: 0}
+    RotationFacing: 0
+    PositionRefrence: {fileID: 0}
+    RotationRefrence: {fileID: 0}
 --- !u!1001 &1187995038
 Prefab:
   m_ObjectHideFlags: 0
@@ -3019,8 +3185,11 @@ MonoBehaviour:
   Target:
     Direction: 0
     Offset: {x: 0, y: 0}
+    Degree: 0
     RelativeTo: 0
-    Refrence: {fileID: 0}
+    RotationFacing: 0
+    PositionRefrence: {fileID: 0}
+    RotationRefrence: {fileID: 0}
 --- !u!1 &1194634594
 GameObject:
   m_ObjectHideFlags: 0
@@ -3071,8 +3240,11 @@ MonoBehaviour:
   Target:
     Direction: 0
     Offset: {x: 0, y: 0}
+    Degree: 0
     RelativeTo: 0
-    Refrence: {fileID: 0}
+    RotationFacing: 0
+    PositionRefrence: {fileID: 0}
+    RotationRefrence: {fileID: 0}
 --- !u!1 &1373192463
 GameObject:
   m_ObjectHideFlags: 0
@@ -3491,8 +3663,11 @@ MonoBehaviour:
   Target:
     Direction: 0
     Offset: {x: 0, y: 0}
+    Degree: 0
     RelativeTo: 0
-    Refrence: {fileID: 0}
+    RotationFacing: 0
+    PositionRefrence: {fileID: 0}
+    RotationRefrence: {fileID: 0}
 --- !u!4 &1678691260 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4825778859103278, guid: 8018d64c8fcaee643a89c81eabd6ff83,

@@ -25,7 +25,79 @@ namespace ChainedRam.Core
     {
         Inside = 1, 
         None = 0, 
-        OutSide = -1, 
+        Outside = -1, 
+    }
+
+    public enum RotationFacing
+    {
+        #region Single Absolute Directions
+        /// <summary>
+        /// 
+        /// </summary>
+        Default = 0x00,
+
+        /// <summary>
+        /// Points to absolote North
+        /// </summary>
+        North = 0x01,
+
+        /// <summary>
+        /// Points to absolote South
+        /// </summary>
+        South = 0x02,
+
+        /// <summary>
+        /// Points to absolote East
+        /// </summary>
+        East = 0x04,
+
+        /// <summary>
+        /// Points to absolote West
+        /// </summary>
+        West = 0x08,
+        #endregion
+        #region Combination Absolute Directions
+        /// <summary>
+        /// Points to absolote NorthEast
+        /// </summary>
+        NorthEast = North | East,
+
+        /// <summary>
+        /// Points to absolote NorthWest
+        /// </summary>
+        NorthWest = North | West,
+
+        /// <summary>
+        /// Points to absolote SouthEast
+        /// </summary>
+        SouthEast = South | East,
+
+        /// <summary>
+        /// Points to absolote SouthWest
+        /// </summary>
+        SouthWest = South | West,
+        #endregion
+        #region Special Directions
+        /// <summary>
+        /// Points to a rotation based on a given agnle (in degrees). 
+        /// </summary>
+        Numaric = 0xF0,
+        
+        /// <summary>
+        /// Points to scene center (inside) or the opposite (outside) base on <see cref="PositionRelativeTo"/>.
+        /// </summary>
+        Relative = 0xF1,
+
+        /// <summary>
+        /// Copies angle based on given transform. 
+        /// </summary>
+        MatchTransform = 0xF2,
+
+        /// <summary>
+        /// Tilt rotation to face given transform. 
+        /// </summary>
+        FaceTransform = 0xF3,
+        #endregion
     }
 
     /// <summary>
@@ -41,10 +113,20 @@ namespace ChainedRam.Core
         private Vector2 Offset;
 
         [SerializeField]
-        private PositionRelativeTo RelativeTo;
-        
+        private float Degree;
+
         [SerializeField]
-        private Transform Refrence;
+        private PositionRelativeTo RelativeTo;
+
+        [SerializeField]
+        private RotationFacing RotationFacing;
+
+        [SerializeField]
+        private Transform PositionRefrence;
+
+        [SerializeField]
+        private Transform RotationRefrence;
+
 
         public Vector3 ProvidedPosition
         {
@@ -52,11 +134,11 @@ namespace ChainedRam.Core
             {
                 if (Direction == Direction.Transform)
                 {
-                    if(Refrence == null)
+                    if(PositionRefrence == null)
                     {
                         throw new NullReferenceException("Transform must be set"); 
                     }
-                    return Refrence.position + (Vector3)Offset; 
+                    return PositionRefrence.position + (Vector3)Offset; 
                 }
 
                 return GetScreenPosition(Direction, Offset, RelativeTo); 
@@ -68,15 +150,69 @@ namespace ChainedRam.Core
             get {
                 if (Direction == Direction.Transform)
                 {
-                    if (Refrence == null)
+                    if (PositionRefrence == null)
                     {
                         throw new NullReferenceException("Transform must be set");
                     }
-                    return Refrence.position - (Vector3)Offset;
+                    return PositionRefrence.position - (Vector3)Offset;
                 }
 
                 return GetScreenPosition(Direction, Offset, (PositionRelativeTo)(-1 * (int)RelativeTo));
             }
+        }
+
+        public float? ProvidedRotation
+        {
+            get
+            {
+                switch (RotationFacing)
+                {
+                    case RotationFacing.Default:
+                        return null; 
+                    case RotationFacing.North:
+                        return 0;
+                    case RotationFacing.NorthEast:
+                        return 315;
+                    case RotationFacing.East:
+                        return 270;
+                    case RotationFacing.SouthEast:
+                        return 225;
+                    case RotationFacing.South:
+                        return 180;
+                    case RotationFacing.SouthWest:
+                        return 135;
+                    case RotationFacing.West:
+                        return 90;
+                    case RotationFacing.NorthWest:
+                        return 45;
+                    case RotationFacing.Numaric:
+                        return Degree;
+                    case RotationFacing.Relative:
+                        switch (RelativeTo)
+                        {
+                            case PositionRelativeTo.Inside:
+                                return AngleBetween(Vector2.zero, ProvidedPosition);                                 
+                            case PositionRelativeTo.Outside:
+                                return 180 + AngleBetween(Vector2.zero, ProvidedPosition);
+                            default:
+                                return null; 
+                        }
+                    case RotationFacing.MatchTransform:
+                        return RotationRefrence.transform.eulerAngles.z;
+                    case RotationFacing.FaceTransform:
+                        return AngleBetween(RotationRefrence.position, ProvidedPosition);
+
+                }
+
+                //should never reach here
+                return null; 
+            }
+        }
+
+        /// Because Fuck Vector2.Angle & it's sister Vector2.SignedAngle. 
+        private float AngleBetween(Vector2 from, Vector2 to)
+        {
+            return Mathf.Atan2(from.y - to.y, from.x - to.x) * Mathf.Rad2Deg - 90;
         }
 
         public void SetToTransform(Transform transform)
@@ -89,7 +225,7 @@ namespace ChainedRam.Core
             Direction = Direction.Transform;
             Offset = offset; 
             RelativeTo = PositionRelativeTo.None;
-            Refrence = transform;
+            PositionRefrence = transform;
         }
 
         public void SetToPosition(Direction d, Vector2 offset, PositionRelativeTo r = PositionRelativeTo.None)
@@ -97,7 +233,7 @@ namespace ChainedRam.Core
             Direction = d;
             Offset = offset;
             RelativeTo = r;
-            Refrence = null;
+            PositionRefrence = null;
         }
 
         public void SetToPosition(Direction d)

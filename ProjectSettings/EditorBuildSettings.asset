@@ -5,6 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Test/Test_Sprite/AnimationModelTest.unity
+  - enabled: 0
+    path: 
     guid: 82b26f41d87d01d429afdae4b6f3cc97

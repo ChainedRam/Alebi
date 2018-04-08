@@ -12,9 +12,6 @@ namespace ChainedRam.Core.Generation
 
         public PositionProvider PositionProvider; 
 
-        public int TargetRotation;
-
-
         public bool TeleportToOtherSide;
         public bool HideGizmo;
 
@@ -33,7 +30,11 @@ namespace ChainedRam.Core.Generation
 
             TargetPosition = PositionProvider.ProvidedPosition;
 
-            Target.transform.eulerAngles = Vector3.forward * TargetRotation;
+            if (PositionProvider.ProvidedRotation.HasValue)
+            {
+                Target.transform.eulerAngles = Vector3.forward * PositionProvider.ProvidedRotation.Value;
+            }
+
             Speed = Vector3.Distance(Target.transform.position, TargetPosition.Value) / WaitTime;
         }
 
