@@ -12,10 +12,10 @@ namespace ChainedRam.Core.Projection
 
         private float TimeWaited;
 
-        private Projectile sender;
+        private GameObject sender;
         private float delta; 
 
-        public override void Initialize(Projectile sender, float delta)
+        public override void Initialize(GameObject sender, float delta)
         {
             this.sender = sender;
             this.delta = delta; 

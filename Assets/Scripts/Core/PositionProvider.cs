@@ -198,21 +198,23 @@ namespace ChainedRam.Core
                                 return null; 
                         }
                     case RotationFacing.MatchTransform:
-                        return RotationRefrence.transform.eulerAngles.z;
+                        if (RotationRefrence == null)
+                        {
+                            return null;
+                        }
+                        return RotationRefrence.transform.eulerAngles.z; 
                     case RotationFacing.FaceTransform:
-                        return AngleBetween(RotationRefrence.position, ProvidedPosition);
+                        if(RotationRefrence == null)
+                        {
+                            return null; 
+                        }
+                        return  AngleBetween(RotationRefrence.position, ProvidedPosition);
 
                 }
 
                 //should never reach here
                 return null; 
             }
-        }
-
-        /// Because Fuck Vector2.Angle & it's sister Vector2.SignedAngle. 
-        private float AngleBetween(Vector2 from, Vector2 to)
-        {
-            return Mathf.Atan2(from.y - to.y, from.x - to.x) * Mathf.Rad2Deg - 90;
         }
 
         public void SetToTransform(Transform transform)
@@ -288,7 +290,13 @@ namespace ChainedRam.Core
         public static float GetScreenHeight()
         {
             return 2 * Camera.main.orthographicSize;
-        } 
+        }
+
+        /// Because Fuck Vector2.Angle & it's sister Vector2.SignedAngle. 
+        public static float AngleBetween(Vector2 from, Vector2 to)
+        {
+            return Mathf.Atan2(from.y - to.y, from.x - to.x) * Mathf.Rad2Deg - 90;
+        }
         #endregion
     }
 }

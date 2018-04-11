@@ -15,7 +15,7 @@ namespace ChainedRam.Core.Projection
             return new Vector2(0, CurrentAcceleration) + defaultVector;
         }
 
-        public override void Initialize(Projectile sender, float delta)
+        public override void Initialize(GameObject sender, float delta)
         {
             CurrentAcceleration = 0;
         }

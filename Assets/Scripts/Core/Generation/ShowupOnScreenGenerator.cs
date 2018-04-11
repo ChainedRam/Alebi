@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using ChainedRam.Core;
+using ChainedRam.Core.Extentions;
 using UnityEngine;
 
 namespace ChainedRam.Core.Generation
@@ -13,7 +14,7 @@ namespace ChainedRam.Core.Generation
         public PositionProvider PositionProvider; 
 
         public bool TeleportToOtherSide;
-        public bool HideGizmo;
+        public bool HideGizmo = true;
 
         private Vector2? TargetPosition;
 
@@ -65,9 +66,13 @@ namespace ChainedRam.Core.Generation
 
             Vector2 sidePos = PositionProvider.ProvidedPosition; 
            
-            Gizmos.DrawSphere(sidePos, .5f);
+            Gizmos.DrawSphere(sidePos, .25f);
+
+            if (PositionProvider.ProvidedRotation != null)
+            {
+                Vector2 line = Vector2.up.Rotate(PositionProvider.ProvidedRotation.Value);
+                Gizmos.DrawLine(PositionProvider.ProvidedPosition, PositionProvider.ProvidedPosition + (Vector3)line);
+            }
         }
-
-
     }
 }

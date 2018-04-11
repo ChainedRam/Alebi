@@ -19,7 +19,7 @@ namespace ChainedRam.Core.Projection
 
         public bool HideGizmo;
 
-        private Projectile Projectile; 
+        private GameObject Projectile; 
 
         private const float StepSize = 0.005f;
         private float DegreeToTarget;
@@ -27,7 +27,7 @@ namespace ChainedRam.Core.Projection
         private float DegreeStepSize;
         private float StepCounter;
 
-        public override void Initialize(Projectile sender, float delta = 1)
+        public override void Initialize(GameObject sender, float delta = 1)
         {
             base.Initialize(sender, delta);
             Projectile = sender; 

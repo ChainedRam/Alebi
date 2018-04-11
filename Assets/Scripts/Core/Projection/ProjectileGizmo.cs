@@ -35,7 +35,7 @@ namespace ChainedRam.Core.Projection //TODO this is more into Editor than Core
             }
 
             Motion motion = projectile.Motion;
-            motion.Initialize(projectile);
+            motion.Initialize(projectile.gameObject);
 
             Color[] c = { Color.white, Color.green, Color.blue, Color.red, Color.green };
             Color prev = Gizmos.color;
@@ -51,7 +51,7 @@ namespace ChainedRam.Core.Projection //TODO this is more into Editor than Core
                 Gizmos.DrawLine(from, to);
             }
             Gizmos.color = prev;
-            motion.Initialize(projectile);
+            motion.Initialize(projectile.gameObject);
         }
 
         private void OnValidate()
