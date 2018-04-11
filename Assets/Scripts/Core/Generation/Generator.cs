@@ -145,7 +145,7 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         protected virtual void Awake()
         {
-            base.enabled = false; 
+
         }
 
         /// <summary>
@@ -161,11 +161,6 @@ namespace ChainedRam.Core.Generation
         /// </summary>
         protected virtual void FixedUpdate()
         {
-            if (enabled == false)
-            {
-                return;
-            }
-
             if (ShouldTerminate())
             {
                 End();

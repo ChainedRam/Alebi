@@ -27,7 +27,7 @@ namespace ChainedRam.Core.Projection
             return defaultVector;
         }
 
-        public override void Initialize(Projectile sender, float delta)
+        public override void Initialize(GameObject sender, float delta)
         {
             OnValidate();
             base.Initialize(sender, delta);

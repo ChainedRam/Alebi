@@ -20,7 +20,7 @@ namespace ChainedRam.Core.Projection
             return GetRelativeOffset(Default());
         }
 
-        public virtual void Initialize(Projectile sender, float delta = 1) { }
+        public virtual void Initialize(GameObject sender, float delta = 1) { }
         #endregion
     }
 }

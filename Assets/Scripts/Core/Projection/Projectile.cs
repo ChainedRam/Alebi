@@ -14,13 +14,13 @@ namespace ChainedRam.Core.Projection
 
         public void Start()
         {
-            Motion.Initialize(this, 1);
+            Motion.Initialize(gameObject, 1);
             enabled = false; 
         }
 
         public virtual void Setup(float delta)
         {
-            Motion.Initialize(this, delta);
+            Motion.Initialize(gameObject, delta);
             enabled = true; 
         }
 

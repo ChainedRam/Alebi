@@ -20,9 +20,9 @@ namespace ChainedRam.Core.Projection
         private float TotalTilt; 
 
         public bool FaceTilt; 
-        private Projectile Proj; 
+        private GameObject Proj; 
 
-        public override void Initialize(Projectile sender, float delta)
+        public override void Initialize(GameObject sender, float delta)
         {
             Proj = sender;
             TotalSpeed = 0;
