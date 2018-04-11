@@ -46,7 +46,6 @@ namespace ChainedRam.Core.Projection
             while (speedBuild < Speed)
             {
                     defaultVector += (Vector2.left * StepSize).Rotate(DegreeToTarget + (Invert ? 90 : 0) + (StepCounter++ * DegreeStepSize * (Invert? -1 : 1)) + (-Degree / 2));
-              
 
                 if (StepCounter + 1 > DegreeStepLength)
                 {
@@ -76,8 +75,7 @@ namespace ChainedRam.Core.Projection
 
             DegreeStepLength = arcLength / StepSize;
 
-            DegreeStepSize = Degree / DegreeStepLength;
-            
+            DegreeStepSize = Degree / DegreeStepLength;       
             StepCounter = 0;
         }
 
