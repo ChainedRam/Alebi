@@ -15,6 +15,7 @@ namespace ChainedRam.Core.Projection
         public float Degree = 1;
 
         public float Speed;
+        public bool Invert;
 
         public bool HideGizmo;
 
@@ -44,11 +45,12 @@ namespace ChainedRam.Core.Projection
 
             while (speedBuild < Speed)
             {
-                defaultVector += (Vector2.left * StepSize).Rotate(DegreeToTarget + (StepCounter++ * DegreeStepSize) + (-Degree / 2));
+                    defaultVector += (Vector2.left * StepSize).Rotate(DegreeToTarget + (Invert ? 90 : 0) + (StepCounter++ * DegreeStepSize * (Invert? -1 : 1)) + (-Degree / 2));
+              
 
                 if (StepCounter + 1 > DegreeStepLength)
                 {
-                    return defaultVector + (Vector2.left * StepSize).Rotate(DegreeToTarget + (DegreeStepLength * DegreeStepSize) + (-Degree / 2));
+                    return defaultVector + (Vector2.left * StepSize).Rotate(DegreeToTarget+ (Invert ? 90 : 0) + (DegreeStepLength * DegreeStepSize* (Invert ? -1 : 1)) + (-Degree / 2));
                 }
 
                 speedBuild += StepSize;
@@ -75,6 +77,7 @@ namespace ChainedRam.Core.Projection
             DegreeStepLength = arcLength / StepSize;
 
             DegreeStepSize = Degree / DegreeStepLength;
+            
             StepCounter = 0;
         }
 
@@ -117,13 +120,13 @@ namespace ChainedRam.Core.Projection
 
             float degreeStepCount = (int)(Mathf.Ceil((float)(arcLength / StepSize)));
 
-            float degreeStep = TotalDegree / degreeStepCount;
+            float degreeStep = TotalDegree / degreeStepCount *(Invert ? -1 : 1);
 
             Vector2 from = Projectile.transform.position;
             Vector2 to;
             for (int i = 0; i < degreeStepCount && i < 1000000; i++)
             {
-                to = from + (Vector2.up * (float)StepSize).Rotate(90 + (degree) + (i * degreeStep) + (-Degree / 2));
+                to = from + (Vector2.up * (float)StepSize).Rotate((Invert ? 180 : 90) + (degree) + (i * degreeStep) + (-Degree / 2));
                 Gizmos.DrawLine(from, to);
                 from = to;
             }
