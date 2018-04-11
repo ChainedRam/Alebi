@@ -1416,7 +1416,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1954132228}
-        m_MethodName: 
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1732,14 +1732,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c50559c8658a2c4bb47574f122a5b56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextFile: {fileID: 4900000, guid: 1c067f32d15009a41ba9ba9214a8f9cb, type: 3}
+  TextFile: {fileID: 4900000, guid: 96160d13d9b1dcd4882f77db886c1972, type: 3}
   ConversationName: Stage 1 Pre Battle
   PauseProprty: 1
   DelayTime: 0.02
   FirstName: Naggah
-  SecondName: James
+  SecondName: Jaber
   FirstAlias: N
-  SecondAlias: K
+  SecondAlias: J
   Output: {fileID: 0}
   box: {fileID: 794963656}
   ErrorMessage: {fileID: 781357480}
