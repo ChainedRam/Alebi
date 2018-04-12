@@ -39,7 +39,7 @@ namespace ChainedRam.Core.Generation
         protected override void OnBegin()
         {
             base.OnBegin();
-            CopiedMotion = gameObject.CopyComponent(Motion);
+            CopiedMotion = Motion.CopyTo(gameObject); 
 
             CopiedMotion.Initialize(Target, Delta);
         }

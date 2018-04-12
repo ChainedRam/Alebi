@@ -30,6 +30,15 @@ namespace ChainedRam.Core.Configuration
         /// </summary>
         private void Awake()
         {
+            EnsureSingleton();
+            ConfigureAll();
+        }
+
+        /// <summary>
+        /// Insure only one instance exist in the scene
+        /// </summary>
+        private void EnsureSingleton()
+        {
             if (Instance != null)
             {
                 Debug.LogError("ConfigureManager already exist.", Instance);
@@ -37,14 +46,13 @@ namespace ChainedRam.Core.Configuration
 
                 throw new DuplicateManagerException("There can only be one ConfigureManager in the scene");
             }
-
             Instance = this;
         }
 
         /// <summary>
         /// Apply mappings to all components within the scene. 
         /// </summary>
-        void Start()
+        private void ConfigureAll()
         {
             Maps = new Dictionary<Type, ConfigMapper>();
 

@@ -48,13 +48,28 @@ namespace ChainedRam.Core.Projection
         {
             if(Proj != null && FaceTilt)
             {
-                Proj.gameObject.transform.eulerAngles += new Vector3(0, 0, TiltAcc);
+                Proj.gameObject.transform.eulerAngles = new Vector3(0, 0, TotalTilt);
             }
         }
 
         public override string ToString()
         {
             return $" S:{Speed.ToString("0.00")}, SA:{SpeedAcc.ToString("0.000")}, TA:{TiltAcc.ToString("0.000")}";
+        }
+
+        public override Motion CopyTo(GameObject go)
+        {
+            LineMotion copy = go.AddComponent<LineMotion>();
+            copy.Speed =  Speed;
+            copy.Tilt = Tilt;
+            copy.SpeedAcc = SpeedAcc;
+            copy.TiltAcc =  TiltAcc; 
+            copy.TotalSpeed = TotalSpeed;
+            copy.TotalTilt = TotalTilt;
+            copy.FaceTilt = FaceTilt;
+            copy.Proj = Proj; 
+
+            return copy; 
         }
     }
 }

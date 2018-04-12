@@ -298,5 +298,19 @@ namespace ChainedRam.Core
             return Mathf.Atan2(from.y - to.y, from.x - to.x) * Mathf.Rad2Deg - 90;
         }
         #endregion
+
+
+        public PositionProvider Copy()
+        {
+            PositionProvider p = new PositionProvider();
+            p.Direction =  Direction;
+            p.Offset = Offset;
+            p.Degree = Degree;
+            p.RelativeTo = RelativeTo;
+            p.RotationFacing = RotationFacing;
+            p.PositionRefrence = PositionRefrence;
+            p.RotationRefrence = RotationRefrence;
+            return p; 
+        }
     }
 }

@@ -57,9 +57,10 @@ namespace ChainedRam.Core.Extentions
         /// <param name="original"></param>
         /// <param name="destination"></param>
         /// <returns></returns>
+        [Obsolete("Doesn't copy pointers, rather shares them.")]
         public static T CopyComponent<T>(this GameObject destination, T original) where T : Component
         {
-            System.Type type = original.GetType();
+            Type type = original.GetType();
             Component copy = destination.AddComponent(type);
             System.Reflection.FieldInfo[] fields = type.GetFields();
             foreach (System.Reflection.FieldInfo field in fields)
@@ -76,6 +77,7 @@ namespace ChainedRam.Core.Extentions
         /// <param name="original"></param>
         /// <param name="destination"></param>
         /// <returns></returns>
+        [Obsolete("Doesn't copy pointers, rather shares them.")]
         public static Component CopyComponent(this GameObject destination, Component original)
         {
             System.Type type = original.GetType();

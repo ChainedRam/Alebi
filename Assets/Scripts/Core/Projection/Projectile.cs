@@ -12,16 +12,11 @@ namespace ChainedRam.Core.Projection
         [ContextMenuItem("Remove Gizmu", "RemoveGizmu", order = 1)]
         public Motion Motion;
 
-        public void Start()
-        {
-            Motion.Initialize(gameObject, 1);
-            enabled = false; 
-        }
 
         public virtual void Setup(float delta)
         {
-            Motion.Initialize(gameObject, delta);
-            enabled = true; 
+            Motion.Initialize(this.gameObject, delta);
+            enabled = true;
         }
 
         public void FixedUpdate()

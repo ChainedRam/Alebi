@@ -21,6 +21,11 @@ namespace ChainedRam.Core.Projection
         }
 
         public virtual void Initialize(GameObject sender, float delta = 1) { }
+
+        public virtual Motion CopyTo(GameObject go)
+        {
+            throw new NotImplementedException("Teach me how to copy");
+        }
         #endregion
     }
 }

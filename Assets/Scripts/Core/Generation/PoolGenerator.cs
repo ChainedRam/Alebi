@@ -27,6 +27,7 @@ namespace ChainedRam.Core.Generation
 
         public void SwitchIn(Generator gen)
         {
+            
             if (Selected != null)
             {
                 Demote(Selected);
@@ -50,7 +51,6 @@ namespace ChainedRam.Core.Generation
         public void Demote(Generator gen)
         {
             gen.OnEndEventHandler -= Next;
-            //Selected = null;
         }
 
         protected override void OnBegin()
@@ -61,7 +61,7 @@ namespace ChainedRam.Core.Generation
             Next();
         }
 
-        private void Next(object s= null, GenerateEventArgs e= null)
+        private void Next(object s = null, GenerateEventArgs e = null)
         {
             Generator nextGen = NextGenerator(); 
 
@@ -132,7 +132,7 @@ namespace ChainedRam.Core.Generation
                 throw new Exception("Cannot select from empty list"); //TODO custom exception
             }
 
-            if (RepeatCounter > 1 && Index + 1 >= list.Length)
+            if (RepeatCounter > 1 && Index >= list.Length)
             {
                 RepeatCounter--;
                 Index = 0;
@@ -140,7 +140,7 @@ namespace ChainedRam.Core.Generation
 
             if (Index < list.Length)
             {
-                return list[(Index++)];
+                return list[Index++];
             }
             else
             {

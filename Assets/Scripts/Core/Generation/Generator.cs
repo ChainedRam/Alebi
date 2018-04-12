@@ -14,6 +14,27 @@ namespace ChainedRam.Core.Generation
         #region Inspecter Attributes
         public float Delta;
         #endregion
+        #region Private Attributes
+        /// <summary>
+        /// Used to count number of generate calls. 
+        /// </summary>
+        private int? GenerateCounter;
+
+        /// <summary>
+        /// Used to help ShouldGenerate with build-in timer for generation.
+        /// </summary>
+        private float? ShouldGenerateWaitTime;
+
+        /// <summary>
+        /// Used to help ShouldTerminate with build-in timer for termination. 
+        /// </summary>
+        private float? ShouldTerminateWaitTime;
+
+        /// <summary>
+        /// Used to know if generator has skipped at least once. 
+        /// </summary>
+        private bool HasSkipped;
+        #endregion
         #region Public Events 
         /// <summary>
         /// Invoked when generating. <see cref="Generate"/>
@@ -34,7 +55,6 @@ namespace ChainedRam.Core.Generation
         /// Invoked when stoping generation. <see cref="End"/>
         /// </summary>
         public EventHandler<GenerateEventArgs> OnEndEventHandler;
-
         #endregion
         #region Raise Event
         /// <summary>
@@ -141,7 +161,7 @@ namespace ChainedRam.Core.Generation
         #endregion
         #region Unity Methods 
         /// <summary>
-        /// 'Seals' Awake function. DO NOT OVERWRITE! use <see cref="OnAwake"/>
+        /// More organized way to call Awake since this call wil lbe inhereted. 
         /// </summary>
         protected virtual void Awake()
         {
@@ -149,7 +169,7 @@ namespace ChainedRam.Core.Generation
         }
 
         /// <summary>
-        /// Start function. DO NOT OVERWRITE. use <see cref="Start"/>
+        /// More organized way to call Start since this call wil lbe inhereted. 
         /// </summary>
         protected virtual void Start()
         {
@@ -167,27 +187,93 @@ namespace ChainedRam.Core.Generation
                 return;
             }
 
+            TickHelperProtectedMethods();
+
             if (ShouldGenerate())
             {
                 Generate();
+                TickHelperGenerateMethods();
             }
             else
             {
                 SkippedGenerate();
-            } 
+                TickHelperSkippedGenerate();
+            }
         }
 
+       
+        /// <summary>
+        /// Called when componetn is enabled; whenever <see cref="Behaviour.enabled"/> flag is set to true.  
+        /// </summary>
         protected void OnEnable()
         {
             OnBegin();
             RaiseOnBeginEvent();
+            ResetHelperAttributes(); 
         }
 
+        /// <summary>
+        /// Called when componetn is disabled; whenever <see cref="Behaviour.enabled"/> flag is set to false.  
+        /// </summary>
         protected void OnDisable()
         {
             OnEnd();
             RaiseOnEndEvent();
         }
+        #endregion
+        #region Protected Methods
+        /// <summary>
+        /// Returns true only once per run. 
+        /// </summary>
+        /// <returns></returns>
+        protected bool ShouldGenerateOnce()
+        {
+            return ShouldGenerateCount(1);
+        }
+
+        /// <summary>
+        /// Returns true n given times. 
+        /// </summary>
+        /// <returns></returns>
+        protected bool ShouldGenerateCount(int n)
+        {
+            GenerateCounter = GenerateCounter ?? n;
+            return GenerateCounter > 0; 
+        }
+
+        /// <summary>
+        /// Returns true after waiting for given seconds. 
+        /// </summary>
+        /// <param name="seconds"></param>
+        /// <returns></returns>
+        protected bool ShouldGenerateWait(float seconds)
+        {
+            ShouldGenerateWaitTime = ShouldGenerateWaitTime ?? seconds;
+
+            return ShouldGenerateWaitTime <= 0.001f; //Define constant
+        }
+
+        /// <summary>
+        /// Returns true after waiting for given seconds. 
+        /// </summary>
+        /// <param name="seconds"></param>
+        /// <returns></returns>
+        protected bool ShouldTerminateWait(float seconds)
+        {
+            ShouldTerminateWaitTime = ShouldTerminateWaitTime ?? seconds;
+
+            return ShouldTerminateWaitTime <= 0.001f; //Define constant
+        }
+
+        /// <summary>
+        /// Returns true if generator has skipped at least once. 
+        /// </summary>
+        /// <returns></returns>
+        protected bool ShouldTerminateOnSkippedGeneration()
+        {
+            return HasSkipped; 
+        }
+
         #endregion
         #region Protected Abstract
         /// <summary>
@@ -245,6 +331,54 @@ namespace ChainedRam.Core.Generation
         {
             return gen.ShouldTerminate();
         }
+        #endregion
+        #region Private Methods
+
+        /// <summary>
+        /// Resets Helper attributes for reuse. 
+        /// </summary>
+        private void ResetHelperAttributes()
+        {
+            GenerateCounter = null; 
+            ShouldTerminateWaitTime = null;
+            ShouldGenerateWaitTime = null;
+            HasSkipped = false; 
+        }
+
+        /// <summary>
+        /// Called every update 
+        /// </summary>
+        private void TickHelperProtectedMethods()
+        {
+            UpdateWaitTime(ref ShouldTerminateWaitTime);
+            UpdateWaitTime(ref ShouldGenerateWaitTime);
+        }
+
+        /// <summary>
+        /// Reduce GenerateCounter for ShouldGenerateTimes method. 
+        /// </summary>
+        private void TickHelperGenerateMethods()
+        {
+            if (GenerateCounter.HasValue)
+            {
+                GenerateCounter--;
+            }
+        }
+
+        private void TickHelperSkippedGenerate()
+        {
+            HasSkipped = true;
+        }
+
+        private void UpdateWaitTime(ref float? WaitTime)
+        {
+            if (WaitTime.HasValue && WaitTime > 0)
+            {
+                WaitTime -= Time.fixedDeltaTime;
+            }
+        } 
+
+
         #endregion
     }
 }
