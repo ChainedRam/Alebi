@@ -67,7 +67,7 @@ namespace ChainedRam.Core.Generation
         protected override void OnEnd()
         {
             base.OnEnd();
-            //ForChildren(c => c.End());  terminate children independently 
+            ForChildren(c => c.End()); 
         }
 
         [ContextMenu("From Children")]

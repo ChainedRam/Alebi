@@ -45,17 +45,36 @@ namespace ChainedRam.Core.Projection
 
             while (speedBuild < Speed)
             {
-                    defaultVector += (Vector2.left * StepSize).Rotate(DegreeToTarget + (Invert ? 90 : 0) + (StepCounter++ * DegreeStepSize * (Invert? -1 : 1)) + (-Degree / 2));
+                    defaultVector += (Vector2.left * StepSize).Rotate(DegreeToTarget + (Invert ? 180 : 0) + (StepCounter++ * DegreeStepSize * (Invert? -1 : 1)) + (-Degree / 2));
 
                 if (StepCounter + 1 > DegreeStepLength)
                 {
-                    return defaultVector + (Vector2.left * StepSize).Rotate(DegreeToTarget+ (Invert ? 90 : 0) + (DegreeStepLength * DegreeStepSize* (Invert ? -1 : 1)) + (-Degree / 2));
+                    return defaultVector + (Vector2.left * StepSize).Rotate(DegreeToTarget+ (Invert ? 180 : 0) + (DegreeStepLength * DegreeStepSize* (Invert ? -1 : 1)) + (-Degree / 2));
                 }
 
                 speedBuild += StepSize;
             }
 
             return defaultVector;
+        }
+
+
+        public override Motion CopyTo(GameObject go)
+        {
+            TargetedMotion copy = go.AddComponent<TargetedMotion>();
+
+            copy.Target = Target.Copy();
+            copy.Degree = Degree;
+            copy.Speed = Speed;
+            copy.Invert = Invert;
+            copy.HideGizmo = HideGizmo;
+            copy.Sender = Sender;
+            copy.DegreeToTarget = DegreeToTarget;
+            copy.DegreeStepLength = DegreeStepLength;
+            copy.DegreeStepSize = DegreeStepSize;
+            copy.StepCounter= StepCounter;
+                    
+            return copy;
         }
 
         private void FancyMath()
