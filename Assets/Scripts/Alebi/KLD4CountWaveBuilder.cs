@@ -39,13 +39,13 @@ public class KLD4CountWaveBuilder : Generator
             case Direction.East:
             case Direction.West:
                 offset = Vector2.right;
-
-
                 break;
+
             case Direction.South:
             case Direction.North:
                 offset = Vector2.up;
                 break;
+
             case Direction.SouthWest:
             case Direction.NorthWest:
             case Direction.NorthEast:

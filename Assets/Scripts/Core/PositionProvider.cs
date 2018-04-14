@@ -1,24 +1,32 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ChainedRam.Core
 {
+    [Flags]
     public enum Direction
     {
-        Transform = -1,
         Center = 0x00,
-        //Single
-        North = 0x01,
-        South = 0x02,
-        East = 0x04,
-        West = 0x08,
-        //Combo
+
+        North = 1 << 0,
+        South = 1 << 1,
+        East  = 1 << 2,
+        West  = 1 << 3,
+
         NorthEast = North | East,
         NorthWest = North | West,
         SouthEast = South | East,
         SouthWest = South | West,
+    }
+
+    public enum PositionLocation
+    {
+        Transform,
+        Direction,
+        Random, 
     }
 
     public enum PositionRelativeTo
@@ -100,6 +108,22 @@ namespace ChainedRam.Core
         #endregion
     }
 
+
+    [Flags]
+    public enum RandomPositionOption
+    {
+        Transforms  = 1 << 0,
+        Center      = 1 << 1,
+        North       = 1 << 2,
+        South       = 1 << 3,
+        East        = 1 << 4,
+        West        = 1 << 5,
+        NorthEast   = 1 << 6,
+        NorthWest   = 1 << 7,
+        SouthEast   = 1 << 8,
+        SouthWest   = 1 << 9,
+    }
+
     /// <summary>
     /// Provides Positions relative to camera sides.
     /// </summary>
@@ -107,10 +131,22 @@ namespace ChainedRam.Core
     public class PositionProvider
     {
         [SerializeField]
+        private PositionLocation Location;
+
+        [SerializeField]
         private Direction Direction;
 
         [SerializeField]
         private Vector2 Offset;
+
+        [SerializeField]
+        private Vector2 RandomMultitude;
+
+        [SerializeField]
+        private RandomPositionOption RandomPositionOption;
+
+        [SerializeField]
+        private Transform[] RandomTransforms;
 
         [SerializeField]
         private float Degree;
@@ -127,28 +163,112 @@ namespace ChainedRam.Core
         [SerializeField]
         private Transform RotationRefrence;
 
+        private int LastRandom = -1;
+        private int LastRandomTransform = -1; 
 
         public Vector3 ProvidedPosition
         {
             get
             {
-                if (Direction == Direction.Transform)
+                switch (Location)
                 {
-                    if(PositionRefrence == null)
+                    case PositionLocation.Transform:
+                    if (PositionRefrence == null)
                     {
-                        throw new NullReferenceException("Transform must be set"); 
+                        throw new NullReferenceException("Transform must be set");
                     }
-                    return PositionRefrence.position + (Vector3)Offset; 
+                    return PositionRefrence.position + (Vector3)Offset;
+
+                    case PositionLocation.Direction:
+                        return GetScreenPosition(Direction, Offset, RelativeTo);
+
+                    case PositionLocation.Random:
+                        var matching = Enum.GetValues(typeof(RandomPositionOption))
+                           .Cast<RandomPositionOption>()
+                           .Where(c => (RandomPositionOption & c) == c)
+                           .ToArray();
+
+                        if(matching.Length == 0)
+                        {
+                            throw new Exception("Random cannot operate without options.");
+                        }
+
+
+                        System.Random rand = new System.Random(); 
+                        int selected;
+
+                        do
+                        {
+                            selected = rand.Next(matching.Length); 
+                        } while (LastRandom == selected && matching.Length > 1); 
+
+
+                        RandomPositionOption myEnum = matching[selected];
+
+                        Direction randomDirection;
+
+                        Vector2 randomOffset = Vector2.Scale(
+                            RandomMultitude, 
+                            new Vector2(UnityEngine.Random.value, UnityEngine.Random.value)
+                            );
+                        
+                        switch (myEnum)
+                        {
+                            case RandomPositionOption.Transforms:
+                                do
+                                {
+                                    selected = rand.Next(RandomTransforms.Length);
+                                } while (LastRandomTransform == selected && RandomTransforms.Length > 1);
+                                LastRandomTransform = selected; 
+
+                                if(RandomTransforms.Length == 0)
+                                {
+                                    throw new Exception("Empty array of transforms.");
+                                }
+
+                                return RandomTransforms[selected].position + (Vector3)(randomOffset+Offset); 
+                            case RandomPositionOption.Center:
+                                randomDirection = Direction.Center;
+                                break;
+                            case RandomPositionOption.East:
+                                randomDirection = Direction.East;
+                                break;
+                            case RandomPositionOption.West:
+                                randomDirection = Direction.West;
+                                break;
+                            case RandomPositionOption.South:
+                                randomDirection = Direction.South;
+                                break;
+                            case RandomPositionOption.North:
+                                randomDirection = Direction.North;
+                                break;
+                            case RandomPositionOption.NorthEast:
+                                randomDirection = Direction.NorthEast;
+                                break;
+                            case RandomPositionOption.NorthWest:
+                                randomDirection = Direction.NorthWest;
+                                break;
+                            case RandomPositionOption.SouthEast:
+                                randomDirection = Direction.SouthEast;
+                                break;
+                            case RandomPositionOption.SouthWest:
+                                randomDirection = Direction.SouthWest;
+                                break;
+                            default:
+                                throw new Exception("Missing Random Options");
+                        }
+
+                        return GetScreenPosition(randomDirection, Offset + randomOffset, RelativeTo);
                 }
 
-                return GetScreenPosition(Direction, Offset, RelativeTo); 
+                throw new Exception("What the fuck?");
             }
         }
 
         public Vector3 OppositePosition
         {
             get {
-                if (Direction == Direction.Transform)
+                if (Location == PositionLocation.Transform)
                 {
                     if (PositionRefrence == null)
                     {
@@ -224,7 +344,7 @@ namespace ChainedRam.Core
 
         public void SetToTransform(Transform transform, Vector2 offset)
         {
-            Direction = Direction.Transform;
+            Location = PositionLocation.Transform;
             Offset = offset; 
             RelativeTo = PositionRelativeTo.None;
             PositionRefrence = transform;
