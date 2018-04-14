@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CollisionEffect<T> : MonoBehaviour where T : Component
+public abstract class PlayerCollisionEffect : CollisionEffect<Player>
 {
-    public abstract void OnHit(T t);
 }

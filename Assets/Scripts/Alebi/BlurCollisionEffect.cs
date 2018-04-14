@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlurCollisionEffect : CollisionEffect
+public class BlurCollisionEffect : PlayerCollisionEffect
 {
     public string Name { get;set; }
 

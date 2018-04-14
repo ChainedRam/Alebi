@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ChainedRam.Core.Player;
 using UnityEngine;
 
-public class RootCollision : CollisionEffect
+public class RootCollision : PlayerCollisionEffect
 {
     public float duration;
     private static StatusEffect rootEffect = new RootStatusEffect();

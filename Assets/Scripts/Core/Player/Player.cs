@@ -120,7 +120,7 @@ namespace ChainedRam.Core.Player
         /// <param name="collision"></param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            CollisionEffect effect = collision.gameObject.GetComponent<CollisionEffect>();
+            PlayerCollisionEffect effect = collision.gameObject.GetComponent<PlayerCollisionEffect>();
 
             if (effect != null)
             {

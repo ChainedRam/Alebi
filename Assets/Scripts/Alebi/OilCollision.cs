@@ -4,8 +4,8 @@ using ChainedRam.Core.Player;
 using UnityEngine;
 using ChainedRam.Core.Projection;
 
-public class OilCollision : CollisionEffect {
-
+public class OilCollision : PlayerCollisionEffect
+{
     public GameObject oil;
     public SpriteRenderer bottleSprite;
     public Projectile bottle;
