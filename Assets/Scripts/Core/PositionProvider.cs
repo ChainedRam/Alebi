@@ -97,14 +97,24 @@ namespace ChainedRam.Core
         Relative = 0xF1,
 
         /// <summary>
-        /// Copies angle based on given transform. 
+        /// Tilt rotation to face given transform. 
         /// </summary>
-        MatchTransform = 0xF2,
+        Inside = 0xF2,
 
         /// <summary>
         /// Tilt rotation to face given transform. 
         /// </summary>
-        FaceTransform = 0xF3,
+        Outside = 0xF3,
+
+        /// <summary>
+        /// Copies angle based on given transform. 
+        /// </summary>
+        MatchTransform = 0xF4,
+
+        /// <summary>
+        /// Tilt rotation to face given transform. 
+        /// </summary>
+        FaceTransform = 0xF5,
         #endregion
     }
 
@@ -163,6 +173,7 @@ namespace ChainedRam.Core
         [SerializeField]
         private Transform RotationRefrence;
 
+        private Vector3? LastProvidedPosition; 
         private int LastRandom = -1;
         private int LastRandomTransform = -1; 
 
@@ -170,98 +181,7 @@ namespace ChainedRam.Core
         {
             get
             {
-                switch (Location)
-                {
-                    case PositionLocation.Transform:
-                    if (PositionRefrence == null)
-                    {
-                        throw new NullReferenceException("Transform must be set");
-                    }
-                    return PositionRefrence.position + (Vector3)Offset;
-
-                    case PositionLocation.Direction:
-                        return GetScreenPosition(Direction, Offset, RelativeTo);
-
-                    case PositionLocation.Random:
-                        var matching = Enum.GetValues(typeof(RandomPositionOption))
-                           .Cast<RandomPositionOption>()
-                           .Where(c => (RandomPositionOption & c) == c)
-                           .ToArray();
-
-                        if(matching.Length == 0)
-                        {
-                            throw new Exception("Random cannot operate without options.");
-                        }
-
-
-                        System.Random rand = new System.Random(); 
-                        int selected;
-
-                        do
-                        {
-                            selected = rand.Next(matching.Length); 
-                        } while (LastRandom == selected && matching.Length > 1); 
-
-
-                        RandomPositionOption myEnum = matching[selected];
-
-                        Direction randomDirection;
-
-                        Vector2 randomOffset = Vector2.Scale(
-                            RandomMultitude, 
-                            new Vector2(UnityEngine.Random.value, UnityEngine.Random.value)
-                            );
-                        
-                        switch (myEnum)
-                        {
-                            case RandomPositionOption.Transforms:
-                                do
-                                {
-                                    selected = rand.Next(RandomTransforms.Length);
-                                } while (LastRandomTransform == selected && RandomTransforms.Length > 1);
-                                LastRandomTransform = selected; 
-
-                                if(RandomTransforms.Length == 0)
-                                {
-                                    throw new Exception("Empty array of transforms.");
-                                }
-
-                                return RandomTransforms[selected].position + (Vector3)(randomOffset+Offset); 
-                            case RandomPositionOption.Center:
-                                randomDirection = Direction.Center;
-                                break;
-                            case RandomPositionOption.East:
-                                randomDirection = Direction.East;
-                                break;
-                            case RandomPositionOption.West:
-                                randomDirection = Direction.West;
-                                break;
-                            case RandomPositionOption.South:
-                                randomDirection = Direction.South;
-                                break;
-                            case RandomPositionOption.North:
-                                randomDirection = Direction.North;
-                                break;
-                            case RandomPositionOption.NorthEast:
-                                randomDirection = Direction.NorthEast;
-                                break;
-                            case RandomPositionOption.NorthWest:
-                                randomDirection = Direction.NorthWest;
-                                break;
-                            case RandomPositionOption.SouthEast:
-                                randomDirection = Direction.SouthEast;
-                                break;
-                            case RandomPositionOption.SouthWest:
-                                randomDirection = Direction.SouthWest;
-                                break;
-                            default:
-                                throw new Exception("Missing Random Options");
-                        }
-
-                        return GetScreenPosition(randomDirection, Offset + randomOffset, RelativeTo);
-                }
-
-                throw new Exception("What the fuck?");
+                return (LastProvidedPosition = CalulatePosition()).Value;
             }
         }
 
@@ -285,6 +205,7 @@ namespace ChainedRam.Core
         {
             get
             {
+                LastProvidedPosition = LastProvidedPosition ?? ProvidedPosition; 
                 switch (RotationFacing)
                 {
                     case RotationFacing.Default:
@@ -311,12 +232,16 @@ namespace ChainedRam.Core
                         switch (RelativeTo)
                         {
                             case PositionRelativeTo.Inside:
-                                return AngleBetween(Vector2.zero, ProvidedPosition);                                 
+                                return AngleBetween(Vector2.zero, LastProvidedPosition.Value);                                 
                             case PositionRelativeTo.Outside:
-                                return 180 + AngleBetween(Vector2.zero, ProvidedPosition);
+                                return 180 + AngleBetween(Vector2.zero, LastProvidedPosition.Value);
                             default:
                                 return null; 
                         }
+                    case RotationFacing.Inside:
+                        return AngleBetween(Vector2.zero, LastProvidedPosition.Value);
+                    case RotationFacing.Outside:
+                        return 180 + AngleBetween(Vector2.zero, LastProvidedPosition.Value);
                     case RotationFacing.MatchTransform:
                         if (RotationRefrence == null)
                         {
@@ -328,7 +253,7 @@ namespace ChainedRam.Core
                         {
                             return null; 
                         }
-                        return  AngleBetween(RotationRefrence.position, ProvidedPosition);
+                        return  AngleBetween(RotationRefrence.position, LastProvidedPosition.Value);
 
                 }
 
@@ -420,7 +345,6 @@ namespace ChainedRam.Core
         }
         #endregion
 
-
         public PositionProvider Copy()
         {
             PositionProvider p = new PositionProvider()
@@ -454,6 +378,109 @@ namespace ChainedRam.Core
             RotationFacing = source.RotationFacing;
             PositionRefrence = source.PositionRefrence;
             RotationRefrence = source.RotationRefrence;
+        }
+
+        private Vector3 CalulatePosition()
+        {
+            switch (Location)
+            {
+                case PositionLocation.Transform:
+                    if (PositionRefrence == null)
+                    {
+                        throw new NullReferenceException("Transform must be set");
+                    }
+                    return PositionRefrence.position + (Vector3)Offset;
+
+                case PositionLocation.Direction:
+                    return GetScreenPosition(Direction, Offset, RelativeTo);
+
+                case PositionLocation.Random:
+                    var matching = Enum.GetValues(typeof(RandomPositionOption))
+                       .Cast<RandomPositionOption>()
+                       .Where(c => (RandomPositionOption & c) == c)
+                       .ToArray();
+
+                    if (matching.Length == 0)
+                    {
+                        throw new Exception("Random cannot operate without options.");
+                    }
+
+
+                    System.Random rand = new System.Random();
+                    int selected;
+
+                    do
+                    {
+                        selected = rand.Next(matching.Length);
+                    } while (LastRandom == selected && matching.Length > 1);
+
+
+                    RandomPositionOption myEnum = matching[selected];
+
+                    Direction randomDirection;
+
+                    Vector2 randomOffset = Vector2.Scale(
+                        RandomMultitude,
+                        new Vector2(UnityEngine.Random.value, UnityEngine.Random.value)
+                        );
+
+                    switch (myEnum)
+                    {
+                        case RandomPositionOption.Transforms:
+                            do
+                            {
+                                selected = rand.Next(RandomTransforms.Length);
+                            } while (LastRandomTransform == selected && RandomTransforms.Length > 1);
+                            LastRandomTransform = selected;
+
+                            if (RandomTransforms.Length == 0)
+                            {
+                                throw new Exception("Empty array of transforms.");
+                            }
+
+                            if (RandomTransforms[selected] == null)
+                            {
+                                throw new NullReferenceException("Transform at " + selected + " is null.");
+                            }
+
+                            return RandomTransforms[selected].position + (Vector3)(randomOffset + Offset);
+                        case RandomPositionOption.Center:
+                            randomDirection = Direction.Center;
+                            break;
+                        case RandomPositionOption.East:
+                            randomDirection = Direction.East;
+                            break;
+                        case RandomPositionOption.West:
+                            randomDirection = Direction.West;
+                            break;
+                        case RandomPositionOption.South:
+                            randomDirection = Direction.South;
+                            break;
+                        case RandomPositionOption.North:
+                            randomDirection = Direction.North;
+                            break;
+                        case RandomPositionOption.NorthEast:
+                            randomDirection = Direction.NorthEast;
+                            break;
+                        case RandomPositionOption.NorthWest:
+                            randomDirection = Direction.NorthWest;
+                            break;
+                        case RandomPositionOption.SouthEast:
+                            randomDirection = Direction.SouthEast;
+                            break;
+                        case RandomPositionOption.SouthWest:
+                            randomDirection = Direction.SouthWest;
+                            break;
+                        default:
+                            throw new Exception("Missing Random Options");
+                    }
+
+                    return GetScreenPosition(randomDirection, Offset + randomOffset, RelativeTo);
+                default:
+                    break;
+            }
+
+            throw new Exception("What the fuck?");
         }
     }
 }

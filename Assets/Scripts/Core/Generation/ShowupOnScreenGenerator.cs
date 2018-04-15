@@ -71,7 +71,7 @@ namespace ChainedRam.Core.Generation
             if (PositionProvider.ProvidedRotation != null)
             {
                 Vector2 line = Vector2.up.Rotate(PositionProvider.ProvidedRotation.Value);
-                Gizmos.DrawLine(PositionProvider.ProvidedPosition, PositionProvider.ProvidedPosition + (Vector3)line);
+                Gizmos.DrawLine(sidePos, sidePos + line);
             }
         }
     }
