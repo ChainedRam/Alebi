@@ -991,8 +991,12 @@ MonoBehaviour:
   WaitTime: 8
   Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt:
+    Location: 0
     Direction: 0
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0
@@ -1461,8 +1465,12 @@ MonoBehaviour:
   WaitTime: 8
   Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt:
+    Location: 0
     Direction: 0
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0
@@ -1908,6 +1916,77 @@ Prefab:
       propertyPath: Target
       value: 
       objectReference: {fileID: 328108319}
+    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.Location
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RandomPositionOption
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RandomMultitude.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RandomMultitude.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114333591413716878, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.Location
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008366456237398, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
+      propertyPath: m_Name
+      value: Exit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1691201217032784, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
+      propertyPath: m_Name
+      value: Enter
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258694435923950, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
+      propertyPath: m_Name
+      value: Side Cycle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511525125536754, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
+      propertyPath: m_Name
+      value: 'All Cycle '
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990287551738072, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: GenerateAt.Location
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990287551738072, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: GenerateAt.RandomPositionOption
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990287551738072, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: GenerateAt.RotationFacing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114456813303677368, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.Location
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114206228067733418, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.Location
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
   m_IsPrefabParent: 0
@@ -2011,8 +2090,12 @@ MonoBehaviour:
   WaitTime: 1
   Prefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd, type: 2}
   GenerateAt:
+    Location: 0
     Direction: 5
     Offset: {x: 1, y: 1}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 1
     RotationFacing: 241
@@ -2022,8 +2105,12 @@ MonoBehaviour:
   MaxSize: 50
   MotionOverride: {fileID: 0}
   Target:
+    Location: 0
     Direction: 0
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0
@@ -2130,8 +2217,12 @@ MonoBehaviour:
   WaitTime: 1
   Prefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd, type: 2}
   GenerateAt:
+    Location: 0
     Direction: 5
     Offset: {x: 1, y: 1}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 1
     RotationFacing: 241
@@ -2141,8 +2232,12 @@ MonoBehaviour:
   MaxSize: 50
   MotionOverride: {fileID: 0}
   Target:
+    Location: 0
     Direction: 0
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0
@@ -2192,8 +2287,12 @@ MonoBehaviour:
   WaitTime: 1
   Prefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd, type: 2}
   GenerateAt:
+    Location: 0
     Direction: 5
     Offset: {x: 1, y: 1}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 1
     RotationFacing: 241
@@ -2203,8 +2302,12 @@ MonoBehaviour:
   MaxSize: 50
   MotionOverride: {fileID: 0}
   Target:
+    Location: 0
     Direction: 0
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0
@@ -2249,42 +2352,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114813449086148944, guid: ddf421f38900a9546812f2b338b36e23,
-        type: 2}
-      propertyPath: StartingPoint
-      value: 
-      objectReference: {fileID: 328108324}
-    - target: {fileID: 114416726409720878, guid: ddf421f38900a9546812f2b338b36e23,
-        type: 2}
-      propertyPath: Target.PositionRefrence
-      value: 
-      objectReference: {fileID: 328108324}
-    - target: {fileID: 114522849863617546, guid: ddf421f38900a9546812f2b338b36e23,
-        type: 2}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 328108319}
-    - target: {fileID: 114970770102001940, guid: ddf421f38900a9546812f2b338b36e23,
-        type: 2}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 328108319}
-    - target: {fileID: 114230851932537302, guid: ddf421f38900a9546812f2b338b36e23,
+    - target: {fileID: 114865626708744992, guid: ddf421f38900a9546812f2b338b36e23,
         type: 2}
       propertyPath: GenerateAt.PositionRefrence
       value: 
       objectReference: {fileID: 328108324}
-    - target: {fileID: 114230851932537302, guid: ddf421f38900a9546812f2b338b36e23,
+    - target: {fileID: 114865626708744992, guid: ddf421f38900a9546812f2b338b36e23,
         type: 2}
       propertyPath: GenerateAt.RotationRefrence
       value: 
-      objectReference: {fileID: 1806644298}
-    - target: {fileID: 114818944961373406, guid: ddf421f38900a9546812f2b338b36e23,
-        type: 2}
-      propertyPath: LookAt.RotationRefrence
-      value: 
-      objectReference: {fileID: 1806644298}
-    - target: {fileID: 114386437623889382, guid: ddf421f38900a9546812f2b338b36e23,
+      objectReference: {fileID: 328108324}
+    - target: {fileID: 114118118175142746, guid: ddf421f38900a9546812f2b338b36e23,
         type: 2}
       propertyPath: Target
       value: 
@@ -2294,19 +2372,39 @@ Prefab:
       propertyPath: Target
       value: 
       objectReference: {fileID: 328108319}
-    - target: {fileID: 114118118175142746, guid: ddf421f38900a9546812f2b338b36e23,
+    - target: {fileID: 114386437623889382, guid: ddf421f38900a9546812f2b338b36e23,
         type: 2}
       propertyPath: Target
       value: 
       objectReference: {fileID: 328108319}
-    - target: {fileID: 114865626708744992, guid: ddf421f38900a9546812f2b338b36e23,
+    - target: {fileID: 114818944961373406, guid: ddf421f38900a9546812f2b338b36e23,
+        type: 2}
+      propertyPath: LookAt.RotationRefrence
+      value: 
+      objectReference: {fileID: 1806644298}
+    - target: {fileID: 114230851932537302, guid: ddf421f38900a9546812f2b338b36e23,
         type: 2}
       propertyPath: GenerateAt.PositionRefrence
       value: 
       objectReference: {fileID: 328108324}
-    - target: {fileID: 114865626708744992, guid: ddf421f38900a9546812f2b338b36e23,
+    - target: {fileID: 114230851932537302, guid: ddf421f38900a9546812f2b338b36e23,
         type: 2}
       propertyPath: GenerateAt.RotationRefrence
+      value: 
+      objectReference: {fileID: 1806644298}
+    - target: {fileID: 114970770102001940, guid: ddf421f38900a9546812f2b338b36e23,
+        type: 2}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 328108319}
+    - target: {fileID: 114522849863617546, guid: ddf421f38900a9546812f2b338b36e23,
+        type: 2}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 328108319}
+    - target: {fileID: 114416726409720878, guid: ddf421f38900a9546812f2b338b36e23,
+        type: 2}
+      propertyPath: Target.PositionRefrence
       value: 
       objectReference: {fileID: 328108324}
     m_RemovedComponents: []
@@ -2630,8 +2728,12 @@ MonoBehaviour:
   WaitTime: 1
   Prefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd, type: 2}
   GenerateAt:
+    Location: 0
     Direction: 5
     Offset: {x: 1, y: 1}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 1
     RotationFacing: 241
@@ -2641,8 +2743,12 @@ MonoBehaviour:
   MaxSize: 50
   MotionOverride: {fileID: 0}
   Target:
+    Location: 0
     Direction: 0
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0
@@ -2981,8 +3087,12 @@ MonoBehaviour:
   WaitTime: 8
   Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt:
+    Location: 0
     Direction: 0
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0
@@ -3037,8 +3147,12 @@ MonoBehaviour:
   WaitTime: 8
   Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt:
+    Location: 0
     Direction: 0
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0

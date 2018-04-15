@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 4986582682508126}
   - component: {fileID: 114522849863617546}
   - component: {fileID: 114416726409720878}
-  - component: {fileID: 114813449086148944}
   m_Layer: 0
   m_Name: WalkaroundMap
   m_TagString: Untagged
@@ -494,8 +493,12 @@ MonoBehaviour:
   WaitTime: 1
   Target: {fileID: 0}
   PositionProvider:
+    Location: 0
     Direction: 1
     Offset: {x: 0, y: 0.5}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 1
     RotationFacing: 2
@@ -558,8 +561,12 @@ MonoBehaviour:
   WaitTime: 0.2
   Prefab: {fileID: 114643541697879042, guid: db2199f407fbcf9499aa8b875580346d, type: 2}
   GenerateAt:
+    Location: 0
     Direction: -1
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0
@@ -628,8 +635,12 @@ MonoBehaviour:
   WaitTime: 1
   Target: {fileID: 0}
   PositionProvider:
+    Location: 0
     Direction: 0
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 2
@@ -668,8 +679,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target:
+    Location: 0
     Direction: -1
     Offset: {x: 0.1, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0
@@ -712,21 +727,6 @@ MonoBehaviour:
   - {fileID: 114230851932537302}
   Selected: {fileID: 0}
   SelectorType: 0
---- !u!114 &114813449086148944
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1562161383423934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8deb0e337b67e754aa4fbbf225193082, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartingPoint: {fileID: 4986582682508126}
-  Motion: {fileID: 114416726409720878}
-  MaxLineLength: 28.75
-  MaxLineDrawn: 1000
 --- !u!114 &114818944961373406
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -742,8 +742,12 @@ MonoBehaviour:
     type: 2}
   Delay: 10
   LookAt:
+    Location: 0
     Direction: -1
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 243
@@ -764,8 +768,12 @@ MonoBehaviour:
   WaitTime: 0.25
   Prefab: {fileID: 114635628181971380, guid: 6ac4f7aceaa5047419439981f759fd74, type: 2}
   GenerateAt:
+    Location: 0
     Direction: -1
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 242
@@ -806,8 +814,12 @@ MonoBehaviour:
   WaitTime: 1
   Target: {fileID: 0}
   PositionProvider:
+    Location: 0
     Direction: 1
     Offset: {x: 0, y: 0.5}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 1
     RotationFacing: 2

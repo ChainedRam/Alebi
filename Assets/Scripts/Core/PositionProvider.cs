@@ -352,6 +352,7 @@ namespace ChainedRam.Core
 
         public void SetToPosition(Direction d, Vector2 offset, PositionRelativeTo r = PositionRelativeTo.None)
         {
+            Location = PositionLocation.Direction; 
             Direction = d;
             Offset = offset;
             RelativeTo = r;
@@ -422,15 +423,37 @@ namespace ChainedRam.Core
 
         public PositionProvider Copy()
         {
-            PositionProvider p = new PositionProvider();
-            p.Direction =  Direction;
-            p.Offset = Offset;
-            p.Degree = Degree;
-            p.RelativeTo = RelativeTo;
-            p.RotationFacing = RotationFacing;
-            p.PositionRefrence = PositionRefrence;
-            p.RotationRefrence = RotationRefrence;
+            PositionProvider p = new PositionProvider()
+            {
+                Location = Location,
+                Direction = Direction,
+                Offset = Offset,
+                RandomMultitude = RandomMultitude,
+                RandomPositionOption = RandomPositionOption,
+                RandomTransforms = RandomTransforms.ToArray(),
+                Degree = Degree,
+                RelativeTo = RelativeTo,
+                RotationFacing = RotationFacing,
+                PositionRefrence = PositionRefrence,
+                RotationRefrence = RotationRefrence,
+            };
+
             return p; 
+        }
+
+        public void CopyValues(PositionProvider source)
+        {
+            Location = source.Location;
+            Direction = source.Direction;
+            Offset = source.Offset;
+            RandomMultitude = source.RandomMultitude;
+            RandomPositionOption = source.RandomPositionOption;
+            RandomTransforms = source.RandomTransforms.ToArray();
+            Degree = source.Degree;
+            RelativeTo = source.RelativeTo;
+            RotationFacing = source.RotationFacing;
+            PositionRefrence = source.PositionRefrence;
+            RotationRefrence = source.RotationRefrence;
         }
     }
 }

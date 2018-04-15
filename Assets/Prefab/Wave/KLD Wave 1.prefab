@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4202446568707294}
   - component: {fileID: 114333591413716878}
   m_Layer: 0
-  m_Name: 'N O '
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 4106044719204132}
   - component: {fileID: 114524634209324312}
   m_Layer: 0
-  m_Name: BuiltWave
+  m_Name: Side Cycle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 4126778713903896}
   - component: {fileID: 114323580906707120}
   m_Layer: 0
-  m_Name: 4xCoin
+  m_Name: 'All Cycle '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 4792664341851136}
   - component: {fileID: 114083530828122350}
   m_Layer: 0
-  m_Name: N I T
+  m_Name: Enter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -785,8 +785,12 @@ MonoBehaviour:
   WaitTime: 5
   Target: {fileID: 0}
   PositionProvider:
+    Location: 1
     Direction: 1
     Offset: {x: 0, y: 1}
+    RandomMultitude: {x: 0.6, y: 0.5}
+    RandomPositionOption: 960
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 1
     RotationFacing: 241
@@ -810,8 +814,12 @@ MonoBehaviour:
   WaitTime: 2
   Target: {fileID: 0}
   PositionProvider:
+    Location: 1
     Direction: 4
     Offset: {x: 1, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: -1
     RotationFacing: 241
@@ -854,8 +862,12 @@ MonoBehaviour:
   WaitTime: 1
   Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt:
+    Location: 0
     Direction: -1
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0
@@ -915,8 +927,12 @@ MonoBehaviour:
   WaitTime: 1
   Target: {fileID: 0}
   PositionProvider:
+    Location: 1
     Direction: 1
     Offset: {x: 0, y: 1}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: -1
     RotationFacing: 241
@@ -940,8 +956,12 @@ MonoBehaviour:
     type: 2}
   Delay: 2
   LookAt:
+    Location: 0
     Direction: -1
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 243
@@ -962,8 +982,12 @@ MonoBehaviour:
   WaitTime: 0.5
   Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt:
+    Location: 0
     Direction: -1
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0
@@ -987,8 +1011,12 @@ MonoBehaviour:
   WaitTime: 1
   Target: {fileID: 0}
   PositionProvider:
+    Location: 1
     Direction: 4
     Offset: {x: 1, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 1
     RotationFacing: 241
@@ -1012,8 +1040,12 @@ MonoBehaviour:
     type: 2}
   Delay: 2
   LookAt:
+    Location: 0
     Direction: -1
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 243
@@ -1052,8 +1084,12 @@ MonoBehaviour:
     type: 2}
   Delay: 2
   LookAt:
+    Location: 0
     Direction: -1
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 243
@@ -1074,8 +1110,12 @@ MonoBehaviour:
   WaitTime: 0.25
   Target: {fileID: 0}
   PositionProvider:
+    Location: 0
     Direction: 4
     Offset: {x: 1, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: -1
     RotationFacing: 241
@@ -1099,8 +1139,12 @@ MonoBehaviour:
     type: 2}
   Delay: 3
   LookAt:
+    Location: 0
     Direction: 5
     Offset: {x: 1, y: 1}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 1
     RotationFacing: 243
@@ -1156,8 +1200,12 @@ MonoBehaviour:
     type: 2}
   Delay: 2
   LookAt:
+    Location: 0
     Direction: -1
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 243
@@ -1178,8 +1226,12 @@ MonoBehaviour:
   WaitTime: 0.15
   Target: {fileID: 0}
   PositionProvider:
+    Location: 0
     Direction: 4
     Offset: {x: 1, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 1
     RotationFacing: 241
@@ -1239,8 +1291,12 @@ MonoBehaviour:
   WaitTime: 0.5
   Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt:
+    Location: 0
     Direction: -1
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0
@@ -1299,8 +1355,12 @@ MonoBehaviour:
   WaitTime: 1
   Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt:
+    Location: 0
     Direction: -1
     Offset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 0
     RotationFacing: 0
@@ -1337,11 +1397,15 @@ MonoBehaviour:
   WaitTime: 1
   Prefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd, type: 2}
   GenerateAt:
+    Location: 2
     Direction: 5
     Offset: {x: 1, y: 1}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 960
+    RandomTransforms: []
     Degree: 0
     RelativeTo: 1
-    RotationFacing: 241
+    RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
   Parent: {fileID: 0}
