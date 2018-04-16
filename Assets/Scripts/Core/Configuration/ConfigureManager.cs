@@ -109,6 +109,7 @@ namespace ChainedRam.Core.Configuration
         /// <param name="comp"></param>
         public static void ConfigureGameObject(GameObject go, bool mustConfig = false)
         {
+            EnsureInstanceExist(); 
             int configCount = 0;
             foreach (var comp in go.GetComponents<Component>())
             {
@@ -125,5 +126,13 @@ namespace ChainedRam.Core.Configuration
             }
         }
         #endregion
+
+        private static void EnsureInstanceExist()
+        {
+            if (Instance == null)
+            {
+                Debug.LogError("Missing ConfigureManager Instance to the scene."); 
+            }
+        }
     } 
 }
