@@ -244,6 +244,12 @@ Transform:
   m_Father: {fileID: 1761454549}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
+--- !u!114 &145883684 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114162308061100050, guid: ddf421f38900a9546812f2b338b36e23,
+    type: 2}
+  m_PrefabInternal: {fileID: 1287985652}
+  m_Script: {fileID: 11500000, guid: 82fe1ac8e2b5fc44990b4efef651e56d, type: 3}
 --- !u!1 &175368622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,11 +1877,6 @@ Prefab:
       propertyPath: LookAt.RotationRefrence
       value: 
       objectReference: {fileID: 1806644298}
-    - target: {fileID: 114333591413716878, guid: 8018d64c8fcaee643a89c81eabd6ff83,
-        type: 2}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 328108319}
     - target: {fileID: 114672247728893346, guid: 8018d64c8fcaee643a89c81eabd6ff83,
         type: 2}
       propertyPath: LookAt.PositionRefrence
@@ -1916,75 +1917,36 @@ Prefab:
       propertyPath: Target
       value: 
       objectReference: {fileID: 328108319}
-    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
-        type: 2}
-      propertyPath: PositionProvider.Location
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
-        type: 2}
-      propertyPath: PositionProvider.RandomPositionOption
-      value: 960
-      objectReference: {fileID: 0}
-    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
-        type: 2}
-      propertyPath: PositionProvider.Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
-        type: 2}
-      propertyPath: PositionProvider.RandomMultitude.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
-        type: 2}
-      propertyPath: PositionProvider.RandomMultitude.y
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 114333591413716878, guid: 8018d64c8fcaee643a89c81eabd6ff83,
         type: 2}
-      propertyPath: PositionProvider.Location
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1008366456237398, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 328108319}
+    - target: {fileID: 1634295743986396, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
       propertyPath: m_Name
-      value: Exit
+      value: Coin Throw
       objectReference: {fileID: 0}
-    - target: {fileID: 1691201217032784, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
+    - target: {fileID: 1707463769684586, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
       propertyPath: m_Name
       value: Enter
       objectReference: {fileID: 0}
-    - target: {fileID: 1258694435923950, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
+    - target: {fileID: 1970159756159160, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
       propertyPath: m_Name
-      value: Side Cycle
+      value: Exit
       objectReference: {fileID: 0}
-    - target: {fileID: 1511525125536754, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
-      propertyPath: m_Name
-      value: 'All Cycle '
-      objectReference: {fileID: 0}
-    - target: {fileID: 114990287551738072, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+    - target: {fileID: 114535727316893718, guid: 8018d64c8fcaee643a89c81eabd6ff83,
         type: 2}
-      propertyPath: GenerateAt.Location
-      value: 2
+      propertyPath: LookAt.RotationFacing
+      value: 245
       objectReference: {fileID: 0}
-    - target: {fileID: 114990287551738072, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+    - target: {fileID: 114379039936533068, guid: 8018d64c8fcaee643a89c81eabd6ff83,
         type: 2}
-      propertyPath: GenerateAt.RandomPositionOption
-      value: 960
+      propertyPath: LookAt.RotationFacing
+      value: 245
       objectReference: {fileID: 0}
-    - target: {fileID: 114990287551738072, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+    - target: {fileID: 114333591413716878, guid: 8018d64c8fcaee643a89c81eabd6ff83,
         type: 2}
-      propertyPath: GenerateAt.RotationFacing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114456813303677368, guid: 8018d64c8fcaee643a89c81eabd6ff83,
-        type: 2}
-      propertyPath: PositionProvider.Location
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114206228067733418, guid: 8018d64c8fcaee643a89c81eabd6ff83,
-        type: 2}
-      propertyPath: PositionProvider.Location
+      propertyPath: HideGizmo
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2352,17 +2314,37 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114865626708744992, guid: ddf421f38900a9546812f2b338b36e23,
+    - target: {fileID: 114416726409720878, guid: ddf421f38900a9546812f2b338b36e23,
+        type: 2}
+      propertyPath: Target.PositionRefrence
+      value: 
+      objectReference: {fileID: 328108324}
+    - target: {fileID: 114522849863617546, guid: ddf421f38900a9546812f2b338b36e23,
+        type: 2}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 328108319}
+    - target: {fileID: 114970770102001940, guid: ddf421f38900a9546812f2b338b36e23,
+        type: 2}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 328108319}
+    - target: {fileID: 114230851932537302, guid: ddf421f38900a9546812f2b338b36e23,
         type: 2}
       propertyPath: GenerateAt.PositionRefrence
       value: 
       objectReference: {fileID: 328108324}
-    - target: {fileID: 114865626708744992, guid: ddf421f38900a9546812f2b338b36e23,
+    - target: {fileID: 114230851932537302, guid: ddf421f38900a9546812f2b338b36e23,
         type: 2}
       propertyPath: GenerateAt.RotationRefrence
       value: 
-      objectReference: {fileID: 328108324}
-    - target: {fileID: 114118118175142746, guid: ddf421f38900a9546812f2b338b36e23,
+      objectReference: {fileID: 1806644298}
+    - target: {fileID: 114818944961373406, guid: ddf421f38900a9546812f2b338b36e23,
+        type: 2}
+      propertyPath: LookAt.RotationRefrence
+      value: 
+      objectReference: {fileID: 1806644298}
+    - target: {fileID: 114386437623889382, guid: ddf421f38900a9546812f2b338b36e23,
         type: 2}
       propertyPath: Target
       value: 
@@ -2372,39 +2354,19 @@ Prefab:
       propertyPath: Target
       value: 
       objectReference: {fileID: 328108319}
-    - target: {fileID: 114386437623889382, guid: ddf421f38900a9546812f2b338b36e23,
+    - target: {fileID: 114118118175142746, guid: ddf421f38900a9546812f2b338b36e23,
         type: 2}
       propertyPath: Target
       value: 
       objectReference: {fileID: 328108319}
-    - target: {fileID: 114818944961373406, guid: ddf421f38900a9546812f2b338b36e23,
-        type: 2}
-      propertyPath: LookAt.RotationRefrence
-      value: 
-      objectReference: {fileID: 1806644298}
-    - target: {fileID: 114230851932537302, guid: ddf421f38900a9546812f2b338b36e23,
+    - target: {fileID: 114865626708744992, guid: ddf421f38900a9546812f2b338b36e23,
         type: 2}
       propertyPath: GenerateAt.PositionRefrence
       value: 
       objectReference: {fileID: 328108324}
-    - target: {fileID: 114230851932537302, guid: ddf421f38900a9546812f2b338b36e23,
+    - target: {fileID: 114865626708744992, guid: ddf421f38900a9546812f2b338b36e23,
         type: 2}
       propertyPath: GenerateAt.RotationRefrence
-      value: 
-      objectReference: {fileID: 1806644298}
-    - target: {fileID: 114970770102001940, guid: ddf421f38900a9546812f2b338b36e23,
-        type: 2}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 328108319}
-    - target: {fileID: 114522849863617546, guid: ddf421f38900a9546812f2b338b36e23,
-        type: 2}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 328108319}
-    - target: {fileID: 114416726409720878, guid: ddf421f38900a9546812f2b338b36e23,
-        type: 2}
-      propertyPath: Target.PositionRefrence
       value: 
       objectReference: {fileID: 328108324}
     m_RemovedComponents: []
@@ -2679,9 +2641,8 @@ MonoBehaviour:
   Delta: 1
   Repeat: 1
   Generators:
-  - {fileID: 494263797}
-  - {fileID: 1039382106}
   - {fileID: 1678691261}
+  - {fileID: 145883684}
   Selected: {fileID: 0}
   SelectorType: 1
 --- !u!1 &1651715406

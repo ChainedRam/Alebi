@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 4694200798972784}
   - component: {fileID: 114222050364578484}
   m_Layer: 0
-  m_Name: East 4xCoin
+  m_Name: Coin Throw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 4951605887482062}
   - component: {fileID: 114732143073949000}
   m_Layer: 0
-  m_Name: E I T
+  m_Name: Enter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 4940019326726482}
   - component: {fileID: 114536039788353442}
   m_Layer: 0
-  m_Name: 'E O '
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -930,12 +930,12 @@ MonoBehaviour:
     Location: 1
     Direction: 1
     Offset: {x: 0, y: 1}
-    RandomMultitude: {x: 0, y: 0}
-    RandomPositionOption: 0
+    RandomMultitude: {x: 1, y: 1}
+    RandomPositionOption: 2
     RandomTransforms: []
     Degree: 0
     RelativeTo: -1
-    RotationFacing: 241
+    RotationFacing: 243
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
   TeleportToOtherSide: 0
@@ -964,7 +964,7 @@ MonoBehaviour:
     RandomTransforms: []
     Degree: 0
     RelativeTo: 0
-    RotationFacing: 243
+    RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
 --- !u!114 &114386400893428346
@@ -1048,7 +1048,7 @@ MonoBehaviour:
     RandomTransforms: []
     Degree: 0
     RelativeTo: 0
-    RotationFacing: 243
+    RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
 --- !u!114 &114524634209324312
@@ -1092,7 +1092,7 @@ MonoBehaviour:
     RandomTransforms: []
     Degree: 0
     RelativeTo: 0
-    RotationFacing: 243
+    RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
 --- !u!114 &114536039788353442
@@ -1147,7 +1147,7 @@ MonoBehaviour:
     RandomTransforms: []
     Degree: 0
     RelativeTo: 1
-    RotationFacing: 243
+    RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
 --- !u!114 &114613928708948906
@@ -1208,7 +1208,7 @@ MonoBehaviour:
     RandomTransforms: []
     Degree: 0
     RelativeTo: 0
-    RotationFacing: 243
+    RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
 --- !u!114 &114732143073949000
