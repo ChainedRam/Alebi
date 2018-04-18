@@ -173,9 +173,11 @@ namespace ChainedRam.Core
         [SerializeField]
         private Transform RotationRefrence;
 
-        private Vector3? LastProvidedPosition; 
-        private int LastRandom = -1;
-        private int LastRandomTransform = -1; 
+        private Vector3? LastProvidedPosition;
+
+        private List<int> RandomTransformMemory;
+
+        private List<int> RandomMemory; 
 
         public Vector3 ProvidedPosition
         {
@@ -405,6 +407,14 @@ namespace ChainedRam.Core
                         throw new Exception("Random cannot operate without options.");
                     }
 
+                    if (RandomMemory == null)
+                    {
+                        RandomMemory = new List<int>();
+                    }
+                    else if (RandomMemory.Count() >= matching.Length)
+                    {
+                        RandomMemory.Clear(); 
+                    }
 
                     System.Random rand = new System.Random();
                     int selected;
@@ -412,8 +422,9 @@ namespace ChainedRam.Core
                     do
                     {
                         selected = rand.Next(matching.Length);
-                    } while (LastRandom == selected && matching.Length > 1);
+                    } while (matching.Length > 1 && RandomMemory.Contains(selected));
 
+                    RandomMemory.Add(selected);
 
                     RandomPositionOption myEnum = matching[selected];
 
@@ -427,11 +438,22 @@ namespace ChainedRam.Core
                     switch (myEnum)
                     {
                         case RandomPositionOption.Transforms:
+
+                            if (RandomTransformMemory == null)
+                            {
+                                RandomMemory = new List<int>();
+                            }
+                            else if (RandomTransformMemory.Count() >= matching.Length)
+                            {
+                                RandomMemory.Clear();
+                            }
+                          
                             do
                             {
                                 selected = rand.Next(RandomTransforms.Length);
-                            } while (LastRandomTransform == selected && RandomTransforms.Length > 1);
-                            LastRandomTransform = selected;
+                            } while (RandomTransforms.Length > 1 && RandomTransformMemory.Contains(selected));
+
+                            RandomTransformMemory.Add(selected); 
 
                             if (RandomTransforms.Length == 0)
                             {
