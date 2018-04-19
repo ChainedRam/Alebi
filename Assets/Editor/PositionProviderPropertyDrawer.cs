@@ -165,14 +165,42 @@ public class PositionProviderPropertyDrawer : PropertyDrawer
 
     private void DrawRotationOffsetProperties(Rect position, SerializedProperty property)
     {
-        float width1 = Math.Min(position.width / 2, 105);
-        float lastWidth = position.width - (width1);
+        float width1 = Math.Min(position.width / 3, 105);
+        float width2 = Math.Min(position.width / 3, 80);
+        float lastWidth = position.width - (width1+ width2);
 
         var labelRect = new Rect(position.x, position.y + personalSpace, width1, position.height);
-        var offsetRect = new Rect(labelRect.xMax, position.y, lastWidth, position.height);
+        var typeRect = new Rect(labelRect.xMax, position.y, width2, position.height);
+        var offsetRect = new Rect(typeRect.xMax, position.y, lastWidth, position.height);
 
         EditorGUI.LabelField(labelRect, "Rotation Offset");
-        EditorGUI.PropertyField(offsetRect, property.FindPropertyRelative("RotationOffset"), GUIContent.none);
+        EditorGUI.PropertyField(typeRect, property.FindPropertyRelative("RotationOffsetType"), GUIContent.none);
+
+        RotationOffsetType type = (RotationOffsetType) property.FindPropertyRelative("RotationOffsetType").intValue;
+
+        switch (type)
+        {
+            case RotationOffsetType.Numaric:
+                EditorGUI.PropertyField(offsetRect, property.FindPropertyRelative("RotationOffset"), GUIContent.none);
+                break;
+            case RotationOffsetType.Vector:
+                EditorGUI.PropertyField(offsetRect, property.FindPropertyRelative("RotationOffsetVector"), GUIContent.none);
+                break;
+            case RotationOffsetType.Random:
+
+                float firstWidth = Math.Min(offsetRect.width / 3, 60);
+                float randomlabelWidth = Math.Min(offsetRect.width / 3, 80);
+                float randomRageWidth = offsetRect.width - (firstWidth + randomlabelWidth); 
+
+                var firstHalf =  new Rect(typeRect.xMax, offsetRect.y, firstWidth, offsetRect.height);
+                var secondHalf = new Rect(firstHalf.xMax, offsetRect.y, randomlabelWidth, offsetRect.height);
+                var thridHalf = new Rect(secondHalf.xMax, offsetRect.y, randomRageWidth, offsetRect.height);
+
+                EditorGUI.PropertyField(firstHalf, property.FindPropertyRelative("RotationOffset"), GUIContent.none);
+                EditorGUI.LabelField(secondHalf, new GUIContent("Random", "Random Range"));
+                EditorGUI.PropertyField(thridHalf, property.FindPropertyRelative("RotationRandomOffset"), GUIContent.none);
+                break;
+        }
     }
 
 

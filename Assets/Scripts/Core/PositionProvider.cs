@@ -134,6 +134,13 @@ namespace ChainedRam.Core
         SouthWest   = 1 << 9,
     }
 
+    public enum RotationOffsetType
+    {
+        Numaric, 
+        Vector, 
+        Random,
+    }
+
     /// <summary>
     /// Provides Positions relative to camera sides.
     /// </summary>
@@ -147,7 +154,7 @@ namespace ChainedRam.Core
         private Direction Direction;
 
         [SerializeField]
-        public Vector2 PositionOffset;
+        private Vector2 PositionOffset;
 
         [SerializeField]
         private Vector2 RandomMultitude;
@@ -174,7 +181,16 @@ namespace ChainedRam.Core
         private Transform RotationRefrence;
 
         [SerializeField]
-        public float RotationOffset;
+        private RotationOffsetType RotationOffsetType;
+
+        [SerializeField]
+        private float RotationOffset;
+
+        [SerializeField]
+        private Vector2 RotationOffsetVector;
+
+        [SerializeField]
+        private float RotationRandomOffset;
 
         private Vector3? LastProvidedPosition;
 
@@ -212,18 +228,32 @@ namespace ChainedRam.Core
             {
                 float? calc = CalculateRotation();
 
-                if(calc.HasValue)
+
+                if (calc.HasValue)
                 {
-                    return calc + RotationOffset; 
+                    float RandomDegree = 0; 
+                    switch (RotationOffsetType)
+                    {
+                        //RotationOffsetType.Vector happends within CalculateRotation(); 
+                        case RotationOffsetType.Random:
+                            RandomDegree = UnityEngine.Random.Range(0, RotationRandomOffset); 
+                            goto case RotationOffsetType.Numaric; 
+                        case RotationOffsetType.Numaric:
+                            return calc + RotationOffset + RandomDegree;
+                    }
                 }
 
-                return null;
+                return calc;
             }
         }
 
         private float? CalculateRotation()
         {
             LastProvidedPosition = LastProvidedPosition ?? ProvidedPosition;
+
+            Vector2 OffsettedPrevPosition = (Vector2)LastProvidedPosition.Value + (RotationOffsetType == RotationOffsetType.Vector?  RotationOffsetVector : Vector2.zero);
+            //thing about how this works?? how offset can join it 
+
             switch (RotationFacing)
             {
                 case RotationFacing.Default:
@@ -250,16 +280,16 @@ namespace ChainedRam.Core
                     switch (RelativeTo)
                     {
                         case PositionRelativeTo.Inside:
-                            return AngleBetween(Vector2.zero, LastProvidedPosition.Value);
+                            return AngleBetween(Vector2.zero, OffsettedPrevPosition);
                         case PositionRelativeTo.Outside:
-                            return 180 + AngleBetween(Vector2.zero, LastProvidedPosition.Value);
+                            return 180 + AngleBetween(Vector2.zero, OffsettedPrevPosition);
                         default:
                             return null;
                     }
                 case RotationFacing.Inside:
-                    return AngleBetween(Vector2.zero, LastProvidedPosition.Value);
+                    return AngleBetween(Vector2.zero, OffsettedPrevPosition);
                 case RotationFacing.Outside:
-                    return 180 + AngleBetween(Vector2.zero, LastProvidedPosition.Value);
+                    return 180 + AngleBetween(Vector2.zero, OffsettedPrevPosition);
                 case RotationFacing.MatchTransform:
                     if (RotationRefrence == null)
                     {
@@ -271,8 +301,7 @@ namespace ChainedRam.Core
                     {
                         return null;
                     }
-                    return AngleBetween(RotationRefrence.position, LastProvidedPosition.Value);
-
+                    return AngleBetween(RotationRefrence.position, OffsettedPrevPosition);
             }
 
             //should never reach here
@@ -304,6 +333,18 @@ namespace ChainedRam.Core
         public void SetToPosition(Direction d)
         {
             SetToPosition(d, Vector2.zero); 
+        }
+
+        public void SetRotationOffset(float degree)
+        {
+            RotationOffsetType = RotationOffsetType.Numaric;
+            RotationOffset = degree; 
+        }
+
+        public void SetRotationOffset(Vector2 rotationOffset)
+        {
+            RotationOffsetType = RotationOffsetType.Vector;
+            RotationOffsetVector = rotationOffset;
         }
 
         #region Static Helper Methods
@@ -378,6 +419,12 @@ namespace ChainedRam.Core
                 PositionRefrence = PositionRefrence,
                 RotationRefrence = RotationRefrence,
                 RotationOffset = RotationOffset,
+                RotationOffsetType = RotationOffsetType,
+                RotationOffsetVector = RotationOffsetVector,
+                RotationRandomOffset = RotationRandomOffset,
+                RandomMemory = RandomMemory?.ToList(),
+                RandomTransformMemory = RandomTransformMemory?.ToList(),
+                LastProvidedPosition = LastProvidedPosition,
             };
 
             return p; 
@@ -397,6 +444,9 @@ namespace ChainedRam.Core
             PositionRefrence = source.PositionRefrence;
             RotationRefrence = source.RotationRefrence;
             RotationOffset = source.RotationOffset;
+            RotationOffsetType = source.RotationOffsetType;
+            RotationOffsetVector = source.RotationOffsetVector;
+            RotationRandomOffset = source.RotationRandomOffset; 
         }
 
         private Vector3 CalulatePosition()
@@ -442,6 +492,7 @@ namespace ChainedRam.Core
                     } while (matching.Length > 1 && RandomMemory.Contains(selected));
 
                     RandomMemory.Add(selected);
+                    Debug.Log(RandomMemory); 
 
                     RandomPositionOption myEnum = matching[selected];
 
@@ -520,6 +571,12 @@ namespace ChainedRam.Core
             }
 
             throw new Exception("What the fuck?");
+        }
+
+        public void ResetRNG()
+        {
+            RandomMemory = null;
+            RandomTransformMemory = null; 
         }
     }
 }

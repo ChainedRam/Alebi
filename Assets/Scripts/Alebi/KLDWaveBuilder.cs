@@ -1,5 +1,6 @@
 ﻿using ChainedRam.Core;
 using ChainedRam.Core.Generation;
+using ChainedRam.Core.Projection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,8 +15,10 @@ public class KLDWaveBuilder : Generator
     public ProjectileGenerator RightCoinSpawner;
     public ProjectileGenerator LeftCoinSpawner;
 
-    public PoolGenerator NetSpawnerRepeater;
-    public ProjectileGenerator NetSpawner; 
+    public MultiProjectileGenerator NetSpawner;
+
+    public DelayedMotion RightCoinDelay;
+    public DelayedMotion LeftCoinDelay;
 
     public int Rank;
 
@@ -30,16 +33,20 @@ public class KLDWaveBuilder : Generator
         Enter.PositionProvider.SetToPosition(RankEnterDirection[Rank % 2], Vector2.right, PositionRelativeTo.Inside);
         Exit.PositionProvider.SetToPosition(RankEnterDirection[Rank % 2], Vector2.right, PositionRelativeTo.Outside);
 
+        RightCoinDelay.LookAt.SetRotationOffset(Vector2.up * .25f * (1 - (2 * (Rank % 2) ) ) );
+        LeftCoinDelay.LookAt.SetRotationOffset(Vector2.up * -.25f * (1 - (2 * (Rank % 2) ) ) );
+
+
         switch (Rank)
         {
             case 2:
-                NetSpawnerRepeater.Repeat = 2;
-                NetSpawner.WaitTime /= 2;
+                NetSpawner.Count *= 2;
+                NetSpawner.FireRate /= 2;
                 break;
 
             case 4:
-                NetSpawnerRepeater.Repeat = 4;
-                NetSpawner.WaitTime /= 2; 
+                NetSpawner.Count *= 2;
+                NetSpawner.FireRate /= 2; 
 
                 BothHandCoinSpawnerRepeater.Repeat = 2;
                 RightCoinSpawner.WaitTime /= 2;

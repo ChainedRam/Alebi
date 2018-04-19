@@ -34,7 +34,7 @@ namespace ChainedRam.Core.Generation
         {
             T comp;
 
-            if (GenerationQueue.Count < MaxSize)
+            if (MaxSize <= 0 || GenerationQueue.Count < MaxSize)
             {
                 comp = base.CreateInstance();
             }

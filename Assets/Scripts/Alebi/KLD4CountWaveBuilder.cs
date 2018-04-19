@@ -30,7 +30,7 @@ public class KLD4CountWaveBuilder : Generator
 
     protected override void OnGenerate(GenerateEventArgs e)
     {
-        Direction selectedDirection = Directions[Rank++];
+        Direction selectedDirection = Directions[(Rank++)% Directions.Length];
 
         Vector2 offset = Vector2.zero; 
 
@@ -56,6 +56,12 @@ public class KLD4CountWaveBuilder : Generator
 
         Enter.PositionProvider.SetToPosition(selectedDirection, offset, PositionRelativeTo.Inside);
         Exit.PositionProvider.SetToPosition(selectedDirection, offset, PositionRelativeTo.Outside);
+
+        if(Rank % Directions.Length == 0)
+        {
+            Enter.WaitTime /= 2;
+            Exit.WaitTime /= 2;
+        }
 
     }
 

@@ -35,7 +35,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4030820696611648}
-  - component: {fileID: 114801754810245152}
+  - component: {fileID: 114107633405902550}
   m_Layer: 0
   m_Name: BothHandThrow
   m_TagString: Untagged
@@ -71,39 +71,6 @@ GameObject:
   - component: {fileID: 114495254433190550}
   m_Layer: 0
   m_Name: L Coin Throw
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1173496847499946
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4330874226991498}
-  - component: {fileID: 114990287551738072}
-  - component: {fileID: 114608833134243510}
-  m_Layer: 0
-  m_Name: NetSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1231891207032034
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4967683954084380}
-  - component: {fileID: 114873274894614688}
-  m_Layer: 0
-  m_Name: Net Repeater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,7 +180,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4095888692017680}
-  - component: {fileID: 114287420612913088}
+  - component: {fileID: 114254368210879056}
+  - component: {fileID: 114436695249867836}
   m_Layer: 0
   m_Name: Net Corner Throw
   m_TagString: Untagged
@@ -421,8 +389,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4967683954084380}
+  m_Children: []
   m_Father: {fileID: 4406202247323616}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -493,19 +460,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4845483415633912}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4330874226991498
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1173496847499946}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4967683954084380}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4406202247323616
@@ -691,20 +645,6 @@ Transform:
   m_Father: {fileID: 4694200798972784}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4967683954084380
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231891207032034}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4330874226991498}
-  m_Father: {fileID: 4095888692017680}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114048670317757236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -720,7 +660,7 @@ MonoBehaviour:
   WaitTime: 6
   Generators:
   - {fileID: 114065117623169842}
-  - {fileID: 114287420612913088}
+  - {fileID: 114254368210879056}
 --- !u!114 &114065117623169842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -757,7 +697,7 @@ MonoBehaviour:
   PositionProvider:
     Location: 1
     Direction: 1
-    PositionOffset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 1}
     RandomMultitude: {x: 0.6, y: 0.5}
     RandomPositionOption: 960
     RandomTransforms: []
@@ -766,10 +706,30 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   TeleportToOtherSide: 1
   HideGizmo: 1
-  Speed: 0
+--- !u!114 &114107633405902550
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1008375927672592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fe1ac8e2b5fc44990b4efef651e56d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Delta: 0
+  Repeat: 1
+  Generators:
+  - {fileID: 114815763779689424}
+  - {fileID: 114386400893428346}
+  Selected: {fileID: 0}
+  SelectorType: 0
 --- !u!114 &114206228067733418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -796,10 +756,12 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   TeleportToOtherSide: 0
   HideGizmo: 1
-  Speed: 0
 --- !u!114 &114222050364578484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -815,7 +777,7 @@ MonoBehaviour:
   Repeat: 1
   Generators:
   - {fileID: 114732143073949000}
-  - {fileID: 114801754810245152}
+  - {fileID: 114107633405902550}
   - {fileID: 114536039788353442}
   Selected: {fileID: 0}
   SelectorType: 1
@@ -845,11 +807,14 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 114672247728893346}
---- !u!114 &114287420612913088
+--- !u!114 &114254368210879056
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -857,15 +822,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1440997801610764}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82fe1ac8e2b5fc44990b4efef651e56d, type: 3}
+  m_Script: {fileID: 11500000, guid: 50599d5975cd38940aa6567b81ec1b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 0
-  Repeat: 1
-  Generators:
-  - {fileID: 114873274894614688}
-  Selected: {fileID: 0}
-  SelectorType: 1
+  WaitTime: 2
+  Prefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd, type: 2}
+  GenerateAt:
+    Location: 2
+    Direction: 0
+    PositionOffset: {x: 1, y: 1}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 960
+    RandomTransforms: []
+    Degree: 0
+    RelativeTo: 1
+    RotationFacing: 0
+    PositionRefrence: {fileID: 0}
+    RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
+    RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
+  Parent: {fileID: 0}
+  MaxSize: 50
+  MotionOverride: {fileID: 114436695249867836}
+  Count: 1
+  FireRate: 2
 --- !u!114 &114323580906707120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -901,7 +884,7 @@ MonoBehaviour:
   PositionProvider:
     Location: 1
     Direction: 1
-    PositionOffset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 1}
     RandomMultitude: {x: 1, y: 1}
     RandomPositionOption: 2
     RandomTransforms: []
@@ -910,10 +893,12 @@ MonoBehaviour:
     RotationFacing: 243
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   TeleportToOtherSide: 0
   HideGizmo: 1
-  Speed: 0
 --- !u!114 &114379039936533068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -927,7 +912,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WrappedMotion: {fileID: 114204662079819578, guid: bfa5c108ec0a8f24e931dc859fbd91b1,
     type: 2}
-  Delay: 2
+  Delay: 1
   LookAt:
     Location: 0
     Direction: -1
@@ -940,7 +925,10 @@ MonoBehaviour:
     RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
-    RotationOffset: 3
+    RotationOffsetType: 2
+    RotationOffset: -5
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 10
 --- !u!114 &114386400893428346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -953,7 +941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 0
-  WaitTime: 0.5
+  WaitTime: 0.25
   Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt:
     Location: 0
@@ -967,10 +955,43 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 114535727316893718}
+--- !u!114 &114436695249867836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1440997801610764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9fb89aa01f60f7498c3b52fcdcac1e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WrappedMotion: {fileID: 114105031797533716, guid: 412e6d2c19d0703469cd6a6b79dc1efd,
+    type: 2}
+  Delay: 3
+  LookAt:
+    Location: 0
+    Direction: 5
+    PositionOffset: {x: 1, y: 1}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
+    Degree: 0
+    RelativeTo: 1
+    RotationFacing: 245
+    PositionRefrence: {fileID: 0}
+    RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
+    RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
 --- !u!114 &114456813303677368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -997,10 +1018,12 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   TeleportToOtherSide: 1
   HideGizmo: 1
-  Speed: 0
 --- !u!114 &114495254433190550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1027,7 +1050,10 @@ MonoBehaviour:
     RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
 --- !u!114 &114524634209324312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1059,7 +1085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WrappedMotion: {fileID: 114204662079819578, guid: bfa5c108ec0a8f24e931dc859fbd91b1,
     type: 2}
-  Delay: 2
+  Delay: 1.5
   LookAt:
     Location: 0
     Direction: -1
@@ -1072,7 +1098,10 @@ MonoBehaviour:
     RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
-    RotationOffset: -3
+    RotationOffsetType: 2
+    RotationOffset: -5
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 10
 --- !u!114 &114536039788353442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1088,7 +1117,7 @@ MonoBehaviour:
   WaitTime: 0.25
   Target: {fileID: 0}
   PositionProvider:
-    Location: 0
+    Location: 1
     Direction: 4
     PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
@@ -1099,37 +1128,12 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   TeleportToOtherSide: 0
   HideGizmo: 1
-  Speed: 0
---- !u!114 &114608833134243510
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1173496847499946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9fb89aa01f60f7498c3b52fcdcac1e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WrappedMotion: {fileID: 114105031797533716, guid: 412e6d2c19d0703469cd6a6b79dc1efd,
-    type: 2}
-  Delay: 3
-  LookAt:
-    Location: 0
-    Direction: 5
-    PositionOffset: {x: 1, y: 1}
-    RandomMultitude: {x: 0, y: 0}
-    RandomPositionOption: 0
-    RandomTransforms: []
-    Degree: 0
-    RelativeTo: 1
-    RotationFacing: 245
-    PositionRefrence: {fileID: 0}
-    RotationRefrence: {fileID: 0}
-    RotationOffset: 0
 --- !u!114 &114613928708948906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1191,7 +1195,10 @@ MonoBehaviour:
     RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
 --- !u!114 &114732143073949000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1207,7 +1214,7 @@ MonoBehaviour:
   WaitTime: 0.15
   Target: {fileID: 0}
   PositionProvider:
-    Location: 0
+    Location: 1
     Direction: 4
     PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
@@ -1218,10 +1225,12 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   TeleportToOtherSide: 1
   HideGizmo: 1
-  Speed: 0
 --- !u!114 &114767012575845510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1239,25 +1248,10 @@ MonoBehaviour:
   BothHandCoinSpawnerRepeater: {fileID: 114880493655184496}
   RightCoinSpawner: {fileID: 114239687739082170}
   LeftCoinSpawner: {fileID: 114949511102524362}
-  NetSpawnerRepeater: {fileID: 114873274894614688}
-  NetSpawner: {fileID: 114990287551738072}
+  NetSpawner: {fileID: 114254368210879056}
+  RightCoinDelay: {fileID: 114672247728893346}
+  LeftCoinDelay: {fileID: 114495254433190550}
   Rank: 0
---- !u!114 &114801754810245152
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1008375927672592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9846a774887f3a748bbfc47e699196b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Delta: 0
-  WaitTime: 0.5
-  Generators:
-  - {fileID: 114815763779689424}
-  - {fileID: 114386400893428346}
 --- !u!114 &114815763779689424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1270,7 +1264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 0
-  WaitTime: 0.5
+  WaitTime: 0.25
   Prefab: {fileID: 114778102892608964, guid: bfa5c108ec0a8f24e931dc859fbd91b1, type: 2}
   GenerateAt:
     Location: 0
@@ -1284,27 +1278,13 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 114379039936533068}
---- !u!114 &114873274894614688
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231891207032034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82fe1ac8e2b5fc44990b4efef651e56d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Delta: 0
-  Repeat: 1
-  Generators:
-  - {fileID: 114990287551738072}
-  Selected: {fileID: 0}
-  SelectorType: 0
 --- !u!114 &114880493655184496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1349,37 +1329,10 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 114495254433190550}
---- !u!114 &114990287551738072
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1173496847499946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35e28f99f3b7cfe44a0c6e9f14172eb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Delta: 0
-  WaitTime: 2
-  Prefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd, type: 2}
-  GenerateAt:
-    Location: 2
-    Direction: 5
-    PositionOffset: {x: 0, y: 0}
-    RandomMultitude: {x: 0, y: 0}
-    RandomPositionOption: 960
-    RandomTransforms: []
-    Degree: 0
-    RelativeTo: 1
-    RotationFacing: 0
-    PositionRefrence: {fileID: 0}
-    RotationRefrence: {fileID: 0}
-    RotationOffset: 0
-  Parent: {fileID: 0}
-  MaxSize: 50
-  MotionOverride: {fileID: 114608833134243510}

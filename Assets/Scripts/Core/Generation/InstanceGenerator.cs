@@ -95,6 +95,12 @@ namespace ChainedRam.Core.Generation
         {
             GenerateInstance(); 
         }
+
+        protected override void OnBegin()
+        {
+            base.OnBegin();
+            GenerateAt.ResetRNG(); 
+        }
         #endregion
         #region Private Methods
         /// <summary>
