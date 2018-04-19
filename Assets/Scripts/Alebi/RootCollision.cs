@@ -12,6 +12,6 @@ public class RootCollision : PlayerCollisionEffect
     {
         gameObject.SetActive(false);
         p.AddEffect(rootEffect, duration);
-        p.velocityReset();
+        p.VelocityReset();
     }
 }

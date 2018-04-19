@@ -4,34 +4,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaveWaveBuilder : Generator
+public sealed class RaveWaveBuilder : OnceGenerator
 {
     public PoolGenerator WalkSpawnRepeater;
-    public DelayedMotion DaggerMotion;
+
+    public DelayedMotion DaggerMotion; 
 
     public NestedGenerator SandCycle; 
     public RotatingGenerator SpinningSand;
     public ProjectileGenerator SandSpawner;
 
-
     protected override void OnGenerate(GenerateEventArgs e)
     {
         WalkSpawnRepeater.Repeat *= 2;
-        DaggerMotion.Delay += 5;
 
-        SandCycle.WaitTime += 5;
-        SpinningSand.WaitTime += 5; 
-        SpinningSand.Loops -= 2;
+        DaggerMotion.Delay += 2.5f;
+
+        SandCycle.WaitTime = 12f; 
+
+        SpinningSand.Loops *= 4;
         SandSpawner.WaitTime /= 2; 
     }
 
-    protected override bool ShouldGenerate()
-    {
-        return ShouldGenerateOnce(); 
-    }
-
-    protected override bool ShouldTerminate()
-    {
-        return ShouldTerminateOnSkippedGeneration(); 
-    }
 }

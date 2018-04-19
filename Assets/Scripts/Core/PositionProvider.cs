@@ -492,7 +492,6 @@ namespace ChainedRam.Core
                     } while (matching.Length > 1 && RandomMemory.Contains(selected));
 
                     RandomMemory.Add(selected);
-                    Debug.Log(RandomMemory); 
 
                     RandomPositionOption myEnum = matching[selected];
 

@@ -826,7 +826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 0
-  WaitTime: 2
+  WaitTime: 4
   Prefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd, type: 2}
   GenerateAt:
     Location: 2
@@ -848,7 +848,7 @@ MonoBehaviour:
   MaxSize: 50
   MotionOverride: {fileID: 114436695249867836}
   Count: 1
-  FireRate: 2
+  FireRate: 4
 --- !u!114 &114323580906707120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -861,7 +861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 0
-  Repeat: 8
+  Repeat: 16
   Generators:
   - {fileID: 114613928708948906}
   - {fileID: 114222050364578484}
@@ -975,7 +975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WrappedMotion: {fileID: 114105031797533716, guid: 412e6d2c19d0703469cd6a6b79dc1efd,
     type: 2}
-  Delay: 3
+  Delay: 2
   LookAt:
     Location: 0
     Direction: 5

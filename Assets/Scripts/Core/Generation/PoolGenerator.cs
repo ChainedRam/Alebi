@@ -104,6 +104,7 @@ namespace ChainedRam.Core.Generation
             if (Selected != null)
             {
                 Demote(Selected);
+                Selected.End(); 
             }
         }
 

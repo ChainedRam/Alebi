@@ -15,10 +15,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Projectile
+  - StageBound
+  - PlayerBound
   - 
   - 
   - 

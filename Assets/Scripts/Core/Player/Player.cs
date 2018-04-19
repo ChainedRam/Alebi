@@ -15,7 +15,8 @@ namespace ChainedRam.Core.Player
         /// <summary>
         /// Speed in which the object will move. 
         /// </summary>
-        public float Speed; 
+        public float Speed;
+
         public bool CanMove; 
         public float SpeedDelta;  
         public int Health;
@@ -120,8 +121,8 @@ namespace ChainedRam.Core.Player
         /// <param name="collision"></param>
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            PlayerCollisionEffect effect = collision.gameObject.GetComponent<PlayerCollisionEffect>();
-
+            PlayerCollisionEffect effect = collision.gameObject.GetComponent<PlayerCollisionEffect>(); 
+            
             if (effect != null)
             {
                 effect.OnHit(this);
@@ -211,9 +212,14 @@ namespace ChainedRam.Core.Player
             }    
         }
 
-        public void velocityReset()
+        public void VelocityReset()
         {
             rigidbody2D.velocity = Vector2.zero;
+        }
+
+        public void AddVelocity(Vector2 power)
+        {
+            rigidbody2D.velocity += power;
         }
         #endregion
     }

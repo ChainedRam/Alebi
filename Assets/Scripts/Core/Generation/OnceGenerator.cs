@@ -5,27 +5,18 @@ using UnityEngine;
 namespace ChainedRam.Core.Generation
 {
     /// <summary>
-    /// Generates wrapped generator once. ONCE! 
+    /// Generates once. ONCE! 
     /// </summary>
-    public class OnceGenerator : GeneratorWrap
+    public abstract class OnceGenerator : Generator
     {
-        #region Private Atributes 
-        private bool HasGenerated;
-        #endregion
-        #region Unity Methods 
-        #endregion
-        #region GeneratorWrap Override 
         protected sealed override bool ShouldGenerate()
         {
-            return !HasGenerated;
+            return ShouldGenerateOnce(); 
         }
 
-        protected override void Awake()
+        protected sealed override bool ShouldTerminate()
         {
-            base.Awake();
-            HasGenerated = false;
-            OnGenerateEventHandler += (s,e) => HasGenerated = true; //REEEEEEE. move to WhenGenerate
+            return ShouldTerminateOnSkippedGeneration(); 
         }
-        #endregion
     }
 }
