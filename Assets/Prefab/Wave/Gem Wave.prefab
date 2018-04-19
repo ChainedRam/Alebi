@@ -329,7 +329,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: 5
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 1, y: 1}
     RandomPositionOption: 960
     RandomTransforms: []
@@ -338,6 +338,7 @@ MonoBehaviour:
     RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 114814532610276158}
@@ -376,7 +377,7 @@ MonoBehaviour:
   PositionProvider:
     Location: 0
     Direction: 0
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -385,9 +386,9 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   TeleportToOtherSide: 1
   HideGizmo: 1
-  Speed: 0
 --- !u!114 &114305085676188868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -405,7 +406,7 @@ MonoBehaviour:
   PositionProvider:
     Location: 1
     Direction: 1
-    Offset: {x: 0, y: 0.5}
+    PositionOffset: {x: 0, y: 1}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -414,9 +415,9 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   TeleportToOtherSide: 1
   HideGizmo: 1
-  Speed: 0
 --- !u!114 &114422457615731782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -470,7 +471,7 @@ MonoBehaviour:
   PositionProvider:
     Location: 1
     Direction: 1
-    Offset: {x: 0, y: 1}
+    PositionOffset: {x: 0, y: 1}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -479,9 +480,9 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   TeleportToOtherSide: 0
   HideGizmo: 1
-  Speed: 0
 --- !u!114 &114793258451472048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -518,7 +519,7 @@ MonoBehaviour:
   LookAt:
     Location: 0
     Direction: 0
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -527,6 +528,7 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
 --- !u!114 &114827996551570790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -544,15 +546,16 @@ MonoBehaviour:
   LookAt:
     Location: 0
     Direction: 0
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
     Degree: 0
     RelativeTo: 0
-    RotationFacing: 0
+    RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
 --- !u!114 &114934498703767468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -570,7 +573,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: 5
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 1, y: 1}
     RandomPositionOption: 960
     RandomTransforms: []
@@ -579,6 +582,7 @@ MonoBehaviour:
     RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 114827996551570790}
@@ -599,7 +603,7 @@ MonoBehaviour:
   PositionProvider:
     Location: 0
     Direction: 0
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -608,6 +612,6 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   TeleportToOtherSide: 0
   HideGizmo: 1
-  Speed: 0

@@ -1,7 +1,5 @@
 ﻿using ChainedRam.Core;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
@@ -11,7 +9,7 @@ using UnityEngine;
 public class PositionProviderPropertyDrawer : PropertyDrawer
 {
     private float LineHeight;
-    private const int LineCount = 3;
+    private const int LineCount = 4;
 
     private const float personalSpace = 1.5f;
 
@@ -24,15 +22,17 @@ public class PositionProviderPropertyDrawer : PropertyDrawer
         var indent = EditorGUI.indentLevel;
         EditorGUI.indentLevel = 0;
 
-
-        var firstRect = new Rect(position.x, position.y, position.width, position.height - 2 * LineHeight); 
+        var firstRect = new Rect(position.x, position.y, position.width, position.height - ((LineCount-1) * LineHeight)); 
         DrawPositionProperties(firstRect, property);
 
         var secondRect = new Rect(position.x, firstRect.yMax, position.width, LineHeight);
-        DrawOffsetProperties(secondRect, property);
+        DrawPositionOffsetProperties(secondRect, property);
 
-        var thordRect = new Rect(position.x, secondRect.yMax, position.width, LineHeight);
-        DrawRotationProperties(thordRect, property); 
+        var thirdRect = new Rect(position.x, secondRect.yMax, position.width, LineHeight);
+        DrawRotationProperties(thirdRect, property);
+
+        var fourthRect = new Rect(position.x, thirdRect.yMax, position.width, LineHeight);
+        DrawRotationOffsetProperties(fourthRect, property);
 
         // Set indent back to what it was
         EditorGUI.indentLevel = indent;
@@ -61,9 +61,6 @@ public class PositionProviderPropertyDrawer : PropertyDrawer
                 EditorGUI.PropertyField(lastRect, property.FindPropertyRelative("PositionRefrence"), GUIContent.none);
                 break;
             case PositionLocation.Direction:
-                //Direction enumValue = (Direction) property.FindPropertyRelative("Direction").intValue;
-                //Enum value = EditorGUI.EnumPopup(lastRect,enumValue);
-                //property.FindPropertyRelative("Direction").intValue = Convert.ToInt32(value);
                 var directionRect = new Rect(position.x + width1, position.y, lastWidth / 2, LineHeight);
                 var relativeToRect = new Rect(position.x + width1 + lastWidth / 2, position.y, lastWidth / 2, LineHeight);
 
@@ -77,16 +74,12 @@ public class PositionProviderPropertyDrawer : PropertyDrawer
 
                 EditorGUI.PropertyField(randomMultRect, property.FindPropertyRelative("RandomMultitude"), GUIContent.none);
                 
-                //EditorGUI.PropertyField(randPositionRect, property.FindPropertyRelative("RandomPositionOption"), GUIContent.none);
                 RandomPositionOption enumValue = (RandomPositionOption) property.FindPropertyRelative("RandomPositionOption").intValue;
                 Enum value = EditorGUI.EnumMaskPopup(randPositionRect, GUIContent.none, enumValue);
                 property.FindPropertyRelative("RandomPositionOption").intValue = Convert.ToInt32(value);
 
-                //Debug.Log(Convert.ToInt32(value));
-                //Debug.Log("LOL" + (int)RandomPositionOption.Transforms);
                 if ((Convert.ToInt32(value) & (int)RandomPositionOption.Transforms) == (int)RandomPositionOption.Transforms)
                 {
-                    //Debug.Log("I'm in");
                     var arryaRect = new Rect(position.x, position.y + LineHeight, position.width, LineHeight);
 
                     SerializedProperty list = property.FindPropertyRelative("RandomTransforms");
@@ -110,16 +103,16 @@ public class PositionProviderPropertyDrawer : PropertyDrawer
         }
     }
 
-    private void DrawOffsetProperties(Rect position, SerializedProperty property)
+    private void DrawPositionOffsetProperties(Rect position, SerializedProperty property)
     {
-        float width1 = Math.Min(position.width / 2, 60);
+        float width1 = Math.Min(position.width / 2, 105);
         float lastWidth = position.width - (width1);
 
         var labelRect = new Rect(position.x, position.y + personalSpace, width1, position.height);
         var offsetRect = new Rect(labelRect.xMax, position.y, lastWidth, position.height);
 
-        EditorGUI.LabelField(labelRect, "Offset");
-        EditorGUI.PropertyField(offsetRect, property.FindPropertyRelative("Offset"), GUIContent.none);
+        EditorGUI.LabelField(labelRect, "Position Offset");
+        EditorGUI.PropertyField(offsetRect, property.FindPropertyRelative("PositionOffset"), GUIContent.none);
     }
 
     private void DrawRotationProperties(Rect position, SerializedProperty property)
@@ -168,11 +161,21 @@ public class PositionProviderPropertyDrawer : PropertyDrawer
         }
 
         return requestedHeight;
-
-
-
-
     }
+
+    private void DrawRotationOffsetProperties(Rect position, SerializedProperty property)
+    {
+        float width1 = Math.Min(position.width / 2, 105);
+        float lastWidth = position.width - (width1);
+
+        var labelRect = new Rect(position.x, position.y + personalSpace, width1, position.height);
+        var offsetRect = new Rect(labelRect.xMax, position.y, lastWidth, position.height);
+
+        EditorGUI.LabelField(labelRect, "Rotation Offset");
+        EditorGUI.PropertyField(offsetRect, property.FindPropertyRelative("RotationOffset"), GUIContent.none);
+    }
+
+
     public T GetActualObjectForSerializedProperty<T>(FieldInfo fieldInfo, SerializedProperty property) where T : class
     {
         var obj = fieldInfo.GetValue(property.serializedObject.targetObject);

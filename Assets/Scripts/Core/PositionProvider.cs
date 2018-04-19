@@ -147,7 +147,7 @@ namespace ChainedRam.Core
         private Direction Direction;
 
         [SerializeField]
-        private Vector2 Offset;
+        public Vector2 PositionOffset;
 
         [SerializeField]
         private Vector2 RandomMultitude;
@@ -173,6 +173,9 @@ namespace ChainedRam.Core
         [SerializeField]
         private Transform RotationRefrence;
 
+        [SerializeField]
+        public float RotationOffset;
+
         private Vector3? LastProvidedPosition;
 
         private List<int> RandomTransformMemory;
@@ -196,10 +199,10 @@ namespace ChainedRam.Core
                     {
                         throw new NullReferenceException("Transform must be set");
                     }
-                    return PositionRefrence.position - (Vector3)Offset;
+                    return PositionRefrence.position - (Vector3)PositionOffset;
                 }
 
-                return GetScreenPosition(Direction, Offset, (PositionRelativeTo)(-1 * (int)RelativeTo));
+                return GetScreenPosition(Direction, PositionOffset, (PositionRelativeTo)(-1 * (int)RelativeTo));
             }
         }
 
@@ -207,61 +210,73 @@ namespace ChainedRam.Core
         {
             get
             {
-                LastProvidedPosition = LastProvidedPosition ?? ProvidedPosition; 
-                switch (RotationFacing)
-                {
-                    case RotationFacing.Default:
-                        return null; 
-                    case RotationFacing.North:
-                        return 0;
-                    case RotationFacing.NorthEast:
-                        return 315;
-                    case RotationFacing.East:
-                        return 270;
-                    case RotationFacing.SouthEast:
-                        return 225;
-                    case RotationFacing.South:
-                        return 180;
-                    case RotationFacing.SouthWest:
-                        return 135;
-                    case RotationFacing.West:
-                        return 90;
-                    case RotationFacing.NorthWest:
-                        return 45;
-                    case RotationFacing.Numaric:
-                        return Degree;
-                    case RotationFacing.Relative:
-                        switch (RelativeTo)
-                        {
-                            case PositionRelativeTo.Inside:
-                                return AngleBetween(Vector2.zero, LastProvidedPosition.Value);                                 
-                            case PositionRelativeTo.Outside:
-                                return 180 + AngleBetween(Vector2.zero, LastProvidedPosition.Value);
-                            default:
-                                return null; 
-                        }
-                    case RotationFacing.Inside:
-                        return AngleBetween(Vector2.zero, LastProvidedPosition.Value);
-                    case RotationFacing.Outside:
-                        return 180 + AngleBetween(Vector2.zero, LastProvidedPosition.Value);
-                    case RotationFacing.MatchTransform:
-                        if (RotationRefrence == null)
-                        {
-                            return null;
-                        }
-                        return RotationRefrence.transform.eulerAngles.z; 
-                    case RotationFacing.FaceTransform:
-                        if(RotationRefrence == null)
-                        {
-                            return null; 
-                        }
-                        return  AngleBetween(RotationRefrence.position, LastProvidedPosition.Value);
+                float? calc = CalculateRotation();
 
+                if(calc.HasValue)
+                {
+                    return calc + RotationOffset; 
                 }
 
-                //should never reach here
-                return null; 
+                return null;
             }
+        }
+
+        private float? CalculateRotation()
+        {
+            LastProvidedPosition = LastProvidedPosition ?? ProvidedPosition;
+            switch (RotationFacing)
+            {
+                case RotationFacing.Default:
+                    return null;
+                case RotationFacing.North:
+                    return 0;
+                case RotationFacing.NorthEast:
+                    return 315;
+                case RotationFacing.East:
+                    return 270;
+                case RotationFacing.SouthEast:
+                    return 225;
+                case RotationFacing.South:
+                    return 180;
+                case RotationFacing.SouthWest:
+                    return 135;
+                case RotationFacing.West:
+                    return 90;
+                case RotationFacing.NorthWest:
+                    return 45;
+                case RotationFacing.Numaric:
+                    return Degree;
+                case RotationFacing.Relative:
+                    switch (RelativeTo)
+                    {
+                        case PositionRelativeTo.Inside:
+                            return AngleBetween(Vector2.zero, LastProvidedPosition.Value);
+                        case PositionRelativeTo.Outside:
+                            return 180 + AngleBetween(Vector2.zero, LastProvidedPosition.Value);
+                        default:
+                            return null;
+                    }
+                case RotationFacing.Inside:
+                    return AngleBetween(Vector2.zero, LastProvidedPosition.Value);
+                case RotationFacing.Outside:
+                    return 180 + AngleBetween(Vector2.zero, LastProvidedPosition.Value);
+                case RotationFacing.MatchTransform:
+                    if (RotationRefrence == null)
+                    {
+                        return null;
+                    }
+                    return RotationRefrence.transform.eulerAngles.z;
+                case RotationFacing.FaceTransform:
+                    if (RotationRefrence == null)
+                    {
+                        return null;
+                    }
+                    return AngleBetween(RotationRefrence.position, LastProvidedPosition.Value);
+
+            }
+
+            //should never reach here
+            return null;
         }
 
         public void SetToTransform(Transform transform)
@@ -272,7 +287,7 @@ namespace ChainedRam.Core
         public void SetToTransform(Transform transform, Vector2 offset)
         {
             Location = PositionLocation.Transform;
-            Offset = offset; 
+            PositionOffset = offset; 
             RelativeTo = PositionRelativeTo.None;
             PositionRefrence = transform;
         }
@@ -281,7 +296,7 @@ namespace ChainedRam.Core
         {
             Location = PositionLocation.Direction; 
             Direction = d;
-            Offset = offset;
+            PositionOffset = offset;
             RelativeTo = r;
             PositionRefrence = null;
         }
@@ -353,7 +368,7 @@ namespace ChainedRam.Core
             {
                 Location = Location,
                 Direction = Direction,
-                Offset = Offset,
+                PositionOffset = PositionOffset,
                 RandomMultitude = RandomMultitude,
                 RandomPositionOption = RandomPositionOption,
                 RandomTransforms = RandomTransforms.ToArray(),
@@ -362,6 +377,7 @@ namespace ChainedRam.Core
                 RotationFacing = RotationFacing,
                 PositionRefrence = PositionRefrence,
                 RotationRefrence = RotationRefrence,
+                RotationOffset = RotationOffset,
             };
 
             return p; 
@@ -371,7 +387,7 @@ namespace ChainedRam.Core
         {
             Location = source.Location;
             Direction = source.Direction;
-            Offset = source.Offset;
+            PositionOffset = source.PositionOffset;
             RandomMultitude = source.RandomMultitude;
             RandomPositionOption = source.RandomPositionOption;
             RandomTransforms = source.RandomTransforms.ToArray();
@@ -380,6 +396,7 @@ namespace ChainedRam.Core
             RotationFacing = source.RotationFacing;
             PositionRefrence = source.PositionRefrence;
             RotationRefrence = source.RotationRefrence;
+            RotationOffset = source.RotationOffset;
         }
 
         private Vector3 CalulatePosition()
@@ -391,10 +408,10 @@ namespace ChainedRam.Core
                     {
                         throw new NullReferenceException("Transform must be set");
                     }
-                    return PositionRefrence.position + (Vector3)Offset;
+                    return PositionRefrence.position + (Vector3)PositionOffset;
 
                 case PositionLocation.Direction:
-                    return GetScreenPosition(Direction, Offset, RelativeTo);
+                    return GetScreenPosition(Direction, PositionOffset, RelativeTo);
 
                 case PositionLocation.Random:
                     var matching = Enum.GetValues(typeof(RandomPositionOption))
@@ -465,7 +482,7 @@ namespace ChainedRam.Core
                                 throw new NullReferenceException("Transform at " + selected + " is null.");
                             }
 
-                            return RandomTransforms[selected].position + (Vector3)(randomOffset + Offset);
+                            return RandomTransforms[selected].position + (Vector3)(randomOffset + PositionOffset);
                         case RandomPositionOption.Center:
                             randomDirection = Direction.Center;
                             break;
@@ -497,7 +514,7 @@ namespace ChainedRam.Core
                             throw new Exception("Missing Random Options");
                     }
 
-                    return GetScreenPosition(randomDirection, Offset + randomOffset, RelativeTo);
+                    return GetScreenPosition(randomDirection, PositionOffset + randomOffset, RelativeTo);
                 default:
                     break;
             }

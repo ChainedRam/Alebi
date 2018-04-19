@@ -2055,6 +2055,21 @@ Prefab:
       propertyPath: LookAt.RotationFacing
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114744702799552568, guid: 4d51d4b913ee23a4bb92abd39846e032,
+        type: 2}
+      propertyPath: HideGizmo
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114744702799552568, guid: 4d51d4b913ee23a4bb92abd39846e032,
+        type: 2}
+      propertyPath: TeleportToOtherSide
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114744702799552568, guid: 4d51d4b913ee23a4bb92abd39846e032,
+        type: 2}
+      propertyPath: PositionProvider.RotationOffset
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d51d4b913ee23a4bb92abd39846e032, type: 2}
   m_IsPrefabParent: 0
