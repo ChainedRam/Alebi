@@ -20,7 +20,7 @@ namespace ChainedRam.Core.Generation
 
         private const float DeltaDistance = 0.01f;
 
-        public float Speed;
+        private float Speed;
 
         protected override void OnGenerate(GenerateEventArgs e)
         {
