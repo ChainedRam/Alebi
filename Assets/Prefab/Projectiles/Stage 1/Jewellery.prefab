@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114777416689300326}
   - component: {fileID: 114752860426119850}
   - component: {fileID: 114785184510817218}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Jewellery
   m_TagString: Untagged
   m_Icon: {fileID: 0}

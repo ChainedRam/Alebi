@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212358656760385084}
   - component: {fileID: 114114767125852056}
   - component: {fileID: 58079748398043386}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Oil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 114371987238006014}
   - component: {fileID: 114142516315315032}
   - component: {fileID: 114225542700796666}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Oil Bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

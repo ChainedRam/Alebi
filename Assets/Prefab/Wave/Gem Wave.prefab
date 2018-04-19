@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4276422780705576}
-  - component: {fileID: 114422457615731782}
+  - component: {fileID: 114161506704658210}
   m_Layer: 0
   m_Name: Gem & Dagger
   m_TagString: Untagged
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 0
-  WaitTime: 0.01
+  WaitTime: 0.0001
   Prefab: {fileID: 114738420063533872, guid: 4f812809963fc5545a7f0c25abe9e114, type: 2}
   GenerateAt:
     Location: 0
@@ -338,10 +338,13 @@ MonoBehaviour:
     RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
-  MotionOverride: {fileID: 114814532610276158}
+  MotionOverride: {fileID: 0}
 --- !u!114 &114100281106766304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -356,10 +359,26 @@ MonoBehaviour:
   Delta: 0
   Enter: {fileID: 114273210746098370}
   Exit: {fileID: 114964002841013166}
-  Spawner: {fileID: 114422457615731782}
+  Spawner: {fileID: 0}
   GemSpawner: {fileID: 114018683160304736}
   DaggerSpawner: {fileID: 114934498703767468}
   Rank: 0
+--- !u!114 &114161506704658210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1680597776619406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9846a774887f3a748bbfc47e699196b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Delta: 0
+  WaitTime: 0.25
+  Generators:
+  - {fileID: 114018683160304736}
+  - {fileID: 114934498703767468}
 --- !u!114 &114273210746098370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -386,7 +405,10 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   TeleportToOtherSide: 1
   HideGizmo: 1
 --- !u!114 &114305085676188868
@@ -415,25 +437,12 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   TeleportToOtherSide: 1
   HideGizmo: 1
---- !u!114 &114422457615731782
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1680597776619406}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9846a774887f3a748bbfc47e699196b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Delta: 0
-  WaitTime: 0.5
-  Generators:
-  - {fileID: 114018683160304736}
-  - {fileID: 114934498703767468}
 --- !u!114 &114698887172081474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -450,7 +459,7 @@ MonoBehaviour:
   Generators:
   - {fileID: 114100281106766304}
   - {fileID: 114273210746098370}
-  - {fileID: 114422457615731782}
+  - {fileID: 114161506704658210}
   - {fileID: 114964002841013166}
   Selected: {fileID: 0}
   SelectorType: 0
@@ -480,7 +489,10 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   TeleportToOtherSide: 0
   HideGizmo: 1
 --- !u!114 &114793258451472048
@@ -528,7 +540,10 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
 --- !u!114 &114827996551570790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -552,10 +567,13 @@ MonoBehaviour:
     RandomTransforms: []
     Degree: 0
     RelativeTo: 0
-    RotationFacing: 245
+    RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
 --- !u!114 &114934498703767468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -582,7 +600,10 @@ MonoBehaviour:
     RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 114827996551570790}
@@ -612,6 +633,9 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
     RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
   TeleportToOtherSide: 0
   HideGizmo: 1

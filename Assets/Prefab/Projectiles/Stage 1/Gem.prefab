@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114894108303555690}
   - component: {fileID: 50831655800464008}
   - component: {fileID: 114938449868749044}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Gem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 114941958170026238}
   - component: {fileID: 114923962411492610}
   - component: {fileID: 58305921005339854}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Gemshard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
