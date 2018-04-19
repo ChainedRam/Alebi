@@ -1564,27 +1564,6 @@ Transform:
   m_Father: {fileID: 1761454549}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!1 &673877622 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1680597776619406, guid: 4d51d4b913ee23a4bb92abd39846e032,
-    type: 2}
-  m_PrefabInternal: {fileID: 1122372196}
---- !u!114 &673877624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 673877622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9846a774887f3a748bbfc47e699196b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Delta: 0
-  WaitTime: 0.25
-  Generators:
-  - {fileID: 1319602560}
-  - {fileID: 1229119141}
 --- !u!1 &676937836
 GameObject:
   m_ObjectHideFlags: 0
@@ -2167,11 +2146,6 @@ Prefab:
       propertyPath: Target
       value: 
       objectReference: {fileID: 328108319}
-    - target: {fileID: 114709350661055194, guid: ddf421f38900a9546812f2b338b36e23,
-        type: 2}
-      propertyPath: StartingPoint
-      value: 
-      objectReference: {fileID: 328108324}
     - target: {fileID: 114118118175142746, guid: ddf421f38900a9546812f2b338b36e23,
         type: 2}
       propertyPath: Target
@@ -2325,6 +2299,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114100281106766304, guid: 4d51d4b913ee23a4bb92abd39846e032,
+        type: 2}
+      propertyPath: Spawner
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 114964002841013166, guid: 4d51d4b913ee23a4bb92abd39846e032,
         type: 2}
       propertyPath: Target
@@ -2375,43 +2354,7 @@ Prefab:
       propertyPath: LookAt.RotationRefrence
       value: 
       objectReference: {fileID: 1806644298}
-    - target: {fileID: 114018683160304736, guid: 4d51d4b913ee23a4bb92abd39846e032,
-        type: 2}
-      propertyPath: GenerateAt.PositionOffset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114018683160304736, guid: 4d51d4b913ee23a4bb92abd39846e032,
-        type: 2}
-      propertyPath: GenerateAt.PositionOffset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114018683160304736, guid: 4d51d4b913ee23a4bb92abd39846e032,
-        type: 2}
-      propertyPath: WaitTime
-      value: 0.0001
-      objectReference: {fileID: 0}
-    - target: {fileID: 114698887172081474, guid: 4d51d4b913ee23a4bb92abd39846e032,
-        type: 2}
-      propertyPath: Generators.Array.data[2]
-      value: 
-      objectReference: {fileID: 673877624}
-    - target: {fileID: 114018683160304736, guid: 4d51d4b913ee23a4bb92abd39846e032,
-        type: 2}
-      propertyPath: MotionOverride
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114934498703767468, guid: 4d51d4b913ee23a4bb92abd39846e032,
-        type: 2}
-      propertyPath: GenerateAt.PositionOffset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114934498703767468, guid: 4d51d4b913ee23a4bb92abd39846e032,
-        type: 2}
-      propertyPath: GenerateAt.PositionOffset.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114422457615731782, guid: 4d51d4b913ee23a4bb92abd39846e032, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d51d4b913ee23a4bb92abd39846e032, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1146051913
@@ -2581,12 +2524,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 14, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1229119141 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114934498703767468, guid: 4d51d4b913ee23a4bb92abd39846e032,
-    type: 2}
-  m_PrefabInternal: {fileID: 1122372196}
-  m_Script: {fileID: 11500000, guid: 35e28f99f3b7cfe44a0c6e9f14172eb8, type: 3}
 --- !u!4 &1246344962 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4827392630385272, guid: 4d51d4b913ee23a4bb92abd39846e032,
@@ -2598,12 +2535,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1122372196}
   m_Script: {fileID: 11500000, guid: 82fe1ac8e2b5fc44990b4efef651e56d, type: 3}
---- !u!114 &1319602560 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114018683160304736, guid: 4d51d4b913ee23a4bb92abd39846e032,
-    type: 2}
-  m_PrefabInternal: {fileID: 1122372196}
-  m_Script: {fileID: 11500000, guid: 35e28f99f3b7cfe44a0c6e9f14172eb8, type: 3}
 --- !u!1 &1373192463
 GameObject:
   m_ObjectHideFlags: 0

@@ -245,7 +245,6 @@ GameObject:
   - component: {fileID: 4986582682508126}
   - component: {fileID: 114522849863617546}
   - component: {fileID: 114416726409720878}
-  - component: {fileID: 114709350661055194}
   m_Layer: 0
   m_Name: WalkaroundMap
   m_TagString: Untagged
@@ -1219,21 +1218,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &114709350661055194
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1562161383423934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8deb0e337b67e754aa4fbbf225193082, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartingPoint: {fileID: 4986582682508126}
-  Motion: {fileID: 114416726409720878}
-  MaxLineLength: 37
-  MaxLineDrawn: 1000
 --- !u!114 &114757906174550730
 MonoBehaviour:
   m_ObjectHideFlags: 1
