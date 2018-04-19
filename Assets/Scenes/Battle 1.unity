@@ -993,7 +993,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: 0
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -1002,6 +1002,7 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 0}
@@ -1467,7 +1468,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: 0
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -1476,6 +1477,7 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 0}
@@ -1916,6 +1918,41 @@ Prefab:
       propertyPath: LookAt.RotationRefrence
       value: 
       objectReference: {fileID: 1806644298}
+    - target: {fileID: 114333591413716878, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.PositionOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114333591413716878, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.RotationFacing
+      value: 241
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.PositionOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.PositionOffset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114333591413716878, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: PositionProvider.PositionOffset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: WaitTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083530828122350, guid: 8018d64c8fcaee643a89c81eabd6ff83,
+        type: 2}
+      propertyPath: HideGizmo
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8018d64c8fcaee643a89c81eabd6ff83, type: 2}
   m_IsPrefabParent: 0
@@ -1958,34 +1995,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114964002841013166, guid: 4d51d4b913ee23a4bb92abd39846e032,
+    - target: {fileID: 114814532610276158, guid: 4d51d4b913ee23a4bb92abd39846e032,
         type: 2}
-      propertyPath: Target
+      propertyPath: LookAt.RotationRefrence
       value: 
-      objectReference: {fileID: 328108319}
-    - target: {fileID: 114273210746098370, guid: 4d51d4b913ee23a4bb92abd39846e032,
+      objectReference: {fileID: 1806644298}
+    - target: {fileID: 114827996551570790, guid: 4d51d4b913ee23a4bb92abd39846e032,
         type: 2}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 328108319}
-    - target: {fileID: 114744702799552568, guid: 4d51d4b913ee23a4bb92abd39846e032,
-        type: 2}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 328108319}
-    - target: {fileID: 114305085676188868, guid: 4d51d4b913ee23a4bb92abd39846e032,
-        type: 2}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 328108319}
-    - target: {fileID: 114018683160304736, guid: 4d51d4b913ee23a4bb92abd39846e032,
-        type: 2}
-      propertyPath: GenerateAt.PositionRefrence
-      value: 
-      objectReference: {fileID: 266462366}
-    - target: {fileID: 114018683160304736, guid: 4d51d4b913ee23a4bb92abd39846e032,
-        type: 2}
-      propertyPath: GenerateAt.RotationRefrence
+      propertyPath: LookAt.RotationRefrence
       value: 
       objectReference: {fileID: 1806644298}
     - target: {fileID: 114934498703767468, guid: 4d51d4b913ee23a4bb92abd39846e032,
@@ -1998,6 +2015,46 @@ Prefab:
       propertyPath: GenerateAt.RotationRefrence
       value: 
       objectReference: {fileID: 1806644298}
+    - target: {fileID: 114018683160304736, guid: 4d51d4b913ee23a4bb92abd39846e032,
+        type: 2}
+      propertyPath: GenerateAt.PositionRefrence
+      value: 
+      objectReference: {fileID: 266462366}
+    - target: {fileID: 114018683160304736, guid: 4d51d4b913ee23a4bb92abd39846e032,
+        type: 2}
+      propertyPath: GenerateAt.RotationRefrence
+      value: 
+      objectReference: {fileID: 1806644298}
+    - target: {fileID: 114305085676188868, guid: 4d51d4b913ee23a4bb92abd39846e032,
+        type: 2}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 328108319}
+    - target: {fileID: 114744702799552568, guid: 4d51d4b913ee23a4bb92abd39846e032,
+        type: 2}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 328108319}
+    - target: {fileID: 114273210746098370, guid: 4d51d4b913ee23a4bb92abd39846e032,
+        type: 2}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 328108319}
+    - target: {fileID: 114964002841013166, guid: 4d51d4b913ee23a4bb92abd39846e032,
+        type: 2}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 328108319}
+    - target: {fileID: 114018683160304736, guid: 4d51d4b913ee23a4bb92abd39846e032,
+        type: 2}
+      propertyPath: GenerateAt.RotationFacing
+      value: 245
+      objectReference: {fileID: 0}
+    - target: {fileID: 114827996551570790, guid: 4d51d4b913ee23a4bb92abd39846e032,
+        type: 2}
+      propertyPath: LookAt.RotationFacing
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d51d4b913ee23a4bb92abd39846e032, type: 2}
   m_IsPrefabParent: 0
@@ -2103,7 +2160,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: 5
-    Offset: {x: 1, y: 1}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -2112,13 +2169,14 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 0}
   Target:
     Location: 0
     Direction: 0
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -2127,6 +2185,7 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
 --- !u!1001 &1187995038
 Prefab:
   m_ObjectHideFlags: 0
@@ -2230,7 +2289,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: 5
-    Offset: {x: 1, y: 1}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -2239,13 +2298,14 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 0}
   Target:
     Location: 0
     Direction: 0
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -2254,6 +2314,7 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
 --- !u!1 &1194634594
 GameObject:
   m_ObjectHideFlags: 0
@@ -2300,7 +2361,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: 5
-    Offset: {x: 1, y: 1}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -2309,13 +2370,14 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 0}
   Target:
     Location: 0
     Direction: 0
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -2324,6 +2386,7 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
 --- !u!4 &1246344962 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4827392630385272, guid: 4d51d4b913ee23a4bb92abd39846e032,
@@ -2800,7 +2863,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: 5
-    Offset: {x: 1, y: 1}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -2809,13 +2872,14 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 0}
   Target:
     Location: 0
     Direction: 0
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -2824,6 +2888,7 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
 --- !u!4 &1678691260 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4825778859103278, guid: 8018d64c8fcaee643a89c81eabd6ff83,
@@ -3033,7 +3098,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: 0
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -3042,6 +3107,7 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 0}
@@ -3093,7 +3159,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: 0
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -3102,6 +3168,7 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 0}
