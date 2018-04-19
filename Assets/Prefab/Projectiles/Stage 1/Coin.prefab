@@ -107,7 +107,6 @@ MonoBehaviour:
   Tilt: 0
   SpeedAcc: 0
   TiltAcc: 0
-  TotalTilt: 0
   FaceTilt: 1
 --- !u!114 &114638114287439620
 MonoBehaviour:
@@ -132,7 +131,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Motion: {fileID: 114204662079819578}
-  CloneMotion: 0
 --- !u!212 &212480672901362300
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -170,7 +168,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 0.3, y: 0.6}
+  m_Size: {x: 0.6, y: 0.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

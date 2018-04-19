@@ -76,22 +76,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1142604378313732
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4300654598642368}
-  - component: {fileID: 114988661853376228}
-  m_Layer: 0
-  m_Name: Wait
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1173496847499946
 GameObject:
   m_ObjectHideFlags: 1
@@ -438,7 +422,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4300654598642368}
   - {fileID: 4967683954084380}
   m_Father: {fileID: 4406202247323616}
   m_RootOrder: 1
@@ -510,19 +493,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4845483415633912}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4300654598642368
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1142604378313732}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4095888692017680}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4330874226991498
@@ -733,7 +703,7 @@ Transform:
   m_Children:
   - {fileID: 4330874226991498}
   m_Father: {fileID: 4095888692017680}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114048670317757236
 MonoBehaviour:
@@ -787,7 +757,7 @@ MonoBehaviour:
   PositionProvider:
     Location: 1
     Direction: 1
-    Offset: {x: 0, y: 1}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0.6, y: 0.5}
     RandomPositionOption: 960
     RandomTransforms: []
@@ -796,6 +766,7 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -816,7 +787,7 @@ MonoBehaviour:
   PositionProvider:
     Location: 1
     Direction: 4
-    Offset: {x: 1, y: 0}
+    PositionOffset: {x: 1, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -825,6 +796,7 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -864,7 +836,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: -1
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -873,6 +845,7 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 114672247728893346}
@@ -890,7 +863,6 @@ MonoBehaviour:
   Delta: 0
   Repeat: 1
   Generators:
-  - {fileID: 114988661853376228}
   - {fileID: 114873274894614688}
   Selected: {fileID: 0}
   SelectorType: 1
@@ -929,7 +901,7 @@ MonoBehaviour:
   PositionProvider:
     Location: 1
     Direction: 1
-    Offset: {x: 0, y: 1}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 1, y: 1}
     RandomPositionOption: 2
     RandomTransforms: []
@@ -938,6 +910,7 @@ MonoBehaviour:
     RotationFacing: 243
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -958,7 +931,7 @@ MonoBehaviour:
   LookAt:
     Location: 0
     Direction: -1
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -967,6 +940,7 @@ MonoBehaviour:
     RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 3
 --- !u!114 &114386400893428346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -984,7 +958,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: -1
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -993,6 +967,7 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 114535727316893718}
@@ -1013,7 +988,7 @@ MonoBehaviour:
   PositionProvider:
     Location: 1
     Direction: 4
-    Offset: {x: 1, y: 0}
+    PositionOffset: {x: 1, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -1022,6 +997,7 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -1042,7 +1018,7 @@ MonoBehaviour:
   LookAt:
     Location: 0
     Direction: -1
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -1051,6 +1027,7 @@ MonoBehaviour:
     RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
 --- !u!114 &114524634209324312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1086,7 +1063,7 @@ MonoBehaviour:
   LookAt:
     Location: 0
     Direction: -1
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -1095,6 +1072,7 @@ MonoBehaviour:
     RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: -3
 --- !u!114 &114536039788353442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1112,7 +1090,7 @@ MonoBehaviour:
   PositionProvider:
     Location: 0
     Direction: 4
-    Offset: {x: 1, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -1121,6 +1099,7 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   TeleportToOtherSide: 0
   HideGizmo: 1
   Speed: 0
@@ -1141,7 +1120,7 @@ MonoBehaviour:
   LookAt:
     Location: 0
     Direction: 5
-    Offset: {x: 1, y: 1}
+    PositionOffset: {x: 1, y: 1}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -1150,6 +1129,7 @@ MonoBehaviour:
     RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
 --- !u!114 &114613928708948906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1202,7 +1182,7 @@ MonoBehaviour:
   LookAt:
     Location: 0
     Direction: -1
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -1211,6 +1191,7 @@ MonoBehaviour:
     RotationFacing: 245
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
 --- !u!114 &114732143073949000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1228,7 +1209,7 @@ MonoBehaviour:
   PositionProvider:
     Location: 0
     Direction: 4
-    Offset: {x: 1, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -1237,6 +1218,7 @@ MonoBehaviour:
     RotationFacing: 241
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   TeleportToOtherSide: 1
   HideGizmo: 1
   Speed: 0
@@ -1293,7 +1275,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: -1
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -1302,6 +1284,7 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 114379039936533068}
@@ -1357,7 +1340,7 @@ MonoBehaviour:
   GenerateAt:
     Location: 0
     Direction: -1
-    Offset: {x: 0, y: 0}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 0
     RandomTransforms: []
@@ -1366,22 +1349,10 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 114495254433190550}
---- !u!114 &114988661853376228
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1142604378313732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8883491aaecc3d04391b7e085d5f348e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Delta: 0
-  WaitTime: 2
 --- !u!114 &114990287551738072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1394,12 +1365,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 0
-  WaitTime: 1
+  WaitTime: 2
   Prefab: {fileID: 114134827714133822, guid: 412e6d2c19d0703469cd6a6b79dc1efd, type: 2}
   GenerateAt:
     Location: 2
     Direction: 5
-    Offset: {x: 1, y: 1}
+    PositionOffset: {x: 0, y: 0}
     RandomMultitude: {x: 0, y: 0}
     RandomPositionOption: 960
     RandomTransforms: []
@@ -1408,6 +1379,7 @@ MonoBehaviour:
     RotationFacing: 0
     PositionRefrence: {fileID: 0}
     RotationRefrence: {fileID: 0}
+    RotationOffset: 0
   Parent: {fileID: 0}
   MaxSize: 50
   MotionOverride: {fileID: 114608833134243510}
