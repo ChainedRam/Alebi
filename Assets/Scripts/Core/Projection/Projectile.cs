@@ -23,6 +23,22 @@ namespace ChainedRam.Core.Projection
         protected virtual void OnEnable()
         {
             Motion.Initialize(gameObject, Delta);
+            
+            //if motion is not mine 
+            if(Motion.gameObject != gameObject)
+            {
+                //do i have one? 
+                Motion mine = GetComponent <Motion> ();
+                if(mine != null)
+                {
+                    Motion = mine; 
+                }
+                else //copy refrenced one to me 
+                {
+                    Motion = Motion.CopyTo(gameObject);
+                }
+            }
+
         }
 
         public void FixedUpdate()

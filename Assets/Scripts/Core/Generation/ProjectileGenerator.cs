@@ -19,7 +19,13 @@ namespace ChainedRam.Core.Generation
 
             if (MotionOverride != null)
             {
+                var oldMotion = generated.Motion; 
                 generated.Motion = MotionOverride.CopyTo(generated.gameObject);
+
+                if (oldMotion != null)
+                {
+                    Destroy(oldMotion);
+                }
             }
 
             ConfigureManager.ConfigureGameObject(generated.gameObject);

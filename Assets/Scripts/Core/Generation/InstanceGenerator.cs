@@ -78,8 +78,10 @@ namespace ChainedRam.Core.Generation
             instance.gameObject.SetActive(true);
             instance.transform.position = GenerateAt.ProvidedPosition;
 
-            if(GenerateAt.ProvidedRotation.HasValue)
-                instance.transform.eulerAngles = Vector3.forward * GenerateAt.ProvidedRotation.Value; 
+            if (GenerateAt.ProvidedRotation.HasValue)
+            {
+                instance.transform.eulerAngles = Vector3.forward * GenerateAt.ProvidedRotation.Value;
+            }
         }
         #endregion
         #region Override Generator
