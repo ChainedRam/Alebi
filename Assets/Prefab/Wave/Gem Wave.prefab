@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114934498703767468}
   - component: {fileID: 114827996551570790}
   m_Layer: 0
-  m_Name: DaggerGenerator
+  m_Name: DaggerSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 114018683160304736}
   - component: {fileID: 114814532610276158}
   m_Layer: 0
-  m_Name: GemGenerator
+  m_Name: GemSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
   Delta: 0
   Enter: {fileID: 114273210746098370}
   Exit: {fileID: 114964002841013166}
-  Spawner: {fileID: 0}
+  Spawner: {fileID: 114161506704658210}
   GemSpawner: {fileID: 114018683160304736}
   DaggerSpawner: {fileID: 114934498703767468}
   Rank: 0

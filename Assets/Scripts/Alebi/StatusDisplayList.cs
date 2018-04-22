@@ -8,24 +8,30 @@ using UnityEngine.UI;
 
 public class StatusDisplayList : MonoBehaviour
 {
-	public Text text; 
+    public Text StatusText;
+    public Text HealthText; 
 
-	public void SetStatuses(List<KeyValue<IStatusEffect, float>> effects)
-	{
-		string build = "Effects\n";
+    public void SetStatuses(List<KeyValue<IStatusEffect, float>> effects)
+    {
+        string build = "Effects\n";
 
-		foreach(var pair in effects)
-		{
-			build += pair.Key.Name + ": " + pair.Value.ToString("0.00") + "\n";
-		}
+        foreach(var pair in effects)
+        {
+            build += pair.Key.Name + ": " + pair.Value.ToString("0.00") + "\n";
+        }
 
-		if (text != null)
-		{
-			text.text = build; 
-		}
-		else
-		{
-			Debug.LogWarning("Missing text reference");
-		}
-	}
+        if (StatusText != null)
+        {
+            StatusText.text = build; 
+        }
+        else
+        {
+            Debug.LogWarning("Missing text reference");
+        }
+    }
+
+    public void SetHealth(int health)
+    {
+        HealthText.text = "Health: " + health; 
+    }
 }

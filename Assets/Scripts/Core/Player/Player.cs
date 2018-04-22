@@ -62,7 +62,7 @@ namespace ChainedRam.Core.Player
         void FixedUpdate()
         {
             StatusDisplay?.SetStatuses(Effects);
-
+            StatusDisplay?.SetHealth(Health);
             foreach (var pair in ArrowsDirectionDic)
             {
                 if (Input.GetKey(pair.Key))

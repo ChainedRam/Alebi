@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 4792323715636778}
   - component: {fileID: 114162308061100050}
   m_Layer: 0
-  m_Name: Rave Wave
+  m_Name: Sand Wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
