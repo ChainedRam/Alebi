@@ -4,25 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkAroundWaveBuilder : Generator
+public class InvertMotionBuilder : OnceGenerator
 {
     public TargetedMotion WalkAroundMotion; 
 
     protected override void OnGenerate(GenerateEventArgs e)
     {
         WalkAroundMotion.Invert = !WalkAroundMotion.Invert; 
-
-
     }
-
-    protected override bool ShouldGenerate()
-    {
-        return ShouldGenerateOnce(); 
-    }
-
-    protected override bool ShouldTerminate()
-    {
-        return ShouldTerminateOnSkippedGeneration(); 
-    }
-
 }

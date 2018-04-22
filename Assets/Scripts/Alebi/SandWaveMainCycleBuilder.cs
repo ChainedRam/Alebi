@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class RaveWaveBuilder : OnceGenerator
+public sealed class SandWaveMainCycleBuilder : OnceGenerator
 {
     public PoolGenerator WalkSpawnRepeater;
 

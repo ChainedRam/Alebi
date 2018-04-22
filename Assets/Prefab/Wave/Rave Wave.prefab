@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4875067348265404}
   - component: {fileID: 114896807247666260}
   m_Layer: 0
-  m_Name: RaveWaveBuilder
+  m_Name: SandWaveMainCycleBuilder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 4699048603122166}
   - component: {fileID: 114344121409357094}
   m_Layer: 0
-  m_Name: WalkAroundWaveBuild
+  m_Name: InvertMotionBuilder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -879,7 +879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 0
-  WaitTime: 0.225
+  WaitTime: 0.22
   Prefab: {fileID: 114643541697879042, guid: db2199f407fbcf9499aa8b875580346d, type: 2}
   GenerateAt:
     Location: 0
@@ -1230,7 +1230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 1
-  Repeat: 27
+  Repeat: 9
   Generators:
   - {fileID: 114230851932537302}
   Selected: {fileID: 0}
