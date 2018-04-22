@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KLDWaveBuilder : Generator
+public class NetSideCycleBuilder : Generator
 {
     public ShowupOnScreenGenerator Enter;
     public ShowupOnScreenGenerator Exit;

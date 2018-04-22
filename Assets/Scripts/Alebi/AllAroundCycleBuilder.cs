@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KLD4CountWaveBuilder : Generator
+public class AllAroundCycleBuilder : Generator
 {
     public ShowupOnScreenGenerator Enter;
     public ShowupOnScreenGenerator Exit;
