@@ -19,7 +19,8 @@ namespace ChainedRam.Core.Projection
         private float TotalSpeed;
         private float TotalTilt; 
 
-        public bool FaceTilt; 
+        public bool FaceTilt;
+        public bool RelativeAngle; 
         private GameObject Proj; 
 
         public override void Initialize(GameObject sender, float delta)
@@ -28,7 +29,7 @@ namespace ChainedRam.Core.Projection
             TotalSpeed = 0;
             TotalTilt = 0; 
 
-            if (Proj != null && FaceTilt)
+            if (sender != null && RelativeAngle)
             {
                 TotalTilt = Proj.gameObject.transform.eulerAngles.z;
             }
