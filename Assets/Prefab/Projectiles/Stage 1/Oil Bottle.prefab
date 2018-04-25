@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1936126136510978
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Duration: 1
-  SlowRate: 0.8
+  SlowRate: 0.5
 --- !u!114 &114225542700796666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0.1
   Tilt: 0
-  SpeedAcc: 0.001
+  SpeedAcc: 0.005
   TiltAcc: 0
   FaceTilt: 0
   RelativeAngle: 1

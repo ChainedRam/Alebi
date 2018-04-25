@@ -12,7 +12,6 @@ public class OilBreakCollision : CollisionEffect<OilBreaker>
 
     public override void OnHit(OilBreaker p)
     {
-        print("break oil");
         oil.transform.position = p.transform.position;
         BreakBottle();
     }
