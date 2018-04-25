@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114026353539834768}
   - component: {fileID: 114024745336635900}
   - component: {fileID: 61787618969120246}
+  - component: {fileID: 114787456182346214}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -40,8 +41,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1617912274296250}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 6.14, y: 0.03, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -6.14, y: 4.2799997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -70,7 +71,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.32, y: 1.48}
   m_EdgeRadius: 0
 --- !u!114 &114007839559259134
 MonoBehaviour:
@@ -104,7 +105,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1617912274296250}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 236f1e99b0bb579429ce36c7113a08b5, type: 3}
   m_Name: 
@@ -133,9 +134,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf9d8da0ade142488f8ebe0ceaab907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 5
-  AngularVelocity: 3
+  Radius: 2
+  AngularVelocity: 2.5
   StartingAngle: 0
+--- !u!114 &114787456182346214
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1617912274296250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0aa5d269711113469533c1329aa937e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 114590091594128224}
+  MaxLineLength: 38.8
+  MaxLineDrawn: 1000
 --- !u!114 &114915388749717504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7496952bfaf95cc40a90a78f92d71c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.015
+  Speed: 0.02
   Tilt: 0
   SpeedAcc: 0
   TiltAcc: 0

@@ -27,7 +27,7 @@ namespace ChainedRam.Core.Projection
         {
             Proj = sender;
             TotalSpeed = 0;
-            TotalTilt = 0; 
+            TotalTilt = 0;
 
             if (sender != null && RelativeAngle)
             {
@@ -68,6 +68,7 @@ namespace ChainedRam.Core.Projection
             copy.TotalSpeed = TotalSpeed;
             copy.TotalTilt = TotalTilt;
             copy.FaceTilt = FaceTilt;
+            copy.RelativeAngle = RelativeAngle;
             copy.Proj = Proj; 
 
             return copy; 

@@ -99,6 +99,7 @@ MonoBehaviour:
   SpeedAcc: 0.01
   TiltAcc: 0.35
   FaceTilt: 1
+  RelativeAngle: 1
 --- !u!114 &114134827714133822
 MonoBehaviour:
   m_ObjectHideFlags: 1

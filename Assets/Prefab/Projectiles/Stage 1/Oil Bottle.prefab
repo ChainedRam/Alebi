@@ -179,6 +179,7 @@ MonoBehaviour:
   SpeedAcc: 0.001
   TiltAcc: 0
   FaceTilt: 0
+  RelativeAngle: 1
 --- !u!114 &114251989816601076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,7 +221,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  time: 1.5
+  time: 2
 --- !u!114 &114554191381114632
 MonoBehaviour:
   m_ObjectHideFlags: 1
