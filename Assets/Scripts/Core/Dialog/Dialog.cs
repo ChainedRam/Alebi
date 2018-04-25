@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,25 +33,42 @@ namespace ChainedRam.Core.Dialog
         /// <returns></returns>
         public abstract bool HasNext();
 
+        public event Action OnStart;
+        public event Action OnEnd;
+        public event Action OnPause;
+        public event Action OnResume;
+
         /// <summary>
         /// Invoked when dialog starts
         /// </summary>
-        public virtual void WhenDialogStart() { }
+        public virtual void WhenDialogStart()
+        {
+            OnStart?.Invoke(); 
+        }
 
         /// <summary>
         /// Invoked when dialog ends 
         /// </summary>
-        public virtual void WhenDialogEnd() { }
+        public virtual void WhenDialogEnd()
+        {
+            OnEnd?.Invoke();
+        }
 
         /// <summary>
         /// Invoked when dialog is paused. <see cref="DialogPauseType"/>
         /// </summary>
-        public virtual void WhenDialogPause() { }
+        public virtual void WhenDialogPause()
+        {
+            OnPause?.Invoke();
+        }
 
         /// <summary>
         /// Invoked when dialog resumes after pausing. 
         /// </summary>
-        public virtual void WhenDialogResume() { }
+        public virtual void WhenDialogResume()
+        {
+            OnResume?.Invoke();
+        }
 
         /// <summary>
         /// Gets time delay in seconds between displaying each charachter. 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChainedRam.Core.Dialog;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,6 +58,10 @@ namespace ChainedRam.Alebi.Puzzle
 
         public Puzzle Next;
 
+        private bool IsPaused;
+
+        public Dialog Dialog;
+        public DialogBox DialogBox; 
 
         // Use this for initialization
         private void Start()
@@ -106,6 +111,11 @@ namespace ChainedRam.Alebi.Puzzle
                 Wall.name = $"Wall {WallPos.x},{WallPos.y}";
                 Wall.transform.localPosition = Vector3.zero;
             }
+
+            IsPaused = true;
+            Dialog.OnEnd += () => IsPaused = false;
+
+            DialogBox.PresentDialog(Dialog); 
         }
 
         float TimeWaited;
@@ -113,7 +123,7 @@ namespace ChainedRam.Alebi.Puzzle
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (EndWindow.activeSelf) //means puzzle ended
+            if (EndWindow.activeSelf || IsPaused) //means puzzle ended
             {
                 return;
             }
