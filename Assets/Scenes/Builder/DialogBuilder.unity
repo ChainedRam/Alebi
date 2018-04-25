@@ -1732,14 +1732,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c50559c8658a2c4bb47574f122a5b56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextFile: {fileID: 4900000, guid: 96160d13d9b1dcd4882f77db886c1972, type: 3}
-  ConversationName: Stage 1 Pre Battle
+  TextFile: {fileID: 4900000, guid: 656f02c4007962b48aac1eb60a632ef5, type: 3}
+  ConversationName: Post puzzle
   PauseProprty: 1
   DelayTime: 0.02
   FirstName: Naggah
-  SecondName: Jaber
+  SecondName: Jamal
   FirstAlias: N
-  SecondAlias: J
+  SecondAlias: K
   Output: {fileID: 0}
   box: {fileID: 794963656}
   ErrorMessage: {fileID: 781357480}

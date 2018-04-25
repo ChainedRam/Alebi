@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4074317475257876}
   - component: {fileID: 114497606755212068}
   m_Layer: 0
-  m_Name: During first room
+  m_Name: 1 1st room start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

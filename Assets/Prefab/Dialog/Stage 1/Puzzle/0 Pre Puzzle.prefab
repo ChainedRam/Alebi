@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4859628388049204}
   - component: {fileID: 114590716446260126}
   m_Layer: 0
-  m_Name: Stage 1 Pre Battle 1
+  m_Name: 0 Pre Puzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

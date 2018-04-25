@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 4036455051593588}
   - component: {fileID: 114094600239117244}
   m_Layer: 0
-  m_Name: Post puzzle
+  m_Name: Game Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
