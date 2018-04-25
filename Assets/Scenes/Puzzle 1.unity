@@ -956,8 +956,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 730541210}
-        m_MethodName: FreazeVertical
+      - m_Target: {fileID: 1568819112}
+        m_MethodName: defult
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
