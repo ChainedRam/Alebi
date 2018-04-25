@@ -244,6 +244,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1608373031825946
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4625971889457466}
+  - component: {fileID: 114205392928581720}
+  m_Layer: 14
+  m_Name: Wait
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1622872782410978
 GameObject:
   m_ObjectHideFlags: 1
@@ -467,7 +483,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4342288395886398}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4221778247322894
 Transform:
@@ -524,6 +540,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4326438705489802}
+  - {fileID: 4625971889457466}
   - {fileID: 4201760732028438}
   m_Father: {fileID: 4761812762405838}
   m_RootOrder: 1
@@ -609,6 +626,19 @@ Transform:
   - {fileID: 4977935895337942}
   m_Father: {fileID: 4289790775144016}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4625971889457466
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1608373031825946}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4342288395886398}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4761812762405838
 Transform:
@@ -1142,6 +1172,19 @@ MonoBehaviour:
   oil: {fileID: 1210580200613156}
   bottle: {fileID: 1679961861197150}
   bottleProjectile: {fileID: 114283111347429046}
+--- !u!114 &114205392928581720
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1608373031825946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8883491aaecc3d04391b7e085d5f348e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Delta: 0
+  WaitTime: 1
 --- !u!114 &114221071620418524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1302,6 +1345,7 @@ MonoBehaviour:
   Repeat: 3
   Generators:
   - {fileID: 114881242888501918}
+  - {fileID: 114205392928581720}
   - {fileID: 114550840418570426}
   Selected: {fileID: 0}
   SelectorType: 0
