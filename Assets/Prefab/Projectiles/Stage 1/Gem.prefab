@@ -146,6 +146,7 @@ MonoBehaviour:
   SpeedAcc: -0.0001
   TiltAcc: 0
   FaceTilt: 1
+  RelativeAngle: 1
 --- !u!114 &114721286162226196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Motion: {fileID: 114941958170026238}
+  FaceDirection: 0
 --- !u!114 &114738420063533872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Motion: {fileID: 114285093463713896}
+  FaceDirection: 0
 --- !u!114 &114894108303555690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,6 +226,7 @@ MonoBehaviour:
   SpeedAcc: 0
   TiltAcc: 0
   FaceTilt: 1
+  RelativeAngle: 1
 --- !u!212 &212945364163477622
 SpriteRenderer:
   m_ObjectHideFlags: 1

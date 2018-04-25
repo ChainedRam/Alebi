@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ChainedRam.Core.Projection
 {
-    public class MultiMotion : Motion
+    public sealed class MultiMotion : Motion
     {
         [Header("Motions apply from top to bottom")]
         [Header("Order Matters")]
@@ -35,6 +35,16 @@ namespace ChainedRam.Core.Projection
             {
                 motion.Initialize(sender, delta);
             }
+        }
+
+        public override Motion CopyTo(GameObject go)
+        {
+            MultiMotion m = go.AddComponent<MultiMotion>();
+            m.Motions = new Motion[Motions.Length];
+
+            Array.Copy(Motions, m.Motions, Motions.Length);
+
+            return m; 
         }
 
         #region OnValidate

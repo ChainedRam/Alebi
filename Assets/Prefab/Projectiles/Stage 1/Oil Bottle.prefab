@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212358656760385084}
   - component: {fileID: 114114767125852056}
   - component: {fileID: 58079748398043386}
+  - component: {fileID: 114243499437892050}
   m_Layer: 11
   m_Name: Oil
   m_TagString: Untagged
@@ -38,14 +39,27 @@ GameObject:
   m_Component:
   - component: {fileID: 4331316021624852}
   - component: {fileID: 114554191381114632}
-  - component: {fileID: 61907519784188024}
-  - component: {fileID: 212752545316236166}
-  - component: {fileID: 114251989816601076}
-  - component: {fileID: 114371987238006014}
-  - component: {fileID: 114142516315315032}
   - component: {fileID: 114225542700796666}
   m_Layer: 11
   m_Name: Oil Bottle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!1 &1936126136510978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4531222562735240}
+  - component: {fileID: 61537496310919852}
+  - component: {fileID: 212509457569706774}
+  - component: {fileID: 114563275692614052}
+  m_Layer: 11
+  m_Name: Bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +76,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4331316021624852}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4331316021624852
 Transform:
@@ -71,11 +85,25 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864722332696122}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.09, y: -3.45, z: 0}
+  m_LocalPosition: {x: 6.09, y: -3.4499998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4531222562735240}
   - {fileID: 4067919629574406}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4531222562735240
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936126136510978}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4331316021624852}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &58079748398043386
@@ -93,12 +121,12 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.775
---- !u!61 &61907519784188024
+--- !u!61 &61537496310919852
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1864722332696122}
+  m_GameObject: {fileID: 1936126136510978}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -130,39 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Duration: 1
-  SlowRate: 0.8
---- !u!114 &114142516315315032
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1864722332696122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 078fe3fc174bbff459f965e86726d18f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnEnter:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  OnExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1864722332696122}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+  SlowRate: 0.5
 --- !u!114 &114225542700796666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -176,29 +172,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0.1
   Tilt: 0
-  SpeedAcc: 0.001
+  SpeedAcc: 0.005
   TiltAcc: 0
   FaceTilt: 0
---- !u!114 &114251989816601076
+  RelativeAngle: 1
+--- !u!114 &114243499437892050
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1864722332696122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 154c67d0b1206184293f457070af828b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  oil: {fileID: 1147725953191884}
-  bottleSprite: {fileID: 212752545316236166}
-  bottle: {fileID: 114554191381114632}
---- !u!114 &114371987238006014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1864722332696122}
+  m_GameObject: {fileID: 1147725953191884}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bb9351c61275804682860efbcc1e1f2, type: 3}
@@ -207,9 +190,9 @@ MonoBehaviour:
   onTrigger:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114251989816601076}
-        m_MethodName: BreakBottle
-        m_Mode: 1
+      - m_Target: {fileID: 1147725953191884}
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -220,7 +203,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  time: 1.5
+  time: 5
 --- !u!114 &114554191381114632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -233,6 +216,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Motion: {fileID: 114225542700796666}
+  FaceDirection: 0
+--- !u!114 &114563275692614052
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936126136510978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 154c67d0b1206184293f457070af828b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oil: {fileID: 1147725953191884}
+  bottle: {fileID: 1936126136510978}
+  bottleProjectile: {fileID: 114554191381114632}
 --- !u!212 &212358656760385084
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -275,12 +273,12 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!212 &212752545316236166
+--- !u!212 &212509457569706774
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1864722332696122}
+  m_GameObject: {fileID: 1936126136510978}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

@@ -10,9 +10,11 @@ public class MultiProjectileGenerator : ProjectileGenerator
     
     public float FireRate; 
 
+    private Coroutine FiringCoroutine; 
+
     protected override void OnGenerate(GenerateEventArgs e)
     {
-        StartCoroutine(Firing(e));
+        FiringCoroutine = StartCoroutine(Firing(e));
     }
 
     private IEnumerator Firing(GenerateEventArgs e)
@@ -28,5 +30,17 @@ public class MultiProjectileGenerator : ProjectileGenerator
     protected override float GetSyncedWaitTime()
     {
         return FireRate * Count;
+    }
+
+    protected override void OnEnd()
+    {
+        base.OnEnd();
+        
+        if(FiringCoroutine != null)
+        {
+            StopCoroutine(FiringCoroutine); 
+        }
+
+        
     }
 }

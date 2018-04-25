@@ -132,6 +132,7 @@ MonoBehaviour:
   SpeedAcc: 0.001
   TiltAcc: 0
   FaceTilt: 0
+  RelativeAngle: 1
 --- !u!212 &212157189334510388
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -16,18 +16,18 @@ namespace ChainedRam.Core.Projection
         public float SpeedAcc = 0;
         public float TiltAcc = 0;
 
-        private float TotalSpeed;
-        private float TotalTilt; 
-
         public bool FaceTilt;
         public bool RelativeAngle; 
+
+        private float TotalSpeed;
+        private float TotalTilt; 
         private GameObject Proj; 
 
         public override void Initialize(GameObject sender, float delta)
         {
             Proj = sender;
             TotalSpeed = 0;
-            TotalTilt = 0; 
+            TotalTilt = 0;
 
             if (sender != null && RelativeAngle)
             {
@@ -68,6 +68,7 @@ namespace ChainedRam.Core.Projection
             copy.TotalSpeed = TotalSpeed;
             copy.TotalTilt = TotalTilt;
             copy.FaceTilt = FaceTilt;
+            copy.RelativeAngle = RelativeAngle;
             copy.Proj = Proj; 
 
             return copy; 
