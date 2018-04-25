@@ -12,7 +12,9 @@ namespace ChainedRam.Core.Projection
         [ContextMenuItem("Remove Gizmu", "RemoveGizmu", order = 1)]
         public Motion Motion;
 
-        private float Delta = 0; 
+        private float Delta = 0;
+
+        public bool FaceDirection;
 
         public virtual void Setup(float delta)
         {
@@ -43,8 +45,15 @@ namespace ChainedRam.Core.Projection
 
         public void FixedUpdate()
         {
+            var prevPosition = transform.position; 
             Vector2 offset = Motion.GetOffset();
-            transform.position += (Vector3)offset; 
+            transform.position += (Vector3)offset;
+
+            //update angle
+            if (FaceDirection)
+            {
+                gameObject.transform.eulerAngles = Vector3.forward * (PositionProvider.AngleBetween(prevPosition, transform.position));
+            }
         }
 
         #region ContextMenuItem

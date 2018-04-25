@@ -16,11 +16,11 @@ namespace ChainedRam.Core.Projection
         public float SpeedAcc = 0;
         public float TiltAcc = 0;
 
-        private float TotalSpeed;
-        private float TotalTilt; 
-
         public bool FaceTilt;
         public bool RelativeAngle; 
+
+        private float TotalSpeed;
+        private float TotalTilt; 
         private GameObject Proj; 
 
         public override void Initialize(GameObject sender, float delta)

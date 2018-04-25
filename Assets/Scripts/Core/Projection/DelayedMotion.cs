@@ -68,7 +68,6 @@ namespace ChainedRam.Core.Projection
             copy.WrappedMotion = WrappedMotion; 
             copy.Delay = Delay;
             copy.LookAt = LookAt.Copy(); 
-
             return copy; 
         }
     }

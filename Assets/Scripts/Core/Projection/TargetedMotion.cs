@@ -16,6 +16,8 @@ namespace ChainedRam.Core.Projection
 
         public float Speed = 0.1f;
 
+        public Motion AlternativeMotion; 
+
         public bool Invert;
         public bool HideGizmo = true;
 
@@ -26,11 +28,15 @@ namespace ChainedRam.Core.Projection
         private float DegreeStepLength;
         private float DegreeStepSize;
         private float StepCounter;
+        private float Delta;
+        private bool HasInitAlernative; 
 
         public override void Initialize(GameObject sender, float delta = 1)
         {
             base.Initialize(sender, delta);
-            Sender = sender; 
+            Sender = sender;
+            Delta = delta;
+            HasInitAlernative = false; 
             FancyMath();
         }
 
@@ -38,6 +44,17 @@ namespace ChainedRam.Core.Projection
         {
             if (StepCounter > DegreeStepLength)
             {
+                if(AlternativeMotion != null)
+                {
+                    if (HasInitAlernative == false)
+                    {
+                        AlternativeMotion.Initialize(Sender, Delta);
+                        HasInitAlernative = true; 
+                    }
+
+                    return AlternativeMotion.GetRelativeOffset(defaultVector); 
+                }
+
                 return defaultVector;
             }
 
@@ -73,6 +90,7 @@ namespace ChainedRam.Core.Projection
             copy.DegreeStepLength = DegreeStepLength;
             copy.DegreeStepSize = DegreeStepSize;
             copy.StepCounter= StepCounter;
+            copy.AlternativeMotion = AlternativeMotion.CopyTo(go); 
                     
             return copy;
         }

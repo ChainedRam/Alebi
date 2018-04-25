@@ -9,12 +9,12 @@ namespace ChainedRam.Core.Generation
     /// </summary>
     public abstract class OnceGenerator : Generator
     {
-        protected sealed override bool ShouldGenerate()
+        protected override bool ShouldGenerate()
         {
             return ShouldGenerateOnce(); 
         }
 
-        protected sealed override bool ShouldTerminate()
+        protected override bool ShouldTerminate()
         {
             return ShouldTerminateOnSkippedGeneration(); 
         }
