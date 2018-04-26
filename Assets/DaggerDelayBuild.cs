@@ -4,15 +4,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InvertMotionBuilder : OnceGenerator
+public class DaggerDelayBuild : OnceGenerator
 {
-    public TargetedMotion WalkAroundMotion;
-    public DaggerDelayBuild DaggerBuild; 
+    public DelayedMotion DaggerDelay;
+
+
+    public int Rank; 
 
     protected override void OnGenerate(GenerateEventArgs e)
     {
-        WalkAroundMotion.Invert = !WalkAroundMotion.Invert;
+        Rank++;
 
-        DaggerBuild.Rank = 0; 
+        DaggerDelay.Delay += (float)Rank/2; 
     }
 }

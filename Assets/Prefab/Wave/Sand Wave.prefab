@@ -139,6 +139,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1199417828796146
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4556321184550708}
+  - component: {fileID: 114933149826966228}
+  m_Layer: 0
+  m_Name: DaggerDelayBuilder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1232961228529004
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +545,19 @@ Transform:
   m_Father: {fileID: 4539054433322218}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4556321184550708
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1199417828796146}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4863604984641716}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4565168124584672
 Transform:
   m_ObjectHideFlags: 1
@@ -584,7 +613,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4863604984641716}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4699048603122166
 Transform:
@@ -691,6 +720,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4556321184550708}
   - {fileID: 4677471275020946}
   m_Father: {fileID: 4604699133261804}
   m_RootOrder: 1
@@ -879,7 +909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 0
-  WaitTime: 0.22
+  WaitTime: 0.4
   Prefab: {fileID: 114643541697879042, guid: db2199f407fbcf9499aa8b875580346d, type: 2}
   GenerateAt:
     Location: 0
@@ -996,6 +1026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Delta: 0
   WalkAroundMotion: {fileID: 114416726409720878}
+  DaggerBuild: {fileID: 114933149826966228}
 --- !u!114 &114378934630572436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1103,6 +1134,7 @@ MonoBehaviour:
     RotationRandomOffset: 0
   Degree: 358.7
   Speed: 0.25
+  AlternativeMotion: {fileID: 0}
   Invert: 1
   HideGizmo: 1
 --- !u!114 &114447956944306964
@@ -1154,7 +1186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 1
-  WaitTime: 5.5
+  WaitTime: 2.2
   Target: {fileID: 0}
   Motion: {fileID: 114416726409720878}
   FaceDirection: 1
@@ -1230,8 +1262,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 1
-  Repeat: 9
+  Repeat: 5
   Generators:
+  - {fileID: 114933149826966228}
   - {fileID: 114230851932537302}
   Selected: {fileID: 0}
   SelectorType: 0
@@ -1261,7 +1294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WrappedMotion: {fileID: 114787539881070476, guid: db2199f407fbcf9499aa8b875580346d,
     type: 2}
-  Delay: 10
+  Delay: 9
   LookAt:
     Location: 0
     Direction: -1
@@ -1328,6 +1361,20 @@ MonoBehaviour:
   SandCycle: {fileID: 114266688905552128}
   SpinningSand: {fileID: 114267041090141242}
   SandSpawner: {fileID: 114865626708744992}
+--- !u!114 &114933149826966228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1199417828796146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db227a2c0a137ff4e869a9477347d04c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Delta: 0
+  DaggerDelay: {fileID: 114818944961373406}
+  Rank: 0
 --- !u!114 &114959266912649524
 MonoBehaviour:
   m_ObjectHideFlags: 1
