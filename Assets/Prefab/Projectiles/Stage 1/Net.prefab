@@ -97,7 +97,7 @@ MonoBehaviour:
   Speed: 0.125
   Tilt: 0
   SpeedAcc: 0.01
-  TiltAcc: 0.35
+  TiltAcc: 0
   FaceTilt: 1
   RelativeAngle: 1
 --- !u!114 &114134827714133822
@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Motion: {fileID: 114105031797533716}
+  FaceDirection: 0
 --- !u!114 &114158425627469044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,6 +142,7 @@ MonoBehaviour:
     RotationRandomOffset: 0
   Degree: 1
   Speed: 0
+  AlternativeMotion: {fileID: 0}
   Invert: 0
   HideGizmo: 0
 --- !u!114 &114611567381333948
