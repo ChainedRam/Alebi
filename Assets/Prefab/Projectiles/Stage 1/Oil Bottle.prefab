@@ -157,8 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61289c38978c6544af6d8aab330332f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Duration: 1
-  SlowRate: 0.5
+  Duration: 1.5
+  SlowRate: 0.6
 --- !u!114 &114225542700796666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -203,7 +203,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  time: 5
+  time: 10
 --- !u!114 &114554191381114632
 MonoBehaviour:
   m_ObjectHideFlags: 1
