@@ -61,12 +61,19 @@ namespace ChainedRam.Core.Dialog
             {
                 return;
             }
-            if (currentStateName != "" && ClipsDictionary.ContainsKey(currentStateName) && animator.GetCurrentAnimatorStateInfo(0).IsName("default"))
+            if (currentStateName != "" && animator.GetCurrentAnimatorStateInfo(0).IsName("default"))
             {
-                OverrideController[EmotionHoldName] = ClipsDictionary[currentStateName];
-                animator.runtimeAnimatorController = OverrideController;
-                animator.SetTrigger("emotion");
-                currentStateName = "";
+                if (ClipsDictionary.ContainsKey(currentStateName))
+                {
+                    OverrideController[EmotionHoldName] = ClipsDictionary[currentStateName];
+                    animator.runtimeAnimatorController = OverrideController;
+                    animator.SetTrigger("emotion");
+                    currentStateName = "";
+                }
+                else
+                {
+                    Debug.LogError("Missing emotion: " + currentStateName);
+                }
             }
         }
 
