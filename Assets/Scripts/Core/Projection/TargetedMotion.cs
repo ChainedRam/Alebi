@@ -90,7 +90,7 @@ namespace ChainedRam.Core.Projection
             copy.DegreeStepLength = DegreeStepLength;
             copy.DegreeStepSize = DegreeStepSize;
             copy.StepCounter= StepCounter;
-            copy.AlternativeMotion = AlternativeMotion.CopyTo(go); 
+            copy.AlternativeMotion = AlternativeMotion == null? null : AlternativeMotion.CopyTo(go); 
                     
             return copy;
         }
