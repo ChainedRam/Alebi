@@ -89,7 +89,17 @@ namespace ChainedRam.Core.Dialog
 
         private void DialogReachedEnd()
         {
-            EndCurrentDialog();
+            if (ShouldPause(CurrentDialog.Property))
+            {
+                Pause();
+
+                OnResume += EndCurrentDialog;
+                OnResume += () => OnResume -= EndCurrentDialog; 
+            }
+            else
+            {
+                EndCurrentDialog();
+            }
         }
         #endregion
         #region RecieveCharacter Helpers
@@ -123,7 +133,7 @@ namespace ChainedRam.Core.Dialog
         }
         private bool ShouldPause(DialogPauseType flag)
         {
-            return EnumExtensions.HasFlag(CurrentDialog.Property,flag);
+            return CurrentDialog.Property.HasFlag(flag); 
         }
         #endregion
         #region RecieveCharacter helpers

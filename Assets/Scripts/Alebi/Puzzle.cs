@@ -64,7 +64,9 @@ namespace ChainedRam.Alebi.Puzzle
 
         private bool IsPaused;
 
-        public Dialog Dialog;
+        public Dialog StartDialog;
+        public Dialog EndDialog;
+
         public DialogBox DialogBox; 
 
         // Use this for initialization
@@ -119,10 +121,13 @@ namespace ChainedRam.Alebi.Puzzle
                 Wall.transform.localPosition = Vector3.zero;
             }
 
-            IsPaused = true;
-            Dialog.OnEnd += () => IsPaused = false;
+            if (StartDialog != null)
+            {
+                IsPaused = true;
+                StartDialog.OnEnd += () => IsPaused = false;
 
-            DialogBox.PresentDialog(Dialog); 
+                DialogBox.PresentDialog(StartDialog);
+            }
         }
 
         float TimeWaited;
@@ -208,6 +213,7 @@ namespace ChainedRam.Alebi.Puzzle
             int py = (int)PlayerPosition.y;
 
             TileContent NextTilecontent = BoardContent[ty][tx];
+            Action OnReached = null; 
 
             switch (NextTilecontent)
             {
@@ -232,8 +238,8 @@ namespace ChainedRam.Alebi.Puzzle
 
 
                 case TileContent.Goal:
-                    GoalReached();
-                    return; 
+                    OnReached =  GoalReached;
+                    break; 
 
                 default:
                     throw new System.Exception("srsly dude?");
@@ -246,15 +252,31 @@ namespace ChainedRam.Alebi.Puzzle
             PlayerPosition = new Vector2(tx, ty);
             Player.transform.SetParent(Board[ty][tx].transform);
 
-            StartCoroutine(CenterObject(Player, speed));
+            StartCoroutine(CenterObject(Player, speed, OnReached));
         }
 
         private void GoalReached()
         {
+            if (EndDialog != null)
+            {
+                IsPaused = true;
+
+                EndDialog.OnEnd += EndPuzzle;
+                DialogBox.PresentDialog(EndDialog);
+            }
+            else
+            {
+                EndPuzzle(); 
+            }
+
+        }
+
+        public void EndPuzzle()
+        {
             gameObject.SetActive(false);
             if (Next)
             {
-                Next.enabled = true; 
+                Next.enabled = true;
             }
             else
             {
@@ -262,7 +284,7 @@ namespace ChainedRam.Alebi.Puzzle
             }
         }
 
-        IEnumerator CenterObject(GameObject go, float duration)
+        IEnumerator CenterObject(GameObject go, float duration, Action onReached = null)
         {
             int frames = (int)Mathf.Ceil((duration / Time.fixedDeltaTime));
 
@@ -273,6 +295,11 @@ namespace ChainedRam.Alebi.Puzzle
                 go.transform.localPosition = Vector3.MoveTowards(go.transform.localPosition, Vector3.zero, speedPerFrame);
 
                 yield return new WaitForFixedUpdate();
+            }
+
+            if(onReached != null)
+            {
+                onReached.Invoke(); 
             }
         }
 

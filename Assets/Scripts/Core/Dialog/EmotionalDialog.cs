@@ -16,8 +16,8 @@ namespace ChainedRam.Core.Dialog
         public List<IndexedEmotion> EmotionList;
         private int EmotionIndex;
 
-        public UnityEvent OnStart;
-        public UnityEvent OnEnd;
+        public UnityEvent OnStartEvent;
+        public UnityEvent OnEndEvent;
 
         private string NonEmotionalText;
 
@@ -122,13 +122,13 @@ namespace ChainedRam.Core.Dialog
 
             EmotionIndex = 0;
 
-            OnStart?.Invoke();
+            OnStartEvent?.Invoke();
         }
 
         public override void WhenDialogEnd()
         {
             base.WhenDialogEnd();
-            OnEnd?.Invoke();
+            OnEndEvent?.Invoke();
         }
     }
 }
