@@ -974,7 +974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delta: 0
-  WaitTime: 8
+  WaitTime: 5
   Generators:
   - {fileID: 114448361070334056}
   - {fileID: 114189978945700450}

@@ -17,10 +17,9 @@ public sealed class SandWaveMainCycleBuilder : OnceGenerator
     protected override void OnGenerate(GenerateEventArgs e)
     {
         WalkSpawnRepeater.Repeat *= 2;
-
         DaggerMotion.Delay += 2.5f;
 
-        SandCycle.WaitTime = 12f; 
+        SandCycle.WaitTime += 1f; 
 
         SpinningSand.Loops *= 4;
         SandSpawner.WaitTime /= 2; 
