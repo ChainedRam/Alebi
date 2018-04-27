@@ -5,32 +5,18 @@ using UnityEngine;
 
 namespace ChainedRam.Core.Generation
 {
-    public abstract class TimedGenerator : Generator
+    public abstract class TimedGenerator : OnceGenerator
     {
         [Header("Timed Generator")]
 
         [ContextMenuItem("Sync", "SyncWaitTime")]
-        public float WaitTime;
+        public float WaitTime = 1;
 
         private float CurrentTime;
-        private bool Once;
 
-        protected override bool ShouldGenerate()
+        protected override void FixedUpdate()
         {
-            if (Once)
-            {
-                Once = false;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        protected override void Update()
-        {
-            base.Update();
+            base.FixedUpdate();
             if (CurrentTime > 0)
                 CurrentTime -= Time.fixedDeltaTime;
         }
@@ -44,14 +30,12 @@ namespace ChainedRam.Core.Generation
         {
             base.OnBegin();
             CurrentTime = WaitTime;
-            Once = true;
         }
 
         protected override void Start()
         {
             base.Start();
             CurrentTime = WaitTime;
-            Once = true;
         }
 
         private void SyncWaitTime()

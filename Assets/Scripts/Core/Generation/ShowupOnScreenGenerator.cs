@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using ChainedRam.Core;
+using ChainedRam.Core.Extentions;
 using UnityEngine;
 
 namespace ChainedRam.Core.Generation
@@ -9,39 +10,38 @@ namespace ChainedRam.Core.Generation
     public class ShowupOnScreenGenerator : TimedGenerator
     {
         public GameObject Target;
-        public Direction Side;
-        public PositionRelativeTo OffsetRelative;
-        
-        public int TargetRotation;
-        public Vector2 Offset;
-
-        public bool TeleportToOtherSide;
-        public bool HideGizmo;
 
         public PositionProvider PositionProvider; 
+
+        public bool TeleportToOtherSide;
+        public bool HideGizmo = true;
 
         private Vector2? TargetPosition;
 
         private const float DeltaDistance = 0.01f;
 
-        public float Speed;
+        private float Speed;
 
         protected override void OnGenerate(GenerateEventArgs e)
         {
             if (TeleportToOtherSide)
             {
-                Target.transform.position = PositionProvider.GetScreenPosition(Side, Offset, (PositionRelativeTo)(-1*(int)OffsetRelative)); 
+                Target.transform.position = PositionProvider.OppositePosition;
             }
 
-            TargetPosition = PositionProvider.GetScreenPosition(Side, Offset, OffsetRelative); 
+            TargetPosition = PositionProvider.ProvidedPosition;
 
-            Target.transform.eulerAngles = Vector3.forward * TargetRotation;
+            if (PositionProvider.ProvidedRotation.HasValue)
+            {
+                Target.transform.eulerAngles = Vector3.forward * PositionProvider.ProvidedRotation.Value;
+            }
+
             Speed = Vector3.Distance(Target.transform.position, TargetPosition.Value) / WaitTime;
         }
 
-        protected override void Update()
+        protected override void FixedUpdate()
         {
-            base.Update();
+            base.FixedUpdate();
 
             if (TargetPosition != null)
             {
@@ -64,11 +64,15 @@ namespace ChainedRam.Core.Generation
                 return;
             }
 
-            Vector2 sidePos = PositionProvider.GetScreenPosition(Side, Offset, OffsetRelative);
+            Vector2 sidePos = PositionProvider.ProvidedPosition; 
            
-            Gizmos.DrawSphere(sidePos, .5f);
+            Gizmos.DrawSphere(sidePos, .25f);
+
+            if (PositionProvider.ProvidedRotation != null)
+            {
+                Vector2 line = Vector2.up.Rotate(PositionProvider.ProvidedRotation.Value);
+                Gizmos.DrawLine(sidePos, sidePos + line);
+            }
         }
-
-
     }
 }

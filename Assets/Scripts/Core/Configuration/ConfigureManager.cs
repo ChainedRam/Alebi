@@ -30,6 +30,15 @@ namespace ChainedRam.Core.Configuration
         /// </summary>
         private void Awake()
         {
+            EnsureSingleton();
+            ConfigureAll();
+        }
+
+        /// <summary>
+        /// Insure only one instance exist in the scene
+        /// </summary>
+        private void EnsureSingleton()
+        {
             if (Instance != null)
             {
                 Debug.LogError("ConfigureManager already exist.", Instance);
@@ -37,14 +46,13 @@ namespace ChainedRam.Core.Configuration
 
                 throw new DuplicateManagerException("There can only be one ConfigureManager in the scene");
             }
-
             Instance = this;
         }
 
         /// <summary>
         /// Apply mappings to all components within the scene. 
         /// </summary>
-        void Start()
+        private void ConfigureAll()
         {
             Maps = new Dictionary<Type, ConfigMapper>();
 
@@ -99,8 +107,9 @@ namespace ChainedRam.Core.Configuration
         /// </summary>
         /// <param name="t"></param>
         /// <param name="comp"></param>
-        public void ConfigureGameObject(GameObject go)
+        public static void ConfigureGameObject(GameObject go, bool mustConfig = false)
         {
+            EnsureInstanceExist(); 
             int configCount = 0;
             foreach (var comp in go.GetComponents<Component>())
             {
@@ -111,12 +120,19 @@ namespace ChainedRam.Core.Configuration
                 }
             }
 
-            if (configCount == 0)
+            if (mustConfig && configCount == 0)
             {
                 Debug.LogError("Failed to configure: '" + go.name + "': object contains to confiurable components.");
-                //throw Exception; 
             }
         }
         #endregion
+
+        private static void EnsureInstanceExist()
+        {
+            if (Instance == null)
+            {
+                Debug.LogError("Missing ConfigureManager Instance to the scene."); 
+            }
+        }
     } 
 }

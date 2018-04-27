@@ -25,7 +25,8 @@ GameObject:
   - component: {fileID: 114054330394001486}
   - component: {fileID: 114611567381333948}
   - component: {fileID: 114105031797533716}
-  m_Layer: 0
+  - component: {fileID: 114158425627469044}
+  m_Layer: 11
   m_Name: Net
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c50f61a77efc8b4ba6ff7812f3b7396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1.25
+  duration: 0.75
 --- !u!114 &114105031797533716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -96,8 +97,9 @@ MonoBehaviour:
   Speed: 0.125
   Tilt: 0
   SpeedAcc: 0.01
-  TiltAcc: 0.35
+  TiltAcc: 0
   FaceTilt: 1
+  RelativeAngle: 1
 --- !u!114 &114134827714133822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,6 +112,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Motion: {fileID: 114105031797533716}
+  FaceDirection: 0
+--- !u!114 &114158425627469044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1215035392223010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e175395830b94cf468939f71559a24f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target:
+    Location: 0
+    Direction: 0
+    PositionOffset: {x: 0, y: 0}
+    RandomMultitude: {x: 0, y: 0}
+    RandomPositionOption: 0
+    RandomTransforms: []
+    Degree: 0
+    RelativeTo: 0
+    RotationFacing: 0
+    PositionRefrence: {fileID: 0}
+    RotationRefrence: {fileID: 0}
+    RotationOffsetType: 0
+    RotationOffset: 0
+    RotationOffsetVector: {x: 0, y: 0}
+    RotationRandomOffset: 0
+  Degree: 1
+  Speed: 0
+  AlternativeMotion: {fileID: 0}
+  Invert: 0
+  HideGizmo: 0
 --- !u!114 &114611567381333948
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ChainedRam.Core.Player;
 using UnityEngine;
 
-public class RootCollision : CollisionEffect
+public class RootCollision : PlayerCollisionEffect
 {
     public float duration;
     private static StatusEffect rootEffect = new RootStatusEffect();
@@ -12,6 +12,6 @@ public class RootCollision : CollisionEffect
     {
         gameObject.SetActive(false);
         p.AddEffect(rootEffect, duration);
-        p.velocityReset();
+        p.VelocityReset();
     }
 }

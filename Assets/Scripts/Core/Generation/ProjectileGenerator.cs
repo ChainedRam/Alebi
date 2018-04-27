@@ -3,48 +3,33 @@ using ChainedRam.Core.Projection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ChainedRam.Core.Configuration;
+using ChainedRam.Core.Extentions;
 
 namespace ChainedRam.Core.Generation
 {
     public class ProjectileGenerator : QueueInstanceGenerator<Projectile>
     {
         [Header("Projectile Generator")]
-        public ChainedRam.Core.Projection.Motion MotionOverride;
-
-        private bool GenerateOnce;
+        public Projection.Motion MotionOverride;
 
         public override void SetupGenerated(Projectile generated)
         {
             base.SetupGenerated(generated);
-            generated.Motion = MotionOverride ?? generated.Motion;
 
-            generated.Setup(Delta);
-        }
-
-        protected override bool ShouldGenerate()
-        {
-            if (GenerateOnce)
+            if (MotionOverride != null)
             {
-                GenerateOnce = false;
-                return true;
+                var oldMotion = generated.Motion; 
+                generated.Motion = MotionOverride.CopyTo(generated.gameObject);
+
+                if (oldMotion != null)
+                {
+                    Destroy(oldMotion);
+                }
             }
 
-            return false;
-        }
-
-        protected override void Awake()
-        {
-            base.Awake();
-            GenerateOnce = true;
-        }
-
-        protected override void OnBegin()
-        {
-            base.OnBegin();
-            GenerateOnce = true;
+            ConfigureManager.ConfigureGameObject(generated.gameObject);
+            generated.Setup(Delta);
         }
     }
-
-
 }

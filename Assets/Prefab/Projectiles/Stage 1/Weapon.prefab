@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114259712101325842}
   - component: {fileID: 114786723026784516}
   - component: {fileID: 114787539881070476}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e2dd39df6d2f942a0035d80887ac2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 2
 --- !u!114 &114643541697879042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,6 +142,7 @@ MonoBehaviour:
   SpeedAcc: 0
   TiltAcc: 0
   FaceTilt: 0
+  RelativeAngle: 1
 --- !u!212 &212995178751681176
 SpriteRenderer:
   m_ObjectHideFlags: 1

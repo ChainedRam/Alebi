@@ -11,7 +11,7 @@ public class PlayerTargettedConfigMapper : ConfigMapper<PlayerTarggettedProjecti
 
     public override void Configure(PlayerTarggettedProjectileGenerator obj)
     {
-        obj.Target = Player.gameObject; 
+        obj.Target.SetToTransform(Player.gameObject.transform); 
     }
 
 }

@@ -16,19 +16,20 @@ namespace ChainedRam.Core.Projection
         public float SpeedAcc = 0;
         public float TiltAcc = 0;
 
+        public bool FaceTilt;
+        public bool RelativeAngle; 
+
         private float TotalSpeed;
         private float TotalTilt; 
+        private GameObject Proj; 
 
-        public bool FaceTilt; 
-        private Projectile Proj; 
-
-        public override void Initialize(Projectile sender, float delta)
+        public override void Initialize(GameObject sender, float delta)
         {
             Proj = sender;
             TotalSpeed = 0;
-            TotalTilt = 0; 
+            TotalTilt = 0;
 
-            if (Proj != null && FaceTilt)
+            if (sender != null && RelativeAngle)
             {
                 TotalTilt = Proj.gameObject.transform.eulerAngles.z;
             }
@@ -48,13 +49,29 @@ namespace ChainedRam.Core.Projection
         {
             if(Proj != null && FaceTilt)
             {
-                Proj.gameObject.transform.eulerAngles += new Vector3(0, 0, TiltAcc);
+                Proj.gameObject.transform.eulerAngles = new Vector3(0, 0, TotalTilt);
             }
         }
 
         public override string ToString()
         {
             return $" S:{Speed.ToString("0.00")}, SA:{SpeedAcc.ToString("0.000")}, TA:{TiltAcc.ToString("0.000")}";
+        }
+
+        public override Motion CopyTo(GameObject go)
+        {
+            LineMotion copy = go.AddComponent<LineMotion>();
+            copy.Speed =  Speed;
+            copy.Tilt = Tilt;
+            copy.SpeedAcc = SpeedAcc;
+            copy.TiltAcc =  TiltAcc; 
+            copy.TotalSpeed = TotalSpeed;
+            copy.TotalTilt = TotalTilt;
+            copy.FaceTilt = FaceTilt;
+            copy.RelativeAngle = RelativeAngle;
+            copy.Proj = Proj; 
+
+            return copy; 
         }
     }
 }

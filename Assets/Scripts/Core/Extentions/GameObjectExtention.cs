@@ -7,7 +7,6 @@ namespace ChainedRam.Core.Extentions
 {
     public static class GameObjectExtention
     {
-        //TODO memorize results. 
         /// <summary>
         /// Checks if any of game objects components implement given interface. 
         /// </summary>
@@ -49,6 +48,47 @@ namespace ChainedRam.Core.Extentions
             instance = default(T);
 
             return false;
+        }
+
+        /// <summary>
+        /// Copys component to a destination game object 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="original"></param>
+        /// <param name="destination"></param>
+        /// <returns></returns>
+        [Obsolete("Doesn't copy pointers, rather shares them.")]
+        public static T CopyComponent<T>(this GameObject destination, T original) where T : Component
+        {
+            Type type = original.GetType();
+            Component copy = destination.AddComponent(type);
+            System.Reflection.FieldInfo[] fields = type.GetFields();
+            foreach (System.Reflection.FieldInfo field in fields)
+            {
+                field.SetValue(copy, field.GetValue(original));
+            }
+            return copy as T;
+        }
+
+        /// <summary>
+        /// Copys component to a destination game object 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="original"></param>
+        /// <param name="destination"></param>
+        /// <returns></returns>
+        [Obsolete("Doesn't copy pointers, rather shares them.")]
+        public static Component CopyComponent(this GameObject destination, Component original)
+        {
+            System.Type type = original.GetType();
+            Component copy = destination.AddComponent(type);
+            // Copied fields can be restricted with BindingFlags
+            System.Reflection.FieldInfo[] fields = type.GetFields();
+            foreach (System.Reflection.FieldInfo field in fields)
+            {
+                field.SetValue(copy, field.GetValue(original));
+            }
+            return copy;
         }
     }
 }

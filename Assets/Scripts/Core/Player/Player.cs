@@ -15,7 +15,8 @@ namespace ChainedRam.Core.Player
         /// <summary>
         /// Speed in which the object will move. 
         /// </summary>
-        public float Speed; 
+        public float Speed;
+
         public bool CanMove; 
         public float SpeedDelta;  
         public int Health;
@@ -61,7 +62,7 @@ namespace ChainedRam.Core.Player
         void FixedUpdate()
         {
             StatusDisplay?.SetStatuses(Effects);
-
+            StatusDisplay?.SetHealth(Health);
             foreach (var pair in ArrowsDirectionDic)
             {
                 if (Input.GetKey(pair.Key))
@@ -115,12 +116,26 @@ namespace ChainedRam.Core.Player
         }
 
         /// <summary>
+        /// Handles collision enter effects . 
+        /// </summary>
+        /// <param name="collision"></param>
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            PlayerCollisionEffect effect = collision.gameObject.GetComponent<PlayerCollisionEffect>(); 
+            
+            if (effect != null)
+            {
+                effect.OnHit(this);
+            }
+        }
+
+        /// <summary>
         /// Handles trigger enter effects . 
         /// </summary>
         /// <param name="collision"></param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            CollisionEffect effect = collision.gameObject.GetComponent<CollisionEffect>();
+            PlayerCollisionEffect effect = collision.gameObject.GetComponent<PlayerCollisionEffect>();
 
             if (effect != null)
             {
@@ -197,9 +212,14 @@ namespace ChainedRam.Core.Player
             }    
         }
 
-        public void velocityReset()
+        public void VelocityReset()
         {
             rigidbody2D.velocity = Vector2.zero;
+        }
+
+        public void AddVelocity(Vector2 power)
+        {
+            rigidbody2D.velocity += power;
         }
         #endregion
     }

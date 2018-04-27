@@ -12,20 +12,48 @@ namespace ChainedRam.Core.Projection
         [ContextMenuItem("Remove Gizmu", "RemoveGizmu", order = 1)]
         public Motion Motion;
 
-        public void Start()
-        {
-            Motion.Initialize(this, 1);
-        }
+        private float Delta = 0;
+
+        public bool FaceDirection;
 
         public virtual void Setup(float delta)
         {
-            Motion.Initialize(this, delta);
+            Delta = delta; 
+            enabled = true;
+        }
+
+        protected virtual void OnEnable()
+        {
+            Motion.Initialize(gameObject, Delta);
+            
+            //if motion is not mine 
+            if(Motion.gameObject != gameObject)
+            {
+                //do i have one? 
+                Motion mine = GetComponent <Motion> ();
+                if(mine != null)
+                {
+                    Motion = mine; 
+                }
+                else //copy refrenced one to me 
+                {
+                    Motion = Motion.CopyTo(gameObject);
+                }
+            }
+
         }
 
         public void FixedUpdate()
         {
+            var prevPosition = transform.position; 
             Vector2 offset = Motion.GetOffset();
-            transform.position += (Vector3)offset; 
+            transform.position += (Vector3)offset;
+
+            //update angle
+            if (FaceDirection)
+            {
+                gameObject.transform.eulerAngles = Vector3.forward * (PositionProvider.AngleBetween(prevPosition, transform.position));
+            }
         }
 
         #region ContextMenuItem

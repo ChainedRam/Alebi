@@ -11,21 +11,23 @@ namespace ChainedRam.Core.Generation
     {
         public virtual Generator[] ChildGenerators { get { return Generators; } set { Generators = value; } }
 
+        public int Repeat = 1;
+
         public Generator[] Generators;
 
-        [HideInInspector()]
+        [HideInInspector]
         public Generator Selected;
-
-        [HideInInspector()]
-        public Selector Selector;
 
         [HideInInspector]
         public SelectorType SelectorType;
 
-        private bool HasRanOut = false; 
+        private int RepeatCounter; 
+        private bool HasRanOut = false;
+        private int Index;
 
         public void SwitchIn(Generator gen)
         {
+            
             if (Selected != null)
             {
                 Demote(Selected);
@@ -42,7 +44,6 @@ namespace ChainedRam.Core.Generation
             Selected = gen;
 
             gen.OnEndEventHandler += Next;
-
             gen.Delta = this.Delta; 
             gen.Begin();
         }
@@ -50,16 +51,17 @@ namespace ChainedRam.Core.Generation
         public void Demote(Generator gen)
         {
             gen.OnEndEventHandler -= Next;
-            Selected = null;
         }
 
         protected override void OnBegin()
         {
             HasRanOut = false;
-            Selector.ResetSelector(); 
+            RepeatCounter = Repeat; 
+            ResetSelector();
+            Next();
         }
 
-        private void Next(object s= null, GenerateEventArgs e= null)
+        private void Next(object s = null, GenerateEventArgs e = null)
         {
             Generator nextGen = NextGenerator(); 
 
@@ -69,14 +71,13 @@ namespace ChainedRam.Core.Generation
             }
             else
             {
-                SwitchIn(nextGen);
-                
+                SwitchIn(nextGen);  
             }
         }
 
         protected override void OnGenerate(GenerateEventArgs e)
         {
-            Next();
+            
         }
 
         /// <summary>
@@ -85,7 +86,7 @@ namespace ChainedRam.Core.Generation
         /// <returns></returns>
         protected override bool ShouldGenerate()
         {
-            return !((Selected?.enabled) ?? false); //TODO use GeneratorShouldGnerate //maybe not 
+            return false;
         }
 
         protected override bool ShouldTerminate()
@@ -95,13 +96,16 @@ namespace ChainedRam.Core.Generation
 
         public Generator NextGenerator()
         {
-            return Selector.Select(ChildGenerators, Selected);
+            return Select(ChildGenerators, Selected);
         }
 
         protected override void OnEnd()
         {
-            if(Selected != null)
+            if (Selected != null)
+            {
                 Demote(Selected);
+                Selected.End(); 
+            }
         }
 
         [ContextMenu("From Children")]
@@ -120,6 +124,34 @@ namespace ChainedRam.Core.Generation
             }
 
             ChildGenerators = gens.ToArray(); 
+        }
+
+        public T Select<T>(T[] list, T prev = null) where T : class
+        {
+            if (list.Length == 0)
+            {
+                throw new Exception("Cannot select from empty list"); //TODO custom exception
+            }
+
+            if (RepeatCounter > 1 && Index >= list.Length)
+            {
+                RepeatCounter--;
+                Index = 0;
+            }
+
+            if (Index < list.Length)
+            {
+                return list[Index++];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public void ResetSelector()
+        {
+            Index = 0;
         }
     }
 
