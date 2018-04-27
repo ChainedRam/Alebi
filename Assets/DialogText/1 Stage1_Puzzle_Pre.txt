@@ -1,0 +1,5 @@
+N: <Neutral> I'm close, all I have to do is go through this tunnel to get to Jaber's den.
+N: <SlightlyAngry> If Jaber stole the milk he's probably expecting me. He might have set up a trap. He's been after me for my milk for years but he hasn't shown up in a long time. What made strike now?
+N: <Determined> Whatever the case, I have to go inside. I need to put a stop to this to make Jamal his tea. 
+*enters tunnel entrance*
+N: <slightly afraid> It's dark in here, but I must carry on.
