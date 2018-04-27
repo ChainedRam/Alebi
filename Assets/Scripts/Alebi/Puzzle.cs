@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChainedRam.Core.Dialog;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,8 @@ namespace ChainedRam.Alebi.Puzzle
         Empty,
         Box,
         Goal,
-        Player
+        Player,
+        Wall
     }
 
     /// <summary>
@@ -35,25 +37,37 @@ namespace ChainedRam.Alebi.Puzzle
         public int Width;
         public int Height;
 
+        private Vector2 PlayerPosition_defult;
         public Vector2 PlayerPosition;
         public Vector2 GoalPosition;
 
+              
         public Vector2[] BoxPositions;
+        public Vector2[] WallPositions;
 
         public GameObject Player;
         public GameObject Goal;
 
         public GameObject BoxPrefab;
         public GameObject TilePrefab;
+        public GameObject WallPrefab;
 
         public Vector2 CellSize;
 
+
+        List<GameObject> BoxList;
         public int[][] BoxBoard;
 
         public GameObject EndWindow;
 
         public Puzzle Next;
 
+        private bool IsPaused;
+
+        public Dialog StartDialog;
+        public Dialog EndDialog;
+
+        public DialogBox DialogBox; 
 
         // Use this for initialization
         private void Start()
@@ -63,9 +77,10 @@ namespace ChainedRam.Alebi.Puzzle
 
         public void Generate()
         {
+            PlayerPosition_defult = PlayerPosition;
             float ix = (-CellSize.x / 2) * Width;
             float iy = (-CellSize.y / 2) * Height;
-
+            BoxList = new List<GameObject>();
             Board = new GameObject[Height][];
             BoardContent = new TileContent[Height][];
             for (int i = 0; i < Height; i++)
@@ -95,6 +110,23 @@ namespace ChainedRam.Alebi.Puzzle
                 box.transform.localPosition = Vector3.zero;
                 box.name = $"box {boxPos.x},{boxPos.y}";
                 BoardContent[(int)boxPos.y][(int)boxPos.x] = TileContent.Box;
+                BoxList.Add(box);
+            }
+
+            foreach (var WallPos in WallPositions)
+            {
+                GameObject Wall = Instantiate(WallPrefab, Board[(int)WallPos.y][(int)WallPos.x].transform);
+                BoardContent[(int)WallPos.y][(int)WallPos.x] = TileContent.Wall;
+                Wall.name = $"Wall {WallPos.x},{WallPos.y}";
+                Wall.transform.localPosition = Vector3.zero;
+            }
+
+            if (StartDialog != null)
+            {
+                IsPaused = true;
+                StartDialog.OnEnd += () => IsPaused = false;
+
+                DialogBox.PresentDialog(StartDialog);
             }
         }
 
@@ -103,7 +135,7 @@ namespace ChainedRam.Alebi.Puzzle
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (EndWindow.activeSelf) //means puzzle ended
+            if (EndWindow.activeSelf || IsPaused) //means puzzle ended
             {
                 return;
             }
@@ -150,6 +182,8 @@ namespace ChainedRam.Alebi.Puzzle
             {
                 case TileContent.Empty:
                     return true;
+                case TileContent.Wall:
+                    return false;
 
                 case TileContent.Box:
                     int bx = tx + ToX(d);
@@ -178,12 +212,17 @@ namespace ChainedRam.Alebi.Puzzle
             int px = (int)PlayerPosition.x;
             int py = (int)PlayerPosition.y;
 
-            TileContent prevTilecontent = BoardContent[ty][tx];
+            TileContent NextTilecontent = BoardContent[ty][tx];
+            Action OnReached = null; 
 
-            switch (prevTilecontent)
+            switch (NextTilecontent)
             {
                 case TileContent.Empty:
                     BoardContent[py][px] = TileContent.Empty;
+                    if (ty == PlayerPosition_defult.y && tx == PlayerPosition_defult.x)
+                    {
+                        defult();
+                    }
                     break;
 
                 case TileContent.Box:
@@ -197,29 +236,47 @@ namespace ChainedRam.Alebi.Puzzle
                     BoardContent[py][px] = TileContent.Empty;
                     break;
 
+
                 case TileContent.Goal:
-                    GoalReached();
-                    return; 
+                    OnReached =  GoalReached;
+                    break; 
 
                 default:
                     throw new System.Exception("srsly dude?");
                     //break; 
             }
 
+
             BoardContent[ty][tx] = TileContent.Player;
 
             PlayerPosition = new Vector2(tx, ty);
             Player.transform.SetParent(Board[ty][tx].transform);
 
-            StartCoroutine(CenterObject(Player, speed));
+            StartCoroutine(CenterObject(Player, speed, OnReached));
         }
 
         private void GoalReached()
         {
+            if (EndDialog != null)
+            {
+                IsPaused = true;
+
+                EndDialog.OnEnd += EndPuzzle;
+                DialogBox.PresentDialog(EndDialog);
+            }
+            else
+            {
+                EndPuzzle(); 
+            }
+
+        }
+
+        public void EndPuzzle()
+        {
             gameObject.SetActive(false);
             if (Next)
             {
-                Next.enabled = true; 
+                Next.enabled = true;
             }
             else
             {
@@ -227,7 +284,7 @@ namespace ChainedRam.Alebi.Puzzle
             }
         }
 
-        IEnumerator CenterObject(GameObject go, float duration)
+        IEnumerator CenterObject(GameObject go, float duration, Action onReached = null)
         {
             int frames = (int)Mathf.Ceil((duration / Time.fixedDeltaTime));
 
@@ -238,6 +295,11 @@ namespace ChainedRam.Alebi.Puzzle
                 go.transform.localPosition = Vector3.MoveTowards(go.transform.localPosition, Vector3.zero, speedPerFrame);
 
                 yield return new WaitForFixedUpdate();
+            }
+
+            if(onReached != null)
+            {
+                onReached.Invoke(); 
             }
         }
 
@@ -251,6 +313,24 @@ namespace ChainedRam.Alebi.Puzzle
         {
             int v = (int)d;
             return (1 - v / 2) * (v * 2 - 1);
+        }
+        public void defult()
+        {
+
+            for (int i = 0; i < BoxList.Count; i++)
+            {
+                GameObject box = BoxList[i];
+                string s=box.transform.parent.name;
+                string [] ss = s.Split(',');
+                int x = int.Parse(ss[1]);
+                int y = int.Parse(ss[0]);
+                Vector2 t = BoxPositions[i];
+                BoardContent[y][x] = TileContent.Empty;
+                box.transform.SetParent(Board[(int)t.y][(int)t.x].transform);
+                BoardContent[(int)t.y][(int)t.x] = TileContent.Box;
+                box.transform.localPosition = Vector3.zero;
+            }
+         
         }
     }
 

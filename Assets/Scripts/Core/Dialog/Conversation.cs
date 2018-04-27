@@ -19,7 +19,7 @@ namespace ChainedRam.Core.Dialog
         {
             get
             {
-                return Dialogs[Index].Property | (Index < Dialogs.Length - 1 ? DialogPauseType.NewPage : DialogPauseType.None);
+                return Dialogs[Index].Property;
             }
         }
 
@@ -27,16 +27,6 @@ namespace ChainedRam.Core.Dialog
         /// Current Dialog index
         /// </summary>
         private int Index;
-
-        /// <summary>
-        /// Indecated whether a new dialog should start 
-        /// </summary>
-        private bool PrepareNextDialog;
-
-        /// <summary>
-        /// Indecated whether conversation has ended
-        /// </summary>
-        private bool HasOnGoingDialog;
 
         /// <summary>
         /// Invoked when conversation starts.  
@@ -63,7 +53,7 @@ namespace ChainedRam.Core.Dialog
         /// <returns></returns>
         public override bool HasNext()
         {
-            return !HasOnGoingDialog; // Index < Dialogs.Length-1 && Dialogs[Index].HasNext();
+            return Index < Dialogs.Length-1 || Dialogs[Index].HasNext();
         }
 
         /// <summary>
@@ -72,37 +62,16 @@ namespace ChainedRam.Core.Dialog
         /// <returns></returns>
         public override char NextCharachter()
         {
-            if (PrepareNextDialog)
+            if (Dialogs[Index].HasNext() == false)
             {
-                PrepareNextDialog = false;
-
                 Dialogs[Index].WhenDialogEnd();
                 Index++;
-                if (HasNext())
-                {
-                    Dialogs[Index].WhenDialogStart();
-                }
-                else
-                {
 
-                }
+                Dialogs[Index].WhenDialogStart();
+                return '\0'; 
             }
 
-            if (Dialogs[Index].HasNext())
-            {
-                return Dialogs[Index].NextCharachter();
-            }
-
-            //last index doesn't have next
-            if (Index == Dialogs.Length - 1)
-            {
-                HasOnGoingDialog = true;
-            }
-            else
-            {
-                PrepareNextDialog = true;
-            }
-            return '\0';
+            return Dialogs[Index].NextCharachter();
         }
 
         /// <summary>
@@ -116,9 +85,6 @@ namespace ChainedRam.Core.Dialog
             }
 
             Index = 0;
-
-            HasOnGoingDialog = false;
-            PrepareNextDialog = false;
         }
 
         /// <summary>
@@ -126,6 +92,7 @@ namespace ChainedRam.Core.Dialog
         /// </summary>
         public override void WhenDialogEnd()
         {
+            base.WhenDialogEnd();
             Dialogs[Index].WhenDialogEnd();
             OnEndConversation?.Invoke();
         }
@@ -135,6 +102,7 @@ namespace ChainedRam.Core.Dialog
         /// </summary>
         public override void WhenDialogPause()
         {
+            base.WhenDialogPause(); 
             Dialogs[Index].WhenDialogPause();
         }
 
@@ -143,6 +111,7 @@ namespace ChainedRam.Core.Dialog
         /// </summary>
         public override void WhenDialogResume()
         {
+            base.WhenDialogResume(); 
             Dialogs[Index].WhenDialogResume();
         }
 
@@ -151,6 +120,7 @@ namespace ChainedRam.Core.Dialog
         /// </summary>
         public override void WhenDialogStart()
         {
+            base.WhenDialogStart(); 
             OnStartConversation?.Invoke();
             Index = 0;
             Dialogs[Index].WhenDialogStart();

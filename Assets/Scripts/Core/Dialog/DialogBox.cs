@@ -10,7 +10,6 @@ namespace ChainedRam.Core.Dialog
 {
     public class DialogBox : MonoBehaviour
     {
-
         #region Public Attributes 
         public Text TextBox;
         public GameObject PauseIndecator; //TODO get by finding + set to private
@@ -90,11 +89,12 @@ namespace ChainedRam.Core.Dialog
 
         private void DialogReachedEnd()
         {
-            if (CurrentDialog.Property.HasFlag(DialogPauseType.End))
+            if (ShouldPause(CurrentDialog.Property))
             {
-                PauseDialog();
+                Pause();
+
                 OnResume += EndCurrentDialog;
-                OnResume += () => OnResume -= EndCurrentDialog; //TODO adds forever
+                OnResume += () => OnResume -= EndCurrentDialog; 
             }
             else
             {
@@ -133,7 +133,7 @@ namespace ChainedRam.Core.Dialog
         }
         private bool ShouldPause(DialogPauseType flag)
         {
-            return EnumExtensions.HasFlag(CurrentDialog.Property,flag);
+            return CurrentDialog.Property.HasFlag(flag); 
         }
         #endregion
         #region RecieveCharacter helpers
@@ -142,6 +142,9 @@ namespace ChainedRam.Core.Dialog
             ClearText();
             CurrentDialog?.WhenDialogEnd();
             CurrentDialog = null;
+
+            gameObject.SetActive(false);
+
         }
 
         private void Pause()
@@ -159,6 +162,7 @@ namespace ChainedRam.Core.Dialog
         #region Public Methods
         public void PresentDialog(Dialog dialog)
         {
+            gameObject.SetActive(true); 
             if (CurrentDialog != null)
             {
                 CurrentDialog.WhenDialogEnd();

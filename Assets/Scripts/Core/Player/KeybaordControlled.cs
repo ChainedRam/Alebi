@@ -23,6 +23,12 @@ namespace ChainedRam.Core.Player
         /// Holds key names and their direction values. 
         /// </summary>
         private Dictionary<string, Vector2> RegisteredKeys; //can improve to be displayable in inspecter.  
+        private float CoolDown;
+        private Vector2? Destination;
+        [Range(0, 2)]
+        public float CoolDownDuration = 1;
+        private const float DistanceThreshold = 0.01f;
+
         #endregion
         #region Unity Methods
         private void Start()
@@ -38,12 +44,67 @@ namespace ChainedRam.Core.Player
         };
         }
 
-
+        
         /// <summary>
         /// Move up or left right 
         /// </summary>
         void FixedUpdate()
         {
+            /*
+            if (Destination != null)
+            {
+                //
+                transform.position = Vector2.MoveTowards(transform.position, (Vector2)Destination, Speed);
+                
+                if (Vector2.Distance(transform.position,(Vector2)Destination)<DistanceThreshold)
+                {
+                    transform.position = (Vector2)Destination;
+                    Destination = null;
+                    CoolDown = 0;
+                }
+
+                
+            }
+            */
+
+            CoolDown += Time.fixedDeltaTime;
+            if (CoolDown < CoolDownDuration)
+            {
+                return;
+            }
+
+            if (Input.GetKey("up"))
+            {
+                Debug.Log("up");
+                CoolDown = 0;
+                rigidbody2D.velocity =  Vector2.up * Speed*Time.fixedDeltaTime;
+            }
+            else if (Input.GetKey("down"))
+            {
+                Debug.Log("down");
+                CoolDown = 0;
+                rigidbody2D.velocity = Vector2.down * Speed*Time.fixedDeltaTime;
+            }
+            else if (Input.GetKey("right"))
+            {
+                Debug.Log("right");
+                CoolDown = 0;
+                rigidbody2D.velocity = Vector2.right * Speed*Time.fixedDeltaTime;
+            }
+            else if (Input.GetKey("left"))
+            {
+                Debug.Log("left");
+                CoolDown = 0;
+                rigidbody2D.velocity = Vector2.left * Speed*Time.fixedDeltaTime;
+            }
+
+            else
+            {
+                rigidbody2D.velocity = Vector2.zero;
+            }
+
+
+            /*
             foreach (var pair in RegisteredKeys)
             {
                 if (Input.GetKey(pair.Key))
@@ -51,6 +112,7 @@ namespace ChainedRam.Core.Player
                     rigidbody2D.velocity += (pair.Value * Speed * Time.deltaTime);
                 }
             }
+            */
         }
         #endregion
     }
