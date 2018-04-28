@@ -8,7 +8,8 @@ public sealed class SandWaveMainCycleBuilder : OnceGenerator
 {
     public PoolGenerator WalkSpawnRepeater;
 
-    public DelayedMotion DaggerMotion; 
+    public DelayedMotion DaggerMotion;
+    public DaggerDelayBuild DaggerBuild;
 
     public NestedGenerator SandCycle; 
     public RotatingGenerator SpinningSand;
@@ -18,8 +19,9 @@ public sealed class SandWaveMainCycleBuilder : OnceGenerator
     {
         WalkSpawnRepeater.Repeat *= 2;
         DaggerMotion.Delay += 2.5f;
+        DaggerBuild.Rank = 0; 
 
-        SandCycle.WaitTime += 1f; 
+        SandCycle.WaitTime += 2f; 
 
         SpinningSand.Loops *= 4;
         SandSpawner.WaitTime /= 2; 

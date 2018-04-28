@@ -679,6 +679,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 153387064}
+--- !u!114 &160485355 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114933149826966228, guid: ddf421f38900a9546812f2b338b36e23,
+    type: 2}
+  m_PrefabInternal: {fileID: 1060374789}
+  m_Script: {fileID: 11500000, guid: db227a2c0a137ff4e869a9477347d04c, type: 3}
 --- !u!1 &162137588 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1411018716645208, guid: f04596cf66b34f34685adc9c5662079d,
@@ -2521,6 +2527,16 @@ Prefab:
       propertyPath: OnGenerateCalled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 1806644293}
+    - target: {fileID: 114896807247666260, guid: ddf421f38900a9546812f2b338b36e23,
+        type: 2}
+      propertyPath: DaggerBuild
+      value: 
+      objectReference: {fileID: 160485355}
+    - target: {fileID: 114266688905552128, guid: ddf421f38900a9546812f2b338b36e23,
+        type: 2}
+      propertyPath: WaitTime
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ddf421f38900a9546812f2b338b36e23, type: 2}
   m_IsPrefabParent: 0

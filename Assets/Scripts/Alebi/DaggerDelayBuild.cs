@@ -15,6 +15,6 @@ public class DaggerDelayBuild : OnceGenerator
     {
         Rank++;
 
-        DaggerDelay.Delay = 5 + ((float)Rank)/4; 
+        DaggerDelay.Delay = 7 + ((float)Rank)/4; 
     }
 }
