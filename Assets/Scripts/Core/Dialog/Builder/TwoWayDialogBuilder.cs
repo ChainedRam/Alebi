@@ -105,7 +105,7 @@ namespace ChainedRam.Core.Dialog
 
         public void PresentOutputUsing()
         {
-            box.PresentDialog(Output);
+            box.StartDialog(Output);
         }
 
         public void PlayDialogAtIndex(InputField input)
@@ -132,7 +132,7 @@ namespace ChainedRam.Core.Dialog
 
             DialogIndex = index - 1;
             //from 0 to (MAX-1)
-            box.PresentDialog(Output.Dialogs[index - 1]);
+            box.StartDialog(Output.Dialogs[index - 1]);
         }
 
         int DialogIndex;
@@ -145,7 +145,7 @@ namespace ChainedRam.Core.Dialog
                 Output.Dialogs[DialogIndex].WhenDialogEnd();
             }
 
-            box.ForceEndDialog();
+            box.EndDialog();
         }
 
         IEnumerator currentErrorMessage;

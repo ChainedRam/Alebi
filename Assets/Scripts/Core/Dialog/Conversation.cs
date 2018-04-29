@@ -48,30 +48,42 @@ namespace ChainedRam.Core.Dialog
         }
 
         /// <summary>
-        /// True unless the last Dialog doesn't HasNext
-        /// </summary>
-        /// <returns></returns>
-        public override bool HasNext()
-        {
-            return Index < Dialogs.Length-1 || Dialogs[Index].HasNext();
-        }
-
-        /// <summary>
         /// Returns next charachter from current dialog. When a dialog ends, returns a null charachter and move dialog to next. 
         /// </summary>
         /// <returns></returns>
-        public override char NextCharachter()
+        public override IEnumerator<Letter> Characters() //MAKE THIS AN IENUMURAABLE 
         {
-            if (Dialogs[Index].HasNext() == false)
+            var enemurator = Dialogs[Index].Characters();
+
+            while (true)
             {
-                Dialogs[Index].WhenDialogEnd();
-                Index++;
+                if (enemurator.MoveNext() == false)
+                {
+                    Dialogs[Index].WhenDialogEnd();
+                    Index++;
 
-                Dialogs[Index].WhenDialogStart();
-                return '\0'; 
+                    if (Index >= Dialogs.Length)
+                    {
+                        Index--; 
+                        break; 
+                    }
+                    enemurator = Dialogs[Index].Characters();
+
+                    Dialogs[Index].ResetDialog();
+                    Dialogs[Index].WhenDialogStart();
+
+                    if (Dialogs[Index].Property == DialogPauseType.End)
+                    {
+                        yield return DialogFont[LetterType.Pause];
+                    }
+
+                    yield return DialogFont[LetterType.Clear];
+                }
+                else
+                {
+                    yield return enemurator.Current;
+                }
             }
-
-            return Dialogs[Index].NextCharachter();
         }
 
         /// <summary>

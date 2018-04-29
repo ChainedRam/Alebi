@@ -19,6 +19,7 @@ namespace ChainedRam.Core.Dialog
         public UnityEvent OnStartEvent;
         public UnityEvent OnEndEvent;
 
+
         private string NonEmotionalText;
 
 
@@ -90,19 +91,19 @@ namespace ChainedRam.Core.Dialog
             NonEmotionalText = result.Trim();
         }
 
-        /// <summary>
-        /// Trigger emotion when time is ready 
-        /// </summary>
-        /// <returns></returns>
-        public override char NextCharachter()
+        public override IEnumerator<Letter> Characters()
         {
-            if (EmotionIndex < EmotionList.Count && Index == EmotionList[EmotionIndex].Index)
-            {
-                Charachter?.SetEmotion(EmotionList[EmotionIndex].Emotion);
-                EmotionIndex++;
-            }
+            var enumerator = base.Characters();
 
-            return base.NextCharachter();
+            while (enumerator.MoveNext())
+            {
+                if (EmotionIndex < EmotionList.Count && Index == EmotionList[EmotionIndex].Index)
+                {
+                    Charachter?.SetEmotion(EmotionList[EmotionIndex].Emotion);
+                    EmotionIndex++;
+                }
+                yield return enumerator.Current; 
+            } 
         }
 
         public override void WhenDialogResume()
