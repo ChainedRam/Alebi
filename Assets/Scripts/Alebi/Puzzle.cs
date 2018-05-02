@@ -126,7 +126,7 @@ namespace ChainedRam.Alebi.Puzzle
                 IsPaused = true;
                 StartDialog.OnEnd += () => IsPaused = false;
 
-                DialogBox.PresentDialog(StartDialog);
+                DialogBox.StartDialog(StartDialog);
             }
         }
 
@@ -262,7 +262,7 @@ namespace ChainedRam.Alebi.Puzzle
                 IsPaused = true;
 
                 EndDialog.OnEnd += EndPuzzle;
-                DialogBox.PresentDialog(EndDialog);
+                DialogBox.StartDialog(EndDialog);
             }
             else
             {

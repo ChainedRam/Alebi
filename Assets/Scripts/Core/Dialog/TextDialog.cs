@@ -34,16 +34,6 @@ namespace ChainedRam.Core.Dialog
             return Delay;
         }
 
-        public override bool HasNext()
-        {
-            return Index < DisplayText.Length;
-        }
-
-        public override char NextCharachter()
-        {
-            return DisplayText[Index++];
-        }
-
         public override void ResetDialog()
         {
             Index = 0;
@@ -52,6 +42,14 @@ namespace ChainedRam.Core.Dialog
         public override void WhenDialogStart()
         {
             Index = 0;
+        }
+
+        public override IEnumerator<Letter> Characters()
+        {
+            while (Index < DisplayText.Length)
+            {
+                yield return DialogFont[DisplayText[Index++]];
+            }
         }
     }
 }

@@ -12,6 +12,11 @@ namespace ChainedRam.Core.Dialog
     public abstract class Dialog : MonoBehaviour
     {
         /// <summary>
+        /// Holds DialogFont 
+        /// </summary>
+        public DialogFont DialogFont; 
+
+        /// <summary>
         /// Holds flags for pausing dialog 
         /// </summary>
         public abstract DialogPauseType Property { get; }
@@ -22,16 +27,10 @@ namespace ChainedRam.Core.Dialog
         public abstract void ResetDialog();
 
         /// <summary>
-        /// Returns next charachter tobe displayed 
+        /// because it's awesome. 
         /// </summary>
         /// <returns></returns>
-        public abstract char NextCharachter();
-
-        /// <summary>
-        /// False when dialog runs out of charachters. Otherwise, true. 
-        /// </summary>
-        /// <returns></returns>
-        public abstract bool HasNext();
+        public abstract IEnumerator<Letter> Characters(); 
 
         public event Action OnStart;
         public event Action OnEnd;
