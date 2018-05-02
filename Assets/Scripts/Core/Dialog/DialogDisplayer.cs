@@ -99,8 +99,9 @@ namespace ChainedRam.Core.Dialog
         }
         private bool ShouldPause(DialogPauseType flag)
         {
-            return CurrentDialog.Property.HasFlag(flag);
+            return CurrentDialog.Property.HasFlag(DialogPauseType.End);
         }
+
         private void EndCurrentDialog()
         {
             ClearText();
