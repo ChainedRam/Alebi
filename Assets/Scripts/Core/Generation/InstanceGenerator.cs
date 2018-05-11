@@ -12,6 +12,9 @@ namespace ChainedRam.Core.Generation
     /// <typeparam name="T"></typeparam>
     public class InstanceGenerator<T> : TimedGenerator where T : Component
     {
+        #region Public Attributes
+        public InstancePooler<T> InstancePooler { private get; set; }
+        #endregion
         #region Inspector Attribute 
         [Header("Instance Generator")]
         [Tooltip("Prefab to genrate.")]
@@ -21,7 +24,8 @@ namespace ChainedRam.Core.Generation
         public PositionProvider GenerateAt;
 
         [Tooltip("Makes generated instances children of.")]
-        public Transform Parent; 
+        public Transform Parent;
+
         #endregion
         #region Protected Abstract Property
         /// <summary>
@@ -34,7 +38,6 @@ namespace ChainedRam.Core.Generation
                 return collection;
             }
         }
-
         #endregion
         #region Private Attributes
         private Collection<T> collection;
@@ -60,9 +63,18 @@ namespace ChainedRam.Core.Generation
             Destroy(instance.gameObject);
         }
 
-        protected virtual T CreateInstance()
+        private T CreateInstance()
         {
-            var instance = Instantiate(Prefab);
+            T instance = null;
+
+            if (InstancePooler != null)
+            {
+                instance = InstancePooler.GetInstance();
+            }
+            else
+            { 
+                instance = Instantiate(Prefab);
+            }
 
             if(Parent != null)
             {

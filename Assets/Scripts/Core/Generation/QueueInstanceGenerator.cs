@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,8 @@ namespace ChainedRam.Core.Generation
     /// An InstanceGenerator that holds limited generations in a queue to recycle them. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class QueueInstanceGenerator<T> : InstanceGenerator<T> where T : Component
+    [Obsolete("InstanePooler is introduced.")]
+    public abstract class gQueueInstanceGenerator<T> : InstanceGenerator<T> where T : Component
     {
         #region Inspector Attributes 
         [Header("FixedSizeGenerator Settings")]
@@ -30,20 +32,20 @@ namespace ChainedRam.Core.Generation
         }
         #endregion
         #region Override InstanceGenerator Methods  
-        protected override T CreateInstance()
-        {
-            T comp;
+        //protected override T CreateInstance()
+        //{
+        //    T comp;
 
-            if (MaxSize <= 0 || GenerationQueue.Count < MaxSize)
-            {
-                comp = base.CreateInstance();
-            }
-            else
-            {
-                comp = GenerationQueue.Dequeue();
-            }
-            return comp;
-        }
+        //    if (MaxSize <= 0 || GenerationQueue.Count < MaxSize)
+        //    {
+        //        comp = base.CreateInstance();
+        //    }
+        //    else
+        //    {
+        //        comp = GenerationQueue.Dequeue();
+        //    }
+        //    return comp;
+        //}
 
         public override void AddInstance(T instance)
         {

@@ -40,13 +40,13 @@ namespace ChainedRam.Core.Generation
             IsMoving = false;
         }*/
 
-        protected override Projectile CreateInstance()
-        {
-            Projectile = base.CreateInstance();
-            Projectile.enabled = false;
+        //protected override Projectile CreateInstance()
+        //{
+        //    Projectile = base.CreateInstance();
+        //    Projectile.enabled = false;
 
-            return Projectile;
-        }
+        //    return Projectile;
+        //}
 
         /*public override void SetupGenerated(Projectile generated)
         {

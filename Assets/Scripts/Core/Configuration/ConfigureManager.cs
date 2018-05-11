@@ -60,6 +60,7 @@ namespace ChainedRam.Core.Configuration
 
             foreach (var mapper in Mappers)
             {
+                mapper.Prepare(); 
                 Type targetType = mapper.TargetType;
                 if (Maps.ContainsKey(targetType))
                 {

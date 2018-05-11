@@ -47,5 +47,10 @@ namespace ChainedRam.Core.Configuration
         /// </summary>
         /// <param name="target"></param>
         public abstract void Configure(object target);
+
+        /// <summary>
+        /// Called once before configuring
+        /// </summary>
+        public virtual void Prepare() { }
     } 
 }

@@ -8,7 +8,7 @@ using ChainedRam.Core.Extentions;
 
 namespace ChainedRam.Core.Generation
 {
-    public class ProjectileGenerator : QueueInstanceGenerator<Projectile>
+    public class ProjectileGenerator : InstanceGenerator<Projectile>
     {
         [Header("Projectile Generator")]
         public Projection.Motion MotionOverride;
@@ -30,6 +30,11 @@ namespace ChainedRam.Core.Generation
 
             ConfigureManager.ConfigureGameObject(generated.gameObject);
             generated.Setup(Delta);
+        }
+
+        protected override void OnGenerate(GenerateEventArgs e)
+        {
+            base.OnGenerate(e);
         }
     }
 }
