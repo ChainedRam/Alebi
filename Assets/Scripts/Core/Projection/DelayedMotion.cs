@@ -22,13 +22,16 @@ namespace ChainedRam.Core.Projection
 
         public override void Initialize(GameObject sender, float delta)
         {
-            this.Sender = sender;
-            this.Delta = delta; 
+            Sender = sender;
+            Delta = delta; 
             TimeWaited = Delay;
 
             LookAt.SetToPosition(Direction.Center, sender.transform.position);
-
-            WarppedMotionCopy = WrappedMotion.CopyTo(sender.gameObject); 
+            if(WarppedMotionCopy != null)
+            {
+                Destroy(WarppedMotionCopy); 
+            }
+            WarppedMotionCopy = WrappedMotion.CopyTo(sender.gameObject);
             WarppedMotionCopy.enabled = false;
         }
 
@@ -69,6 +72,14 @@ namespace ChainedRam.Core.Projection
             copy.Delay = Delay;
             copy.LookAt = LookAt.Copy(); 
             return copy; 
+        }
+
+        private void OnDestroy()
+        {
+            if (WarppedMotionCopy != null)
+            {
+                Destroy(WarppedMotionCopy);
+            }
         }
     }
 }

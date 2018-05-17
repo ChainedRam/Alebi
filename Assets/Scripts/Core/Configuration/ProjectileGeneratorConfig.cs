@@ -17,13 +17,20 @@ public sealed class ProjectileGeneratorConfig : ConfigMapper<ProjectileGenerator
     public override void Configure(ProjectileGenerator projectileGenerator)
     {
         projectileGenerator.InstancePooler = Register(projectileGenerator.Prefab); 
+
     }
 
     private ProjectilePooler Register(Projectile proj)
     {
         if(!Poolers.ContainsKey(proj))
         {
-            Poolers.Add(proj, new ProjectilePooler(proj)); 
+            var pooler = new ProjectilePooler(proj)
+            {
+                Capacity = 10 
+            };
+            Debug.LogWarning("[Debug] Capacity = 10");
+            Poolers.Add(proj, pooler); 
+
         }
 
         return Poolers[proj]; 
