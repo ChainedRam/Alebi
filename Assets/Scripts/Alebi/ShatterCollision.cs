@@ -7,19 +7,27 @@ using UnityEngine;
 public class ShatterCollision : CollisionEffect<GemShatterer>
 {
     public int ShardCount;
-    public Projectile ShardPrefab; 
+    public Projectile ShardPrefab;
 
+    private Projectile[] Shards;
+
+    private void Start()
+    {
+        Shards = new Projectile[ShardCount]; 
+    }
 
     public override void OnHit(GemShatterer g)
     {
-        ShardPrefab.gameObject.SetActive(false); 
-        for (int i = 0; i < ShardCount; i++)
+        for (int i = 0; i < Shards.Length; i++)
         {
-            var shard = Instantiate(ShardPrefab);
-            shard.transform.position = transform.position; 
-            shard.transform.eulerAngles = transform.eulerAngles + (Vector3.forward * (i * 360/ShardCount));
-            shard.Setup(1);
-            shard.gameObject.SetActive(true);
+            if(Shards[i] == null)
+            {
+                Shards[i] = Instantiate(ShardPrefab);
+            }
+            Shards[i].transform.position = transform.position; 
+            Shards[i].transform.localEulerAngles = (Vector3.forward * (i * 360f / Shards.Length));
+            Shards[i].Setup(1);
+            Shards[i].gameObject.SetActive(true);
         }
 
         gameObject.SetActive(false); 

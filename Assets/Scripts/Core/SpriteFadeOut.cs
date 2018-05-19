@@ -8,20 +8,24 @@ public class SpriteFadeOut : MonoBehaviour
     public float Duration;
 
     private SpriteRenderer Sprite;
-    private float? Speed; 
+    private float? Speed;
+    private float StartingAlpha;
 
-    
-
-    public void Start ()
+    private void Awake()
     {
-        Sprite = GetComponent<SpriteRenderer>(); 
+        Sprite = GetComponent<SpriteRenderer>();
+        StartingAlpha = Sprite.color.a;
     }
-     
+
     public void StartFading()
     {
         enabled = true; 
     }
 
+    private void OnEnable()
+    {
+        Sprite.color = new Color(Sprite.color.r, Sprite.color.g, Sprite.color.b, StartingAlpha);
+    }
 
     void FixedUpdate ()
     {
@@ -30,8 +34,6 @@ public class SpriteFadeOut : MonoBehaviour
             Speed = Sprite.color.a / (Duration / Time.fixedDeltaTime);
         }
 
-        //print(Sprite.color.a);
-        
         Sprite.color = new Color(Sprite.color.r, Sprite.color.g, Sprite.color.b, Sprite.color.a - Speed.Value); 
     }
 }
