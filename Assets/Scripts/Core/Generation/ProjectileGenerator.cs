@@ -28,7 +28,6 @@ namespace ChainedRam.Core.Generation
                 }
             }
 
-            ConfigureManager.ConfigureGameObject(generated.gameObject);
             generated.Setup(Delta);
         }
 

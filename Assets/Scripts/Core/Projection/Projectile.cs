@@ -20,6 +20,7 @@ namespace ChainedRam.Core.Projection
         {
             Delta = delta; 
             enabled = true;
+            Motion.Initialize(gameObject, Delta);
         }
 
         protected virtual void OnEnable()
