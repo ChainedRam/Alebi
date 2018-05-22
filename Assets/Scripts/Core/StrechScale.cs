@@ -5,6 +5,7 @@ using UnityEngine;
 public class StrechScale : MonoBehaviour
 {
     private float Speed;
+    private Vector3 StartingScale; 
 
     public Vector3 StrechTo;
 
@@ -12,8 +13,14 @@ public class StrechScale : MonoBehaviour
 
     private void Awake()
     {
+        Speed =  Vector3.Distance(transform.localScale, StrechTo) / (Duration);
+        StartingScale = transform.localScale; 
         enabled = true;
-        Speed =  Vector3.Distance(transform.localScale, StrechTo) / (Duration); 
+    }
+
+    private void OnEnable()
+    {
+        transform.localScale = StartingScale; 
     }
 
     public void BeginStreching()
