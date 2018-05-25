@@ -347,6 +347,12 @@ namespace ChainedRam.Core
             RotationOffsetVector = rotationOffset;
         }
 
+        public void SetRotationFacing(Transform t)
+        {
+            RotationFacing = RotationFacing.FaceTransform;
+            RotationRefrence = t; 
+        }
+
         #region Static Helper Methods
         public static Vector2 GetScreenPosition(Direction dir, Vector2 offset, PositionRelativeTo m)
         {
