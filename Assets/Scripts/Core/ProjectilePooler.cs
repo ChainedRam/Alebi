@@ -21,4 +21,9 @@ public class ProjectilePooler : InstancePooler<Projectile>
 
         return x; 
     }
+
+    protected override void OnReused(Projectile instance)
+    {
+        instance.gameObject.SetActive(false); 
+    }
 }

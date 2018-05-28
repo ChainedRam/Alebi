@@ -1,4 +1,6 @@
-﻿using ChainedRam.Core.Player;
+﻿using ChainedRam.Core.Configuration;
+using ChainedRam.Core.Player;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,9 +18,16 @@ public class BlurCollisionEffect : PlayerCollisionEffect
     {
         if(ScreenEffect == null)
         {
-            Debug.LogError("Missing ScreenEffect refreence. " +
-                "Be sure to add and setup 'BlurCollisionEffectConfig'" +
-                " in ConfiguraionManager.");
+            try
+            {
+                ConfigureManager.Configure(this);
+            }
+            catch (NullReferenceException)
+            {
+                Debug.LogError("Missing ScreenEffect refreence. " +
+                    "Be sure to add and setup 'BlurCollisionEffectConfig'" +
+                    " in ConfiguraionManager.");
+            }
         }
     }
 
