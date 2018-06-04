@@ -67,7 +67,14 @@ namespace ChainedRam.Alebi.Puzzle
         public Dialog StartDialog;
         public Dialog EndDialog;
 
-        public DialogBox DialogBox; 
+        public DialogBox DialogBox;
+
+        public AudioClip movesfx;
+        public AudioClip boldersfx;
+        public AudioClip resetsfx;
+        public AudioClip goalsfx;
+
+        public AudioSource source;
 
         // Use this for initialization
         private void Start()
@@ -181,6 +188,7 @@ namespace ChainedRam.Alebi.Puzzle
             switch (BoardContent[ty][tx])
             {
                 case TileContent.Empty:
+                    source.PlayOneShot(movesfx, 0.1f);
                     return true;
                 case TileContent.Wall:
                     return false;
@@ -188,10 +196,12 @@ namespace ChainedRam.Alebi.Puzzle
                 case TileContent.Box:
                     int bx = tx + ToX(d);
                     int by = ty + ToY(d);
+                    source.PlayOneShot(boldersfx, 0.25f);
 
                     return (bx >= 0 && bx < Width && by >= 0 && by < Height) && BoardContent[by][bx] == TileContent.Empty;
 
                 case TileContent.Goal:
+                    source.PlayOneShot(goalsfx, 1.00f);
                     return true;
 
                 default:
@@ -221,6 +231,7 @@ namespace ChainedRam.Alebi.Puzzle
                     BoardContent[py][px] = TileContent.Empty;
                     if (ty == PlayerPosition_defult.y && tx == PlayerPosition_defult.x)
                     {
+                       
                         defult();
                     }
                     break;
@@ -330,7 +341,7 @@ namespace ChainedRam.Alebi.Puzzle
                 BoardContent[(int)t.y][(int)t.x] = TileContent.Box;
                 box.transform.localPosition = Vector3.zero;
             }
-         
+            source.PlayOneShot(resetsfx);
         }
     }
 
