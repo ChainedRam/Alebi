@@ -1,0 +1,45 @@
+Puzzle
+Pre-Puzzle
+N: <Neutral> I'm close, all I have to do is go through this tunnel to get to Jaber's den.
+N: <SlightlyAngry> If Jaber stole the milk he's probably expecting me. He might have set up a trap. He's been after me for my milk for years but he hasn't shown up in a long time. What made strike now?
+N: <Determined> Whatever the case, I have to go inside. I need to put a stop to this to make Jamal his tea. 
+*enters tunnel entrance*
+N: <slightly afraid> It's dark in here, but I must carry on.
+
+Puzzle
+*Naggah stops in front of some boulders blocking her path*
+N: <Neutral> Jaber must have put these boulders here to protect his den. 
+N: <Thinking> How did he manage that with his tiny body? He must have had help from someone.
+N: <Determined> Now to deal with these boulders.
+
+*Naggah does first puzzle*
+
+N: <Relieved> Ok that was easy, Jaber has to try harder than that to keep me out of his little cave
+
+*naggah goes through first door and sees second set of boulders*
+
+N: <Annoyed, -_-> I spoke to soon. 
+
+*she does second puzzle*
+
+N: <Happy> I did it! Am I done?
+
+*goes through door and sees 3rd set*
+
+N: <?_? face> How many sets of these are there? And how does Jaber go into his cave with all these boulders blocking the way??
+
+Post Puzzle
+N: <Relieved> I’m finally through. 
+*after entering cave*
+N: <Amazed> Woah, this place is huge!
+
+
+Battle
+Pre-Battle
+N: <Overwhelmed> How am I going to find my milk in here?
+N: <Yelling> JAAAABER, COME OUT. I KNOW YOU’RE IN HERE!! IS THIS GOLD COIN ONE OF YOURS?
+*silence, then Naggah notices a cage just big enough to fit her in the far side of the cave*
+N:<NervouslyYelling> Why did you break into my house Jaber?
+*Jaber Appears out of darkness*
+J: <Fiendishly> The milk truck has arrived!! Time to lock her up.
+*Battle begins*
