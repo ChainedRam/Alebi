@@ -91,7 +91,7 @@ namespace ChainedRam.Core.Dialog
             NonEmotionalText = result.Trim();
         }
 
-        public override IEnumerator<Letter> Characters()
+        public override IEnumerator<char> Characters()
         {
             var enumerator = base.Characters();
 
