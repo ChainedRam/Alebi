@@ -11,6 +11,7 @@ namespace ChainedRam.Core.Dialog
     /// </summary>
     public class EmotionalDialog : TextDialog
     {
+        //misspell, if u want to fix it, u have to edit all prefab instance
         public EmotionalCharacter Charachter;
 
         public List<IndexedEmotion> EmotionList;
@@ -19,9 +20,7 @@ namespace ChainedRam.Core.Dialog
         public UnityEvent OnStartEvent;
         public UnityEvent OnEndEvent;
 
-
         private string NonEmotionalText;
-
 
         protected override string DisplayText => NonEmotionalText;
 
@@ -97,7 +96,7 @@ namespace ChainedRam.Core.Dialog
 
             while (enumerator.MoveNext())
             {
-                if (EmotionIndex < EmotionList.Count && Index == EmotionList[EmotionIndex].Index)
+                if (EmotionIndex < EmotionList.Count && (Index-1) == EmotionList[EmotionIndex].Index)
                 {
                     Charachter?.SetEmotion(EmotionList[EmotionIndex].Emotion);
                     EmotionIndex++;
@@ -109,8 +108,14 @@ namespace ChainedRam.Core.Dialog
         public override void WhenDialogResume()
         {
             base.WhenDialogResume();
+            Charachter.Undarken();
         }
 
+        public override void WhenDialogPause()
+        {
+            base.WhenDialogPause();
+            Charachter.Darken();
+        }
         public override void ResetDialog()
         {
             base.ResetDialog();
@@ -120,16 +125,18 @@ namespace ChainedRam.Core.Dialog
         public override void WhenDialogStart()
         {
             base.WhenDialogStart();
-
             EmotionIndex = 0;
-
             OnStartEvent?.Invoke();
+
+            Charachter.Undarken();
         }
 
         public override void WhenDialogEnd()
         {
             base.WhenDialogEnd();
             OnEndEvent?.Invoke();
+
+            Charachter.Darken();
         }
     }
 }

@@ -10,7 +10,10 @@ namespace ChainedRam.Core.Dialog
     public class FakeEmotionalCharachter : EmotionalCharacter
     {
         public Text label;
+        public GameObject Fade; 
 
+
+        [Header("Optional")]
         public EmotionalCharacter Face;
 
         private void Start()
@@ -23,6 +26,16 @@ namespace ChainedRam.Core.Dialog
             label.text = name;
             Face?.SetEmotion(name);
 
+        }
+
+        public override void Darken()
+        {
+            Fade.SetActive(true); 
+        }
+
+        public override void Undarken()
+        {
+            Fade.SetActive(false);
         }
     }
 }

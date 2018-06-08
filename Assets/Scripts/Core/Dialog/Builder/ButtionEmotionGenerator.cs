@@ -8,7 +8,7 @@ namespace ChainedRam.Core.Dialog
 {
     public class ButtionEmotionGenerator : MonoBehaviour
     {
-        public EmotionalCharacter Character;
+        public AnimationalCharacter Character;
 
         public Button ButtonPrefab;
         public GameObject ButtonParent;
