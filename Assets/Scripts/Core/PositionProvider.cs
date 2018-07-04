@@ -335,6 +335,11 @@ namespace ChainedRam.Core
             SetToPosition(d, Vector2.zero); 
         }
 
+        public void SetPositionOffset(Vector2 pos)
+        {
+            PositionOffset = pos;
+        }
+
         public void SetRotationOffset(float degree)
         {
             RotationOffsetType = RotationOffsetType.Numaric;
