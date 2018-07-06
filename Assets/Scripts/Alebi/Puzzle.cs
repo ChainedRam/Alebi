@@ -332,19 +332,27 @@ namespace ChainedRam.Alebi.Puzzle
         public void ResetPuzzle()
         {
 
+            //empty all 
+            foreach (var box in BoxList)
+            {
+                string currentPos = box.transform.parent.name;
+                string[] split = currentPos.Split(',');
+                int currentX = int.Parse(split[1]);
+                int currentY = int.Parse(split[0]);
+                BoardContent[currentY][currentX] = TileContent.Empty;
+
+            }
+
+            //set boxes
             for (int i = 0; i < BoxList.Count; i++)
             {
-                GameObject box = BoxList[i];
-                string s=box.transform.parent.name;
-                string [] ss = s.Split(',');
-                int x = int.Parse(ss[0]);
-                int y = int.Parse(ss[1]);
                 Vector2 t = BoxPositions[i];
-                BoardContent[y][x] = TileContent.Empty;
-                box.transform.SetParent(Board[(int)t.y][(int)t.x].transform);
+                BoxList[i].transform.SetParent(Board[(int)t.y][(int)t.x].transform);
                 BoardContent[(int)t.y][(int)t.x] = TileContent.Box;
-                box.transform.localPosition = Vector3.zero;
+
+                StartCoroutine(CenterObject(BoxList[i], speed/2));
             }
+
         }
     }
 
