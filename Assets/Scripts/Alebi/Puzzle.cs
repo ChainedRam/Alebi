@@ -228,10 +228,14 @@ namespace ChainedRam.Alebi.Puzzle
                     BoardContent[py][px] = TileContent.Empty;
                     if (ty == PlayerPosition_defult.y && tx == PlayerPosition_defult.x)
                     {
-                       
-                        defult();
+
+                        ResetPuzzle();
+                        source.PlayOneShot(resetsfx);
                     }
-                    source.PlayOneShot(movesfx, 0.1f);
+                    else
+                    {
+                        source.PlayOneShot(movesfx, 0.1f);
+                    }
                     break;
 
                 case TileContent.Box:
@@ -325,7 +329,7 @@ namespace ChainedRam.Alebi.Puzzle
             int v = (int)d;
             return (1 - v / 2) * (v * 2 - 1);
         }
-        public void defult()
+        public void ResetPuzzle()
         {
 
             for (int i = 0; i < BoxList.Count; i++)
@@ -333,15 +337,14 @@ namespace ChainedRam.Alebi.Puzzle
                 GameObject box = BoxList[i];
                 string s=box.transform.parent.name;
                 string [] ss = s.Split(',');
-                int x = int.Parse(ss[1]);
-                int y = int.Parse(ss[0]);
+                int x = int.Parse(ss[0]);
+                int y = int.Parse(ss[1]);
                 Vector2 t = BoxPositions[i];
                 BoardContent[y][x] = TileContent.Empty;
                 box.transform.SetParent(Board[(int)t.y][(int)t.x].transform);
                 BoardContent[(int)t.y][(int)t.x] = TileContent.Box;
                 box.transform.localPosition = Vector3.zero;
             }
-            source.PlayOneShot(resetsfx);
         }
     }
 
