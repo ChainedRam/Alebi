@@ -187,8 +187,7 @@ namespace ChainedRam.Alebi.Puzzle
 
             switch (BoardContent[ty][tx])
             {
-                case TileContent.Empty:
-                    source.PlayOneShot(movesfx, 0.1f);
+                case TileContent.Empty:                    
                     return true;
                 case TileContent.Wall:
                     return false;
@@ -196,12 +195,10 @@ namespace ChainedRam.Alebi.Puzzle
                 case TileContent.Box:
                     int bx = tx + ToX(d);
                     int by = ty + ToY(d);
-                    source.PlayOneShot(boldersfx, 0.25f);
 
                     return (bx >= 0 && bx < Width && by >= 0 && by < Height) && BoardContent[by][bx] == TileContent.Empty;
 
                 case TileContent.Goal:
-                    source.PlayOneShot(goalsfx, 1.00f);
                     return true;
 
                 default:
@@ -234,6 +231,7 @@ namespace ChainedRam.Alebi.Puzzle
                        
                         defult();
                     }
+                    source.PlayOneShot(movesfx, 0.1f);
                     break;
 
                 case TileContent.Box:
@@ -245,11 +243,13 @@ namespace ChainedRam.Alebi.Puzzle
                     BoardContent[by][bx] = TileContent.Box;
                     StartCoroutine(CenterObject(box, speed));
                     BoardContent[py][px] = TileContent.Empty;
+                    source.PlayOneShot(boldersfx, 0.25f);
                     break;
 
 
                 case TileContent.Goal:
                     OnReached =  GoalReached;
+                    source.PlayOneShot(goalsfx, 1.00f);
                     break; 
 
                 default:
