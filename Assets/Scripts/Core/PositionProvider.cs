@@ -519,11 +519,11 @@ namespace ChainedRam.Core
 
                             if (RandomTransformMemory == null)
                             {
-                                RandomMemory = new List<int>();
+                                RandomTransformMemory = new List<int>();
                             }
                             else if (RandomTransformMemory.Count() >= matching.Length)
                             {
-                                RandomMemory.Clear();
+                                RandomTransformMemory.Clear();
                             }
                           
                             do
