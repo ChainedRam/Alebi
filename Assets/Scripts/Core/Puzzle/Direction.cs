@@ -4,9 +4,4 @@ using UnityEngine;
 
 namespace ChainedRam.Core.Puzzle
 {
-    public class Puzzle : MonoBehaviour
-    {
-        public Tile[][] tile;
-    }
-
 }

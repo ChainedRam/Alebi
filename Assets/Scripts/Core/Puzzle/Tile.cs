@@ -2,23 +2,65 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour , NeighbotGrid<Tile>.INeighbor<Tile> {
-    [SerializeField]
-    public Tile[] neighbor;
-    public Tile[] Neighbor
+namespace ChainedRam.Core.Puzzle
+{
+    public class Tile : MonoBehaviour, NeighbotGrid<Tile>.INeighbor<Tile>
     {
-        set
+        public TileContent content;
+        [SerializeField]
+        public Tile[] neighbor;
+        public Tile[] Neighbor
         {
-            this.neighbor = value;
+            set
+            {
+                this.neighbor = value;
+            }
+            get
+            {
+                return this.neighbor;
+            }
         }
-        get
+        private void Awake()
         {
-            return this.neighbor;
+            Neighbor = new Tile[4];
         }
-    }
-    private void Awake()
-    {
-        Neighbor = new Tile[4];
+
+        public bool IsEmpty()
+        {
+            return content == null;
+        }
+
+        public void SetContent(TileContent content)
+        {
+            if(content.parent != null)
+                content.parent.EmptyContent();
+            content.parent = this;
+            this.content = content;
+
+            content.transform.SetParent(this.transform);
+        }
+        private void EmptyContent()
+        {
+            if (HasContent())
+            {
+                content.parent = null;
+            }
+            content = null;
+        }
+        public bool HasContent()
+        {
+            return content != null;
+        }
+
+        public bool HasNeighbor(NeighborDirection direction)
+        {
+            return neighbor[(int)direction] != null;
+        }
+
+        public Tile GetNeighbor(NeighborDirection direction)
+        {
+            return neighbor[(int)direction];
+        }
     }
 
 }

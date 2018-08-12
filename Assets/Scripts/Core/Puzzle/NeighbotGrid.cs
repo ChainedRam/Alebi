@@ -5,8 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-    class NeighbotGrid <T> where T: NeighbotGrid<T>.INeighbor<T>
+namespace ChainedRam.Core
+{
+    public enum NeighborDirection
     {
+        North = 0,
+        East = 1,
+        South = 2,
+        West = 3
+    };
+
+    class NeighbotGrid<T> where T : NeighbotGrid<T>.INeighbor<T>
+    {
+        
         public interface INeighbor<K>
         {
             K[] Neighbor { set; get; }
@@ -33,7 +44,7 @@ using System.Threading.Tasks;
             {
                 for (int j = 0; j < Grid[i].Length; j++)
                 {
-                        Grid[i][j] = create(j, i);
+                    Grid[i][j] = create(j, i);
                 }
             }
 
@@ -42,27 +53,27 @@ using System.Threading.Tasks;
             {
                 for (int j = 0; j < Grid[i].Length; j++)
                 {
-                    if (IsInBound(i - 1, j, Grid.Length, Grid[i].Length))
+                    if (IsInBound(i + 1, j, Grid.Length, Grid[i].Length))
                     {
-                        Grid[i][j].Neighbor[0] = Grid[i - 1][j];
+                        Grid[i][j].Neighbor[(int)NeighborDirection.North] = Grid[i + 1][j];
                         //i-1,j
                     }
 
-                    if (IsInBound(i + 1, j, Grid.Length, Grid[i].Length))
+                    if (IsInBound(i , j + 1, Grid.Length, Grid[i].Length))
                     {
-                        Grid[i][j].Neighbor[1] = Grid[i + 1][j];
+                        Grid[i][j].Neighbor[(int)NeighborDirection.East] = Grid[i][j + 1];
                         //i+1,j
                     }
 
-                    if (IsInBound(i, j + 1, Grid.Length, Grid[i].Length))
+                    if (IsInBound(i - 1, j , Grid.Length, Grid[i].Length))
                     {
-                        Grid[i][j].Neighbor[2] = Grid[i][j + 1];
+                        Grid[i][j].Neighbor[(int)NeighborDirection.South] = Grid[i - 1][j];
                         //i,j+1
                     }
 
                     if (IsInBound(i, j - 1, Grid.Length, Grid[i].Length))
                     {
-                        Grid[i][j].Neighbor[3] = Grid[i][j - 1];
+                        Grid[i][j].Neighbor[(int)NeighborDirection.West] = Grid[i][j - 1];
                         //i,j-1
                     }
 
@@ -81,3 +92,4 @@ using System.Threading.Tasks;
         }
     }
 
+}
