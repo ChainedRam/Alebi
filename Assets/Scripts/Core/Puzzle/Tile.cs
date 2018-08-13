@@ -6,7 +6,14 @@ namespace ChainedRam.Core.Puzzle
 {
     public class Tile : MonoBehaviour, NeighbotGrid<Tile>.INeighbor<Tile>
     {
-        public TileContent content;
+        public TileContent content
+        {
+            get
+            {
+                //if (transform.GetChild(0) != null)
+                    return transform.GetComponentInChildren<TileContent>();
+            }
+        }
         [SerializeField]
         public Tile[] neighbor;
         public Tile[] Neighbor
@@ -32,20 +39,7 @@ namespace ChainedRam.Core.Puzzle
 
         public void SetContent(TileContent content)
         {
-            if(content.parent != null)
-                content.parent.EmptyContent();
-            content.parent = this;
-            this.content = content;
-
             content.transform.SetParent(this.transform);
-        }
-        private void EmptyContent()
-        {
-            if (HasContent())
-            {
-                content.parent = null;
-            }
-            content = null;
         }
         public bool HasContent()
         {
