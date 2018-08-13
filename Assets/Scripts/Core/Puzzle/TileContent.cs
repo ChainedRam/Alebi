@@ -8,7 +8,10 @@ namespace ChainedRam.Core.Puzzle
     public abstract class TileContent : MonoBehaviour
     {
         public float speed;
-        public bool isMoving;
+        public bool isMoving
+        {
+            private set; get;
+        }
 
         private void Start()
         {
@@ -23,7 +26,7 @@ namespace ChainedRam.Core.Puzzle
             }
         }
 
-        public bool Move(NeighborDirection dire)
+        public virtual bool Move(NeighborDirection dire)
         {
             if (isMoving)
             {

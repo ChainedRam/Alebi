@@ -8,6 +8,8 @@ namespace ChainedRam.Core.Puzzle
     {
         void Update()
         {
+            if (isMoving)
+                return;
             if (Input.GetKeyDown(KeyCode.W))
                 Move(NeighborDirection.North);
             else if (Input.GetKeyDown(KeyCode.D))
@@ -16,6 +18,17 @@ namespace ChainedRam.Core.Puzzle
                 Move(NeighborDirection.West);
             else if (Input.GetKeyDown(KeyCode.S))
                 Move(NeighborDirection.South);
+        }
+        public override bool Move(NeighborDirection dire)
+        {
+            if (base.Move(dire))
+                return true;
+            if (!parent.HasNeighbor(dire))
+                return false;
+            if (parent.GetNeighbor(dire).content.Move(dire))
+                return base.Move(dire);
+            else
+                return false;
         }
     }
 

@@ -29,13 +29,21 @@ namespace ChainedRam.Core.Puzzle
 
             p.tile = gridBuilder.Grid;
             
-            GameObject obj = new GameObject();
+            GameObject obj = new GameObject("Player");
             PuzzlePlayer player = obj.AddComponent<PuzzlePlayer>();
             p.tile[0][0].SetContent(player);
             SpriteRenderer playerSR = player.gameObject.AddComponent<SpriteRenderer>();
             playerSR.sprite = sprite;
             playerSR.color = Color.red;
             player.transform.position = new Vector2(0, 0);
+
+            GameObject blockObj = new GameObject("block");
+            BlockContent puzzleBlock = blockObj.AddComponent<BlockContent>();
+            p.tile[1][1].SetContent(puzzleBlock);
+            SpriteRenderer blockSR = puzzleBlock.gameObject.AddComponent<SpriteRenderer>();
+            blockSR.sprite = sprite;
+            blockSR.color = Color.black;
+            puzzleBlock.transform.position = new Vector2(0, 0);
         }
 
         // Update is called once per frame
