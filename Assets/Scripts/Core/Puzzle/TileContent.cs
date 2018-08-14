@@ -7,6 +7,7 @@ namespace ChainedRam.Core.Puzzle
 {
     public abstract class TileContent : MonoBehaviour
     {
+        public Tile originalParent;
         public float speed;
         public bool isMoving
         {
@@ -18,6 +19,12 @@ namespace ChainedRam.Core.Puzzle
             speed = 0.075f;
             isMoving = true;
         }
+
+        public void resetToOriginal()
+        {
+            originalParent.SetContent(this);
+        }
+
         public Tile parent
         {
             get
