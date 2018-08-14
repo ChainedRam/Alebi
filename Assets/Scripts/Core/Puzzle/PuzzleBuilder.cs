@@ -6,7 +6,8 @@ namespace ChainedRam.Core.Puzzle
 {
     public class PuzzleBuilder : MonoBehaviour
     {
-
+        public int endTileX;
+        public int endTileY;
         public int width = 4;
         public int height = 3;
         public Sprite sprite;
@@ -18,13 +19,24 @@ namespace ChainedRam.Core.Puzzle
             Puzzle p = gameObject.AddComponent<Puzzle>();
             NeighbotGrid<Tile> gridBuilder = new NeighbotGrid<Tile>(width, height, (x, y) =>
             {
-                GameObject tile = new GameObject($"Tile: {x},{y}");
-                Tile t = tile.AddComponent<Tile>();
-                tile.transform.SetParent(p.transform);
-                SpriteRenderer sr = tile.AddComponent<SpriteRenderer>();
+                GameObject tileGameObject = new GameObject();
+                Tile tile;
+                SpriteRenderer sr = tileGameObject.AddComponent<SpriteRenderer>();
                 sr.sprite = sprite;
-                tile.transform.position = new Vector3((x - ((float)width / 2) + size), (y - ((float)height / 2) + size), 0);
-                return t;
+                if (endTileX == x && endTileY == y)
+                {
+                    tileGameObject.name = $"End Point: {x},{y}";
+                    tile = tileGameObject.AddComponent<EndTile>();
+                    sr.color = new Color(0.5f, 0, 0);
+                }
+                else
+                {
+                    tileGameObject.name = ($"Tile: {x},{y}");
+                    tile = tileGameObject.AddComponent<Tile>();
+                }
+                tileGameObject.transform.SetParent(p.transform);
+                tileGameObject.transform.position = new Vector3((x - ((float)width / 2) + size), (y - ((float)height / 2) + size), 0);
+                return tile;
             });
 
             p.tile = gridBuilder.Grid;

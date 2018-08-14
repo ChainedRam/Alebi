@@ -37,9 +37,10 @@ namespace ChainedRam.Core.Puzzle
             return content == null;
         }
 
-        public void SetContent(TileContent content)
+        public virtual bool SetContent(TileContent content)
         {
             content.transform.SetParent(this.transform);
+            return true;
         }
         public bool HasContent()
         {

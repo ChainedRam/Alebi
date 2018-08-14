@@ -36,8 +36,7 @@ namespace ChainedRam.Core.Puzzle
             {
                 return false;
             }
-            parent.GetNeighbor(dire).SetContent(this);
-            return true;
+            return parent.GetNeighbor(dire).SetContent(this);
         }
 
         private void LateUpdate()
