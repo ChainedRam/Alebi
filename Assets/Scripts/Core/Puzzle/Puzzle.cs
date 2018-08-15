@@ -8,9 +8,25 @@ namespace ChainedRam.Core.Puzzle
     {
         public Tile[][] tile;
 
+        public Puzzle nextPuzzle;
+
         private void Start()
         {
             SetState();
+        }
+
+        public void End()
+        {
+            this.gameObject.SetActive(false);
+            print("puzzle ended");
+            if (nextPuzzle != null)
+            {
+                nextPuzzle.gameObject.SetActive(true);
+            }
+            else
+            {
+                print("game finished");
+            }
         }
 
         [ContextMenu("SetState")]

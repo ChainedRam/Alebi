@@ -8,8 +8,8 @@ namespace ChainedRam.Core.Puzzle
     {
         public int endTileX;
         public int endTileY;
-        public int width = 4;
-        public int height = 3;
+        public int width;
+        public int height;
         public Sprite sprite;
         public float size;
         // Use this for initialization

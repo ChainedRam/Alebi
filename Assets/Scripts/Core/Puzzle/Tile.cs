@@ -29,7 +29,8 @@ namespace ChainedRam.Core.Puzzle
         }
         private void Awake()
         {
-            Neighbor = new Tile[4];
+            if(Neighbor == null)
+                Neighbor = new Tile[4];
         }
 
         public bool IsEmpty()
