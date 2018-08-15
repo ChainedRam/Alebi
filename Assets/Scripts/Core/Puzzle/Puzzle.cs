@@ -11,6 +11,7 @@ namespace ChainedRam.Core.Puzzle
 
         public Puzzle nextPuzzle;
         public DialogBox dialogBox;
+        public Dialog.Dialog startDialogue;
 
         private void Start()
         {
@@ -20,7 +21,9 @@ namespace ChainedRam.Core.Puzzle
         {
             if (dialogBox != null)
             {
-
+                Pause();
+                startDialogue.OnEnd += Resume;
+                dialogBox.StartDialog(startDialogue);
             }
         }
 
@@ -56,6 +59,16 @@ namespace ChainedRam.Core.Puzzle
             {
                 item.resetToOriginal();
             }
+        }
+        public void Pause()
+        {
+            GetComponentInChildren<PuzzlePlayer>().enabled = false;
+            print("for i have paused");
+        }
+        public void Resume()
+        {
+            GetComponentInChildren<PuzzlePlayer>().enabled = true;
+            print("for i have resumed");
         }
     }
 
