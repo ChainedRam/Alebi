@@ -14,9 +14,9 @@ namespace ChainedRam.Core.Dialog
         public Text TextBox;
         public GameObject PauseIndecator; //TODO get by finding + set to private
 
-        protected override void AppendLetter(Letter next)
+        protected override void AppendLetter(char next)
         {
-            TextBox.text += "" + (char)next.Type; 
+            TextBox.text += "" + next; 
         }
 
         protected override void ClearText()

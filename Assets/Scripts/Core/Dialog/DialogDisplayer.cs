@@ -12,7 +12,7 @@ namespace ChainedRam.Core.Dialog
     {
         #region Private Fields 
         private Dialog CurrentDialog;
-        private IEnumerator<Letter> CharactersEnumertor;
+        private IEnumerator<char> CharactersEnumertor;
         private float CurrentWaitTime;
         private bool IsPaused;
         private Action OnResumeAction;
@@ -57,14 +57,14 @@ namespace ChainedRam.Core.Dialog
         }
         #endregion
         #region Private Methods
-        private void RecieveCharacter(Letter nextLetter)
+        private void RecieveCharacter(char nextLetter)
         {
-            switch (nextLetter.Type)
+            switch (nextLetter)
             {
-                case LetterType.Pause:
+                case '|':
                     Pause();
                     break;
-                case LetterType.Clear:
+                case '_':
                     ClearText();
                     break;
                 default:
@@ -132,7 +132,7 @@ namespace ChainedRam.Core.Dialog
         #endregion
         #region Protected Abstract Methods
         protected abstract void ClearText();
-        protected abstract void AppendLetter(Letter next);
+        protected abstract void AppendLetter(char next);
         #endregion
         #region Public Methods
         public void StartDialog(Dialog dialog)

@@ -12,11 +12,6 @@ namespace ChainedRam.Core.Dialog
     public abstract class Dialog : MonoBehaviour
     {
         /// <summary>
-        /// Holds DialogFont 
-        /// </summary>
-        public DialogFont DialogFont; 
-
-        /// <summary>
         /// Holds flags for pausing dialog 
         /// </summary>
         public abstract DialogPauseType Property { get; }
@@ -30,7 +25,7 @@ namespace ChainedRam.Core.Dialog
         /// because it's awesome. 
         /// </summary>
         /// <returns></returns>
-        public abstract IEnumerator<Letter> Characters(); 
+        public abstract IEnumerator<char> Characters(); 
 
         public event Action OnStart;
         public event Action OnEnd;
