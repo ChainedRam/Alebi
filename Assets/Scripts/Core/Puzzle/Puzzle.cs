@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChainedRam.Core.Dialog;
 
 namespace ChainedRam.Core.Puzzle
 {
@@ -9,10 +10,18 @@ namespace ChainedRam.Core.Puzzle
         public Tile[][] tile;
 
         public Puzzle nextPuzzle;
+        public DialogBox dialogBox;
 
         private void Start()
         {
             SetState();
+        }
+        private void OnEnable()
+        {
+            if (dialogBox != null)
+            {
+
+            }
         }
 
         public void End()
