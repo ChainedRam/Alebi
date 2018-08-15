@@ -13,6 +13,13 @@ namespace ChainedRam.Core.Puzzle
         {
             private set; get;
         }
+        public Tile parent
+        {
+            get
+            {
+                return transform.parent.GetComponent<Tile>();
+            }
+        }
 
         private void Start()
         {
@@ -25,13 +32,6 @@ namespace ChainedRam.Core.Puzzle
             originalParent.SetContent(this);
         }
 
-        public Tile parent
-        {
-            get
-            {
-                return transform.parent.GetComponent<Tile>();
-            }
-        }
 
         public virtual bool Move(NeighborDirection dire)
         {
@@ -72,6 +72,10 @@ namespace ChainedRam.Core.Puzzle
             }
             transform.localPosition -= new Vector3(offsetX, offsetY, 0);
             isMoving = (isXMoving | isYMoving);
+            if (!isMoving)
+            {
+                parent.OnContentReached();
+            }
         }
     }
 }
