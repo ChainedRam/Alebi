@@ -9,6 +9,10 @@ namespace ChainedRam.Core.Puzzle
     {
         public Tile originalParent;
         public float speed;
+
+        [Header("Optional SFX")]
+        public AudioClip MovedSound;
+
         public bool isMoving
         {
             private set; get;
@@ -43,9 +47,15 @@ namespace ChainedRam.Core.Puzzle
             {
                 return false;
             }
-            return parent.GetNeighbor(dire).SetContent(this);
-        }
 
+            bool didMove = parent.GetNeighbor(dire).SetContent(this);
+            if(didMove && MovedSound != null)
+            {
+                AudioSourceController.PlayAudio(MovedSound); 
+            }
+
+            return didMove; 
+        }
 
         private void LateUpdate()
         {

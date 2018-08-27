@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 334919292}
   - component: {fileID: 334919291}
   m_Layer: 0
-  m_Name: box (1)
+  m_Name: ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -261,6 +261,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalParent: {fileID: 0}
   speed: 0.075
+  MovedSound: {fileID: 0}
+  MovingSound: {fileID: 8300000, guid: 149cba7e4e0466242a22e9d3a308326c, type: 3}
 --- !u!212 &334919292
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1017,6 +1019,21 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114780881497065416, guid: a66e87b897be5724e8ed1658d3727a4b,
+        type: 2}
+      propertyPath: MovedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f0dc396b7919cad459e532efa53303c2, type: 3}
+    - target: {fileID: 114883120146963440, guid: a66e87b897be5724e8ed1658d3727a4b,
+        type: 2}
+      propertyPath: MovedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0ba51372886890c459103fd6faa860f5, type: 3}
+    - target: {fileID: 114030282315208874, guid: a66e87b897be5724e8ed1658d3727a4b,
+        type: 2}
+      propertyPath: MovedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0ba51372886890c459103fd6faa860f5, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a66e87b897be5724e8ed1658d3727a4b, type: 2}
   m_IsPrefabParent: 0
