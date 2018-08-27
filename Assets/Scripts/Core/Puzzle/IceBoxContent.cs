@@ -8,10 +8,7 @@ namespace ChainedRam.Core.Puzzle
     {
         public override bool Move(NeighborDirection dire)
         {
-            while (base.Move(dire))
-            {
-                return Move(dire);
-            }
+            while (base.Move(dire)) { }
             return true;
         }
     }
