@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ChainedRam.Core.Puzzle.BlockContent">
+    <Position X="9.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Puzzle\BlockContent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChainedRam.Core.Puzzle.BlockTile" Collapsed="true">
+    <Position X="5.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Puzzle\BlockTile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChainedRam.Core.Puzzle.IceBoxContent">
+    <Position X="11.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Puzzle\IceBoxContent.cs</FileName>
+      <NewMemberFileName>Assets\Scripts\Core\Puzzle\BoxContent.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChainedRam.Core.Puzzle.EndTile" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Puzzle\EndTile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChainedRam.Core.Puzzle.Puzzle" Collapsed="true">
+    <Position X="16.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIhBAAAACAABAAAAAAgAAAAAAAAAABAAAAEAAgACAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Puzzle\Puzzle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChainedRam.Core.Puzzle.PuzzleBuilder" Collapsed="true">
+    <Position X="15" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAABACAAAAQAQIAIAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Puzzle\PuzzleBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChainedRam.Core.Puzzle.PuzzlePlayer">
+    <Position X="13.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Puzzle\PuzzlePlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChainedRam.Core.Puzzle.Tile" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCAAIAAAIAAAAAAAAAAAAAAAAgAAAAIBAAAAAADEA=</HashCode>
+      <FileName>Assets\Scripts\Core\Puzzle\Tile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ChainedRam.Core.Puzzle.TileContent">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAKAACABAAAAAIAAAAAAAAQAAgAABAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Puzzle\TileContent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChainedRam.Core.NeighbotGrid&lt;T&gt;" Collapsed="true">
+    <Position X="15" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAABAAAAABAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Puzzle\NeighbotGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ChainedRam.Core.NeighborDirection" Collapsed="true">
+    <Position X="15" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAABAAQ=</HashCode>
+      <FileName>Assets\Scripts\Core\Puzzle\NeighbotGrid.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

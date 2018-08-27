@@ -46,6 +46,7 @@ namespace ChainedRam.Core.Puzzle
             return parent.GetNeighbor(dire).SetContent(this);
         }
 
+
         private void LateUpdate()
         {
             bool isXMoving = false;
