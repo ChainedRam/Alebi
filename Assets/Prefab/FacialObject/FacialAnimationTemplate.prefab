@@ -659,9 +659,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1453819329214756}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7991531952363064581c344a909f0510, type: 3}
+  m_Script: {fileID: 11500000, guid: 9adf1a7c9171a014087e2eaeacc150f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Shade: {fileID: 0}
   animator: {fileID: 95263142135130028}
   clips:
   - {fileID: 7400000, guid: 63074e42cab025940956627cd7c7d876, type: 2}

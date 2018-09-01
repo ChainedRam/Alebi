@@ -44,11 +44,11 @@ namespace ChainedRam.Core.Dialog
             Index = 0;
         }
 
-        public override IEnumerator<Letter> Characters()
+        public override IEnumerator<char> Characters()
         {
             while (Index < DisplayText.Length)
             {
-                yield return DialogFont[DisplayText[Index++]];
+                yield return DisplayText[Index++];
             }
         }
     }

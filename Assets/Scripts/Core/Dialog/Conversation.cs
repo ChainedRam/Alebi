@@ -51,7 +51,7 @@ namespace ChainedRam.Core.Dialog
         /// Returns next charachter from current dialog. When a dialog ends, returns a null charachter and move dialog to next. 
         /// </summary>
         /// <returns></returns>
-        public override IEnumerator<Letter> Characters() //MAKE THIS AN IENUMURAABLE 
+        public override IEnumerator<char> Characters() 
         {
             var enemurator = Dialogs[Index].Characters();
 
@@ -59,25 +59,25 @@ namespace ChainedRam.Core.Dialog
             {
                 if (enemurator.MoveNext() == false)
                 {
+                    if ((Index+1) >= Dialogs.Length)
+                    {
+                        break;
+                    }
+
+                    if (Dialogs[Index].Property == DialogPauseType.End)
+                    {
+                        yield return '|';
+                    }
+
+                    yield return '_';
+
                     Dialogs[Index].WhenDialogEnd();
                     Index++;
 
-                    if (Index >= Dialogs.Length)
-                    {
-                        Index--; 
-                        break; 
-                    }
                     enemurator = Dialogs[Index].Characters();
 
                     Dialogs[Index].ResetDialog();
                     Dialogs[Index].WhenDialogStart();
-
-                    if (Dialogs[Index].Property == DialogPauseType.End)
-                    {
-                        yield return DialogFont[LetterType.Pause];
-                    }
-
-                    yield return DialogFont[LetterType.Clear];
                 }
                 else
                 {
@@ -123,8 +123,7 @@ namespace ChainedRam.Core.Dialog
         /// </summary>
         public override void WhenDialogResume()
         {
-            base.WhenDialogResume(); 
-            Dialogs[Index].WhenDialogResume();
+            base.WhenDialogResume();
         }
 
         /// <summary>
