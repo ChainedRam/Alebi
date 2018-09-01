@@ -67,7 +67,14 @@ namespace ChainedRam.Alebi.Puzzle
         public Dialog StartDialog;
         public Dialog EndDialog;
 
-        public DialogBox DialogBox; 
+        public DialogBox DialogBox;
+
+        public AudioClip movesfx;
+        public AudioClip boldersfx;
+        public AudioClip resetsfx;
+        public AudioClip goalsfx;
+
+        public AudioSource source;
 
         // Use this for initialization
         private void Start()
@@ -180,7 +187,7 @@ namespace ChainedRam.Alebi.Puzzle
 
             switch (BoardContent[ty][tx])
             {
-                case TileContent.Empty:
+                case TileContent.Empty:                    
                     return true;
                 case TileContent.Wall:
                     return false;
@@ -221,7 +228,13 @@ namespace ChainedRam.Alebi.Puzzle
                     BoardContent[py][px] = TileContent.Empty;
                     if (ty == PlayerPosition_defult.y && tx == PlayerPosition_defult.x)
                     {
-                        defult();
+
+                        ResetPuzzle();
+                        source.PlayOneShot(resetsfx);
+                    }
+                    else
+                    {
+                        source.PlayOneShot(movesfx, 0.1f);
                     }
                     break;
 
@@ -234,11 +247,13 @@ namespace ChainedRam.Alebi.Puzzle
                     BoardContent[by][bx] = TileContent.Box;
                     StartCoroutine(CenterObject(box, speed));
                     BoardContent[py][px] = TileContent.Empty;
+                    source.PlayOneShot(boldersfx, 0.25f);
                     break;
 
 
                 case TileContent.Goal:
                     OnReached =  GoalReached;
+                    source.PlayOneShot(goalsfx, 1.00f);
                     break; 
 
                 default:
@@ -314,23 +329,30 @@ namespace ChainedRam.Alebi.Puzzle
             int v = (int)d;
             return (1 - v / 2) * (v * 2 - 1);
         }
-        public void defult()
+        public void ResetPuzzle()
         {
 
+            //empty all 
+            foreach (var box in BoxList)
+            {
+                string currentPos = box.transform.parent.name;
+                string[] split = currentPos.Split(',');
+                int currentX = int.Parse(split[1]);
+                int currentY = int.Parse(split[0]);
+                BoardContent[currentY][currentX] = TileContent.Empty;
+
+            }
+
+            //set boxes
             for (int i = 0; i < BoxList.Count; i++)
             {
-                GameObject box = BoxList[i];
-                string s=box.transform.parent.name;
-                string [] ss = s.Split(',');
-                int x = int.Parse(ss[1]);
-                int y = int.Parse(ss[0]);
                 Vector2 t = BoxPositions[i];
-                BoardContent[y][x] = TileContent.Empty;
-                box.transform.SetParent(Board[(int)t.y][(int)t.x].transform);
+                BoxList[i].transform.SetParent(Board[(int)t.y][(int)t.x].transform);
                 BoardContent[(int)t.y][(int)t.x] = TileContent.Box;
-                box.transform.localPosition = Vector3.zero;
+
+                StartCoroutine(CenterObject(BoxList[i], speed/2));
             }
-         
+
         }
     }
 
